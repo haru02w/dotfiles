@@ -179,7 +179,7 @@ window#waybar {
         };
         "custom/power" = {
             format = "⏻";
-            on-click = "systemctl suspend";
+            on-click = "${pkgs.systemdMinimal}/bin/systemctl suspend";
         };
         "clock" = {
             format = "{:%H\n%M}";
@@ -193,16 +193,16 @@ window#waybar {
             };
         };
         "custom/arch" = {
-        format = "";
-        on-click = "wofi --show run";
+            format = "";
+            on-click = "${pkgs.rofi-wayland}/bin/rofi -show drun";
         };
         "custom/fanprofiles" = {
             interval = "once";
             signal = 8;
             format = "{}";
             exec-on-event = false;
-            on-click = "asusctl profile -n; pkill -RTMIN+8 waybar";
-            exec = "~/.config/waybar/fanprofiles.sh";
+            on-click = "${pkgs.asusctl}/bin/asusctl profile -n; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar";
+            exec = "~/.config/waybar/fanprofiles.sh"; # WARN
             escape = true;
         };
         "custom/separator" = {
@@ -248,14 +248,14 @@ window#waybar {
             format-icons= ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
             tooltip= true;
             tooltip-format= "{essid}\n{signalStrength} UP:{bandwidthUpBytes} DOWN:{bandwidthDownBytes}";
-            on-click= "networkmanager_dmenu";
+            on-click= "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
         };
         "bluetooth"= {
             format-on= "󰂯";
             format-off= "󰂲";
             format-disabled= "󰂲";
             format-connected= "󰂱";
-            on-click = "dmenu-bluetooth";
+            on-click = "dmenu-bluetooth"; #WARN
         };
     };
 # WARN dmenu-bluetooth not installed

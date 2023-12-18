@@ -11,6 +11,10 @@
     home-manager
   ];
 
+  environment.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
