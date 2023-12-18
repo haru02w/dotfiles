@@ -10,16 +10,27 @@
       ./hardware-configuration.nix
       ../../shared
     ];
+
   boot.loader = {
-    grub.enable = true;
-    grub.device = "/dev/vda"; 
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
   };
 
-  networking.hostName = "vm";
+  networking.hostName = "zephyrus";
+  
+  # bluetooth
+  hardware.bluetooth.enable = true;
+  # asus-linux
+  services.supergfxd.enable = true;
+  services.asusd = {
+    enable = true;
+    enableUserService = true;
+  };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
+  environment.systemPackages = with pkgs; [
+    brightnessctl
+  ];
+  
   system.stateVersion = "24.05";
 }
 

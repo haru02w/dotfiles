@@ -1,9 +1,10 @@
 {
   description = "Haru02w's config";
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
+  outputs = { self, nixpkgs, home-manager, hyprland, ... } @ inputs: 
   let
-    hostnames = ["vm"];
+    user = "haru02w";
+    hostnames = ["vm" "zephyrus" "acme"];
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
@@ -17,18 +18,26 @@
   in{
     nixosConfigurations = nixpkgs.lib.attrsets.genAttrs hostnames nixosConfig;
 
-    homeConfigurations."haru02w" = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [ ./user/haru02w/home.nix ];
+      modules = [ 
+        hyprland.homeManagerModules.default
+        ./user/${user}/home.nix
+      ];
     };
   };
 
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "github:hyprwm/Hyprland";
+
   };
 }

@@ -1,6 +1,7 @@
 { config, lib, pkgs, ...}:
 
 {
+  imports = [ ./desktop.nix ];
   # System Packages. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -8,40 +9,11 @@
     git
     wget
     home-manager
-
-    waybar
-    mako
-    libnotify
-    kitty # allacritty later
-    rofi-wayland
   ];
 
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-
-  xdg.portal.enable = true;
-
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
-
-  hardware = {
-    opengl.enable = true;
-  };
-
-  # Enable pipewire
-  sound.enable = true;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-    pulse.enable = true;
-  };
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+  ];
 
   # Users
   users.users = {
@@ -57,6 +29,13 @@
   # Enable network
   networking.networkmanager.enable = true;
 
+  nix.settings.auto-optimise-store = true;
+  nix.optimise.automatic = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 
   time.timeZone = "America/Sao_Paulo";
   i18n.defaultLocale = "en_US.UTF-8";
