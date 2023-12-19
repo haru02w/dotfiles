@@ -248,17 +248,35 @@ window#waybar {
             format-icons= ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
             tooltip= true;
             tooltip-format= "{essid}\n{signalStrength} UP:{bandwidthUpBytes} DOWN:{bandwidthDownBytes}";
-            on-click= "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
+            on-click= "$HOME/.config/rofi/nm.sh";
         };
         "bluetooth"= {
             format-on= "󰂯";
             format-off= "󰂲";
             format-disabled= "󰂲";
             format-connected= "󰂱";
-            on-click = "dmenu-bluetooth"; #WARN
+            on-click = "$HOME/.config/rofi/bt.sh";
         };
     };
+  };
+
+  home.file.".config/waybar/fanprofiles.sh".source = 
+  let
+    script = pkgs.writeShellScriptBin "fanprofiles.sh" ''
+        RETURN=$(${pkgs.asusctl}/bin/asusctl profile -p)
+
+        if [[ $RETURN = *"Performance"* ]]
+        then
+            echo "󰑮"
+        elif [[ $RETURN = *"Balanced"* ]]
+        then
+            echo "󰜎"
+        elif [[ $RETURN = *"Quiet"* ]]
+        then
+            echo ""
+        fi
+    '';
+  in "${script}/bin/fanprofiles.sh";
 # WARN dmenu-bluetooth not installed
 # WARN ~/.config/waybar/fanprofiles.sh not in place
-  };
 }

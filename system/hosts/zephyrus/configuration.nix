@@ -20,6 +20,8 @@
   
   # bluetooth
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = false;
+
   # asus-linux
   services.supergfxd.enable = true;
   services.asusd = {
@@ -27,10 +29,6 @@
     enableUserService = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    brightnessctl
-  ];
-  
   system.stateVersion = "24.05";
 }
 

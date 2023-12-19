@@ -78,6 +78,8 @@
     };
 
     binde = [
+        "$mod, Return, exec, ${pkgs.foot}/bin/footclient" #pkgs.
+        "$mod, W, killactive"
         "$mod CTRL, H, resizeactive, -40 0"
         "$mod CTRL, J, resizeactive, 0 40"
         "$mod CTRL, K, resizeactive, 0 -40"
@@ -89,10 +91,18 @@
         "$mod, mouse:273, resizewindow"
     ];
 
+    bindle = [
+        ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ -l 1.0"
+        ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- -l 1.0"
+        ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +2%"
+        ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 2%-"
+        ", XF86KbdBrightnessUp, exec, ${pkgs.asusctl}/bin/asusctl -n"
+        ", XF86KbdBrightnessDown, exec, ${pkgs.asusctl}/bin/asusctl -p"
+    ];
+
     bind =
       [
-        "$mod, Return, exec, ${pkgs.alacritty}/bin/alacritty" #pkgs.
-        "$mod, W, killactive"
         "$mod SHIFT, Q, exit"
         "$mod, V, togglefloating"
         "$mod, R, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun" #pkgs.
@@ -122,7 +132,7 @@
         "$mod, mouse_down, workspace, e+1"
         "$mod, mouse_up, workspace, e-1"
 
-        # ", Print, exec, grimblast copy area"
+        ", Print, exec, ${pkgs.grimblast}/bin/grimblast copysave area ~/.screenshots/$(date +'%s.png')"
       ]
       ++ (
         # workspaces

@@ -1,15 +1,6 @@
 { config, lib, pkgs, ...}:
 
 {
-  /* environment.systemPackages = with pkgs; [
-    waybar
-    mako
-    libnotify
-    kitty # allacritty later
-    alacritty
-    rofi-wayland
-  ]; */
-
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -27,7 +18,6 @@
 
   # Enable pipewire
   sound.enable = true;
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa = {

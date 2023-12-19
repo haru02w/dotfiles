@@ -1,7 +1,10 @@
 { config, lib, pkgs, ...}:
 
 {
-  imports = [ ./desktop.nix ];
+  imports = [ 
+    ./desktop.nix 
+    ./security.nix
+  ];
   # System Packages. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [

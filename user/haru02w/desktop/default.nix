@@ -2,17 +2,18 @@
 
 {
 	home.packages = with pkgs; [
-	  networkmanager_dmenu
 	  rofi-wayland
 	  waybar
 	  mako
 	  libnotify
-      alacritty
+	  brightnessctl
+	  grimblast
 	];
 
 	imports = [ 
 	  ./hyprland.nix
 	  ./waybar.nix
 	  ./rofi.nix
+	  ./foot.nix
 	];
 }
