@@ -12,10 +12,6 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  hardware = {
-    opengl.enable = true;
-  };
-
   # Enable pipewire
   sound.enable = true;
   services.pipewire = {

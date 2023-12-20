@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ...}:
+{ config, lib, pkgs, nixpkgs, ...}:
 
 {
   imports = [ 
@@ -38,14 +38,26 @@
 
   nix.settings.auto-optimise-store = true;
   nix.optimise.automatic = true;
+
   nix.gc = {
     automatic = true;
-    dates = "weekly";
+    dates = "daily";
     options = "--delete-older-than 7d";
   };
 
+  system.autoUpgrade = {
+    enable = true;
+    operation = "boot";
+    flake = "github:haru02w/nixos-dotfiles";
+    flags = [ "--refresh" ];
+    dates = "daily";
+  };
+
+
   time.timeZone = "America/Sao_Paulo";
   i18n.defaultLocale = "en_US.UTF-8";
+
+  nixpkgs.config.allowUnfree = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }

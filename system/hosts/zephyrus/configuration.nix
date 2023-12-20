@@ -29,6 +29,34 @@
     enableUserService = true;
   };
 
+  # Enable opengl
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+
+  };
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["nvidia"];
+
+  # Nvidia driver
+  hardware.nvidia = {
+    # Modesetting is required.
+    modesetting.enable = true;
+    powerManagement.enable = true; # WARN: can cause problems
+    powerManagement.finegrained = true;
+    open = false;# Not opensourced driver
+    nvidiaSettings = true;
+    prime = {
+      nvidiaBusId = "PCI:1:0:0";
+      amdgpuBusId = "PCI:4:0:0";
+      offload = {
+			  enable = true;
+			  enableOffloadCmd = true;
+		  };
+    };
+  };
+
   system.stateVersion = "24.05";
 }
 

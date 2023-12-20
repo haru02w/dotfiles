@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, nixpkgs, pkgs, ... }:
 
 {
   imports = [ ./desktop ];
@@ -8,7 +8,11 @@
     firefox
     discord
     webcord
+    #gpustat
+
+    # # neovim config
     ripgrep
+    fzf
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -29,8 +33,13 @@
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
+
+  # neovim config
   home.file = {
-    
+    ".config/nvim" = {
+      source = dotconfig/nvim;
+      recursive = true;
+    };
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -55,7 +64,7 @@
   #  /etc/profiles/per-user/haru02w/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
   };
 
   home.username = "haru02w";
