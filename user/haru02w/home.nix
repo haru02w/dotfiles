@@ -2,6 +2,19 @@
 
 {
   imports = [ ./desktop ];
+
+  programs.gpg.enable = true;
+  services.gpg-agent = {
+    enable = true;
+    pinentryFlavor = "curses";
+  };
+
+  programs.git = {
+    enable = true;
+    userName = "Haru02w";
+    userEmail = "haru02w@protonmail.com";
+  };
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs;[
@@ -63,6 +76,7 @@
   #
   #  /etc/profiles/per-user/haru02w/etc/profile.d/hm-session-vars.sh
   #
+
   home.sessionVariables = {
     EDITOR = "nvim";
   };

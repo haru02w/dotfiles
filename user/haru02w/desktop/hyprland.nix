@@ -1,16 +1,19 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
-  wayland.windowManager.hyprland = {
-    enable = true;
-    package = pkgs.hyprland;
-  };
-
   home.pointerCursor = {
     gtk.enable = true;
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Ice";
     size = 20;
+  };
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = pkgs.hyprland;
+    plugins = [
+      inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+    ];
   };
 
   wayland.windowManager.hyprland.settings = {
@@ -129,8 +132,8 @@
         "$mod SHIFT, period, movewindow, mon:+1"
 
 
-        "$mod, mouse_down, workspace, e+1"
-        "$mod, mouse_up, workspace, e-1"
+        "$mod, mouse_down, split-workspace, e+1"
+        "$mod, mouse_up, split-workspace, e-1"
 
         ", Print, exec, ${pkgs.grimblast}/bin/grimblast copysave area ~/.screenshots/$(date +'%s.png')"
       ]
@@ -144,8 +147,8 @@
               in
                 builtins.toString (x + 1 - (c * 10));
             in [
-              "$mod, ${ws}, workspace, ${toString (x + 1)}"
-              "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+              "$mod, ${ws}, split-workspace, ${toString (x + 1)}"
+              "$mod SHIFT, ${ws}, split-movetoworkspace, ${toString (x + 1)}"
             ]
           )
           10)

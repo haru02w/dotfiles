@@ -150,7 +150,7 @@ window#waybar {
         modules-left =  ["custom/arch" "custom/fanprofiles" "cpu" "memory" "custom/separator" "tray"];
         modules-center = ["hyprland/workspaces"];
         modules-right =  ["network" "bluetooth" "backlight" "pulseaudio" "battery" "custom/separator" "clock" "custom/power"];
-        "wlr/workspaces" = {
+        "hyprland/workspaces" = {
             all-outputs = false;
 	        format = "{icon}";
             sort-by-number = true;

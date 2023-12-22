@@ -1,4 +1,4 @@
-{ config, lib, pkgs, nixpkgs, ...}:
+{ inputs,config, pkgs, nixpkgs, ...}:
 
 {
   imports = [ 
@@ -41,18 +41,9 @@
 
   nix.gc = {
     automatic = true;
-    dates = "daily";
+    dates = "*-*-* 17:00:00";
     options = "--delete-older-than 7d";
   };
-
-  system.autoUpgrade = {
-    enable = true;
-    operation = "boot";
-    flake = "github:haru02w/nixos-dotfiles";
-    flags = [ "--refresh" ];
-    dates = "daily";
-  };
-
 
   time.timeZone = "America/Sao_Paulo";
   i18n.defaultLocale = "en_US.UTF-8";

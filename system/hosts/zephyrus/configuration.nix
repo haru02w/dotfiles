@@ -23,10 +23,31 @@
   hardware.bluetooth.powerOnBoot = false;
 
   # asus-linux
+  # powerManagement.enable = true;
   services.supergfxd.enable = true;
   services.asusd = {
     enable = true;
     enableUserService = true;
+
+    asusdConfig = ''
+(
+    charge_control_end_threshold: 75,
+    panel_od: false,
+    mini_led_mode: false,
+    disable_nvidia_powerd_on_battery: true,
+    ac_command: "",
+    bat_command: "",
+    platform_policy_on_battery: Quiet,
+    platform_policy_on_ac: Performance,
+    ppt_pl1_spl: None,
+    ppt_pl2_sppt: None,
+    ppt_fppt: None,
+    ppt_apu_sppt: None,
+    ppt_platform_sppt: None,
+    nv_dynamic_boost: None,
+    nv_temp_target: None,
+)
+    '';
   };
 
   # Enable opengl

@@ -2,13 +2,19 @@
 
 {
 	home.packages = with pkgs; [
+	  wl-clipboard
 	  rofi-wayland
 	  waybar
-	  mako
 	  libnotify
 	  brightnessctl
 	  grimblast
 	];
+
+	services.mako = {
+		enable = true;
+		ignoreTimeout = true;
+		defaultTimeout = 5000;
+	};
 
 	imports = [ 
 	  ./hyprland.nix

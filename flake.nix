@@ -1,7 +1,7 @@
 {
   description = "Haru02w's config";
 
-  outputs = { self, nixpkgs, home-manager, hyprland, ... } @ inputs: 
+  outputs = { self, nixpkgs, home-manager, hyprland, split-monitor-workspaces, ... } @ inputs: 
   let
     user = "haru02w";
     hostnames = ["vm" "zephyrus" "acme"];
@@ -15,13 +15,19 @@
     };
     nixosConfig = hostname: 
       nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+        };
         inherit system;
-	modules = [ ./system/hosts/${hostname}/configuration.nix ];
+	      modules = [ ./system/hosts/${hostname}/configuration.nix ];
       };
   in{
     nixosConfigurations = nixpkgs.lib.attrsets.genAttrs hostnames nixosConfig;
 
     homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
+      extraSpecialArgs = {
+        inherit inputs;
+      };
       inherit pkgs;
       modules = [ 
         hyprland.homeManagerModules.default
@@ -41,5 +47,9 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
+    split-monitor-workspaces = {
+      url = "github:Duckonaut/split-monitor-workspaces";
+      inputs.hyprland.follows = "hyprland"; # <- make sure this line is present for the plugin to work as intended
+    };
   };
 }
