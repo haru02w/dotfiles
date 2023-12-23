@@ -23,15 +23,14 @@
   hardware.bluetooth.powerOnBoot = false;
 
   # asus-linux
-  # powerManagement.enable = true;
   services.supergfxd.enable = true;
   services.asusd = {
     enable = true;
     enableUserService = true;
 
-    asusdConfig = ''
+    /* asusdConfig = ''
 (
-    charge_control_end_threshold: 75,
+    charge_control_end_threshold: 81,
     panel_od: false,
     mini_led_mode: false,
     disable_nvidia_powerd_on_battery: true,
@@ -47,16 +46,28 @@
     nv_dynamic_boost: None,
     nv_temp_target: None,
 )
-    '';
+    ''; */
   };
 
-  # Enable opengl
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+  # Battery improvements
+  powerManagement.enable = true;
+  services.tlp = {
+      enable = true;
+      settings = {
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
+        CPU_MIN_PERF_ON_AC = 0;
+        CPU_MAX_PERF_ON_AC = 100;
+        CPU_MIN_PERF_ON_BAT = 0;
+        CPU_MAX_PERF_ON_BAT = 25;
+
+        #Optional helps save long term battery health
+        START_CHARGE_THRESH_BAT0 = 75; # 75 and bellow it starts to charge
+        STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
+      };
   };
+
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
 
@@ -78,6 +89,15 @@
     };
   };
 
+  # Enable opengl
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+
+  };
+
+  hardware.enableRedistributableFirmware = true;
   system.stateVersion = "24.05";
 }
 

@@ -26,6 +26,11 @@
     # # neovim config
     ripgrep
     fzf
+
+    # status tools
+    powertop
+    btop
+    htop
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -42,6 +47,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    tmux
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -51,6 +57,10 @@
   home.file = {
     ".config/nvim" = {
       source = dotconfig/nvim;
+      recursive = true;
+    };
+    ".config/tmux" = {
+      source = dotconfig/tmux;
       recursive = true;
     };
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
