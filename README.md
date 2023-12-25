@@ -2,6 +2,5 @@
 My dotfiles using NixOS
 
 ## Notes to myself
- - Rollback home-manager:
-  Run `home-manager generations`, take the path of one of them,
-  and run `<path>/activate`.
+ - `sudo nixos-rebuild switch --flake .`
+ - `home-manager switch --flake .` if not in NixOS (probably won't work anyway)

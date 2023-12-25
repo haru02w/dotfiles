@@ -1,55 +1,77 @@
 {
-  description = "Haru02w's config";
-
-  outputs = { self, nixpkgs, home-manager, hyprland, split-monitor-workspaces, ... } @ inputs: 
+  outputs = {self, nixpkgs, home-manager, hyprland, ...} @ inputs:
   let
-    user = "haru02w";
-    hostnames = ["vm" "zephyrus" "acme"];
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
+    inherit (self) outputs;
+    lib = nixpkgs.lib // home-manager.lib;
+    # Supported systems for your flake packages, shell, etc.
+    systems = [ "x86_64-linux" ];
+    # This is a function that generates an attribute by calling a function you
+    # pass to it, with each system as an argument
+    forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
+    pkgsFor = lib.genAttrs systems (system: import nixpkgs {
       inherit system;
-      config = {
-        allowUnfree = true;
-        allowUnfreePredicate = (_: true);
+      config.allowUnfree = true;
+    });
+  in
+  {
+    inherit lib;
+    # Your custom packages
+    # Accessible through 'nix build', 'nix shell', etc
+    packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
+    # Formatter for your nix files, available through 'nix fmt'
+    # Other options beside 'alejandra' include 'nixpkgs-fmt'
+    formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
+    # Your custom packages and modifications, exported as overlays
+    overlays = import ./overlays { inherit inputs outputs; };
+    # Reusable nixos modules you might want to export
+    # These are usually stuff you would upstream into nixpkgs
+    nixosModules = import ./modules/nixos;
+    # Reusable home-manager modules you might want to export
+    # These are usually stuff you would upstream into home-manager
+    homeManagerModules = import ./modules/home-manager;
+
+    # NixOS configuration entrypoint
+    # Available through 'nixos-rebuild --flake .#your-hostname'
+    nixosConfigurations = {
+      zephyrus = lib.nixosSystem {
+        specialArgs = { inherit inputs outputs; };
+        modules = [
+          { system.stateVersion = "23.11"; }
+          ./hosts/zephyrus
+        ];
       };
     };
-    nixosConfig = hostname: 
-      nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-        };
-        inherit system;
-	      modules = [ ./system/hosts/${hostname}/configuration.nix ];
-      };
-  in{
-    nixosConfigurations = nixpkgs.lib.attrsets.genAttrs hostnames nixosConfig;
 
-    homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
-      extraSpecialArgs = {
-        inherit inputs;
+    # Standalone home-manager configuration entrypoint
+    # Available through 'home-manager --flake .#your-username@your-hostname'
+    homeConfigurations = {
+      "haru02w@zephyrus" = lib.homeManagerConfiguration {
+        pkgs = pkgsFor.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = { inherit inputs outputs; };
+        modules = [
+          ./home/haru02w/zephyrus.nix
+        ];
       };
-      inherit pkgs;
-      modules = [ 
-        hyprland.homeManagerModules.default
-        ./user/${user}/home.nix
-      ];
     };
   };
 
+  inputs = 
+  {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
 
-  inputs = {
-
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
     split-monitor-workspaces = {
       url = "github:Duckonaut/split-monitor-workspaces";
-      inputs.hyprland.follows = "hyprland"; # <- make sure this line is present for the plugin to work as intended
+      inputs.hyprland.follows = "hyprland";
     };
+
+    nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 }
