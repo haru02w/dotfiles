@@ -19,7 +19,7 @@
       automatic = true;
       dates = "*-*-* 10:00:00";
       # Keep the last 3 generations
-      options = "--delete-older-than +3";
+      options = "--delete-older-than 7d";
     };
 
     # Add each flake input as a registry

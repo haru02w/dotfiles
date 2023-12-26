@@ -1,8 +1,11 @@
-{pkgs ? import <nixpkgs> {}}:
+{ pkgs ? import <nixpkgs> {} }:
 pkgs.mkShell {
-  nativeBuildInputs = with pkgs; [
+  packages = with pkgs; [
     gcc
-	gnumake
-	cmake
+	  gnumake
+	  cmake
   ];
+  shellHook = ''
+    echo "C/C++ development shell loaded."
+  '';
 }

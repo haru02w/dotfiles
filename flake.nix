@@ -38,7 +38,6 @@
       zephyrus = lib.nixosSystem {
         specialArgs = { inherit inputs outputs; };
         modules = [
-          { system.stateVersion = "23.11"; }
           ./nixos/zephyrus
         ];
       };
