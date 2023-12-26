@@ -6,11 +6,12 @@ in
 {
   imports = (builtins.attrValues outputs.nixosModules) ++ [
     ./hardware-configuration.nix
-    ../../segments/nixos/common/global.nix
-    ../../segments/nixos/common/hyprland-desktop.nix
-    ../../segments/nixos/laptop.nix
+    ../segments/common/global.nix
+    ../segments/common/hyprland-desktop.nix
+    # ../segments/laptop.nix
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
   ];
+  hardware.laptop.enable = true;
 
   networking.hostName = "zephyrus";
 

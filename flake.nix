@@ -23,6 +23,8 @@
     formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays { inherit inputs outputs; };
+    # DevShell templates for various programming languages
+    templates = import ./templates;
     # Reusable nixos modules you might want to export
     # These are usually stuff you would upstream into nixpkgs
     nixosModules = import ./modules/nixos;
@@ -37,7 +39,7 @@
         specialArgs = { inherit inputs outputs; };
         modules = [
           { system.stateVersion = "23.11"; }
-          ./hosts/zephyrus
+          ./nixos/zephyrus
         ];
       };
     };

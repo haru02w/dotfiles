@@ -1,1 +1,3 @@
-{}
+{
+  laptop = import ./laptop.nix;
+}

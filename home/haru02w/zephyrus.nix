@@ -4,19 +4,7 @@
   imports = [
     ./global
     ./features/desktop/hyprland
-  ];
-
-    # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = with pkgs;[
-    firefox
-    discord
-    webcord
-    #gpustat
-
-    # status tools
-    powertop
-    btop
-    htop
+    ../segments/pkgs_gui.nix
+    ../segments/pkgs_cli.nix
   ];
 }
