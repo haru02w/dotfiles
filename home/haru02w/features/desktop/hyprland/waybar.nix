@@ -251,6 +251,7 @@ window#waybar {
             on-click= "$HOME/.config/rofi/nm.sh";
         };
         "bluetooth"= {
+            format = "";
             format-on= "󰂯";
             format-off= "󰂲";
             format-disabled= "󰂲";
