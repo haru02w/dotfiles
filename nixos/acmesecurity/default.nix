@@ -6,15 +6,13 @@ in
 {
   imports = (builtins.attrValues outputs.nixosModules) ++ [
     ./hardware-configuration.nix
-    ../segments/common/global.nix
-    ../segments/common/hyprland-desktop.nix
-    # ../segments/laptop.nix
-    inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
+    ../features/common/global.nix
+    ../features/common/hyprland-desktop.nix
   ];
 
-  networking.hostName = "qemu";
+  networking.hostName = "acmesecurity";
 
-  # TODO:bootloader
+  # TODO: Bootloader
 
   # Users
   users.users = {

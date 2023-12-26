@@ -17,7 +17,7 @@
 
     gc = {
       automatic = true;
-      dates = "daily";
+      dates = "*-*-* 10:00:00";
       # Keep the last 3 generations
       options = "--delete-older-than +3";
     };

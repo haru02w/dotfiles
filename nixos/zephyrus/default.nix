@@ -6,9 +6,8 @@ in
 {
   imports = (builtins.attrValues outputs.nixosModules) ++ [
     ./hardware-configuration.nix
-    ../segments/common/global.nix
-    ../segments/common/hyprland-desktop.nix
-    # ../segments/laptop.nix
+    ../features/common/global.nix
+    ../features/common/hyprland-desktop.nix
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
   ];
   hardware.laptop.enable = true;
