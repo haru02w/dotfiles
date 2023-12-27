@@ -2,9 +2,12 @@
 
 {
   imports = [
-    ./global
-    ./features/desktop/hyprland
-    ../features/pkgs_gui.nix
-    ../features/pkgs_cli.nix
+    ../features/common/global.nix
+    ../features/desktop/hyprland
+    ../features/gui-packages.nix
+  ];
+
+  home.packages = with pkgs; [
+
   ];
 }

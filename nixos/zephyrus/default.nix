@@ -10,6 +10,9 @@ in
     ../features/common/hyprland-desktop.nix
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
   ];
+  hardware.nvidia.powerManagement.finegrained = true;
+  hardware.nvidia.dynamicBoost.enable = true;
+
   hardware.laptop.enable = true;
 
   networking.hostName = "zephyrus";

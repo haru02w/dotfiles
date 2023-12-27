@@ -23,11 +23,11 @@
   # neovim config
   home.file = {
     ".config/nvim" = {
-      source = ../../dotconfig/nvim;
+      source = ../dotconfig/nvim;
       recursive = true;
     };
     ".config/tmux" = {
-      source = ../../dotconfig/tmux;
+      source = ../dotconfig/tmux;
       recursive = true;
     };
   };
