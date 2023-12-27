@@ -10,8 +10,11 @@ in
     ../features/common/hyprland-desktop.nix
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
   ];
-  hardware.nvidia.powerManagement.finegrained = true;
-  hardware.nvidia.dynamicBoost.enable = true;
+  hardware.nvidia = {
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
+    dynamicBoost.enable = true;
+  };
 
   hardware.laptop.enable = true;
 
@@ -22,7 +25,7 @@ in
     loader = {
       systemd-boot = {
         enable = true;
-         configurationLimit = 5;
+        # configurationLimit = 10;
       };
       efi.canTouchEfiVariables = true;
     };

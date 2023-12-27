@@ -1,5 +1,7 @@
 {inputs, lib, outputs, ...}:
 {
+  imports = [ inputs.nix-gc-env.nixosModules.default ];
+
   nixpkgs = {
 	  overlays = builtins.attrValues outputs.overlays;
 	  config.allowUnfree = true;
@@ -18,8 +20,8 @@
     gc = {
       automatic = true;
       dates = "*-*-* 10:00:00";
-      # Keep the last 3 generations
-      options = "--delete-older-than 7d";
+      # Keep the last 5 generations
+      delete_generations = "+5"; # Option added by nix-gc-env
     };
 
     # Add each flake input as a registry

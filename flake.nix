@@ -59,7 +59,6 @@
   inputs = 
   {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -74,5 +73,7 @@
     };
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
+
+    nix-gc-env.url = "github:Julow/nix-gc-env";
   };
 }
