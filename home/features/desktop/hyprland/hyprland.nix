@@ -19,7 +19,7 @@
     "$mod" = "SUPER";
     exec-once = "${pkgs.waybar}/bin/waybar";
 
-    monitor = ",preferred,auto,1.111111";
+    monitor = ",preferred,auto,1.2";
 
     input = {
       kb_layout = "us";
@@ -99,44 +99,43 @@
         ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +2%"
         ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 2%-"
-        ", XF86KbdBrightnessUp, exec, ${pkgs.asusctl}/bin/asusctl -n"
-        ", XF86KbdBrightnessDown, exec, ${pkgs.asusctl}/bin/asusctl -p"
     ];
 
-    bind =
-      [
-        "$mod SHIFT, Q, exit"
-        "$mod, V, togglefloating"
-        "$mod, R, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun" #pkgs.
-        "$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show run" #pkgs.
-        "$mod, P, pseudo" # dwindle
+    bind = [
+      ", XF86Launch4, exec, ${pkgs.asusctl}/bin/asusctl profile -n; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar"
+      ", XF86KbdBrightnessUp, exec, ${pkgs.asusctl}/bin/asusctl -n"
+      ", XF86KbdBrightnessDown, exec, ${pkgs.asusctl}/bin/asusctl -p"
 
-        "$mod SHIFT, Space, togglesplit"
-        "$mod CTRL, Space, workspaceopt, allfloat"
+      "$mod SHIFT, Q, exit"
+      "$mod, V, togglefloating"
+      "$mod, R, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun" #pkgs.
+      "$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show run" #pkgs.
+      "$mod, P, pseudo" # dwindle
 
-        "$mod, H, movefocus, l"
-        "$mod, J, movefocus, r"
-        "$mod, K, movefocus, u"
-        "$mod, L, movefocus, d"
+      "$mod SHIFT, Space, togglesplit"
+      "$mod CTRL, Space, workspaceopt, allfloat"
 
-        "$mod, period, focusmonitor, +1"
-        "$mod, comma, focusmonitor, -1"
+      "$mod, H, movefocus, l"
+      "$mod, J, movefocus, r"
+      "$mod, K, movefocus, u"
+      "$mod, L, movefocus, d"
 
-        "$mod SHIFT, H, movewindow, l"
-        "$mod SHIFT, J, movewindow, d"
-        "$mod SHIFT, K, movewindow, u"
-        "$mod SHIFT, L, movewindow, r"
+      "$mod, period, focusmonitor, +1"
+      "$mod, comma, focusmonitor, -1"
 
-        "$mod SHIFT, comma, movewindow, mon:-1"
-        "$mod SHIFT, period, movewindow, mon:+1"
+      "$mod SHIFT, H, movewindow, l"
+      "$mod SHIFT, J, movewindow, d"
+      "$mod SHIFT, K, movewindow, u"
+      "$mod SHIFT, L, movewindow, r"
 
+      "$mod SHIFT, comma, movewindow, mon:-1"
+      "$mod SHIFT, period, movewindow, mon:+1"
 
-        "$mod, mouse_down, split-workspace, e+1"
-        "$mod, mouse_up, split-workspace, e-1"
+      "$mod, mouse_down, split-workspace, e+1"
+      "$mod, mouse_up, split-workspace, e-1"
 
-        ", Print, exec, ${pkgs.grimblast}/bin/grimblast copysave area ~/.screenshots/$(date +'%s.png')"
-      ]
-      ++ (
+      ", Print, exec, ${pkgs.grimblast}/bin/grimblast copysave area ~/.screenshots/$(date +'%s.png')"
+    ] ++ (
         # workspaces
         # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
         builtins.concatLists (builtins.genList (
@@ -149,8 +148,7 @@
               "$mod, ${ws}, split-workspace, ${toString (x + 1)}"
               "$mod SHIFT, ${ws}, split-movetoworkspace, ${toString (x + 1)}"
             ]
-          )
-          10)
-      );
+        ) 10)
+    );
   };
 }

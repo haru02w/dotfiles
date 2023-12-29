@@ -1,5 +1,11 @@
 {pkgs, ...}:
 {
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
+
   programs.zsh = {
     enable = true;
     autocd = true;
@@ -32,9 +38,9 @@
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
     '';
 
-    envExtra =''
+    /* envExtra =''
       setopt no_global_rcs
-    '';
+    ''; */
     
     history = {
       expireDuplicatesFirst = true;

@@ -11,6 +11,7 @@
     git
     wget
   ];
+
   programs.zsh.enable = true;
 
   system.stateVersion = "23.11";

@@ -2,7 +2,6 @@
 let
   python-packages = ps: with ps; [
     pip
-    pytorch-bin
   ];
   pyenv = pkgs.python3.withPackages python-packages;
 in

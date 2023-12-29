@@ -11,6 +11,7 @@ in
     ../features/common/hyprland-desktop.nix
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
   ];
+
   hardware.nvidia = {
     powerManagement.enable = true;
     powerManagement.finegrained = true;
@@ -18,6 +19,10 @@ in
   };
 
   hardware.laptop.enable = true;
+
+  environment.sessionVariables = {
+    WLR_DRM_DEVICES = "/dev/dri/card0";
+  };
 
   networking.hostName = "zephyrus";
 
