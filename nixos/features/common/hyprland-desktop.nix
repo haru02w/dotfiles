@@ -1,6 +1,7 @@
 {
   imports = [ 
     ../hyprland.nix
+    ../tuigreet.nix
 	  ../opengl.nix 
     ../pipewire.nix
     ../fonts.nix

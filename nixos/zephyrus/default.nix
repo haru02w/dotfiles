@@ -6,6 +6,7 @@ in
 {
   imports = (builtins.attrValues outputs.nixosModules) ++ [
     ./hardware-configuration.nix
+    ../features/quietboot.nix
     ../features/common/global.nix
     ../features/common/hyprland-desktop.nix
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
@@ -25,7 +26,6 @@ in
     loader = {
       systemd-boot = {
         enable = true;
-        # configurationLimit = 10;
       };
       efi.canTouchEfiVariables = true;
     };
@@ -36,14 +36,15 @@ in
     "${admin}"= {
       isNormalUser = true;
       extraGroups = ifGroupsExist [ 
-        "wheel"
+        "wheel" # Enable ‘sudo’ for the user.
         "networkmanager"
         "video"
         "audio"
         "libvirtd"
         "network"
         "git"
-      ]; # Enable ‘sudo’ for the user.
+      ]; 
+      shell = pkgs.zsh;
       packages = with pkgs; [];
     };
     # more
