@@ -80,7 +80,7 @@
     };
 
     binde = [
-        "$mod, Return, exec, ${pkgs.foot}/bin/footclient" #pkgs.
+        "$mod, Return, exec, ${pkgs.foot}/bin/footclient ${pkgs.tmux}/bin/tmux"
         "$mod, W, killactive"
         "$mod CTRL, H, resizeactive, -40 0"
         "$mod CTRL, J, resizeactive, 0 40"

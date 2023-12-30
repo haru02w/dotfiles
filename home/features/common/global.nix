@@ -6,6 +6,7 @@
   imports = [
     ../nix.nix
     ../zsh.nix
+    ../tmux.nix
     ../fonts.nix
     ../nvim
     ../git.nix

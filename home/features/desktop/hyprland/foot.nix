@@ -7,7 +7,6 @@
 		settings = {
 		  main = {
 	        font = "FiraCode Nerd Font:size=16";
-			pad="16x0";
 			dpi-aware = false;
 		  };
 		  colors = {
