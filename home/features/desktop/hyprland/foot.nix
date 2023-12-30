@@ -11,7 +11,7 @@
 		  };
 		  colors = {
 			foreground = "d9e0ee";
-			background = "1e1e2e";
+			background = "1a1b26";
 
 			regular0 = "232a2d";
 			regular1 = "e57474";

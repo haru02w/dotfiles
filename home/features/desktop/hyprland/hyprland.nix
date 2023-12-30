@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 {
   home.pointerCursor = {
@@ -80,7 +80,13 @@
     };
 
     binde = [
-        "$mod, Return, exec, ${pkgs.foot}/bin/footclient ${pkgs.tmux}/bin/tmux"
+        ("$mod, Return, exec, ${pkgs.foot}/bin/footclient " + (
+          if (lib.elem pkgs.tmux config.home.packages) then
+            "${pkgs.tmux}/bin/tmux"
+          else 
+            ""
+        ))
+
         "$mod, W, killactive"
         "$mod CTRL, H, resizeactive, -40 0"
         "$mod CTRL, J, resizeactive, 0 40"

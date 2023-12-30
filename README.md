@@ -6,7 +6,6 @@ My dotfiles using NixOS
  - `home-manager switch --flake .` if not in NixOS (probably won't work anyway)
 
 ## TODO:
+  - create other repo to build neovim with plugins using flake
   - fzf
   - zoxide
-  - tmux
-  - nixvim
