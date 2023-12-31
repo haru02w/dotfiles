@@ -1,14 +1,11 @@
 { pkgs, ...}:
 
 {
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
-
   programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
+    defaultEditor = true;
   };
 
   home.packages = with pkgs;[
