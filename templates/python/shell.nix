@@ -1,13 +1,19 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ lib, pkgs ? import <nixpkgs> {
+  #config = {
+  #  allowUnfree = true;
+  #  cudaSupport = true;
+  #};
+}}:
 let
   python-packages = ps: with ps; [
     pip
+    #pytorch-bin
   ];
   pyenv = pkgs.python3.withPackages python-packages;
 in
 pkgs.mkShell {
-  packages = with pkgs;[
-    
+  packages = [
+    (lib.optional pkgs.config.cudaSupport pkgs.cudaPackages.cudatoolkit)
   ] ++ [ pyenv ];
 
   shellHook = ''

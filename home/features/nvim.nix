@@ -1,7 +1,7 @@
-{pkgs, ...}:
+{inputs, pkgs, ...}:
 {
-  home.packages = with pkgs;[
-    nixnvc
+  home.packages = [
+    inputs.nixnvc.packages.${pkgs.system}.nvim
   ];
   home.sessionVariables = {
     EDITOR = "nvim";

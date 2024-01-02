@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(template C) #CXX
+project(template LANGUAGES C) #CXX
 
 # Set the C/C++ standard required
 # set(CMAKE_CXX_STANDARD 11)
@@ -25,3 +25,12 @@ file(MAKE_DIRECTORY "src")
 file(GLOB_RECURSE SOURCES "${CMAKE_SOURCE_DIR}/src/*.c") # /*.cpp")
 
 add_executable(main ${SOURCES})
+
+option(TESTING "Enable tests." OFF)
+
+if(TESTING)
+  enable_testing()
+  add_subdirectory(test)
+endif()
+
+install(TARGETS main DESTINATION bin)

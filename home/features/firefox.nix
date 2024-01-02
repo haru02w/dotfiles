@@ -17,6 +17,11 @@
       ];
 
       settings = {
+        ##UI
+        "browser.uiCustomization.state" = ''
+          {"placements":{"widget-overflow-fixed-list":[],"unified-extensions-area":["addon_darkreader_org-browser-action","dfyoutube_example_com-browser-action","enhancerforyoutube_maximerf_addons_mozilla_org-browser-action","_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action"],"nav-bar":["back-button","stop-reload-button","forward-button","customizableui-special-spring1","simple-tab-groups_drive4ik-browser-action","urlbar-container","downloads-button","unified-extensions-button","ublock0_raymondhill_net-browser-action","sponsorblocker_ajay_app-browser-action"],"toolbar-menubar":["menubar-items"],"TabsToolbar":["firefox-view-button","tabbrowser-tabs","new-tab-button","alltabs-button"],"PersonalToolbar":["import-button","personal-bookmarks"]},"seen":["save-to-pocket-button","developer-button","addon_darkreader_org-browser-action","dfyoutube_example_com-browser-action","enhancerforyoutube_maximerf_addons_mozilla_org-browser-action","simple-tab-groups_drive4ik-browser-action","sponsorblocker_ajay_app-browser-action","_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action","ublock0_raymondhill_net-browser-action"],"dirtyAreaCache":["nav-bar","PersonalToolbar","unified-extensions-area","toolbar-menubar","TabsToolbar"],"currentVersion":20,"newElementCount":4}
+        '';
+
         ## STARTUP
         # restore session after reboot
         "toolkit.winRegisterApplicationRestart" = true;
