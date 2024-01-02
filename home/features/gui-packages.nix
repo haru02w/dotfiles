@@ -2,7 +2,7 @@
 {
   imports = [ ./firefox.nix ];
   home.packages = with pkgs; [
-    firefox
+    vieb
     discord
     webcord
   ];

@@ -1,11 +1,29 @@
-{inputs, pkgs, config, ...}:
+{ pkgs, config, ...}:
 {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-devedition-bin;
+    package = pkgs.firefox;
+    # package = pkgs.firefox-devedition-bin;
     profiles.${config.home.username} = {
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        tokyo-night-v2
+        simple-tab-groups
+        ublock-origin
+        sponsorblock
+        enhancer-for-youtube
+        df-youtube
+        translate-web-pages
+        darkreader
+      ];
+
       settings = {
         ## STARTUP
+        # restore session after reboot
+        "toolkit.winRegisterApplicationRestart" = true;
+        # disable Firefox View pinned at startup
+        "browser.tabs.firefox-view" = false;
+        #disable default browser check
+        "browser.shell.checkDefaultBrowser" = false;
         #disable about:config warning
         "browser.aboutConfig.showWarning" = false;
         # set startup page
@@ -122,15 +140,6 @@
         # disable What's new page
         "browser.messaging-system.whatsNewPanel.enabled" = false;
       };
-      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
-        simple-tab-groups
-        ublock-origin
-        sponsorblock
-        enhancer-for-youtube
-        df-youtube
-        translate-web-pages
-        darkreader
-      ];
     };
   };
 }
