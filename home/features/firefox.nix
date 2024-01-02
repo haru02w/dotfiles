@@ -5,29 +5,7 @@
     package = pkgs.firefox-devedition-bin;
     profiles.${config.home.username} = {
       settings = {
-        # Performance settings
-        "gfx.webrender.all" = true; # Force enable GPU acceleration
-        "media.ffmpeg.vaapi.enabled" = true;
-        "widget.dmabuf.force-enabled" = true; # Required in recent Firefoxes
 
-        # Keep the reader button enabled at all times; really don't
-        # care if it doesn't work 20% of the time, most websites are
-        # crap and unreadable without this
-        "reader.parse-on-load.force-enabled" = true;
-
-        # Hide the "sharing indicator", it's especially annoying
-        # with tiling WMs on wayland
-        "privacy.webrtc.legacyGlobalIndicator" = false;
-
-        "app.update.auto" = false;
-        "browser.bookmarks.restore_default_bookmarks" = false;
-        "browser.discovery.enabled" = false;
-        "browser.laterrun.enabled" = false;
-        "browser.newtabpage.activity-stream.showSponsored" = false;
-        "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
-
-        "browser.download.panel.shown" = true;
-        "general.autoScroll" = true;
       };
       extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
         tokyo-night-v2 # theme
@@ -42,3 +20,99 @@
     };
   };
 }
+/*
+user_pref("app.normandy.api_url", "");
+user_pref("app.normandy.enabled", false);
+user_pref("app.shield.optoutstudies.enabled", false);
+user_pref("app.update.auto", false);
+user_pref("beacon.enabled", false);
+user_pref("breakpad.reportURL", "");
+user_pref("browser.aboutConfig.showWarning", false);
+user_pref("browser.crashReports.unsubmittedCheck.autoSubmit", false);
+user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
+user_pref("browser.crashReports.unsubmittedCheck.enabled", false);
+user_pref("browser.disableResetPrompt", true);
+user_pref("browser.newtab.preload", false);
+user_pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
+user_pref("browser.newtabpage.enhanced", false);
+user_pref("browser.newtabpage.introShown", true);
+user_pref("browser.safebrowsing.appRepURL", "");
+user_pref("browser.safebrowsing.blockedURIs.enabled", false);
+user_pref("browser.safebrowsing.downloads.enabled", false);
+user_pref("browser.safebrowsing.downloads.remote.enabled", false);
+user_pref("browser.safebrowsing.downloads.remote.url", "");
+user_pref("browser.safebrowsing.enabled", false);
+user_pref("browser.safebrowsing.malware.enabled", false);
+user_pref("browser.safebrowsing.phishing.enabled", false);
+user_pref("browser.selfsupport.url", "");
+user_pref("browser.send_pings", false);
+user_pref("browser.sessionstore.privacy_level", 0);
+user_pref("browser.shell.checkDefaultBrowser", false);
+user_pref("browser.startup.homepage_override.mstone", "ignore");
+user_pref("browser.tabs.crashReporting.sendReport", false);
+user_pref("browser.urlbar.groupLabels.enabled", false);
+user_pref("browser.urlbar.quicksuggest.enabled", false);
+user_pref("browser.urlbar.trimURLs", false);
+user_pref("datareporting.healthreport.service.enabled", false);
+user_pref("datareporting.healthreport.uploadEnabled", false);
+user_pref("datareporting.policy.dataSubmissionEnabled", false);
+user_pref("device.sensors.ambientLight.enabled", false);
+user_pref("device.sensors.enabled", false);
+user_pref("device.sensors.motion.enabled", false);
+user_pref("device.sensors.orientation.enabled", false);
+user_pref("device.sensors.proximity.enabled", false);
+user_pref("dom.battery.enabled", false);
+user_pref("dom.event.clipboardevents.enabled", false);
+user_pref("dom.webaudio.enabled", false);
+user_pref("experiments.activeExperiment", false);
+user_pref("experiments.enabled", false);
+user_pref("experiments.manifest.uri", "");
+user_pref("experiments.supported", false);
+user_pref("extensions.getAddons.cache.enabled", false);
+user_pref("extensions.getAddons.showPane", false);
+user_pref("extensions.greasemonkey.stats.optedin", false);
+user_pref("extensions.greasemonkey.stats.url", "");
+user_pref("extensions.pocket.enabled", false);
+user_pref("extensions.shield-recipe-client.api_url", "");
+user_pref("extensions.shield-recipe-client.enabled", false);
+user_pref("extensions.webservice.discoverURL", "");
+user_pref("media.autoplay.default", 0);
+user_pref("media.autoplay.enabled", true);
+user_pref("media.eme.enabled", false);
+user_pref("media.gmp-widevinecdm.enabled", false);
+user_pref("media.navigator.enabled", false);
+user_pref("media.video_stats.enabled", false);
+user_pref("network.allow-experiments", false);
+user_pref("network.captive-portal-service.enabled", false);
+user_pref("network.cookie.cookieBehavior", 1);
+user_pref("network.http.referer.spoofSource", true);
+user_pref("network.trr.mode", 5);
+user_pref("privacy.donottrackheader.enabled", true);
+user_pref("privacy.donottrackheader.value", 1);
+user_pref("privacy.query_stripping", true);
+user_pref("privacy.trackingprotection.cryptomining.enabled", true);
+user_pref("privacy.trackingprotection.enabled", true);
+user_pref("privacy.trackingprotection.fingerprinting.enabled", true);
+user_pref("privacy.trackingprotection.pbmode.enabled", true);
+user_pref("privacy.usercontext.about_newtab_segregation.enabled", true);
+user_pref("security.ssl.disable_session_identifiers", true);
+user_pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.showSponsoredTopSite", false);
+user_pref("signon.autofillForms", false);
+user_pref("toolkit.telemetry.archive.enabled", false);
+user_pref("toolkit.telemetry.bhrPing.enabled", false);
+user_pref("toolkit.telemetry.cachedClientID", "");
+user_pref("toolkit.telemetry.enabled", false);
+user_pref("toolkit.telemetry.firstShutdownPing.enabled", false);
+user_pref("toolkit.telemetry.hybridContent.enabled", false);
+user_pref("toolkit.telemetry.newProfilePing.enabled", false);
+user_pref("toolkit.telemetry.prompted", 2);
+user_pref("toolkit.telemetry.rejected", true);
+user_pref("toolkit.telemetry.reportingpolicy.firstRun", false);
+user_pref("toolkit.telemetry.server", "");
+user_pref("toolkit.telemetry.shutdownPingSender.enabled", false);
+user_pref("toolkit.telemetry.unified", false);
+user_pref("toolkit.telemetry.unifiedIsOptIn", false);
+user_pref("toolkit.telemetry.updatePing.enabled", false);
+user_pref("webgl.renderer-string-override", " ");
+user_pref("webgl.vendor-string-override", " ");
+*/
