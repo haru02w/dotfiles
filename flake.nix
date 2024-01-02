@@ -1,6 +1,6 @@
 {
   outputs = {self, nixpkgs, home-manager, hyprland, ...} @ inputs:
-  let
+  let 
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
     # Suported systems for your flake packages, shell, etc.
@@ -71,6 +71,11 @@
     };
 
     nix-gc-env.url = "github:Julow/nix-gc-env";
+
+    nixnvc = {
+      url = "github:haru02w/nixnvc";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     hyprland.url = "github:hyprwm/Hyprland";
     split-monitor-workspaces = {

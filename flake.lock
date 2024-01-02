@@ -1,5 +1,39 @@
 {
   "nodes": {
+    "buffer_manager-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1698915257,
+        "narHash": "sha256-a0REAPs0rJIWLvRNZ04ULwjNzH64hYGhrV/+i/9w/TA=",
+        "owner": "j-morano",
+        "repo": "buffer_manager.nvim",
+        "rev": "4fa47504a23d9a94216f02b1d84f7b0a2dbe2b72",
+        "type": "github"
+      },
+      "original": {
+        "owner": "j-morano",
+        "repo": "buffer_manager.nvim",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1701680307,
+        "narHash": "sha256-kAuep2h5ajznlPMD9rnQyffWG8EM/C73lejGofXvdM8=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "4022d587cbbfd70fe950c1e2083a02621806a725",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -98,6 +132,28 @@
         "type": "github"
       }
     },
+    "nixnvc": {
+      "inputs": {
+        "buffer_manager-nvim": "buffer_manager-nvim",
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1704151656,
+        "narHash": "sha256-FWaeGbAdHb7j1y+F8AfHRvdeZqKUbNQpZiH+iI8P6wk=",
+        "owner": "haru02w",
+        "repo": "nixnvc",
+        "rev": "4e1f6aedfc02b44e82dc2a0af43b92da23a3933b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "haru02w",
+        "repo": "nixnvc",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1703879120,
@@ -150,6 +206,7 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "nix-gc-env": "nix-gc-env",
+        "nixnvc": "nixnvc",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "split-monitor-workspaces": "split-monitor-workspaces"
@@ -188,6 +245,21 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
         "type": "github"
       }
     },

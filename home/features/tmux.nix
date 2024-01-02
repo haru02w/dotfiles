@@ -9,25 +9,28 @@
     historyLimit = 10000;
     disableConfirmationPrompt = true;
     escapeTime = 0;
-    # newSession = true;
     baseIndex = 1;
-    # hjkl panel navigation
-    customPaneNavigationAndResize = true;
     keyMode = "vi";
     prefix = "C-Space";
-    extraConfig = builtins.readFile ./dotconfig/tmux.conf +
+    extraConfig = ''
+      is_vim="${pkgs.procps}/bin/ps -o state= -o comm= -t '#{pane_tty}' \
+          | ${pkgs.gnugrep}/bin/grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+    ''+
       (if (lib.elem pkgs.wl-clipboard config.home.packages) then
-        "set -s copy-command '${pkgs.wl-clipboard}/bin/wl-copy --foreground --type text/plain'"
+        "set -s copy-command '${pkgs.wl-clipboard}/bin/wl-copy --foreground --type text/plain'\n"
       else 
-        "")
+        "") + builtins.readFile ./dotconfig/tmux.conf
     ;
     plugins = with pkgs.tmuxPlugins;[
       {
+        plugin = vim-tmux-navigator;
+      }
+      {
         plugin = resurrect;
         extraConfig = ''
-		      set -g @resurrect-strategy-nvim 'session'
-		      set -g @resurrect-capture-pane-contents 'on'
-		    '';
+          set -g @resurrect-strategy-nvim 'session'
+          set -g @resurrect-capture-pane-contents 'on'
+        '';
       }
       {
         plugin = continuum;

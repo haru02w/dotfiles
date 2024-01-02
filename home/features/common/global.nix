@@ -8,7 +8,7 @@
     ../zsh.nix
     ../tmux.nix
     ../fonts.nix
-    ../nvim
+    ../nvim.nix
     ../git.nix
   ] ++ (builtins.attrValues outputs.homeManagerModules);
 

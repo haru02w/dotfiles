@@ -9,27 +9,30 @@
 	        font = "FiraCode Nerd Font:size=16";
 			dpi-aware = false;
 		  };
+		  cursor.color = "11121d a0a8cd";
 		  colors = {
-			foreground = "d9e0ee";
-			background = "1a1b26";
+			foreground = "a0a8cd";
+			background = "11121d";
+			selection-foreground = "a0a8cd";
+			selection-background = "11121d";
 
-			regular0 = "232a2d";
-			regular1 = "e57474";
-			regular2 = "8ccf7e";
-			regular3 = "e5c76b";
-			regular4 = "67b0e8";
-			regular5 = "c47fd5";
-			regular6 = "6cbfbf";
-			regular7 = "b3b9b8";
+			regular0 = "06080a"; # black
+			regular1 = "ee6d85"; # red
+			regular2 = "95c561"; # green
+			regular3 = "d7a65f"; # yellow
+			regular4 = "7199ee"; # blue
+			regular5 = "a485dd"; # purple
+			regular6 = "38a89d"; # cyan
+			regular7 = "a0a8cd"; # white
 
-			bright0 = "2d3437";
-			bright1 = "ef7e7e";
-			bright2 = "96d988";
-			bright3 = "f4d67a";
-			bright4 = "71baf2";
-			bright5 = "ce89df";
-			bright6 = "67cbe7";
-			bright7 = "bdc3c2";
+			bright0 = "212234"; # black
+			bright1 = "ee6d85"; # red
+			bright2 = "95c561"; # green
+			bright3 = "d7a65f"; # yellow
+			bright4 = "7199ee"; # blue
+			bright5 = "a485dd"; # purple
+			bright6 = "38a89d"; # cyan
+			bright7 = "a0a8cd"; # white
 		  };
 		};
 	};

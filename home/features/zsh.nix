@@ -17,8 +17,8 @@
     syntaxHighlighting.enable = true;
     historySubstringSearch = {
       enable = true;
-      searchUpKey = [ "^[[A" "^K" ];
-      searchDownKey = [ "^[[B" "^J"];
+      searchUpKey = [ "^[[A" ];
+      searchDownKey = [ "^[[B" ];
     };
     plugins = [
       {
