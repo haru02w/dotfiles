@@ -1,6 +1,6 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{ lib, pkgs, config, outputs, ... }:
+{ lib, config, outputs, ... }:
 
 {
   imports = [
@@ -10,18 +10,8 @@
     ../fonts.nix
     ../nvim.nix
     ../git.nix
+    ../cli-packages.nix
   ] ++ (builtins.attrValues outputs.homeManagerModules);
-
-  home.packages = with pkgs;[
-    libqalculate # calculator
-    ncdu # tui disk usage analizer
-    pulsemixer # tui pulse mixer 
-    powertop # power status
-    btop # general system status
-	  htop # general system status
-	  neofetch # system info
-    pfetch #system info
-  ];
 
   home = {
     username = lib.mkDefault "haru02w";
