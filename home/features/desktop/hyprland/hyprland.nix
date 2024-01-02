@@ -156,5 +156,9 @@
             ]
         ) 10)
     );
+    bindl = [
+      ",switch:off:Lid Switch, exec, hyprctl keyword monitor 'eDP-1,preferred,auto,1.2'"
+      ",switch:on:Lid Switch, exec, hyprctl keyword monitor 'eDP-1, disable'"
+    ];
   };
 }

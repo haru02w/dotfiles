@@ -1,5 +1,22 @@
 {pkgs, ...}:
 {
+  home.packages = with pkgs;[
+    bat
+    ripgrep
+    fzf
+    entr
+  ];
+
+  programs.eza = {
+    enable = true;
+    enableAliases = true;
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
@@ -52,6 +69,8 @@
 
     shellAliases = {
       update = "sudo nixos-rebuild switch --flake ~/.dotfiles";
+      cat = "${pkgs.bat}/bin/bat";
+      cd = "z";
     };
   };
 }
