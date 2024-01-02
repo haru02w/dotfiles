@@ -50,7 +50,7 @@ in
         "git"
       ]; 
       shell = pkgs.zsh;
-      packages = with pkgs; [];
+      packages = [];
     };
     # more
   };
