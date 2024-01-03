@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.waybar = {
@@ -179,7 +179,7 @@ window#waybar {
         };
         "custom/power" = {
             format = "⏻";
-            on-click = "${pkgs.systemdMinimal}/bin/systemctl suspend";
+            on-click = "systemctl suspend";
         };
         "clock" = {
             format = "{:%H\n%M}";

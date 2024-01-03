@@ -9,5 +9,6 @@
     htop # general system status
     neofetch # system info
     pfetch #system info
+    tldr # simpler man
   ];
 }
