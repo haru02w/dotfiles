@@ -46,6 +46,12 @@
           ./nixos/zephyrus
         ];
       };
+      tweety = lib.nixosSystem {
+        specialArgs = { inherit inputs outputs; };
+        modules = [
+          ./nixos/tweety
+        ];
+      };
     };
 
     # Standalone home-manager configuration entrypoint
@@ -56,6 +62,13 @@
         extraSpecialArgs = { inherit inputs outputs; };
         modules = [
           ./home/haru02w/zephyrus.nix
+        ];
+      };
+      "haru02w@tweety" = lib.homeManagerConfiguration {
+        pkgs = pkgsFor.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = { inherit inputs outputs; };
+        modules = [
+          ./home/haru02w/tweety.nix
         ];
       };
     };

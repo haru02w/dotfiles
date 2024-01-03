@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, outputs, ...}:
+{ config, pkgs, outputs, ...}:
 let
   admin = "haru02w";
   ifGroupsExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
@@ -11,9 +11,11 @@ in
     ../features/common/hyprland-desktop.nix
   ];
 
-  networking.hostName = "acmesecurity";
+  networking.hostName = "tweety";
 
-  # TODO: Bootloader
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # Users
   users.users = {
@@ -29,7 +31,7 @@ in
         "git"
       ];
       shell = pkgs.zsh;
-      packages = with pkgs; [];
+      packages = [];
     };
     # more
   };
