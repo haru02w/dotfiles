@@ -129,16 +129,16 @@
       "$mod, K, movefocus, u"
       "$mod, L, movefocus, d"
 
-      "$mod, period, focusmonitor, +1"
-      "$mod, comma, focusmonitor, -1"
-
       "$mod SHIFT, H, movewindow, l"
       "$mod SHIFT, J, movewindow, d"
       "$mod SHIFT, K, movewindow, u"
       "$mod SHIFT, L, movewindow, r"
 
-      "$mod SHIFT, comma, movewindow, mon:-1"
-      "$mod SHIFT, period, movewindow, mon:+1"
+      "$mod, bracketleft, focusmonitor, -1"
+      "$mod, bracketright, focusmonitor, +1"
+
+      "$mod SHIFT, bracketleft, movewindow, mon:-1"
+      "$mod SHIFT, bracketright, movewindow, mon:+1"
 
       "$mod, mouse_down, split-workspace, e+1"
       "$mod, mouse_up, split-workspace, e-1"

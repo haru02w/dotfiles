@@ -28,16 +28,6 @@
     package = pkgs.swaylock-effects;
     settings = {
       image = "${wallpaper}";
-      ignore-empty-password = true;
-      indicator = true;
-      indicator-idle-visible = true;
-      indicator-caps-lock = true;
-      indicator-radius = 100;
-      indicator-thickness = 16;
-      line-uses-inside = true;
-      effect-blur = "9x7";
-      effect-vignette = "0.85:0.85";
-      fade-in = 0.1;
     };
   };
 }
