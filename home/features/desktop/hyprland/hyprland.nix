@@ -19,7 +19,10 @@
     "$mod" = "SUPER";
     exec-once = "${pkgs.waybar}/bin/waybar";
 
-    monitor = ",preferred,auto,1.2";
+    monitor = [
+      "eDP-1,preferred,auto,1.2"
+      ",preferred,auto,1"
+    ];
 
     input = {
       kb_layout = "us";

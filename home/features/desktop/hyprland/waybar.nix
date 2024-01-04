@@ -242,6 +242,7 @@ window#waybar {
             format-icons = [ "" "" "" "" "" ];
         };
         "network"= {
+            format = "󰈁";
             format-ethernet= "󰈁";
             format-wifi = "{icon}";
             format-disconnected= "󰖪";

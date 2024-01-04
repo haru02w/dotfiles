@@ -23,10 +23,12 @@
         '';
 
         ## STARTUP
+        # Enable auto scroll
+        "general.autoScroll" = true;
         # restore session after reboot
         "toolkit.winRegisterApplicationRestart" = true;
         # disable Firefox View pinned at startup
-        "browser.tabs.firefox-view" = false;
+        # "browser.tabs.firefox-view" = false;
         #disable default browser check
         "browser.shell.checkDefaultBrowser" = false;
         #disable about:config warning
