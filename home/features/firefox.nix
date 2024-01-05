@@ -17,18 +17,21 @@
       ];
 
       settings = {
+        # https://support.mozilla.org/bm/questions/1358615
+
         ##UI
         "browser.uiCustomization.state" = ''
           {"placements":{"widget-overflow-fixed-list":[],"unified-extensions-area":["addon_darkreader_org-browser-action","dfyoutube_example_com-browser-action","enhancerforyoutube_maximerf_addons_mozilla_org-browser-action","_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action"],"nav-bar":["back-button","stop-reload-button","forward-button","customizableui-special-spring1","simple-tab-groups_drive4ik-browser-action","urlbar-container","downloads-button","unified-extensions-button","ublock0_raymondhill_net-browser-action","sponsorblocker_ajay_app-browser-action"],"toolbar-menubar":["menubar-items"],"TabsToolbar":["firefox-view-button","tabbrowser-tabs","new-tab-button","alltabs-button"],"PersonalToolbar":["import-button","personal-bookmarks"]},"seen":["save-to-pocket-button","developer-button","addon_darkreader_org-browser-action","dfyoutube_example_com-browser-action","enhancerforyoutube_maximerf_addons_mozilla_org-browser-action","simple-tab-groups_drive4ik-browser-action","sponsorblocker_ajay_app-browser-action","_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action","ublock0_raymondhill_net-browser-action"],"dirtyAreaCache":["nav-bar","PersonalToolbar","unified-extensions-area","toolbar-menubar","TabsToolbar"],"currentVersion":20,"newElementCount":4}
         '';
 
-        ## STARTUP
         # Enable auto scroll
         "general.autoScroll" = true;
         # restore session after reboot
         "toolkit.winRegisterApplicationRestart" = true;
         # disable Firefox View pinned at startup
-        # "browser.tabs.firefox-view" = false;
+        "browser.tabs.firefox-view" = false;
+        "browser.tabs.firefox-view-next" = false;
+
         #disable default browser check
         "browser.shell.checkDefaultBrowser" = false;
         #disable about:config warning
@@ -47,8 +50,6 @@
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
         # clear default topsites
         "browser.newtabpage.activity-stream.default.sites" = "";
-
-        # GEOLOCATION
         # use Mozilla geolocation service instead of Google if permission is granted
         "geo.provider.network.url" =
           "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%";
@@ -57,15 +58,10 @@
         "geo.provider.use_corelocation" = false; # MAC
         "geo.provider.use_gpsd" = false; # LINUX 
         "geo.provider.use_geoclue" = false; # LINUX
-
-        # QUIETER FOX
         # disable addons recomendations (google analytics)
         "extensions.getAddons.showPane" = false;
         "extensions.htmlaboutaddons.recommendations.enabled" = false;
         "browser.discovery.enabled" = false;
-
-
-        # TELEMETRY
         # disable new data submission
         "datareporting.policy.dataSubmissionEnabled" = false;
         # disable healt report
@@ -112,24 +108,13 @@
         "browser.urlbar.mdn.featureGate" = false;
         # disable search and form history
         "browser.formfill.enable" = false;
-
-        
-        # PASSWORDS
         # disable auto-filling username & password form fields
         "signon.autofillForms" = false;
         # disable formless login capture for Password Manager
         "signon.formlessCapture.enabled" = false;
-
-
-        # DISK AVOIDANCE
         # disable media cache from writing to disk in Private Browsing
         "browser.privatebrowsing.forceMediaMemoryCache" = true;
-
-        # TRACKING
         "browser.contentblocking.category" = "strict";
-
-
-        #MISC
         # ask what folder to download
         "browser.download.useDownloadDir" = false;
         "browser.download.alwaysOpenPanel" = true;
