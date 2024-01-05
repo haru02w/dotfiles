@@ -1,9 +1,9 @@
 {pkgs, ...}:
 {
   imports = [ ./firefox.nix ];
-  home.packages = with pkgs; [
-    vieb
-    discord
-    webcord
+  home.packages = [
+    pkgs.unstable.vieb
+    pkgs.discord
+    pkgs.webcord
   ];
 }
