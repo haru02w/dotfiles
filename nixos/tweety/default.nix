@@ -36,4 +36,6 @@ in
     # more
   };
   home-manager.users.${admin} = import ../../home/${admin}/${config.networking.hostName}.nix;
+
+  services.openssh.enable = true;
 }

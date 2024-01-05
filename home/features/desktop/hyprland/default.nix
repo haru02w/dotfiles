@@ -7,7 +7,6 @@
     ./waybar.nix
     ./rofi.nix
     ./foot.nix
-    ./swaylock.nix
     ../playerctl.nix
   ];
 
