@@ -11,12 +11,12 @@
   ];
 
   home.packages = with pkgs; [
+    rofi-wayland
+    waybar
+    libnotify
+    brightnessctl
+    grimblast
     wl-clipboard
-      rofi-wayland
-      waybar
-      libnotify
-      brightnessctl
-      grimblast
   ];
 
   services.mako = {

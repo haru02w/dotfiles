@@ -8,7 +8,6 @@
     enable = true;
 	  xwayland.enable = true;
 	  portalPackage = pkgs.xdg-desktop-portal-hyprland;
-    package = pkgs.hyprland;
   };
 
   xdg.portal.enable = true;
