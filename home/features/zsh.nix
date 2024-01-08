@@ -1,11 +1,5 @@
-{pkgs, ...}:
-{
-  home.packages = with pkgs;[
-    bat
-    ripgrep
-    fzf
-    entr
-  ];
+{ pkgs, ... }: {
+  home.packages = with pkgs; [ bat ripgrep fzf entr ];
 
   programs.eza = {
     enable = true;
@@ -57,9 +51,10 @@
     '';
 
     /* envExtra =''
-      setopt no_global_rcs
-    ''; */
-    
+         setopt no_global_rcs
+       '';
+    */
+
     history = {
       expireDuplicatesFirst = true;
       ignoreSpace = false;

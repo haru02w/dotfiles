@@ -3,18 +3,19 @@
   #  allowUnfree = true;
   #  cudaSupport = true;
   #};
-}}:
+} }:
 let
-  python-packages = ps: with ps; [
-    pip
-    #pytorch-bin
-  ];
+  python-packages = ps:
+    with ps;
+    [
+      pip
+      #pytorch-bin
+    ];
   pyenv = pkgs.python3.withPackages python-packages;
-in
-pkgs.mkShell {
-  packages = [
-    (lib.optional pkgs.config.cudaSupport pkgs.cudaPackages.cudatoolkit)
-  ] ++ [ pyenv ];
+in pkgs.mkShell {
+  packages =
+    [ (lib.optional pkgs.config.cudaSupport pkgs.cudaPackages.cudatoolkit) ]
+    ++ [ pyenv ];
 
   shellHook = ''
     # Tells pip to put packages into $PIP_PREFIX instead of the usual locations.

@@ -17,7 +17,7 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs;[
+  home.packages = with pkgs; [
     firefox
     discord
     webcord
@@ -87,9 +87,7 @@
   #  /etc/profiles/per-user/haru02w/etc/profile.d/hm-session-vars.sh
   #
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+  home.sessionVariables = { EDITOR = "nvim"; };
 
   home.username = "haru02w";
   home.homeDirectory = "/home/haru02w";

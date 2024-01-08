@@ -1,9 +1,9 @@
-{ config, pkgs, outputs, ...}:
+{ config, pkgs, outputs, ... }:
 let
   admin = "haru02w";
-  ifGroupsExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in
-{
+  ifGroupsExist = groups:
+    builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
+in {
   imports = (builtins.attrValues outputs.nixosModules) ++ [
     ./hardware-configuration.nix
     ../features/quietboot.nix
@@ -19,9 +19,9 @@ in
 
   # Users
   users.users = {
-    "${admin}"= {
+    "${admin}" = {
       isNormalUser = true;
-      extraGroups = ifGroupsExist [ 
+      extraGroups = ifGroupsExist [
         "wheel" # Enable ‘sudo’ for the user.
         "networkmanager"
         "video"
@@ -31,11 +31,12 @@ in
         "git"
       ];
       shell = pkgs.zsh;
-      packages = [];
+      packages = [ ];
     };
     # more
   };
-  home-manager.users.${admin} = import ../../home/${admin}/${config.networking.hostName}.nix;
+  home-manager.users.${admin} =
+    import ../../home/${admin}/${config.networking.hostName}.nix;
 
   services.openssh.enable = true;
 }

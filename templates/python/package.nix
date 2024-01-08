@@ -1,6 +1,6 @@
 { python3Packages }:
 with python3Packages;
-buildPythonApplication rec{
+buildPythonApplication rec {
   pname = "main";
   version = "1.0";
   src = ./src;

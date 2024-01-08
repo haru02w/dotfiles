@@ -1,8 +1,7 @@
-let 
+let
   locale = "en_US.UTF-8";
   timezone = "America/Sao_Paulo";
-in 
-{
+in {
   i18n = {
     defaultLocale = locale;
     extraLocaleSettings = {

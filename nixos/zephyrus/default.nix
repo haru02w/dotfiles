@@ -1,9 +1,9 @@
-{ config, pkgs, inputs, outputs, ...}:
+{ config, pkgs, inputs, outputs, ... }:
 let
   admin = "haru02w";
-  ifGroupsExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in
-{
+  ifGroupsExist = groups:
+    builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
+in {
   imports = (builtins.attrValues outputs.nixosModules) ++ [
     ./hardware-configuration.nix
     ../features/quietboot.nix
@@ -20,27 +20,23 @@ in
 
   hardware.laptop.enable = true;
 
-  environment.sessionVariables = {
-    WLR_DRM_DEVICES = "/dev/dri/card0";
-  };
+  environment.sessionVariables = { WLR_DRM_DEVICES = "/dev/dri/card0"; };
 
   networking.hostName = "zephyrus";
 
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     loader = {
-      systemd-boot = {
-        enable = true;
-      };
+      systemd-boot = { enable = true; };
       efi.canTouchEfiVariables = true;
     };
   };
 
   # Users
   users.users = {
-    "${admin}"= {
+    "${admin}" = {
       isNormalUser = true;
-      extraGroups = ifGroupsExist [ 
+      extraGroups = ifGroupsExist [
         "wheel" # Enable ‘sudo’ for the user.
         "networkmanager"
         "video"
@@ -48,11 +44,12 @@ in
         "libvirtd"
         "network"
         "git"
-      ]; 
+      ];
       shell = pkgs.zsh;
-      packages = [];
+      packages = [ ];
     };
     # more
   };
-  home-manager.users.${admin} = import ../../home/${admin}/${config.networking.hostName}.nix;
+  home-manager.users.${admin} =
+    import ../../home/${admin}/${config.networking.hostName}.nix;
 }

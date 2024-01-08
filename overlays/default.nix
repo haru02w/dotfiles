@@ -1,5 +1,4 @@
-{inputs, ...}:
-{
+{ inputs, ... }: {
   nur = inputs.nur.overlay;
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

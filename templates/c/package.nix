@@ -1,9 +1,4 @@
-{ lib
-, stdenv
-, pkgs
-, enableTests ? true
-, ...
-}:
+{ lib, stdenv, pkgs, enableTests ? true, ... }:
 stdenv.mkDerivation {
   name = "main";
 
@@ -11,11 +6,11 @@ stdenv.mkDerivation {
   src = ./.;
 
   # packages at compilationtime
-  nativeBuildInputs = with pkgs;[ cmake ];
+  nativeBuildInputs = with pkgs; [ cmake ];
   # packages at testing
-  checkInputs = [];
+  checkInputs = [ ];
   # packages at run time
-  BuildInputs = [];
+  BuildInputs = [ ];
   doCheck = enableTests;
   cmakeFlags = lib.optional (!enableTests) "-DTESTING=off";
 }

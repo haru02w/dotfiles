@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }:
 
 {
-  imports = [ 
+  imports = [
     inputs.hyprland.homeManagerModules.default
     ./hyprland.nix
     ./waybar.nix

@@ -1,10 +1,9 @@
-{inputs, lib, outputs, ...}:
-{
+{ inputs, lib, outputs, ... }: {
   imports = [ inputs.nix-gc-env.nixosModules.default ];
 
   nixpkgs = {
-	  overlays = builtins.attrValues outputs.overlays;
-	  config.allowUnfree = true;
+    overlays = builtins.attrValues outputs.overlays;
+    config.allowUnfree = true;
     config.allowUnfreePredicate = _: true;
   };
 

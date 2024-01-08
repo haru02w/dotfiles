@@ -1,16 +1,7 @@
-{pkgs, ...}:
-{
-  imports = [
-    ../nix.nix
-    ../hm-module.nix
-    ../locale_n_timezone.nix
-  ];
+{ pkgs, ... }: {
+  imports = [ ../nix.nix ../hm-module.nix ../locale_n_timezone.nix ];
   environment.variables.EDITOR = "nvim";
-  environment.systemPackages = with pkgs; [
-    neovim
-    git
-    wget
-  ];
+  environment.systemPackages = with pkgs; [ neovim git wget ];
 
   programs.zsh.enable = true;
 
