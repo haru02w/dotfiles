@@ -18,7 +18,10 @@
 
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
-    exec-once = "${pkgs.waybar}/bin/waybar";
+    exec-once = [
+      "${pkgs.waybar}/bin/waybar"
+      "${pkgs.swaybg}/bin/swaybg -i ${toString ../../dotconfig/wallpapers/localhost.jpeg}"
+    ];
 
     monitor = [
       "eDP-1,preferred,auto,1.2"
