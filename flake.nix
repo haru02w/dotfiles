@@ -88,7 +88,7 @@
 
     nixnvc = {
       url = "github:haru02w/nixnvc";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     nur = {
