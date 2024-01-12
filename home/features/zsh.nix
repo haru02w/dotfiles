@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config,lib,  ... }: {
   home.packages = with pkgs; [ bat ripgrep fzf entr ];
 
   programs.eza = {
@@ -64,6 +64,9 @@
 
     shellAliases = {
       update = "sudo nixos-rebuild switch --flake ~/.dotfiles";
+      cdmnt = 
+        (if config.services.udiskie.enable then
+          "cd /run/media/${config.home.username}/" else null );
       cat = "${pkgs.bat}/bin/bat";
       cd = "z";
     };

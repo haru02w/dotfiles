@@ -9,7 +9,6 @@ in {
     ../features/quietboot.nix
     ../features/common/global.nix
     ../features/common/hyprland-desktop.nix
-    ./nfs-bkpsys.nix
   ];
 
   networking.hostName = "tweety";

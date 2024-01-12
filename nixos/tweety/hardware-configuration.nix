@@ -22,6 +22,17 @@
     fsType = "vfat";
   };
 
+  fileSystems."/mnt/bkpsys" = {
+    device = "bkpsys.acmesecurity.org:/";
+    fsType = "nfs4";
+    options = [
+      "nofail"
+      "x-systemd.automount"
+      "x-systemd.requires=network-online.target"
+      "x-systemd.device-timeout=10"
+    ];
+  };
+
   swapDevices =
     [{ device = "/dev/disk/by-uuid/6f73c440-3ef2-4172-a2e1-0c8342e42af3"; }];
 

@@ -10,6 +10,7 @@
     ../fonts.nix
     ../nvim.nix
     ../git.nix
+    ../automount.nix
     ../cli-packages.nix
   ] ++ (builtins.attrValues outputs.homeManagerModules);
 
