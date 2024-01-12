@@ -8,4 +8,6 @@
 
   system.stateVersion = "23.11";
   hardware.enableRedistributableFirmware = true;
+
+  boot.supportedFilesystems = [ "ntfs" ];
 }
