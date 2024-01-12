@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    progress # monitor progress of GNU utils
     libqalculate # calculator
     ncdu # tui disk usage analizer
     pulsemixer # tui pulse mixer
