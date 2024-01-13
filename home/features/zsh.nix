@@ -1,4 +1,4 @@
-{ pkgs, config,lib,  ... }: {
+{ pkgs, config,  ... }: {
   home.packages = with pkgs; [ bat ripgrep fzf entr ];
 
   programs.eza = {
@@ -22,10 +22,13 @@
     enable = true;
     autocd = true;
 
+    localVariables = {
+      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=5";
+    };
     #plugins
     enableCompletion = true;
-    enableAutosuggestions = true;
     syntaxHighlighting.enable = true;
+    enableAutosuggestions = true;
     historySubstringSearch = {
       enable = true;
       searchUpKey = [ "^[[A" ];
