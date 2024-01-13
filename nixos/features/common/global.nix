@@ -5,6 +5,7 @@
   environment.systemPackages = with pkgs; [ neovim git wget ];
 
   programs.zsh.enable = true;
+  security.sudo.wheelNeedsPassword = false;
 
   system.stateVersion = "23.11";
   hardware.enableRedistributableFirmware = true;
