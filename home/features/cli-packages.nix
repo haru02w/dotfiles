@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    irssi # irc client
     progress # monitor progress of GNU utils
     libqalculate # calculator
     ncdu # tui disk usage analizer

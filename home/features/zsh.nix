@@ -1,4 +1,4 @@
-{ pkgs, config,  ... }: {
+{ pkgs, ... }: {
   home.packages = with pkgs; [ bat ripgrep fzf entr ];
 
   programs.eza = {
@@ -22,9 +22,7 @@
     enable = true;
     autocd = true;
 
-    localVariables = {
-      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=5";
-    };
+    localVariables = { ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=5"; };
     #plugins
     enableCompletion = true;
     syntaxHighlighting.enable = true;
@@ -67,9 +65,6 @@
 
     shellAliases = {
       update = "sudo nixos-rebuild switch --flake ~/.dotfiles";
-      cdmnt = 
-        (if config.services.udiskie.enable then
-          "cd /run/media/${config.home.username}/" else null );
       cat = "${pkgs.bat}/bin/bat";
       cd = "z";
     };
