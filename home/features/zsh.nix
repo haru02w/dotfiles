@@ -65,8 +65,9 @@
 
     shellAliases = {
       update = "sudo nixos-rebuild switch --flake ~/.dotfiles";
-      cat = "${pkgs.bat}/bin/bat";
+      cat = "bat";
       cd = "z";
+      gs = "git status";
     };
   };
 }

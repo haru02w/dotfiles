@@ -3,16 +3,18 @@
   home.packages = with pkgs; [ sops ];
 
   sops = {
-    defaultSopsFile = ../../secrets.yaml;
+    defaultSopsFile = ../../secrets/accounts.yaml;
     defaultSopsFormat = "yaml";
 
-    age.keyFile = "/home/haru02w/.config/sops/age/keys.txt";
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
-    secrets.ssh_id = {
+    secrets.rsa_id = {
+      sopsFile = ../../secrets/ssh-keys.yaml;
       path = "${config.home.homeDirectory}/.ssh/id_rsa";
     };
 
-    secrets.ssh_id_pub = {
+    secrets.rsa_id_pub = {
+      sopsFile = ../../secrets/ssh-keys.yaml;
       path = "${config.home.homeDirectory}/.ssh/id_rsa.pub";
     };
   };
