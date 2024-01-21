@@ -11,5 +11,6 @@
     neofetch # system info
     pfetch # system info
     tldr # simpler man
+    bitwarden-cli # password manager
   ];
 }
