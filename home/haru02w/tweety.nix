@@ -4,5 +4,6 @@
     ../features/desktop/hyprland
     ../features/desktop/hyprland/swaylock.nix
     ../features/gui-packages.nix
+    ../features/secrets.nix
   ];
 }
