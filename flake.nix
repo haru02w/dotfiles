@@ -94,5 +94,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    devenv.url = "github:cachix/devenv";
+  };
+
+  nixConfig = {
+    extra-substituters = [
+      "https://hyprland.cachix.org" # hyprland
+      "https://nix-community.cachix.org" # nix-community (nur)
+      "https://devenv.cachix.org" # devenv
+    ];
+    extra-trusted-public-keys = [
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" # Hyprland
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" # nix-community (nur)
+      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+    ];
   };
 }
