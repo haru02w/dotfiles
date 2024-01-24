@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   imports = [
     ../nix.nix
-    ../hm-module.nix
     ../udisk2.nix
     ../locale_n_timezone.nix
   ];

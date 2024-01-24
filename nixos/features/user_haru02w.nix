@@ -5,7 +5,10 @@ let
     builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in
 {
-  imports = [ inputs.sops-nix.nixosModules.sops ];
+  imports = [
+    ./hm-module.nix
+    inputs.sops-nix.nixosModules.sops
+  ];
   sops = {
     age.keyFile = "${config.users.users.${default-user}.home}/.config/sops/age/keys.txt";
     secrets.${default-user} = {
