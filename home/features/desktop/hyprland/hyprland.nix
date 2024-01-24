@@ -20,7 +20,7 @@
     exec-once = [
       "${pkgs.waybar}/bin/waybar"
       "${pkgs.swaybg}/bin/swaybg -i ${
-        toString ../../dotconfig/wallpapers/localhost.jpeg
+        toString config.desktop.wallpaper
       }"
     ];
 

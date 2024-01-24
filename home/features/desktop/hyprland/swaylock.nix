@@ -21,7 +21,7 @@
   };
   # TODO: extract it out
   programs.swaylock =
-    let wallpaper = ./../../dotconfig/wallpapers/localhost.jpeg;
+    let wallpaper = config.desktop.wallpaper;
     in {
       enable = true;
       package = pkgs.swaylock-effects;
