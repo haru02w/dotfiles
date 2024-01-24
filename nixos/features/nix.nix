@@ -19,7 +19,7 @@
 
     gc = {
       automatic = true;
-      dates = "*-*-* 10:00:00";
+      dates = "*-*-* 00/2:00:00";
       # Keep the last 5 generations
       delete_generations = "+5"; # Option added by nix-gc-env
     };
