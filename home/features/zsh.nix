@@ -4,7 +4,6 @@
     ripgrep # find words within files
     fzf # fuzzy finder
     entr # rerun command when file change
-    devenv # a better nix devShell
   ];
 
   programs.eza = {
