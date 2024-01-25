@@ -19,10 +19,11 @@
 
   programs.direnv = {
     enable = true;
+    config.global.strict_env = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };
-  # home.sessionVariables.DIRENV_LOG_FORMAT = "";
+  home.sessionVariables.DIRENV_LOG_FORMAT = "";
 
   programs.zsh = {
     enable = true;
