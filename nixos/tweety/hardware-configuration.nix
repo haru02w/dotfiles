@@ -23,7 +23,7 @@
   };
 
   fileSystems."/mnt/bkpsys" = {
-    device = "bkpsys.acmesecurity.org:/";
+    device = "bkpsys.in.acmesecurity.org:/";
     fsType = "nfs4";
     options = [
       "nofail"
