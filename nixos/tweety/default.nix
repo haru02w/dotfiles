@@ -14,5 +14,5 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  services.openssh.enable = false;
+  services.openssh.enable = true;
 }
