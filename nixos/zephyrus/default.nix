@@ -15,7 +15,10 @@
     dynamicBoost.enable = true;
   };
 
-  hardware.laptop.enable = true;
+  hardware.laptop = {
+    enable = true;
+    wifi.enableOpenvpn = true;
+  };
 
   environment.sessionVariables = { WLR_DRM_DEVICES = "/dev/dri/card0"; };
 

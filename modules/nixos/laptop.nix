@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 with lib;
 let cfg = config.hardware.laptop;
 in {
@@ -10,6 +10,7 @@ in {
         default = true;
         example = false;
       };
+      enableOpenvpn = mkEnableOption "OpenVPN module";
     };
 
     bluetooth = {
@@ -29,11 +30,21 @@ in {
     };
   };
 
-  config = mkIf cfg.enable (mkMerge [
+  config = {
+    networking.networkmanager = mkIf cfg.wifi.enable {
+      enable = true;
+      plugins = lib.optional cfg.wifi.enableOpenvpn pkgs.networkmanager-openvpn;
+    };
+    hardware.bluetooth.enable = mkIf cfg.bluetooth.enable true;
+    programs.light.enable = mkIf cfg.backlight.enable true;
+
+    environment.systemPackages = lib.optional cfg.wifi.enableOpenvpn pkgs.openvpn;
+  };
+  /* config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.wifi.enable { networking.networkmanager.enable = true; })
 
     (mkIf cfg.bluetooth.enable { hardware.bluetooth.enable = true; })
 
     (mkIf cfg.backlight.enable { programs.light.enable = true; })
-  ]);
+  ]); */
 }
