@@ -15,6 +15,7 @@
     extraConfig = ''
       is_vim="${pkgs.procps}/bin/ps -o state= -o comm= -t '#{pane_tty}' \
           | ${pkgs.gnugrep}/bin/grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+      tmux="${pkgs.tmux}/bin/tmux"
     '' + (if (lib.elem pkgs.wl-clipboard config.home.packages) then ''
       set -s copy-command '${pkgs.wl-clipboard}/bin/wl-copy --foreground --type text/plain'
     '' else

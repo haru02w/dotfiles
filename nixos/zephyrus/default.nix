@@ -4,6 +4,7 @@
     ../features/user_haru02w.nix
     ./hardware-configuration.nix
     ../features/quietboot.nix
+    ../features/tailscale.nix
     ../features/common/global.nix
     ../features/common/hyprland-desktop.nix
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
