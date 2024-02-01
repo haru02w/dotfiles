@@ -19,9 +19,9 @@
     "$mod" = "SUPER";
     exec-once = [
       "${pkgs.waybar}/bin/waybar"
-      "${pkgs.swaybg}/bin/swaybg -i ${
+      (if builtins.isNull config.desktop.wallpaper then "" else ''${pkgs.swaybg}/bin/swaybg -i ${
         toString config.desktop.wallpaper
-      }"
+      }'')
     ];
 
     monitor = [ "eDP-1,preferred,auto,1.2" ",preferred,auto,1" ];

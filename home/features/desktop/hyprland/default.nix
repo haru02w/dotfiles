@@ -10,7 +10,7 @@
     ../playerctl.nix
   ];
 
-  desktop.wallpaper = ../../dotconfig/wallpapers/win-xp_night.jpg;
+  # desktop.wallpaper = ../../dotconfig/wallpapers/win-xp_night.jpg;
 
   home.packages = with pkgs; [
     swaybg

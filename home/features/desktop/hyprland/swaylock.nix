@@ -21,7 +21,7 @@
   };
   # TODO: extract it out
   programs.swaylock =
-    let wallpaper = config.desktop.wallpaper;
+    let wallpaper =if builtins.isNull config.desktop.wallpaper then "" else config.desktop.wallpaper;
     in {
       enable = true;
       package = pkgs.swaylock-effects;
