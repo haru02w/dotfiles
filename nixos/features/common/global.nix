@@ -3,9 +3,10 @@
     ../nix.nix
     ../udisk2.nix
     ../locale_n_timezone.nix
+    ../tailscale.nix
   ];
   environment.variables.EDITOR = "nvim";
-  environment.systemPackages = with pkgs; [ neovim git wget ];
+  environment.systemPackages = with pkgs; [ neovim git wget nfs-utils ];
 
   programs.zsh.enable = true;
   security.sudo.wheelNeedsPassword = false;

@@ -4,7 +4,6 @@
     ../features/user_haru02w.nix
     ./hardware-configuration.nix
     ../features/quietboot.nix
-    ../features/tailscale.nix
     ../features/common/global.nix
     ../features/common/hyprland-desktop.nix
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
@@ -24,6 +23,11 @@
   environment.sessionVariables = { WLR_DRM_DEVICES = "/dev/dri/card0"; };
 
   networking.hostName = "zephyrus";
+  networking.extraHosts =
+  ''
+    192.168.0.2 proxmox.lan
+    192.168.0.200 rpi3.lan
+  '';
 
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
