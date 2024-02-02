@@ -1,7 +1,7 @@
 { pkgs, inputs, outputs, ... }:
 {
   imports = (builtins.attrValues outputs.nixosModules) ++ [
-    ../features/user_haru02w.nix
+    ../features/main_user.nix
     ./hardware-configuration.nix
     ../features/quietboot.nix
     ../features/common/global.nix
@@ -22,6 +22,7 @@
 
   environment.sessionVariables = { WLR_DRM_DEVICES = "/dev/dri/card0"; };
 
+  users.main_user = "haru02w";
   networking.hostName = "zephyrus";
   networking.extraHosts =
   ''

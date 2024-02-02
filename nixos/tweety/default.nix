@@ -1,13 +1,13 @@
 { outputs, ... }:
 {
   imports = (builtins.attrValues outputs.nixosModules) ++ [
-    ../features/user_haru02w.nix
+    ../features/main_user.nix
     ./hardware-configuration.nix
     ../features/quietboot.nix
     ../features/common/global.nix
     ../features/common/hyprland-desktop.nix
   ];
-
+  users.main_user = "haru02w";
   networking.hostName = "tweety";
 
   # Bootloader.

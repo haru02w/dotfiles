@@ -1,6 +1,5 @@
 { inputs, config, pkgs, ...}:
 let
-  default-user = "haru02w";
   ifGroupsExist = groups:
     builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in
@@ -10,8 +9,8 @@ in
     inputs.sops-nix.nixosModules.sops
   ];
   sops = {
-    age.keyFile = "${config.users.users.${default-user}.home}/.config/sops/age/keys.txt";
-    secrets.${default-user} = {
+    age.keyFile = "${config.users.users.${config.users.main_user}.home}/.config/sops/age/keys.txt";
+    secrets.${config.users.main_user} = {
       sopsFile = ../../secrets/accounts.yaml;
       neededForUsers = true;
     };
@@ -19,9 +18,9 @@ in
   # disable `useradd`, `groupadd`, `usermod`, `passwd` commands
   users.mutableUsers = false; 
   users.users = {
-    "${default-user}" = {
+    "${config.users.main_user}" = {
       isNormalUser = true;
-      hashedPasswordFile = config.sops.secrets.${default-user}.path;
+      hashedPasswordFile = config.sops.secrets.${config.users.main_user}.path;
       extraGroups = ifGroupsExist [
         "wheel" # Enable ‘sudo’ for the user.
         "networkmanager"
@@ -37,6 +36,6 @@ in
     root.hashedPassword = "!";
     # more
   };
-  home-manager.users.${default-user} =
-    import ../../home/${default-user}/${config.networking.hostName}.nix;
+  home-manager.users.${config.users.main_user} =
+    import ../../home/${config.users.main_user}/${config.networking.hostName}.nix;
 }
