@@ -19,6 +19,7 @@
       settings = {
         # https://support.mozilla.org/bm/questions/1358615
 
+        "media.ffmpeg.vaapi.enabled" = true;
         ##UI
         # Set dark mode
         "layout.css.prefers-color-scheme.content-override" = 0;
