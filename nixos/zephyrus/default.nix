@@ -2,6 +2,7 @@
 {
   imports = (builtins.attrValues outputs.nixosModules) ++ [
     ../features/main_user.nix
+    ../features/impermanence.nix
     ./hardware-configuration.nix
     ../features/quietboot.nix
     ../features/common/global.nix

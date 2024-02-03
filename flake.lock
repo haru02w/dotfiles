@@ -124,6 +124,21 @@
         "type": "github"
       }
     },
+    "impermanence": {
+      "locked": {
+        "lastModified": 1706639736,
+        "narHash": "sha256-CaG4j9+UwBDfinxxvJMo6yOonSmSo0ZgnbD7aj2Put0=",
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "rev": "cd13c2917eaa68e4c49fea0ff9cada45440d7045",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "type": "github"
+      }
+    },
     "nix-filter": {
       "locked": {
         "lastModified": 1693833173,
@@ -274,6 +289,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "hyprland": "hyprland",
+        "impermanence": "impermanence",
         "nix-gc-env": "nix-gc-env",
         "nixnvc": "nixnvc",
         "nixos-hardware": "nixos-hardware",

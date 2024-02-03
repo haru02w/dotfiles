@@ -2,27 +2,66 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 { config, lib, modulesPath, ... }:
+let
+  wipeScript = ''
+    mkdir /tmp -p
+    MNTPOINT=$(mktemp -d)
+    (
+      mount -t btrfs -o subvol=/ /dev/disk/by-uuid/a469dd74-9ac9-4474-aa1a-f243b2e74710 "$MNTPOINT"
+      trap 'umount "$MNTPOINT"' EXIT
 
-{
+      echo "Creating needed directories"
+      mkdir -p "$MNTPOINT"/persist/var/{log,lib/{nixos,systemd}}
+
+      echo "Cleaning root subvolume"
+      btrfs subvolume list -o "$MNTPOINT/root" | cut -f9 -d ' ' |
+      while read -r subvolume; do
+        btrfs subvolume delete "$MNTPOINT/$subvolume"
+      done && btrfs subvolume delete "$MNTPOINT/root"
+
+      echo "Restoring blank subvolume"
+      btrfs subvolume snapshot "$MNTPOINT/root-blank" "$MNTPOINT/root"
+    )
+  '';
+in {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
-
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usbhid" ];
-  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/b24e400b-fa67-4dbc-a9af-fe4f827c5718";
-    fsType = "ext4";
+  boot.initrd = {
+    availableKernelModules = [ "nvme" "xhci_pci" "usbhid" ];
+    kernelModules = [ ];
+    luks.devices."luks".device = "/dev/disk/by-uuid/743806d5-5fd2-4c1e-8855-e13db0eda487";
+    postDeviceCommands = lib.mkBefore wipeScript;
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/12CE-A600";
-    fsType = "vfat";
-  };
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/a469dd74-9ac9-4474-aa1a-f243b2e74710";
+      fsType = "btrfs";
+      options = [ "subvol=root" "compress" ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/a469dd74-9ac9-4474-aa1a-f243b2e74710";
+      fsType = "btrfs";
+      options = [ "subvol=nix" ];
+    };
+
+  fileSystems."/persist" =
+    { device = "/dev/disk/by-uuid/a469dd74-9ac9-4474-aa1a-f243b2e74710";
+      fsType = "btrfs";
+      options = [ "subvol=persist" ];
+      neededForBoot = true;
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/380A-9C09";
+      fsType = "vfat";
+    };
 
   swapDevices =
-    [{ device = "/dev/disk/by-uuid/f40a0562-439a-41eb-b32f-568881f8aee5"; }];
+    [ { device = "/dev/disk/by-uuid/710d89e5-ad23-44a3-a51c-279f10e383bc"; }
+    ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
