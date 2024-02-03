@@ -18,8 +18,12 @@
 
   hardware.laptop = {
     enable = true;
-    wifi.enableOpenvpn = true;
+    wifi.enableOpenvpn = false;
   };
+  services.logind.extraConfig = ''
+    HandleLidSwitch=ignore
+    HandleLidSwitchExternalPower=ignore
+  '';
 
   environment.sessionVariables = { WLR_DRM_DEVICES = "/dev/dri/card0"; };
 
@@ -38,5 +42,4 @@
       efi.canTouchEfiVariables = true;
     };
   };
-
 }

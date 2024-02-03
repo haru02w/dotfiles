@@ -1,7 +1,8 @@
-{ inputs, config, pkgs, ...}:
+{ inputs, config, pkgs, lib,  ...}:
 let
   ifGroupsExist = groups:
     builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
+  hasOptinPersistence = config.environment.persistence ? "/persist";
 in
 {
   imports = [
@@ -9,7 +10,7 @@ in
     inputs.sops-nix.nixosModules.sops
   ];
   sops = {
-    age.keyFile = "${config.users.users.${config.users.main_user}.home}/.config/sops/age/keys.txt";
+    age.keyFile = "${lib.optionalString hasOptinPersistence "/persist"}/${config.users.users.${config.users.main_user}.home}/.config/sops/age/keys.txt";
     secrets.${config.users.main_user} = {
       sopsFile = ../../secrets/accounts.yaml;
       neededForUsers = true;
