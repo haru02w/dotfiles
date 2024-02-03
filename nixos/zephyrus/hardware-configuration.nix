@@ -10,9 +10,6 @@ let
       mount -t btrfs -o subvol=/ /dev/disk/by-uuid/a469dd74-9ac9-4474-aa1a-f243b2e74710 "$MNTPOINT"
       trap 'umount "$MNTPOINT"' EXIT
 
-      echo "Creating needed directories"
-      mkdir -p "$MNTPOINT"/persist/var/{log,lib/{nixos,systemd}}
-
       echo "Cleaning root subvolume"
       btrfs subvolume list -o "$MNTPOINT/root" | cut -f9 -d ' ' |
       while read -r subvolume; do

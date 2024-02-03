@@ -13,10 +13,14 @@
       directories = [
         "/home/${config.users.main_user}" # whole home folder
         "/etc/NetworkManager/system-connections" # wifi passwords
+        "/var/lib/bluetooth" # bluetooth connections
         "/var/lib/systemd"
         "/var/lib/nixos"
         "/var/log" # logs
+        "/var/lib/tailscale" # tailscale login
+        "/etc/asusd" # asusctl state
       ];
+      files = [ "/root/.local/share/nix/trusted-settings.json" ];
     };
   };
   programs.fuse.userAllowOther = true;
