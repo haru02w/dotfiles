@@ -33,20 +33,21 @@
       # Reusable home-manager modules you might want to export
       # These are usually stuff you would upstream into home-manager
       homeManagerModules = import ./modules/home-manager;
-      devShells = forEachSystem (pkgs: {
-        default = pkgs.callPackage ./shell.nix { };
-      });
+      devShells =
+        forEachSystem (pkgs: { default = pkgs.callPackage ./shell.nix { }; });
 
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
         zephyrus = lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./nixos/zephyrus ];
+          modules =
+            [ inputs.impermanence.nixosModules.impermanence ./nixos/zephyrus ];
         };
         tweety = lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./nixos/tweety ];
+          modules =
+            [ inputs.impermanence.nixosModules.impermanence ./nixos/tweety ];
         };
       };
 

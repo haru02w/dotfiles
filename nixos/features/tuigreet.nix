@@ -1,11 +1,7 @@
-{ pkgs, config, ... }: {
+{ pkgs, ... }: {
   services.greetd = {
     enable = true;
     settings = {
-      initial_session = {
-        command = "Hyprland > /dev/null";
-        user = "${config.users.main_user}";
-      };
       default_session = {
         command = ''
           ${pkgs.greetd.tuigreet}/bin/tuigreet \
