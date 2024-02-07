@@ -1,13 +1,10 @@
 {
-  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;
-      # Suported systems for your flake packages, shell, etc.
       suportedSystems =
         [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      # This is a function that generates an attribute by calling a function you
-      # pass to it, with each system as an argument
       forEachSystem = f:
         lib.genAttrs suportedSystems (system: f pkgsFor.${system});
       pkgsFor = lib.genAttrs suportedSystems (system:
@@ -15,89 +12,93 @@
           inherit system;
           config.allowUnfree = true;
         });
-    in {
+    in
+    {
       inherit lib;
-      # Your custom packages
-      # Accessible through 'nix build', 'nix shell', etc
-      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
-      # Formatter for your nix files, available through 'nix fmt'
-      # Other options beside 'alejandra' include 'nixpkgs-fmt'
-      formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
-      # Your custom packages and modifications, exported as overlays
-      overlays = import ./overlays { inherit inputs outputs; };
-      # DevShell templates for various programming languages
+      # system-level modules
+      nixosModules = import ./nixos/modules;
+      # user-level modules
+      homeManagerModules = import ./home/modules;
+      # 'nix flake new -t self#<template>'
       templates = import ./templates;
-      # Reusable nixos modules you might want to export
-      # These are usually stuff you would upstream into nixpkgs
-      nixosModules = import ./modules/nixos;
-      # Reusable home-manager modules you might want to export
-      # These are usually stuff you would upstream into home-manager
-      homeManagerModules = import ./modules/home-manager;
-      devShells =
-        forEachSystem (pkgs: { default = pkgs.callPackage ./shell.nix { }; });
+      # override inputs
+      overlays = import ./overlays { inherit inputs outputs; };
+      # 'nix build', 'nix shell', etc
+      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
+      # 'nix develop'
+      devShells = forEachSystem (pkgs: import ./shell.nix { inherit pkgs; });
+      # 'nix fmt'
+      formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
 
-      # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
+      # 'nixos-rebuild --flake .#<hostname>'
       nixosConfigurations = {
+        # personal laptop
         zephyrus = lib.nixosSystem {
+          modules = [ ./nixos/zephyrus ];
           specialArgs = { inherit inputs outputs; };
-          modules =
-            [ inputs.impermanence.nixosModules.impermanence ./nixos/zephyrus ];
         };
+        # work desktop
         tweety = lib.nixosSystem {
+          modules = [ ./nixos/tweety ];
           specialArgs = { inherit inputs outputs; };
-          modules =
-            [ inputs.impermanence.nixosModules.impermanence ./nixos/tweety ];
         };
       };
 
-      # Standalone home-manager configuration entrypoint
-      # Available through 'home-manager --flake .#your-username@your-hostname'
+      # 'home-manager --flake .#<username>@<hostname>'
       homeConfigurations = {
         "haru02w@zephyrus" = lib.homeManagerConfiguration {
-          pkgs = pkgsFor.x86_64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home/haru02w/zephyrus.nix ];
+          pkgs = pkgsFor.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
         };
         "haru02w@tweety" = lib.homeManagerConfiguration {
-          pkgs = pkgsFor.x86_64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home/haru02w/tweety.nix ];
+          pkgs = pkgsFor.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
         };
       };
     };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+
+    impermanence.url = "github:nix-community/impermanence";
+
+    nix-colors.url = "github:misterio77/nix-colors";
+
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-gc-env.url = "github:Julow/nix-gc-env";
+    nur.url = "github:nix-community/NUR";
 
     nixnvc = {
       url = "github:haru02w/nixnvc";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nur = { url = "github:nix-community/NUR"; };
+    #nh = {
+    #  url = "github:viperml/nh";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     split-monitor-workspaces = {
       url = "github:Duckonaut/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";
     };
-
-    nixos-hardware.url = "github:nixos/nixos-hardware";
-
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    impermanence.url = "github:nix-community/impermanence";
   };
 
   nixConfig = {

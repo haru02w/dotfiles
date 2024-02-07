@@ -1,1 +1,3 @@
-{ pkgs ? import <nixpkgs> { } }: { battop = pkgs.callPackage ./battop { }; }
+{ pkgs ? import <nixpkgs> { } }: {
+  battop = pkgs.callPackage ./battop {};
+}
