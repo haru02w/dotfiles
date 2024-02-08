@@ -34,12 +34,12 @@
       nixosConfigurations = {
         # personal laptop
         zephyrus = lib.nixosSystem {
-          modules = [ ./nixos/zephyrus ];
+          modules = [ ./nixos/hosts/zephyrus ];
           specialArgs = { inherit inputs outputs; };
         };
         # work desktop
         tweety = lib.nixosSystem {
-          modules = [ ./nixos/tweety ];
+          modules = [ ./nixos/hosts/tweety ];
           specialArgs = { inherit inputs outputs; };
         };
       };
