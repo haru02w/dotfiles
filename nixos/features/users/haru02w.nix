@@ -1,27 +1,28 @@
 { inputs, config, pkgs, lib,  ...}:
 let
+  user = "haru02w";
   ifGroupsExist = groups:
     builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
   hasOptinPersistence = config.environment.persistence ? "/persist";
 in
 {
   imports = [
-    ./hm-module.nix
+    ../hm-module.nix
     inputs.sops-nix.nixosModules.sops
   ];
   sops = {
-    age.keyFile = "${lib.optionalString hasOptinPersistence "/persist"}/${config.users.users.${config.users.main_user}.home}/.config/sops/age/keys.txt";
-    secrets.${config.users.main_user} = {
-      sopsFile = ../../secrets/accounts.yaml;
+    age.keyFile = "${lib.optionalString hasOptinPersistence "/persist"}/${config.users.users.${user}.home}/.config/sops/age/keys.txt";
+    secrets.${user} = {
+      sopsFile = ../../../secrets/accounts.yaml;
       neededForUsers = true;
     };
   };
   # disable `useradd`, `groupadd`, `usermod`, `passwd` commands
   users.mutableUsers = false; 
   users.users = {
-    "${config.users.main_user}" = {
+    "${user}" = {
       isNormalUser = true;
-      hashedPasswordFile = config.sops.secrets.${config.users.main_user}.path;
+      hashedPasswordFile = config.sops.secrets.${user}.path;
       extraGroups = ifGroupsExist [
         "wheel" # Enable ‘sudo’ for the user.
         "networkmanager"
@@ -37,6 +38,6 @@ in
     root.hashedPassword = "!";
     # more
   };
-  home-manager.users.${config.users.main_user} =
-    import ../../home/${config.users.main_user}/${config.networking.hostName}.nix;
+  home-manager.users.${user} =
+    import ../../../home/${user}/${config.networking.hostName}.nix;
 }
