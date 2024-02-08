@@ -6,7 +6,7 @@ let
   ifTheyExist = groups:
     builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
-  imports = [ ../common/optional/home-manager.nix ];
+  imports = [ ../home-manager.nix ];
 
   users.mutableUsers = false;
   users.users.${user} = {
@@ -21,7 +21,7 @@ in {
 
   sops = {
     sops.secrets.${user} = {
-      sopsFile = ../../secrets/accounts.yaml;
+      sopsFile = ../../../secrets/accounts.yaml;
       neededForUsers = true;
     };
   };
