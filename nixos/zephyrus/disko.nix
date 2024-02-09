@@ -1,7 +1,7 @@
 { inputs ? null, lib, ... }:
 let disk = "/dev/nvme0n1";
 in {
-  imports = lib.optional (!isNull inputs) inputs.disko.nixosModules.disko;
+  imports = lib.optionals (inputs ? disko) [ inputs.disko.nixosModules.disko ];
   disko.devices.disk.nvme = {
     type = "disk";
     device = disk;

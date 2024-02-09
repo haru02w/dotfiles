@@ -16,9 +16,9 @@
     {
       inherit lib;
       # system-level modules
-      nixosModules = import ./nixos/modules;
+      nixosModules = import ./modules/nixos;
       # user-level modules
-      homeManagerModules = import ./home/modules;
+      homeManagerModules = import ./modules/home-manager;
       # 'nix flake new -t self#<template>'
       templates = import ./templates;
       # override inputs
@@ -34,12 +34,12 @@
       nixosConfigurations = {
         # personal laptop
         zephyrus = lib.nixosSystem {
-          modules = [ ./nixos/hosts/zephyrus ];
+          modules = [ ./nixos/zephyrus ];
           specialArgs = { inherit inputs outputs; };
         };
         # work desktop
         tweety = lib.nixosSystem {
-          modules = [ ./nixos/hosts/tweety ];
+          modules = [ ./nixos/tweety ];
           specialArgs = { inherit inputs outputs; };
         };
       };
@@ -65,6 +65,10 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     impermanence.url = "github:nix-community/impermanence";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nix-colors.url = "github:misterio77/nix-colors";
 
