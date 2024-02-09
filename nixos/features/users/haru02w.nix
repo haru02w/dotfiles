@@ -3,7 +3,7 @@ let
   user = "haru02w";
   ifGroupsExist = groups:
     builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-  hasOptinPersistence = config.environment.persistence ? "/persist";
+  hasOptinPersistence = config.environment ? persistence;
 in
 {
   imports = [
