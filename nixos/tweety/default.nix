@@ -23,6 +23,7 @@
     enable = true;
     dockerCompat = true;
     dockerSocket.enable = true;
+    defaultNetwork.settings.dns_enabled = true;
     extraPackages = [ inputs.nixnvc.packages.${pkgs.system}.nvim ];
   };
 }
