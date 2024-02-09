@@ -1,5 +1,4 @@
-{ outputs, ... }:
-{
+{ inputs, outputs, pkgs, ... }: {
   imports = (builtins.attrValues outputs.nixosModules) ++ [
     ../features/users/haru02w.nix
     ./hardware-configuration.nix
@@ -19,5 +18,11 @@
       PermitRootLogin = "no";
       PasswordAuthentication = false;
     };
+  };
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    dockerSocket.enable = true;
+    extraPackages = [ inputs.nixnvc.packages.${pkgs.system}.nvim ];
   };
 }
