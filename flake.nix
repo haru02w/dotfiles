@@ -12,8 +12,7 @@
           inherit system;
           config.allowUnfree = true;
         });
-    in
-    {
+    in {
       inherit lib;
       # system-level modules
       nixosModules = import ./modules/nixos;
@@ -61,29 +60,39 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
 
+    # nixos module
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
+    # nixos module
     impermanence.url = "github:nix-community/impermanence";
+
+    # nixos module
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # home-manager module
     nix-colors.url = "github:misterio77/nix-colors";
 
+    # nixos and home-manager module
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # nixos module
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # overlay
     nur.url = "github:nix-community/NUR";
 
+    # package
     nixnvc = {
       url = "github:haru02w/nixnvc";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -94,11 +103,13 @@
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
 
+    # home-manager module
     hyprland = {
       url = "github:hyprwm/hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # package
     split-monitor-workspaces = {
       url = "github:Duckonaut/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";
