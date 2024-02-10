@@ -29,4 +29,5 @@
   '';
 
   networking.hostName = "zephyrus";
+  services.openssh.enable = true;
 }

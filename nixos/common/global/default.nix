@@ -4,7 +4,6 @@
     ./nix.nix
     ./security.nix
     ./home-manager.nix
-    ./editor.nix
   ];
 
   security.sudo.wheelNeedsPassword = false;
