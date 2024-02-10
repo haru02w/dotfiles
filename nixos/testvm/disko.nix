@@ -17,7 +17,7 @@ in {
           };
         };
         luks = {
-          size = "254412152832"; # half-disk
+          size = "100%";
           content = {
             type = "luks";
             name = "crypted";
@@ -49,4 +49,5 @@ in {
       };
     };
   };
+  fileSystems."/persist".neededForBoot = true;
 }

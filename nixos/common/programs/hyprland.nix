@@ -1,8 +1,5 @@
 {
-  programs.hyprland = {
-    enable = true;
-    enableNvidiaPatches = true;
-  };
+  programs.hyprland.enable = true;
 
   xdg.portal.enable = true;
 

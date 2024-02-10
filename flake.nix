@@ -41,6 +41,10 @@
           modules = [ ./nixos/tweety ];
           specialArgs = { inherit inputs outputs; };
         };
+        testvm = lib.nixosSystem {
+          modules = [ ./nixos/testvm ];
+          specialArgs = { inherit inputs outputs; };
+        };
       };
 
       # 'home-manager --flake .#<username>@<hostname>'
@@ -52,6 +56,11 @@
         };
         "haru02w@tweety" = lib.homeManagerConfiguration {
           modules = [ ./home/haru02w/tweety.nix ];
+          pkgs = pkgsFor.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+        };
+        "haru02w@testvm" = lib.homeManagerConfiguration {
+          modules = [ ./home/haru02w/testvm.nix ];
           pkgs = pkgsFor.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
         };
