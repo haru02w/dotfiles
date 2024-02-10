@@ -9,8 +9,7 @@
     ./laptop.nix
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
   ];
-
-  networking.hostName = "zephyrus";
+  services.tailscale.enable = true;
 
   #ignore lid close
   services.logind.extraConfig = ''
@@ -18,5 +17,5 @@
     HandleLidSwitchExternalPower=ignore
   '';
 
-  system.stateVersion = "23.11";
+  networking.hostName = "zephyrus";
 }
