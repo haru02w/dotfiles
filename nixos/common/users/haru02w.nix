@@ -1,5 +1,5 @@
 # Main user for non-headless machines
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 let
   user = "haru02w";
   ifGroupsExist = groups:
@@ -28,4 +28,8 @@ in {
     sopsFile = ../../../secrets/accounts.yaml;
     neededForUsers = true;
   };
+
+# temporary
+} // lib.mkIf (config.environment.persistence ? "/persist") {
+  environment.persistence."/persist".directories = [ "/home/haru02w" ];
 }

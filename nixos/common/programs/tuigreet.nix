@@ -13,7 +13,7 @@
           --window-padding 1 \
           --container-padding 2 \
           --prompt-padding 2 \
-          --cmd Hyprland
+          --cmd "Hyprland"
         '';
       };
     };

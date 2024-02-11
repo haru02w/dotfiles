@@ -3,7 +3,6 @@
     "/persist" = {
       directories = [
         # TODO: setup impermanence in home-manager and remove home
-        "/home" # whole home folder
         "/etc/NetworkManager/system-connections" # wifi passwords
         "/var/lib/bluetooth" # bluetooth connections
         "/var/lib/systemd"
