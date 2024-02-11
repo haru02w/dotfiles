@@ -23,9 +23,9 @@
       # override inputs
       overlays = import ./overlays { inherit inputs outputs; };
       # 'nix build', 'nix shell', etc
-      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
+      packages = forEachSystem (pkgs: import ./pkgs { inherit inputs pkgs; });
       # 'nix develop'
-      devShells = forEachSystem (pkgs: import ./shell.nix { inherit pkgs; });
+      devShells = forEachSystem (pkgs: import ./shell.nix { inherit inputs pkgs; });
       # 'nix fmt'
       formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
 
