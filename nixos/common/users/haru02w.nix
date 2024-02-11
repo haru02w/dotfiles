@@ -19,6 +19,7 @@ in {
       packages = [ pkgs.home-manager ];
     };
   };
+  programs.zsh.enable = true;
 
   home-manager.users.${user} =
     import ../../../home/${user}/${config.networking.hostName}.nix;
