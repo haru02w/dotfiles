@@ -1,5 +1,5 @@
-{ inputs, outputs, ... }: {
-  imports = (builtins.attrValues outputs.nixosModules) ++ [
+{ inputs, ... }: {
+  imports =  [
     # settings
     ../common/global
     ../common/bootloader/uefi_systemd-boot.nix
