@@ -20,14 +20,7 @@
   ];
 
   networking.networkmanager.enable = true;
-  services.tailscale.enable = true;
 
-  #ignore lid close
-  services.logind.extraConfig = ''
-    HandleLidSwitch=ignore
-    HandleLidSwitchExternalPower=ignore
-  '';
-
-  networking.hostName = "zephyrus";
+  networking.hostName = "testvm";
   services.openssh.enable = true;
 }
