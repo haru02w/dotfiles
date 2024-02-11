@@ -2,7 +2,6 @@
   environment.persistence = {
     "/persist" = {
       directories = [
-        # TODO: setup impermanence in home-manager and remove home
         "/etc/NetworkManager/system-connections" # wifi passwords
         "/var/lib/bluetooth" # bluetooth connections
         "/var/lib/systemd"
