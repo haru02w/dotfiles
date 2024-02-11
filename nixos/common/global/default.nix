@@ -1,14 +1,10 @@
-{pkgs,...}:
-{
-  imports = [ 
-    ./nix.nix
-    ./security.nix
-    ./home-manager.nix
-  ];
+{ outputs, pkgs, ... }: {
+  imports = (builtins.attrValues outputs.nixosModules)
+    ++ [ ./nix.nix ./security.nix ./home-manager.nix ];
 
   security.sudo.wheelNeedsPassword = false;
 
-  environment ={
+  environment = {
     variables.EDITOR = "nvim";
     systemPackages = with pkgs; [ neovim git wget ];
   };

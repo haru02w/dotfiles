@@ -1,5 +1,5 @@
-{ outputs, ... }: {
-  imports = (builtins.attrValues outputs.nixosModules) ++ [
+{
+  imports = [
     # settings
     ../common/global
     ../common/settings/locale_n_timezone.nix
