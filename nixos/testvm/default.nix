@@ -2,6 +2,7 @@
   imports = [
     # settings
     ../common/global
+    ../common/bootloader/uefi_systemd-boot.nix
     ../common/settings/locale_n_timezone.nix
     ../common/settings/sops.nix
     ../common/settings/impermanence.nix
@@ -17,7 +18,6 @@
     ./hardware-configuration.nix
     ./disko.nix
   ];
-  boot.loader.grub.device = "/dev/vda";
 
   networking.networkmanager.enable = true;
   services.tailscale.enable = true;
