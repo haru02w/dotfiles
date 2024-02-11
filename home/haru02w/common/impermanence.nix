@@ -1,8 +1,6 @@
-{config, ...}:
-{
+{ config, ... }: {
   home.persistence."/persist/${config.home.homeDirectory}" = {
-    directories = [
-      "."
-    ];
+    directories = [ "." ];
+    allowOther = true;
   };
 }
