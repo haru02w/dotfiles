@@ -47,7 +47,6 @@
     shellAliases = {
       nixos-apply = "sudo nixos-rebuild switch --flake ~/.dotfiles";
       nixos-update = "sudo nixos-rebuild switch --flake ~/.dotfiles --upgrade";
-      mntnas = "sudo mkdir -p /mnt/nas && sudo mount.nfs proxmox:/ /mnt/nas";
       cat = "bat";
       gs = "git status";
       ga = "git add -A";
