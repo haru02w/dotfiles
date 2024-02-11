@@ -1,4 +1,4 @@
-{ # bind folders from persist to everywhere else
+{ config, ... }: { # bind folders from persist to everywhere else
   environment.persistence = {
     "/persist" = {
       directories = [
@@ -12,7 +12,10 @@
         "/var/lib/tailscale" # tailscale login
         "/etc/asusd" # asusctl state
       ];
-      files = [ "/root/.local/share/nix/trusted-settings.json" ];
+      files = [
+        "/root/.local/share/nix/trusted-settings.json"
+        config.sops.age.keyFile
+      ];
     };
   };
   programs.fuse.userAllowOther = true;
