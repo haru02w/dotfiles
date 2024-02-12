@@ -1,4 +1,5 @@
 { config, lib, ... }: { # bind folders from persist to everywhere else
+  fileSystems."/persist".neededForBoot = true;
   environment.persistence = {
     "/persist" = {
       directories = [
