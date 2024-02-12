@@ -2,7 +2,6 @@
   imports = [
     # settings
     ../common/global
-    ../common/bootloader/uefi_systemd-boot.nix
     ../common/settings/locale_n_timezone.nix
     ../common/settings/sops.nix
     ../common/settings/impermanence.nix
