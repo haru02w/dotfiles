@@ -18,12 +18,17 @@
     (import ./disko.nix { device = "/dev/vda"; })
   ];
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.efiInstallAsRemovable = true;
-
+  # bootloader
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+  };
+  
+  # services
   networking.networkmanager.enable = true;
-
-  networking.hostName = "testvm";
   services.openssh.enable = true;
+
+  # extra configuration
+  networking.hostName = "testvm";
 }
