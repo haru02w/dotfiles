@@ -16,7 +16,7 @@
 
     # host specific
     ./hardware-configuration.nix
-    ./disko.nix
+    (import ./disko.nix {device = "/dev/vda";})
   ];
 
   boot.loader.grub.enable = true;
