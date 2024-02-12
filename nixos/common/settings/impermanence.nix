@@ -9,10 +9,10 @@
         "/var/log" # logs
         "/var/lib/tailscale" # tailscale login
         "/etc/asusd" # asusctl state
+        "/etc/sops" # passwords stuff
       ];
       files = [
         "/root/.local/share/nix/trusted-settings.json"
-        config.sops.age.keyFile
       ];
     };
   };
