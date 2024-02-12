@@ -1,13 +1,12 @@
-{ lib, config, ... }:
+{ config, ... }:
 let
-  # WARN: put private key at this location
-  privateKey =
-    "${lib.optionalString hasImpermanence "/persist"}/etc/sops/age/keys.txt";
-  hasImpermanence = config.environment.persistence ? "/persist";
+  isEd25519 = k: k.type == "ed25519";
+  getKeyPath = k: k.path;
+  keys = builtins.filter isEd25519 config.services.openssh.hostKeys;
 in {
   sops = {
     defaultSopsFile = ../../secrets/accounts.yaml;
     defaultSopsFormat = "yaml";
-    age.keyFile = privateKey;
+    age.sshKeyPaths = map getKeyPath keys;
   };
 }

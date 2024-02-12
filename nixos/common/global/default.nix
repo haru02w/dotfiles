@@ -1,6 +1,6 @@
 { outputs, pkgs, ... }: {
   imports = (builtins.attrValues outputs.nixosModules)
-    ++ [ ./nix.nix ./security.nix ./home-manager.nix ];
+    ++ [ ./nix.nix ./openssh.nix ./security.nix ./home-manager.nix ];
 
   security.sudo.wheelNeedsPassword = false;
 
