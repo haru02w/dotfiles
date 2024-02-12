@@ -19,6 +19,10 @@
     ./disko.nix
   ];
 
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.efiInstallAsRemovable = true;
+
   networking.networkmanager.enable = true;
 
   networking.hostName = "testvm";
