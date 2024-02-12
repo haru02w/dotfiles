@@ -5,6 +5,11 @@ let
   ifGroupsExist = groups:
     builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
+  sops.secrets.${user} = {
+    sopsFile = ../../../secrets/accounts.yaml;
+    neededForUsers = true;
+  };
+
   users.mutableUsers = false;
 
   users.users = {
@@ -23,9 +28,4 @@ in {
 
   home-manager.users.${user} =
     import ../../../home/${user}/${config.networking.hostName}.nix;
-
-  sops.secrets.${user} = {
-    sopsFile = ../../../secrets/accounts.yaml;
-    neededForUsers = true;
-  };
 }
