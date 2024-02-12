@@ -1,6 +1,14 @@
-{outputs, ...}:
-{
-  imports = builtins.attrValues outputs.homeManagerModules;
+{ outputs, ... }: {
+  imports = (builtins.attrValues outputs.homeManagerModules) ++ [
+    ./fonts.nix
+    ./git.nix
+    ./neovim.nix
+    ./nix.nix
+    ./packages.nix
+    ./tmux.nix
+    ./udiskie.nix
+    ./zsh.nix
+  ];
 
   home.stateVersion = "23.11";
 
