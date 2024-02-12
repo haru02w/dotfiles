@@ -1,7 +1,7 @@
 {
   imports = [
-    ./common/global
-    ./common/programs/zsh.nix
-    ./common/settings/impermanence.nix
+  ./common/global
+  ./common/impermanence.nix
+  ./common/desktop/hyprland
   ];
 }
