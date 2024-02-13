@@ -1,11 +1,10 @@
 { config, pkgs, ... }:
-let
-  keys = ["/etc/ssh/ssh_host_ed25519_key"];
+let keys = [ "/etc/ssh/ssh_host_ed25519_key" ];
 in {
   home.packages = with pkgs; [ sops ];
 
   sops = {
-    defaultSopsFile = ../../secrets/accounts.yaml;
+    defaultSopsFile = ../../../secrets/ssh-keys.yaml;
     defaultSopsFormat = "yaml";
     age.sshKeyPaths = keys;
 
