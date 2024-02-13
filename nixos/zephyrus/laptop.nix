@@ -5,9 +5,6 @@
     # plugins = pkgs.networkmanager-openvpn;
   };
 
-  # monitor backlight
-  programs.light.enable = true;
-
   #bluetooth support
   hardware.bluetooth.enable = true;
 }
