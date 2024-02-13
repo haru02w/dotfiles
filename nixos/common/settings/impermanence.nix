@@ -10,9 +10,9 @@
         "/var/log" # logs
         "/var/lib/tailscale" # tailscale login
         "/etc/asusd" # asusctl state
+        "/etc/ssh"
       ];
       files = [
-        "/etc/sops/age/keys.txt" # passwords stuff
         "/root/.local/share/nix/trusted-settings.json"
       ];
     };
