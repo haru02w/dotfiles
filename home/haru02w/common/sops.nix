@@ -1,5 +1,11 @@
-{ config, pkgs, ... }:
-let keys = [ "/etc/ssh/ssh_host_ed25519_key" ];
+{ config, pkgs, lib, osConfig, ... }:
+let
+  hasImpermanence = osConfig.environment.persistence ? "/persist";
+  keys = [
+    "${
+      lib.optionalString hasImpermanence "/persist"
+    }/etc/ssh/ssh_host_ed25519_key"
+  ];
 in {
   home.packages = with pkgs; [ sops ];
 
