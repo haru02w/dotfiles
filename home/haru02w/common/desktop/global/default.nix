@@ -1,1 +1,8 @@
-{ imports = [ ./firefox.nix ./packages.nix ./playerctl.nix ]; }
+{ colorScheme, ... }: {
+  imports = [
+    ./firefox.nix
+    ./packages.nix
+    ./services.nix
+  ];
+  inherit colorScheme;
+}

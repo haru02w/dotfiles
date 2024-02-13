@@ -25,7 +25,8 @@
       # 'nix build', 'nix shell', etc
       packages = forEachSystem (pkgs: import ./pkgs { inherit inputs pkgs; });
       # 'nix develop'
-      devShells = forEachSystem (pkgs: import ./shell.nix { inherit inputs pkgs; });
+      devShells =
+        forEachSystem (pkgs: import ./shell.nix { inherit inputs pkgs; });
       # 'nix fmt'
       formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
 
@@ -84,12 +85,7 @@
     };
 
     # nixos and home-manager module
-    stylix = { 
-      url = "github:danth/stylix";
-      inputs.home-manager.follows = "home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-
-    };
+    nix-colors.url = "github:misterio77/nix-colors";
 
     # nixos and home-manager module
     sops-nix = {
