@@ -83,8 +83,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # home-manager module
-    nix-colors.url = "github:misterio77/nix-colors";
+    # nixos and home-manager module
+    stylix = { 
+      url = "github:danth/stylix";
+      inputs.home-manager.follows = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+
+    };
 
     # nixos and home-manager module
     sops-nix = {
