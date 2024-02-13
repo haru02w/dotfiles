@@ -7,4 +7,11 @@
       nix-colors.homeManagerModules.default
     ];
   };
+  wallpaper = {lib,...}:{
+    options.wallpaper = lib.mkOption {
+      type = lib.types.nullOr lib.types.path;
+      default = null;
+      example = ../image.jpg;
+    };
+  };
 }
