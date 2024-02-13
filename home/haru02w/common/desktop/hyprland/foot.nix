@@ -3,7 +3,7 @@
   programs.foot = {
     enable = true;
     server.enable = true;
-    settings = with config.colorScheme.colors; {
+    settings = with config.colorScheme.palette; {
       main = {
         font = "FiraCode Nerd Font:size=16";
         dpi-aware = false;
