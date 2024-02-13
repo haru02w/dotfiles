@@ -1,15 +1,13 @@
 { config, pkgs, ... }:
 let
-  isEd25519 = k: k.type == "ed25519";
-  getKeyPath = k: k.path;
-  keys = builtins.filter isEd25519 [ "/etc/ssh/ssh_host_ed25519_key" ];
+  key = "/etc/ssh/ssh_host_ed25519_key";
 in {
   home.packages = with pkgs; [ sops ];
 
   sops = {
     defaultSopsFile = ../../secrets/accounts.yaml;
     defaultSopsFormat = "yaml";
-    age.sshKeyPaths = map getKeyPath keys;
+    age.sshKeyPaths = key;
 
     secrets.rsa_id = {
       sopsFile = ../../secrets/ssh-keys.yaml;
