@@ -28,6 +28,7 @@
   # services
   networking.networkmanager.enable = true;
   services.openssh.enable = true;
+  services.qemuGuest.enable = true;
 
   # extra configuration
   networking.hostName = "testvm";
