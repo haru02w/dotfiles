@@ -5,7 +5,7 @@
     server.enable = true;
     settings = with config.colorScheme.palette; {
       main = {
-        font = "FiraCode Nerd Font:size=16";
+        font = "${config.fontProfiles.regular.family}:size=16";
         dpi-aware = false;
       };
       colors = {
