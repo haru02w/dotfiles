@@ -8,13 +8,9 @@
         font = "FiraCode Nerd Font:size=16";
         dpi-aware = false;
       };
-      cursor.color = "${base00} ${base05}";
       colors = {
         foreground = base05;
         background = base00;
-        selection-background = base05;
-        selection-foreground = base00;
-        urls = base09;
 
         regular0 = base00;
         regular1 = base08;
