@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, config, ... }: {
+{ inputs, lib, pkgs, config, wallpaper, ... }: {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -103,7 +103,7 @@
       ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 2%-"
     ];
     bind = [
-      # WARN: bar hardcoded
+      # WARN: fan profiles
       ", XF86Launch4, exec, ${pkgs.asusctl}/bin/asusctl profile -n; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar"
       ", XF86KbdBrightnessUp, exec, ${pkgs.asusctl}/bin/asusctl -n"
       ", XF86KbdBrightnessDown, exec, ${pkgs.asusctl}/bin/asusctl -p"

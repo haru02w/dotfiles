@@ -4,7 +4,7 @@
       sops-nix.homeManagerModules.sops
       hyprland.homeManagerModules.default
       impermanence.nixosModules.home-manager.impermanence
-      stylix.homeManagerModules.stylix
+      nix-colors.homeManagerModules.default
     ];
   };
 }
