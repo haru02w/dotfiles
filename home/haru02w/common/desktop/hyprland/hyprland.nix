@@ -103,15 +103,13 @@
       ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 2%-"
     ];
     bind = [
-      # FIX: remove this line
-      "$mod SHIFT, B, exec, ${pkgs.procps}/bin/pkill -9 waybar"
-
       # WARN: fan profiles
       ", XF86Launch4, exec, ${pkgs.asusctl}/bin/asusctl profile -n; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar"
       ", XF86KbdBrightnessUp, exec, ${pkgs.asusctl}/bin/asusctl -n"
       ", XF86KbdBrightnessDown, exec, ${pkgs.asusctl}/bin/asusctl -p"
 
       "$mod SHIFT, Q, exit"
+      "$mod, Q, exec, ${pkgs.procps}/bin/pkill -9 waybar"
       "$mod, V, togglefloating"
       "$mod, R, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun" # pkgs.
       "$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show run" # pkgs.
