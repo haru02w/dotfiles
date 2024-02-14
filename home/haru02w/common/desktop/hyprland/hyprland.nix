@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, config, wallpaper, ... }: {
+{ inputs, lib, pkgs, config, ... }: {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -43,9 +43,9 @@
     misc = {
       vfr = true;
       vrr = 2;
-      disable_hyprland_logo = true;
-      disable_splash_rendering = true;
-      force_default_wallpaper = 0;
+      # disable_hyprland_logo = true;
+      # disable_splash_rendering = true;
+      force_default_wallpaper = 2;
       key_press_enables_dpms = true;
       mouse_move_enables_dpms = true;
     };
@@ -103,6 +103,9 @@
       ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 2%-"
     ];
     bind = [
+      # FIX: remove this line
+      "$mod SHIFT, B, exec, ${pkgs.procps}/bin/pkill -9 waybar"
+
       # WARN: fan profiles
       ", XF86Launch4, exec, ${pkgs.asusctl}/bin/asusctl profile -n; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar"
       ", XF86KbdBrightnessUp, exec, ${pkgs.asusctl}/bin/asusctl -n"
