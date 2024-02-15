@@ -3,11 +3,11 @@
     "buffer_manager-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1698915257,
-        "narHash": "sha256-a0REAPs0rJIWLvRNZ04ULwjNzH64hYGhrV/+i/9w/TA=",
+        "lastModified": 1705570427,
+        "narHash": "sha256-YL+ypkQAkEbhbOZedD+9frr+5nMBXjEnLCYroeLGNYM=",
         "owner": "j-morano",
         "repo": "buffer_manager.nvim",
-        "rev": "4fa47504a23d9a94216f02b1d84f7b0a2dbe2b72",
+        "rev": "9cd0e34522d96d08817828f1e9fd3379f27efb73",
         "type": "github"
       },
       "original": {
@@ -178,11 +178,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1705458350,
-        "narHash": "sha256-ZxT384GOkxCga5pg8PJei8+0DRgzdrgzpkfXJi4DWRM=",
+        "lastModified": 1708024166,
+        "narHash": "sha256-t2ZjmivwJvrp94dR6rhtOwuSQyRRusiQzrFieehNo8c=",
         "owner": "haru02w",
         "repo": "nixnvc",
-        "rev": "72acc5dd570b6cb3c721a79f54bab511f76dc7fe",
+        "rev": "6029c14a8ac686bee7ed6822da059def6e9a5ba1",
         "type": "github"
       },
       "original": {
