@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
   programs.waybar = with config.colorScheme.palette; {
     enable = true;
     systemd.enable = true;
@@ -104,6 +104,7 @@
         tooltip-format = ''
           {essid}
           {signalStrength} UP:{bandwidthUpBytes} DOWN:{bandwidthDownBytes}'';
+        on-click = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
       };
       "bluetooth" = {
         format = "";
@@ -111,6 +112,7 @@
         format-off = "󰂲";
         format-disabled = "󰂲";
         format-connected = "󰂱";
+        on-click = "${pkgs.rofi-bluetooth}/bin/rofi-bluetooth";
       };
     };
 
