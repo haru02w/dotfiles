@@ -18,7 +18,7 @@
 
   programs.direnv = {
     enable = true;
-    config.global.strict_env = true;
+    # config.global.strict_env = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };
