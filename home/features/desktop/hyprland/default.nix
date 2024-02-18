@@ -32,4 +32,6 @@
     ignoreTimeout = true;
     defaultTimeout = 5000;
   };
+
+  home.sessionVariables.NIXOS_OZONE_WL = "1";
 }

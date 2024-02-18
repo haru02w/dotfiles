@@ -102,6 +102,10 @@
     bindm = [ "$mod, mouse:272, movewindow" "$mod, mouse:273, resizewindow" ];
 
     bindle = [
+      ", XF86AudioStop, exec, ${pkgs.playerctl}/bin/playerctl stop"
+      ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
+      ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+      ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
       ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ -l 1.0"
       ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- -l 1.0"
       ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"

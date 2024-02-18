@@ -1,5 +1,4 @@
-{ pkgs, inputs, outputs, ... }:
-{
+{ pkgs, inputs, outputs, ... }: {
   imports = (builtins.attrValues outputs.nixosModules) ++ [
     ../features/users/haru02w.nix
     ../features/impermanence.nix
@@ -28,8 +27,7 @@
   environment.sessionVariables = { WLR_DRM_DEVICES = "/dev/dri/card0"; };
 
   networking.hostName = "zephyrus";
-  networking.extraHosts =
-  ''
+  networking.extraHosts = ''
     192.168.0.2 proxmox.lan
     192.168.0.200 rpi3.lan
   '';
@@ -41,4 +39,6 @@
       efi.canTouchEfiVariables = true;
     };
   };
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 }
