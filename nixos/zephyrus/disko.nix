@@ -1,23 +1,28 @@
-let disk = "/dev/nvme0n1";
-in {
-  disko.devices.disk.nvme = {
+{ device ? throw "Set this to your disk device, e.g. /dev/sda", ... }:
+{
+  disko.devices.disk.main = {
+    inherit device;
     type = "disk";
-    device = disk;
     content = {
       type = "gpt";
       partitions = {
         boot = {
+          name = "BOOT";
+          size = "1M";
+          type = "EF02";
+        };
+        esp = {
+          name = "ESP";
           size = "1G";
           type = "EF00";
           content = {
             type = "filesystem";
             format = "vfat";
             mountpoint = "/boot";
-            mountOptions = [ "defaults" ];
           };
         };
         luks = {
-          size = "254412152832"; # half-disk
+          size = "220G";
           content = {
             type = "luks";
             name = "crypted";
@@ -28,15 +33,15 @@ in {
               subvolumes = {
                 "/root" = {
                   mountpoint = "/";
-                  mountOptions = [ "compress=zstd" "noatime" ];
+                  mountOptions = [ "subvol=root" "compress=zstd" "noatime" ];
                 };
                 "/persist" = {
                   mountpoint = "/persist";
-                  mountOptions = [ "compress=zstd" "noatime" ];
+                  mountOptions = [ "subvol=persist" "compress=zstd" "noatime" ];
                 };
                 "/nix" = {
                   mountpoint = "/nix";
-                  mountOptions = [ "compress=zstd" "noatime" ];
+                  mountOptions = [ "subvol=nix" "compress=zstd" "noatime" ];
                 };
                 "/swap" = {
                   mountpoint = "/.swapvol";
@@ -49,5 +54,4 @@ in {
       };
     };
   };
-  fileSystems."/persist".neededForBoot = true;
 }
