@@ -16,6 +16,7 @@
         "/var/log" # logs
         "/var/lib/tailscale" # tailscale login
         "/etc/asusd" # asusctl state
+        "/var/lib/libvirt" # vms
       ];
       files = [ "/root/.local/share/nix/trusted-settings.json" ];
     };
