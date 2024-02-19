@@ -17,4 +17,6 @@
     name = "Bibata-Modern-Ice";
     size = 20;
   };
+
+  home.sessionVariables.NIXOS_OZONE_WL = "1";
 }
