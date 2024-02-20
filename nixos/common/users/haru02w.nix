@@ -20,7 +20,7 @@ in {
       hashedPasswordFile = config.sops.secrets.${user}.path;
       #openssh.authorizedKeys.keys = [ (builtins.readfile ./././.) ];
       extraGroups = [ "wheel" "video" "audio" ]
-        ++ ifGroupsExist [ "network" "docker" "podman" "libvirtd" "git" ];
+        ++ ifGroupsExist [ "networkmanager" "docker" "podman" "libvirtd" "git" ];
       packages = [ pkgs.home-manager ];
     };
   };

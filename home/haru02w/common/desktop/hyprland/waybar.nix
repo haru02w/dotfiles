@@ -1,11 +1,17 @@
 { config, pkgs, ... }: {
   programs.waybar = with config.colorScheme.palette; {
     enable = true;
-    systemd.enable = true;
     settings.mainBar = {
       layer = "top";
       position = "right";
-      modules-left = [ "cpu" "memory" "battery" "custom/separator" "tray" ];
+      modules-left = [
+        "custom/fanprofiles"
+        "cpu"
+        "memory"
+        "battery"
+        "custom/separator"
+        "tray"
+      ];
       modules-center = [ "hyprland/workspaces" ];
       modules-right = [
         "network"
@@ -112,6 +118,31 @@
         format-disabled = "󰂲";
         format-connected = "󰂱";
         on-click = "${pkgs.rofi-bluetooth}/bin/rofi-bluetooth";
+      };
+      "custom/fanprofiles" = {
+        interval = "once";
+        signal = 8;
+        format = "{}";
+        exec-on-event = false;
+        on-click =
+          "${pkgs.asusctl}/bin/asusctl profile -n; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar";
+        exec = let
+          script = pkgs.writeShellScriptBin "fanprofiles.sh" ''
+            RETURN=$(${pkgs.asusctl}/bin/asusctl profile -p)
+
+            if [[ $RETURN = *"Performance"* ]]
+            then
+                echo "󱑴"
+            elif [[ $RETURN = *"Balanced"* ]]
+            then
+                echo "󱑳"
+            elif [[ $RETURN = *"Quiet"* ]]
+            then
+                echo "󱑲"
+            fi
+          '';
+        in "${script}/bin/fanprofiles.sh"; # WARN
+        escape = true;
       };
     };
 

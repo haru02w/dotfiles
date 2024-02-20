@@ -2,7 +2,6 @@
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    systemd.enable = true;
     plugins = with inputs;
       [
         split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
@@ -12,6 +11,7 @@
     laptop-monitor-name = "eDP-1";
     laptop-monitor = "${laptop-monitor-name},1920x1080@60,auto,1.2";
   in {
+    exec-once = "${config.programs.waybar.package}/bin/waybar";
     monitor = [ laptop-monitor ",preferred,auto,1" ];
 
     input = {
