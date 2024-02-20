@@ -26,7 +26,7 @@
       packages = forEachSystem (pkgs: import ./pkgs { inherit inputs pkgs; });
       # 'nix develop'
       devShells =
-        forEachSystem (pkgs: import ./shell.nix { inherit inputs pkgs; });
+        forEachSystem (pkgs: { default = pkgs.callPackage ./shell.nix { }; });
       # 'nix fmt'
       formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
 
