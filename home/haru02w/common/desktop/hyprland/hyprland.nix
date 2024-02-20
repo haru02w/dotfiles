@@ -16,7 +16,7 @@
 
     input = {
       kb_layout = "us";
-      # kb_options = "compose:ralt, altwin:swap_lalt_lwin";
+      kb_options = "compose:ralt, altwin:swap_lalt_lwin";
 
       follow_mouse = 1;
       touchpad = {
@@ -111,8 +111,8 @@
       "$mod SHIFT, Q, exit"
       "$mod, Q, exec, ${pkgs.procps}/bin/pkill -9 waybar"
       "$mod, V, togglefloating"
-      "$mod, R, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun" # pkgs.
-      "$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show run" # pkgs.
+      "$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons" # pkgs.
+      "$mod, R, exec, ${pkgs.rofi-wayland}/bin/rofi -show run" # pkgs.
       "$mod, P, pseudo" # dwindle
 
       "$mod SHIFT, Space, togglesplit"
