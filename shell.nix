@@ -1,8 +1,6 @@
-{ pkgs ? import <nixpkgs>{}, ... }:
+{ pkgs ? import <nixpkgs> { }, ... }:
 pkgs.mkShell {
-  packages = with pkgs;[
-    git
-  ];
+  packages = with pkgs; [ git ];
 
   shellHook = ''
     ${pkgs.git}/bin/git status
