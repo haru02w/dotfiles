@@ -96,7 +96,7 @@
         "hyprland-protocols": "hyprland-protocols",
         "hyprlang": "hyprlang",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ],
         "systems": "systems",
         "wlroots": "wlroots",
@@ -379,15 +379,16 @@
         "nix-filter": "nix-filter"
       },
       "locked": {
-        "lastModified": 1698179193,
-        "narHash": "sha256-zDW+72enuRGuLLRbO1+pYk8FgRjQrBGksIAOk88OwOI=",
-        "owner": "Duckonaut",
+        "lastModified": 1708368126,
+        "narHash": "sha256-8q9ycZP2B6PYBHVoslhCHWDQj901Vj3gtMMK2TkdchQ=",
+        "owner": "zjeffer",
         "repo": "split-monitor-workspaces",
-        "rev": "2b1abdbf9e9de9ee660540167c8f51903fa3d959",
+        "rev": "563d44371012fca2af615ae11658a56822700ee0",
         "type": "github"
       },
       "original": {
-        "owner": "Duckonaut",
+        "owner": "zjeffer",
+        "ref": "fix/zjeffer/hyprlang-breaking-changes",
         "repo": "split-monitor-workspaces",
         "type": "github"
       }

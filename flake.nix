@@ -117,12 +117,12 @@
     # home-manager module
     hyprland = {
       url = "github:hyprwm/hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     # package
     split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces";
+      url = "github:zjeffer/split-monitor-workspaces/fix/zjeffer/hyprlang-breaking-changes";
       inputs.hyprland.follows = "hyprland";
     };
   };
