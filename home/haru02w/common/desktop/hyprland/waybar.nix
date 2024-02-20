@@ -77,15 +77,14 @@
       };
       "pulseaudio" = {
         format = "󱄠 {icon}";
-        format-bluetooth = "󱄠 {icon}";
         format-muted = "󰸈";
         format-icons = [ "▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" ];
         tooltip = true;
         tooltip-format = "{volume}%";
       };
       "battery" = {
-        format = "<span color='#FF0000'>󱐋</span> {icon}";
-        format-charging = "<span color='#00FF00'>󱐋</span> {icon}";
+        format = "{icon} ";
+        format-charging = "<span color='#${base0B}'>{icon} </span>";
         tooltip = true;
         tooltip-format = "{capacity}%";
         states = {
