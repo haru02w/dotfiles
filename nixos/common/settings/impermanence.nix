@@ -11,9 +11,7 @@
         "/var/lib/tailscale" # tailscale login
         "/etc/asusd" # asusctl state
         "/etc/ssh"
-      ];
-      files = [
-        "/root/.local/share/nix/trusted-settings.json"
+        "/root/.local/share/nix/"
       ];
     };
   };
