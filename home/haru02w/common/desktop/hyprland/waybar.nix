@@ -89,15 +89,17 @@
         tooltip-format = "{volume}%";
       };
       "battery" = {
-        format = "{icon} ";
-        format-charging = "<span color='#${base0B}'>{icon} </span>";
+        format = "{icon}";
+        format-charging = "<span color='#${base0B}'>{icon}</span>";
+        format-warning= "<span color='#${base0A}'>{capacity}%</span>";
+        format-critical= "<span color='#${base08}'>{capacity}%</span>";
         tooltip = true;
         tooltip-format = "{capacity}%";
         states = {
           warning = 30;
           critical = 15;
         };
-        format-icons = [ "" "" "" "" "" ];
+        format-icons = [ "󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󱟢" ];
       };
       "network" = {
         format = "";

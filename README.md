@@ -12,6 +12,7 @@
     6. `sudo nixos-install --flake .#hostName` again
 
 ## TODO:
- - Learn more about declarative Containers/VMs
- - Learn more about CI/CD tools like Hydra
- - Learn more about devenv and use it in project templates
+  - Create a split-monitor-workspaces fork myself and maintain it
+  - Learn more about declarative Containers/VMs
+  - Learn more about CI/CD tools like Hydra
+  - Learn more about devenv and use it in project templates
