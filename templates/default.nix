@@ -1,4 +1,4 @@
 {
-  c.path = ./c;
+  cpp.path = ./cpp;
   python.path = ./python;
 }
