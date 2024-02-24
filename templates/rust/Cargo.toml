@@ -1,5 +1,5 @@
 [package]
-name = "foo-bar"
-version = "0.1.0"
+name = "rust_template"
+version = "0.0.1"
 license = "MIT"
 edition = "2021"

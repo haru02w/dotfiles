@@ -3,7 +3,7 @@ stdenv.mkDerivation {
   name = "main";
 
   # important for caching
-  src = ./.;
+  src = lib.sourceByRegex ./. [ "^src.*" "^test.*" "CMakeLists.txt" ];
 
   # packages at compilationtime
   nativeBuildInputs = with pkgs; [ cmake ];
