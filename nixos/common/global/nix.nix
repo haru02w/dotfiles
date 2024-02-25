@@ -18,7 +18,8 @@
 
     gc = {
       automatic = true;
-      dates = "*-*-* 00/12:00:00";
+      randomizedDelaySec = "24h";
+      options = "--delete-older-than 3d";
     };
 
     # Add each flake input as a registry
