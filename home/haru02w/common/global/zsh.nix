@@ -1,4 +1,4 @@
-{ pkgs, ...}: {
+{ pkgs, ... }: {
 
   programs.zsh = {
     enable = true;
@@ -47,7 +47,12 @@
     shellAliases = {
       nixos-apply = "sudo nixos-rebuild switch --flake ~/.dotfiles";
       nixos-update = "sudo nixos-rebuild switch --flake ~/.dotfiles --upgrade";
+      # `bat` stuff
       cat = "bat";
+      man = "batman";
+      rg = "batgrep";
+      watch = "batwatch";
+      # git stuff
       gs = "git status";
       ga = "git add -A";
       gca = "git commit -a";
@@ -57,6 +62,11 @@
   programs.eza = {
     enable = true;
     enableAliases = true;
+  };
+
+  programs.bat = {
+    enable = true;
+    extraPackages = with pkgs.bat-extras; [ batdiff batman batgrep batwatch ];
   };
 
   programs.zoxide = {
