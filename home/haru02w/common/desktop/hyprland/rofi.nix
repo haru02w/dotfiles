@@ -266,11 +266,14 @@
         };
       };
   };
-  home.packages = with pkgs; [ rofi-bluetooth networkmanager_dmenu ];
+  home.packages = with pkgs; [
+    rofi-bluetooth
+    networkmanager_dmenu
+  ];
   xdg.configFile."networkmanager-dmenu/config.ini".text = ''
     [dmenu]
     dmenu_command = rofi -dmenu -i
-    active_chars = 󱘖
+    active_chars = '󱘖'
     # highlight = <True or False> # (Default: False) use highlighting instead of active_chars (only applicable to Rofi / Wofi)
     # highlight_fg = <Color> # (Default: None) foreground color of active connection (only applicable to Wofi)
     # highlight_bg = <Color> # (Default: None) background color of active connection (only applicable to Wofi)
@@ -279,7 +282,7 @@
     compact = True
     # pinentry = <Pinentry command>  # (Default: None) e.g. `pinentry-gtk`
     # wifi_chars = <string of 4 unicode characters representing 1-4 bars strength>
-    wifi_chars = ▂▄▆█
+    # wifi_chars = ▂▄▆█
     # wifi_icons = <characters representing signal strength as an icon>
     wifi_icons = 󰤯󰤟󰤢󰤥󰤨
     # format = <Python style format string for the access point entries>
