@@ -45,8 +45,8 @@
     };
 
     shellAliases = {
-      nixos-apply = "sudo nixos-rebuild switch --flake ~/.dotfiles";
-      nixos-update = "sudo nixos-rebuild switch --flake ~/.dotfiles --upgrade";
+      nixos-switch = "nixos-rebuild switch --flake ~/.dotfiles";
+      nixos-boot = "nixos-rebuild boot --flake ~/.dotfiles";
       # `bat` stuff
       cat = "bat";
       man = "batman";
