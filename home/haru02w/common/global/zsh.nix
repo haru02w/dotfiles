@@ -45,8 +45,8 @@
     };
 
     shellAliases = {
-      nixos-switch = "nixos-rebuild switch --flake ~/.dotfiles";
-      nixos-boot = "nixos-rebuild boot --flake ~/.dotfiles";
+      nixos-switch = "sudo nixos-rebuild switch --flake ~/.dotfiles";
+      nixos-boot = "sudo nixos-rebuild boot --flake ~/.dotfiles";
       # `bat` stuff
       cat = "bat";
       man = "batman";
@@ -55,7 +55,8 @@
       # git stuff
       gs = "git status";
       ga = "git add -A";
-      gca = "git commit -a";
+      gc = "git commit";
+      gp = "git push";
     };
   };
 
