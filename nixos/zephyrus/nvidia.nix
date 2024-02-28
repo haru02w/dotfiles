@@ -4,4 +4,5 @@
     powerManagement.finegrained = true;
     dynamicBoost.enable = true;
   };
+  environment.sessionVariables.WLR_DRM_DEVICES = "/dev/dri/card0";
 }
