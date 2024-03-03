@@ -115,13 +115,13 @@
 
     # home-manager module
     hyprland = {
-      url = "github:hyprwm/hyprland";
+      url = "github:hyprwm/hyprland/v0.36.0";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     # package
     split-monitor-workspaces = {
-      url = "github:zjeffer/split-monitor-workspaces";
+      url = "github:zjeffer/split-monitor-workspaces/d0012b8b0f764e32dd7b82f7a94b8c30197d7dc8";
       inputs.hyprland.follows = "hyprland";
     };
   };
