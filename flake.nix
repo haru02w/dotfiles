@@ -115,7 +115,7 @@
 
     # home-manager module
     hyprland = {
-      url = "github:hyprwm/hyprland/v0.36.0";
+      url = "github:hyprwm/hyprland/4bff762d9733ba7334cd37b995cf51552cc80be0";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
