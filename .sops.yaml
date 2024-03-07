@@ -5,7 +5,11 @@ keys:
   - &testvm age1xd7uw00xddzmqcymfmfz4dp2fldk62hzadq3f28mnvk3q2d46qqsp5jjc8
   - &zephyrus age1zzh8860ya7ghaz4xrqntwfj7ahnh6p82e6jdvuqewlnaehe6ve3qnzudu5
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: secrets/ssh-keys.yaml$
+    key_groups:
+      - age:
+        - *haru02w
+  - path_regex: secrets/accounts.yaml$
     key_groups:
       - age:
         - *haru02w
