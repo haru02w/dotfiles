@@ -8,7 +8,7 @@
     2. `nix-shell -p ssh-to-age --run 'cat /mnt/persist/etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age > pubkey.txt'`
     3. open `pubkey.txt` and add it to `.sops.yaml`
     4. copy backup age key to `~/.config/sops/age/keys.txt`
-    5. `nix-shell -p sops --run 'sops updatekeys secrets/*` yes to every question
+    5. `nix-shell -p sops --run 'sops updatekeys secrets/file.yaml`
     6. `sudo nixos-install --flake .#hostName` again
 
 ## TODO:
