@@ -12,6 +12,7 @@
     ../common/programs/pipewire.nix
     ../common/programs/tuigreet.nix
     ../common/programs/udisks2.nix
+    ../common/programs/docker.nix
 
 
     # host specific
