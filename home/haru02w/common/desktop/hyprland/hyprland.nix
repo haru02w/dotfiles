@@ -109,7 +109,7 @@
       ", XF86KbdBrightnessDown, exec, ${pkgs.asusctl}/bin/asusctl -p"
 
       "$mod SHIFT, Q, exit"
-      "$mod, Q, exec, ${pkgs.procps}/bin/pkill -9 waybar"
+      # "$mod, Q, exec, ${pkgs.procps}/bin/pkill -9 waybar"
       "$mod, V, togglefloating"
       "$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons" # pkgs.
       "$mod, R, exec, ${pkgs.rofi-wayland}/bin/rofi -show run" # pkgs.
