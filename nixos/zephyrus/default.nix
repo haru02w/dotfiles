@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ inputs, pkgs, ... }: {
   imports = [
     # settings
     ../common/global
@@ -14,7 +14,6 @@
     ../common/programs/udisks2.nix
     ../common/programs/docker.nix
 
-
     # host specific
     ./hardware-configuration.nix
     ./disko.nix
@@ -24,8 +23,13 @@
     (import ./disko.nix { device = "/dev/nvme0n1"; })
   ];
 
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.enable = true;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_zen;
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+    };
+  };
 
   services.tailscale.enable = true;
 
