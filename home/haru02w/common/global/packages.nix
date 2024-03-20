@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{pkgs,outputs, ...}:
 {
   home.packages = with pkgs; [
     irssi # irc client
@@ -12,5 +12,6 @@
     pfetch # system info
     tldr # simpler man
     bitwarden-cli # password manager
+    outputs.packages.${pkgs.system}.battop # battery info
   ];
 }
