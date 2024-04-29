@@ -91,8 +91,8 @@
       "battery" = {
         format = "{icon}";
         format-charging = "<span color='#${base0B}'>{icon}</span>";
-        format-warning= "<span color='#${base0A}'>{capacity}%</span>";
-        format-critical= "<span color='#${base08}'>{capacity}%</span>";
+        format-warning = "<span color='#${base0A}'>{capacity}%</span>";
+        format-critical = "<span color='#${base08}'>{capacity}%</span>";
         tooltip = true;
         tooltip-format = "{capacity}%";
         states = {
@@ -128,22 +128,24 @@
         exec-on-event = false;
         on-click =
           "${pkgs.asusctl}/bin/asusctl profile -n; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar";
-        exec = let
-          script = pkgs.writeShellScriptBin "fanprofiles.sh" ''
-            RETURN=$(${pkgs.asusctl}/bin/asusctl profile -p)
+        exec =
+          let
+            script = pkgs.writeShellScriptBin "fanprofiles.sh" ''
+              RETURN=$(${pkgs.asusctl}/bin/asusctl profile -p)
 
-            if [[ $RETURN = *"Performance"* ]]
-            then
-                echo "󱑴"
-            elif [[ $RETURN = *"Balanced"* ]]
-            then
-                echo "󱑳"
-            elif [[ $RETURN = *"Quiet"* ]]
-            then
-                echo "󱑲"
-            fi
-          '';
-        in "${script}/bin/fanprofiles.sh"; # WARN
+              if [[ $RETURN = *"Performance"* ]]
+              then
+                  echo "󱑴"
+              elif [[ $RETURN = *"Balanced"* ]]
+              then
+                  echo "󱑳"
+              elif [[ $RETURN = *"Quiet"* ]]
+              then
+                  echo "󱑲"
+              fi
+            '';
+          in
+          "${script}/bin/fanprofiles.sh"; # WARN
         escape = true;
       };
     };

@@ -85,9 +85,9 @@
     binde = [
       ("$mod, Return, exec, ${pkgs.foot}/bin/footclient "
         + (if (lib.elem pkgs.tmux config.home.packages) then
-          "${pkgs.tmux}/bin/tmux"
-        else
-          ""))
+        "${pkgs.tmux}/bin/tmux"
+      else
+        ""))
 
       "$mod, W, killactive"
       "$mod CTRL, H, resizeactive, -40 0"
@@ -143,12 +143,13 @@
     ] ++ (
       # workspaces
       # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-      builtins.concatLists (builtins.genList (x:
-        let ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
-        in [
-          "$mod, ${ws}, split-workspace, ${toString (x + 1)}"
-          "$mod SHIFT, ${ws}, split-movetoworkspace, ${toString (x + 1)}"
-        ]) 10));
+      builtins.concatLists (builtins.genList
+        (x:
+          let ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
+          in [
+            "$mod, ${ws}, split-workspace, ${toString (x + 1)}"
+            "$mod SHIFT, ${ws}, split-movetoworkspace, ${toString (x + 1)}"
+          ]) 10));
     bindl = [
       ",switch:off:Lid Switch, exec, hyprctl keyword monitor 'eDP-1,preferred,auto,1.2'"
       ",switch:on:Lid Switch, exec, hyprctl keyword monitor 'eDP-1, disable'"

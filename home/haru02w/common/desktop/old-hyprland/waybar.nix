@@ -279,22 +279,24 @@
     };
   };
 
-  home.file.".config/waybar/fanprofiles.sh".source = let
-    script = pkgs.writeShellScriptBin "fanprofiles.sh" ''
-      RETURN=$(${pkgs.asusctl}/bin/asusctl profile -p)
+  home.file.".config/waybar/fanprofiles.sh".source =
+    let
+      script = pkgs.writeShellScriptBin "fanprofiles.sh" ''
+        RETURN=$(${pkgs.asusctl}/bin/asusctl profile -p)
 
-      if [[ $RETURN = *"Performance"* ]]
-      then
-          echo "󰑮"
-      elif [[ $RETURN = *"Balanced"* ]]
-      then
-          echo "󰜎"
-      elif [[ $RETURN = *"Quiet"* ]]
-      then
-          echo ""
-      fi
-    '';
-  in "${script}/bin/fanprofiles.sh";
+        if [[ $RETURN = *"Performance"* ]]
+        then
+            echo "󰑮"
+        elif [[ $RETURN = *"Balanced"* ]]
+        then
+            echo "󰜎"
+        elif [[ $RETURN = *"Quiet"* ]]
+        then
+            echo ""
+        fi
+      '';
+    in
+    "${script}/bin/fanprofiles.sh";
   # WARN dmenu-bluetooth not installed
   # WARN ~/.config/waybar/fanprofiles.sh not in place
 }

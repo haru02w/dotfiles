@@ -1,4 +1,4 @@
-{pkgs,outputs, ...}:
+{ pkgs, outputs, ... }:
 {
   home.packages = with pkgs; [
     irssi # irc client
