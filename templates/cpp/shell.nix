@@ -1,6 +1,6 @@
-{ pkgs ? import <nixpkgs> {}}:
+{ pkgs ? import <nixpkgs> { } }:
 let
-  mainPkg = pkgs.callPackage ./default.nix {};
+  mainPkg = pkgs.callPackage ./default.nix { };
 in
 mainPkg.overrideAttrs (oa: {
   nativeBuildInputs = [

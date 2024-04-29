@@ -16,7 +16,8 @@ let
       };
     };
   cfg = config.fontProfiles;
-in {
+in
+{
   options = {
     wallpaper = lib.mkOption {
       type = lib.types.nullOr lib.types.path;

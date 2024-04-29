@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   imports = [
     ../global # change theme or wallpaper here

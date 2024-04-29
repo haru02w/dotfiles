@@ -1,9 +1,11 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   home.packages = with pkgs;[
     discord
     webcord
-    (symlinkJoin { # vieb pached for wayland
+    gimp
+    (symlinkJoin {
+      # vieb pached for wayland
       name = "vieb";
       paths = [ vieb ];
       buildInputs = [ makeWrapper ];

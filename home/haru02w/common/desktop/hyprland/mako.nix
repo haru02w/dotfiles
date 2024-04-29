@@ -1,4 +1,4 @@
-{config,...}:
+{ config, ... }:
 {
   services.mako = with config.colorScheme.palette;{
     enable = true;

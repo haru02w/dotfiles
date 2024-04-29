@@ -5,7 +5,7 @@
       package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
       family = "FiraCode Nerd Font Mono";
     };
-    regular = { 
+    regular = {
       package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
       family = "FiraCode Nerd Font";
     };

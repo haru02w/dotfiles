@@ -1,4 +1,5 @@
-{ # Enable automounting in /run/media/$USER/
+{
+  # Enable automounting in /run/media/$USER/
   # OBS: The following option at nixos config must be enabled
   # 'services.udisks2.enable = true'
   services.udiskie = {

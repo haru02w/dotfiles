@@ -4,7 +4,8 @@ let
   user = "haru02w";
   ifGroupsExist = groups:
     builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in {
+in
+{
   sops.secrets.${user} = {
     sopsFile = ../../../secrets/accounts.yaml;
     neededForUsers = true;

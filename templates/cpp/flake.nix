@@ -9,13 +9,15 @@
           "aarch64-linux"
           "x86_64-darwin"
           "aarch64-darwin"
-        ] (system:
-          f (import nixpkgs {
-            inherit system;
-            # config.allowUnfree = true;
-            # overlays = [];
-          }));
-    in {
+        ]
+          (system:
+            f (import nixpkgs {
+              inherit system;
+              # config.allowUnfree = true;
+              # overlays = [];
+            }));
+    in
+    {
       packages =
         forAllSystems (pkgs: { default = pkgs.callPackage ./default.nix { }; });
 
