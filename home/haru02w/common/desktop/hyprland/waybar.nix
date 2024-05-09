@@ -1,6 +1,7 @@
 { config, pkgs, ... }: {
   programs.waybar = with config.colorScheme.palette; {
     enable = true;
+    package = pkgs.unstable.waybar;
     settings.mainBar = {
       layer = "top";
       position = "right";
