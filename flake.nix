@@ -11,8 +11,7 @@
           inherit system;
           config.allowUnfree = true;
         });
-    in
-    {
+    in {
       inherit lib;
       # system-level modules
       nixosModules = import ./modules/nixos;
@@ -115,15 +114,10 @@
     #};
 
     # home-manager module
-    hyprland = {
-      url = "github:hyprwm/hyprland/fe7b748eb668136dd0558b7c8279bfcd7ab4d759";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
+    hyprland.url = "github:hyprwm/Hyprland/v0.40.0";
     # package
     split-monitor-workspaces = {
-      url =
-        "github:Duckonaut/split-monitor-workspaces/b0ee3953eaeba70f3fba7c4368987d727779826a";
+      url = "github:Duckonaut/split-monitor-workspaces/b40147d96d62a9e9bbc56b18ea421211ee598357";
       inputs.hyprland.follows = "hyprland";
     };
   };
