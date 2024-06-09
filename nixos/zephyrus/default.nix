@@ -23,6 +23,9 @@
     (import ./disko.nix { device = "/dev/nvme0n1"; })
   ];
 
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     loader = {

@@ -504,11 +504,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1717866732,
-        "narHash": "sha256-Xp1yCdLnq94mpMVtRWsX3P8w8a+AbfPa87Vg8FaN8l8=",
+        "lastModified": 1717892931,
+        "narHash": "sha256-x4W9ILWA0Kxo/+GFLF6pray/EqEJLmUf2QbyYCbx2hU=",
         "owner": "haru02w",
         "repo": "nixnvc",
-        "rev": "1495098d0edbe4fe7c588beb1ceaf981396ee525",
+        "rev": "46cd76ca40fabcb43380ff97e297e58c81fffb06",
         "type": "github"
       },
       "original": {
