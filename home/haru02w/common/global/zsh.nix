@@ -7,7 +7,7 @@
     #plugins
     enableCompletion = true;
     syntaxHighlighting.enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     historySubstringSearch = {
       enable = true;
       searchUpKey = [ "^[[A" ];
@@ -62,7 +62,7 @@
 
   programs.eza = {
     enable = true;
-    enableAliases = true;
+    enableZshIntegration = true;
   };
 
   programs.bat = {

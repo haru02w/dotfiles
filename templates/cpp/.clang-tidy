@@ -1,33 +1,26 @@
 ---
 Checks: >
-  -*,
-  readability-*,
-  modernize-*,
-  cppcoreguidelines-*, -cppcoreguidelines-owning-memory,
-  performance-*,
-  misc-*,
-  bugprone-*,
-  google-*, -google-readability-todo
+    *,
+    -abseil-*,
+    -altera-*,
+    -android-*,
+    -fuchsia-*,
+    -google-*,
+    -llvm*,
+    -modernize-use-trailing-return-type,
+    -zircon-*,
+    -readability-else-after-return,
+    -readability-static-accessed-through-instance,
+    -readability-avoid-const-params-in-decls,
+    -cppcoreguidelines-non-private-member-variables-in-classes,
+    -misc-non-private-member-variables-in-classes,
 
-WarningsAsErrors: '*'
-FormatStyle: file
-# CheckOptions:
-#   - { key: readability-identifier-naming.NamespaceCase,          value: lower_case }
-#   - { key: readability-identifier-naming.ClassCase,              value: CamelCase  }
-#   - { key: readability-identifier-naming.StructCase,             value: CamelCase  }
-#   - { key: readability-identifier-naming.TemplateParameterCase,  value: CamelCase  }
-#   - { key: readability-identifier-naming.FunctionCase,           value: CamelCase  }
-#   - { key: readability-identifier-naming.VariableCase,           value: lower_case }
-#   - { key: readability-identifier-naming.PrivateMemberSuffix,    value: _          }
-#   - { key: readability-identifier-naming.ProtectedMemberSuffix,  value: _          }
-#   - { key: readability-identifier-naming.MacroDefinitionCase,    value: UPPER_CASE }
-#   - { key: readability-identifier-naming.EnumConstantCase,         value: CamelCase }
-#   - { key: readability-identifier-naming.EnumConstantPrefix,       value: k         }
-#   - { key: readability-identifier-naming.ConstexprVariableCase,    value: CamelCase }
-#   - { key: readability-identifier-naming.ConstexprVariablePrefix,  value: k         }
-#   - { key: readability-identifier-naming.GlobalConstantCase,       value: CamelCase }
-#   - { key: readability-identifier-naming.GlobalConstantPrefix,     value: k         }
-#   - { key: readability-identifier-naming.MemberConstantCase,       value: CamelCase }
-#   - { key: readability-identifier-naming.MemberConstantPrefix,     value: k         }
-#   - { key: readability-identifier-naming.StaticConstantCase,       value: CamelCase }
-#   - { key: readability-identifier-naming.StaticConstantPrefix,     value: k         }
+WarningsAsErrors: ''
+HeaderFilterRegex: ''
+FormatStyle:     none
+
+CheckOptions:
+    - key: readability-identifier-length.IgnoredVariableNames
+      value: 'x|y|z'
+    - key: readability-identifier-length.IgnoredParameterNames
+      value: 'x|y|z'
