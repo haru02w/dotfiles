@@ -114,10 +114,16 @@
     #};
 
     # home-manager module
-    hyprland.url = "github:hyprwm/Hyprland/v0.40.0";
+    hyprland = {
+      type = "git";
+      url = "https://github.com/hyprwm/Hyprland";
+      submodules = true;
+      ref = "refs/tags/v0.41.1";
+    };
+
     # package
     split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces/b40147d96d62a9e9bbc56b18ea421211ee598357";
+      url = "github:Duckonaut/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";
     };
   };
