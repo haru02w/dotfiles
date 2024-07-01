@@ -27,7 +27,7 @@
   programs.virt-manager.enable = true;
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
