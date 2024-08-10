@@ -27,7 +27,7 @@
   programs.virt-manager.enable = true;
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages;
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;

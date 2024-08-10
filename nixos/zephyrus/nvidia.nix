@@ -1,5 +1,6 @@
 { config, ... }: {
   hardware.nvidia = {
+    open = true;
     powerManagement.enable = true;
     powerManagement.finegrained = true;
     dynamicBoost.enable = true;

@@ -11,7 +11,8 @@
           inherit system;
           config.allowUnfree = true;
         });
-    in {
+    in
+    {
       inherit lib;
       # system-level modules
       nixosModules = import ./modules/nixos;
@@ -118,7 +119,7 @@
       type = "git";
       submodules = true;
       url = "https://github.com/hyprwm/Hyprland";
-      ref = "refs/tags/v0.41.2";
+      ref = "refs/tags/v0.42.0";
     };
 
     # package
