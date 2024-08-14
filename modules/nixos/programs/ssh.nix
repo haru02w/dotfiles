@@ -1,8 +1,8 @@
 { lib, config, ... }:
 with lib;
-let cfg = config.modules.ssh;
+let cfg = config.modules.programs.ssh;
 in {
-  options.modules.ssh = {
+  options.modules.programs.ssh = {
     enable = mkEnableOption "ssh";
     enablePassword = mkEnableOption "Enable login with password ";
     enableRootLogin = mkEnableOption "Enable root login";
