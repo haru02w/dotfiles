@@ -23,6 +23,7 @@
     git
     neovim
     firefox
+    home-manager
   ];
 
   users.users.haru02w = {

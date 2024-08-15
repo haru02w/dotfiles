@@ -18,9 +18,10 @@
     );
     directoriesInsidePath = path : builtins.attrNames (lib.filterAttrs (name: value: value == "directory") (builtins.readDir path));
     homeManagerUsersPerHost = host: directoriesInsidePath ./hosts/${host}/home-manager;
-    homeManagerConfigPerHostAndUser = systemPerHostAndUser: builtins.listToAttrs (map (host: map (user: lib.nameValuePair "${user}@${host}" (systemPerHostAndUser host user)) (homeManagerUsersPerHost host)) hosts);
+    homeManagerConfigPerHostAndUser = systemPerHostAndUser: builtins.listToAttrs (lib.flatten (map (host: map (user: lib.nameValuePair "${user}@${host}" (systemPerHostAndUser host user)) (homeManagerUsersPerHost host)) hosts));
     nixosConfigPerHost = systemPerHost: builtins.listToAttrs (map (host: lib.nameValuePair host (systemPerHost host)) hosts);
   in {
+
     nixosConfigurations = nixosConfigPerHost (host: lib.nixosSystem {
       modules = [ 
         self.outputs.nixosModules
@@ -30,12 +31,18 @@
     });
 
     homeConfigurations = homeManagerConfigPerHostAndUser (host: user: lib.homeManagerConfiguration {
-      pkgs = import ./hosts/${host}/pkgs.nix pkgsFor;
+      pkgs = pkgsFor."${import ./hosts/${host}/arch.nix}";
+      modules = [
+        self.outputs.homeModules
+	./hosts/${host}/home-manager/${user}
+      ];
       extraSpecialArgs = { inherit inputs; };
     });
 
     nixosModules = import ./modules/nixos;
+    homeModules = import ./modules/home-manager;
   };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
