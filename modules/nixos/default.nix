@@ -19,5 +19,5 @@ let
       (files dir));
 in
 {
-  imports = validFiles ./.;
+  imports = [ ] ++ validFiles ./.;
 }
