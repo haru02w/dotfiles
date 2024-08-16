@@ -1,6 +1,11 @@
-{ lib, config, pkgs, ... }:
-with lib;
-let cfg = config.modules.programs.neovim;
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.modules.programs.neovim;
 in {
   options.modules.programs.neovim = {
     enable = mkEnableOption "neovim";

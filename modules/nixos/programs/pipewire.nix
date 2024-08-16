@@ -1,6 +1,11 @@
-{ inputs, lib, config, ...}:
-with lib;
-let cfg = config.modules.nix;
+{
+  inputs,
+  lib,
+  config,
+  ...
+}:
+with lib; let
+  cfg = config.modules.nix;
 in {
   options.modules.programs.pipewire.enable = mkEnableOption "Pipewire sound system";
   config = mkIf cfg.enable {

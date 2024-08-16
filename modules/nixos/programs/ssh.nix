@@ -1,6 +1,10 @@
-{ lib, config, ... }:
-with lib;
-let cfg = config.modules.programs.ssh;
+{
+  lib,
+  config,
+  ...
+}:
+with lib; let
+  cfg = config.modules.programs.ssh;
 in {
   options.modules.programs.ssh = {
     enable = mkEnableOption "ssh";
@@ -13,8 +17,11 @@ in {
       settings = {
         # Harden
         PasswordAuthentication = mkDefault cfg.enablePassword;
-        PermitRootLogin =
-          mkDefault (if cfg.enableRootLogin then "yes" else "no");
+        PermitRootLogin = mkDefault (
+          if cfg.enableRootLogin
+          then "yes"
+          else "no"
+        );
         # Automatically remove stale sockets
         StreamLocalBindUnlink = mkDefault "yes";
         # Allow forwarding ports to everywhere

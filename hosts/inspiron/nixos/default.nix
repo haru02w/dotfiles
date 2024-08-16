@@ -1,6 +1,6 @@
-{ pkgs, ...}:{
-  imports = [ 
-    ./hardware-configuration.nix 
+{pkgs, ...}: {
+  imports = [
+    ./hardware-configuration.nix
   ];
 
   boot.loader.grub.enable = true;
@@ -29,9 +29,9 @@
   users.users.haru02w = {
     isNormalUser = true;
     description = "haru02w";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 

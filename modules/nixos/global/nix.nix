@@ -1,6 +1,11 @@
-{ inputs, lib, config, ... }:
-with lib;
-let cfg = config.modules.nix;
+{
+  inputs,
+  lib,
+  config,
+  ...
+}:
+with lib; let
+  cfg = config.modules.nix;
 in {
   options.modules.nix.enable = mkOption {
     description = "Enable nix config";
@@ -18,10 +23,10 @@ in {
       optimise.automatic = mkDefault true;
 
       settings = {
-        trusted-users = mkDefault [ "root" "@wheel" ];
+        trusted-users = mkDefault ["root" "@wheel"];
         auto-optimise-store = mkDefault true;
-        experimental-features = mkDefault [ "nix-command" "flakes" "repl-flake" ];
-        system-features = mkDefault [ "kvm" "big-parallel" "nixos-test" ];
+        experimental-features = mkDefault ["nix-command" "flakes" "repl-flake"];
+        system-features = mkDefault ["kvm" "big-parallel" "nixos-test"];
       };
 
       gc = {
@@ -32,11 +37,11 @@ in {
 
       # Add each flake input as a registry
       # To make nix3 commands consistent with the flake
-      registry = mkDefault (lib.mapAttrs (_: value: { flake = value; }) inputs);
+      registry = mkDefault (lib.mapAttrs (_: value: {flake = value;}) inputs);
 
       # Add nixpkgs input to NIX_PATH
       # This lets nix2 commands still use <nixpkgs>
-      nixPath = mkDefault [ "nixpkgs=${inputs.nixpkgs.outPath}" ];
+      nixPath = mkDefault ["nixpkgs=${inputs.nixpkgs.outPath}"];
     };
   };
 }

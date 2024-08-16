@@ -1,15 +1,35 @@
-{ lib, config, ... }:
-with lib;
-let cfg = config.modules.settings;
+{
+  lib,
+  config,
+  ...
+}:
+with lib; let
+  cfg = config.modules.settings;
 in {
   options.modules.settings = with types; {
-    hostname = mkOption { type = str; example = "mycomputer"; };
-    keymap = {
-      layout = mkOption { type = str; default = "us"; example = "us"; };
-      variant = mkOption { type = str; default = ""; };
+    hostname = mkOption {
+      type = str;
+      example = "mycomputer";
     };
-    locale = mkOption { type = str; example = "en_US.UTF-8"; };
-    timezone = mkOption { type = str; example = "America/Sao_Paulo"; };
+    keymap = {
+      layout = mkOption {
+        type = str;
+        default = "us";
+        example = "us";
+      };
+      variant = mkOption {
+        type = str;
+        default = "";
+      };
+    };
+    locale = mkOption {
+      type = str;
+      example = "en_US.UTF-8";
+    };
+    timezone = mkOption {
+      type = str;
+      example = "America/Sao_Paulo";
+    };
   };
   config = {
     networking.hostName = cfg.hostname;
