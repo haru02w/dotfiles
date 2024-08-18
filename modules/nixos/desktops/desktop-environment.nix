@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.desktops;
+  cfg = config.modules.desktopEnvironment;
 in {
-  options.modules.desktops = {
+  options.modules.desktopEnvironment = {
     gnome.enable = mkEnableOption "Gnome DE";
     kde.enable = mkEnableOption "Plasma DE";
     xfce.enable = mkEnableOption "XFCE DE";
@@ -20,46 +20,52 @@ in {
     deepin.enable = mkEnableOption "Deepin DE";
   };
 
-  config = let
-    anyDEActive =
-      lib.any (value: value == true)
-      (map (name: cfg.${name}.enable) (builtins.attrNames cfg));
-  in
-    lib.mkMerge [
-      (mkIf anyDEActive {services.xserver.enable = mkForce true;})
+  config = lib.mkMerge [
+      (mkIf anyDEActive {services.xserver.enable = true;})
       (mkIf cfg.gnome.enable {
-        services.xserver.desktopManager.gnome.enable = mkForce true;
+        services.xserver.enable = mkIf (!services.xserver.enable) true;
+        services.xserver.desktopManager.gnome.enable = true;
       })
       (mkIf cfg.kde.enable {
-        services.desktopManager.plasma6.enable = mkForce true;
+        services.xserver.enable = mkIf (!services.xserver.enable) true;
+        services.desktopManager.plasma6.enable = true;
       })
       (mkIf cfg.xfce.enable {
-        services.xserver.desktopManager.xfce.enable = mkForce true;
+        services.xserver.enable = mkIf (!services.xserver.enable) true;
+        services.xserver.desktopManager.xfce.enable = true;
       })
       (mkIf cfg.pantheon.enable {
-        services.xserver.desktopManager.pantheon.enable = mkForce true;
+        services.xserver.enable = mkIf (!services.xserver.enable) true;
+        services.xserver.desktopManager.pantheon.enable = true;
       })
       (mkIf cfg.cinnamon.enable {
-        services.xserver.desktopManager.cinnamon.enable = mkForce true;
+        services.xserver.enable = mkIf (!services.xserver.enable) true;
+        services.xserver.desktopManager.cinnamon.enable = true;
       })
       (mkIf cfg.mate.enable {
-        services.xserver.desktopManager.mate.enable = mkForce true;
+        services.xserver.enable = mkIf (!services.xserver.enable) true;
+        services.xserver.desktopManager.mate.enable = true;
       })
       (mkIf cfg.enlightenment.enable {
-        services.xserver.desktopManager.enlightenment.enable = mkForce true;
+        services.xserver.enable = mkIf (!services.xserver.enable) true;
+        services.xserver.desktopManager.enlightenment.enable = true;
         services.acpid.enable = mkDefault true;
       })
       (mkIf cfg.lxqt.enable {
-        services.xserver.desktopManager.lxqt.enable = mkForce true;
+        services.xserver.enable = mkIf (!services.xserver.enable) true;
+        services.xserver.desktopManager.lxqt.enable = true;
       })
       (mkIf cfg.lumina.enable {
-        services.xserver.desktopManager.lumina.enable = mkForce true;
+        services.xserver.enable = mkIf (!services.xserver.enable) true;
+        services.xserver.desktopManager.lumina.enable = true;
       })
       (mkIf cfg.budgie.enable {
-        services.xserver.desktopManager.budgie.enable = mkForce true;
+        services.xserver.enable = mkIf (!services.xserver.enable) true;
+        services.xserver.desktopManager.budgie.enable = true;
       })
       (mkIf cfg.deepin.enable {
-        services.xserver.desktopManager.deepin.enable = mkForce true;
+        services.xserver.enable = mkIf (!services.xserver.enable) true;
+        services.xserver.desktopManager.deepin.enable = true;
       })
     ];
 }

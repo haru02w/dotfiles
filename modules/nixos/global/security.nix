@@ -1,10 +1,6 @@
-{
-  lib,
-  config,
-  ...
-}:
-with lib; let
-  cfg = config.modules.security;
+{ lib, config, ... }:
+with lib;
+let cfg = config.modules.security;
 in {
   options.modules.security.enable = mkOption {
     description = "Enable security options";
@@ -14,6 +10,12 @@ in {
 
   config = mkIf cfg.enable {
     security = {
+      security.pam.loginLimits = [{
+        domain = "@users";
+        item = "rtprio";
+        type = "-";
+        value = 1;
+      }];
       sudo.wheelNeedsPassword = mkDefault false;
       rtkit.enable = mkDefault true;
       polkit.enable = mkDefault true;

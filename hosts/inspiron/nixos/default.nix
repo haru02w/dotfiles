@@ -16,8 +16,8 @@
 
   services.printing.enable = true;
   modules.programs.pipewire.enable = true;
-  services.displayManager.sddm.enable = true;
-  modules.desktops.kde.enable = true;
+  modules.displayManager.sddm.enable = true;
+  modules.desktopEnvironment.plasma.enable = true;
 
   environment.systemPackages = with pkgs; [
     git
@@ -30,9 +30,6 @@
     isNormalUser = true;
     description = "haru02w";
     extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
   };
 
   system.stateVersion = "24.05";
