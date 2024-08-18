@@ -1,5 +1,4 @@
 {
-  self,
   inputs,
   lib,
   config,
@@ -16,7 +15,7 @@ in {
 
   config = mkIf cfg.enable {
     nixpkgs = {
-      overlays = self.outputs.overlays;
+      overlays = inputs.self.outputs.overlays;
       config.allowUnfree = mkDefault true;
       config.allowUnfreePredicate = mkDefault (_: true);
     };

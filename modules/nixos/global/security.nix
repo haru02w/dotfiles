@@ -14,7 +14,7 @@ in {
 
   config = mkIf cfg.enable {
     security = {
-      security.pam.loginLimits = [
+      pam.loginLimits = [
         {
           domain = "@users";
           item = "rtprio";

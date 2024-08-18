@@ -1,4 +1,8 @@
-{lib, ...}:
+{
+  lib,
+  inputs,
+  ...
+}:
 with lib; let
   # Recursively constructs an attrset of a given folder, recursing on directories, value of attrs is the filetype
   getDir = dir:
@@ -22,7 +26,7 @@ with lib; let
       (file: hasSuffix ".nix" file && file != "default.nix")
       (files dir));
 in {
-  imports =
+  imports = with inputs;
     [
       impermanence.nixosModules.impermanence
       disko.nixosModules.disko

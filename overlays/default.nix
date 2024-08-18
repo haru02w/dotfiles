@@ -1,4 +1,5 @@
-{inputs, ...}: [
-  inputs.nix-alien.overlays.default
-  inputs.nur.overlay
+{inputs, ...}:
+with inputs; [
+  nix-alien.overlays.default
+  nur.overlay
 ]

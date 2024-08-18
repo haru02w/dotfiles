@@ -18,6 +18,7 @@
   modules.programs.pipewire.enable = true;
   modules.displayManager.sddm.enable = true;
   modules.desktopEnvironment.plasma.enable = true;
+  modules.fhsHelpers.enable = true;
 
   environment.systemPackages = with pkgs; [
     git
