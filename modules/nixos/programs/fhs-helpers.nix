@@ -1,16 +1,15 @@
 {
-  inputs,
-  pkgs,
   lib,
   config,
   ...
 }:
 with lib; let
-  cfg = config.modules.fhs-compliant;
+  cfg = config.modules.fhs-helpers;
 in {
-  options.modules.fhs-compliant.enable = mkEnableOption "FHS compliant";
+  options.modules.fhs-helpers.enable = mkEnableOption "FHS compliant";
   config = mkIf cfg.enable {
     programs.nix-ld.enable = true;
+    services.envfs.enable = true;
     environment.systemPackages = [
       nix-alien
     ];
