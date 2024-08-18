@@ -22,8 +22,10 @@ with lib; let
       (file: hasSuffix ".nix" file && file != "default.nix")
       (files dir));
 in {
-  imports = [
-    sops-nix.homeManagerModules.sops
-    impermanence.nixosModules.home-manager.impermanence
-  ] ++ validFiles ./.;
+  imports =
+    [
+      sops-nix.homeManagerModules.sops
+      impermanence.nixosModules.home-manager.impermanence
+    ]
+    ++ validFiles ./.;
 }

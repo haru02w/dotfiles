@@ -22,10 +22,12 @@ with lib; let
       (file: hasSuffix ".nix" file && file != "default.nix")
       (files dir));
 in {
-  imports = [
-    impermanence.nixosModules.impermanence
-    disko.nixosModules.disko
-    sops-nix.nixosModules.sops
-    home-manager.nixosModules.home-manager
-  ] ++ validFiles ./.;
+  imports =
+    [
+      impermanence.nixosModules.impermanence
+      disko.nixosModules.disko
+      sops-nix.nixosModules.sops
+      home-manager.nixosModules.home-manager
+    ]
+    ++ validFiles ./.;
 }

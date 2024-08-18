@@ -63,6 +63,14 @@
       url = "github:thiagokokada/nix-alien";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-data = {
+      url = "github:snowfallorg/nix-data";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    snow = {
+      url = "github:snowfallorg/snow";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # TODO:
     impermanence.url = "github:nix-community/impermanence";
