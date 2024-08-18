@@ -34,6 +34,7 @@
       builtins.listToAttrs
       (map (host: lib.nameValuePair host (systemPerHost host)) hosts);
   in {
+    overlays = import ./overlays {inherit inputs;};
     nixosModules = import ./modules/nixos;
     homeModules = import ./modules/home-manager;
 
@@ -54,10 +55,36 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-alien = {
+      url = "github:thiagokokada/nix-alien";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # TODO:
+    impermanence.url = "github:nix-community/impermanence";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
+    };
+    nur.url = "github:nix-community/NUR";
+    # TODO:
+  };
+
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org" # nix-community (nur)
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" # nix-community (nur)
+    ];
   };
 }

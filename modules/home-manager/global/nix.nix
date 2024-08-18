@@ -22,8 +22,6 @@ in {
     };
 
     nix = {
-      optimise.automatic = mkDefault true;
-
       settings = {
         trusted-users = mkDefault ["root" "@wheel"];
         auto-optimise-store = mkDefault true;
@@ -40,10 +38,6 @@ in {
       # Add each flake input as a registry
       # To make nix3 commands consistent with the flake
       registry = mkDefault (lib.mapAttrs (_: value: {flake = value;}) inputs);
-
-      # Add nixpkgs input to NIX_PATH
-      # This lets nix2 commands still use <nixpkgs>
-      nixPath = mkDefault ["nixpkgs=${inputs.nixpkgs.outPath}"];
     };
   };
 }
