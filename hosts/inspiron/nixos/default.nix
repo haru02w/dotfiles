@@ -19,6 +19,9 @@
   modules.displayManager.sddm.enable = true;
   modules.desktopEnvironment.plasma.enable = true;
   modules.fhsHelpers.enable = true;
+  modules.ssh.enable = true;
+  modules.ssh.enablePassword = true;
+  modules.ssh.enableRootLogin = true;
 
   environment.systemPackages = with pkgs; [
     git
