@@ -1,5 +1,7 @@
 {pkgs, ...}: {
   imports = [
+    (import ./disko.nix {device = "/dev/disk/by-id/ata-FUJITSU_MJA2160BH_G2_K95BT9926SR8";})
+    ./impermanence.nix
     ./hardware-configuration.nix
   ];
 
@@ -19,9 +21,11 @@
   modules.displayManager.sddm.enable = true;
   modules.desktopEnvironment.plasma.enable = true;
   modules.fhsHelpers.enable = true;
-  modules.ssh.enable = true;
-  modules.ssh.enablePassword = true;
-  modules.ssh.enableRootLogin = true;
+  modules.programs.ssh = {
+    enable = true;
+    enablePassword = true;
+    enableRootLogin = true;
+  };
 
   environment.systemPackages = with pkgs; [
     git

@@ -1,5 +1,4 @@
-{...}: {
-  imports = [(import ./disko.nix {device = "/dev/sda";})];
+{
   fileSystems."/persist".neededForBoot = true;
   programs.fuse.userAllowOther = true;
 
