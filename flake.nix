@@ -64,8 +64,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # TODO:
-    impermanence.url = "github:nix-community/impermanence";
+    nix-persist.url = "github:haru02w/nix-persist";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";

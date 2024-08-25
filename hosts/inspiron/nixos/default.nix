@@ -1,6 +1,8 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   imports = [
-    (import ./disko.nix {device = "/dev/disk/by-id/ata-FUJITSU_MJA2160BH_G2_K95BT9926SR8";})
+    (import ./disko.nix {
+      device = "/dev/disk/by-id/ata-FUJITSU_MJA2160BH_G2_K95BT9926SR8";
+    })
     ./impermanence.nix
     ./hardware-configuration.nix
   ];
@@ -27,17 +29,17 @@
     enableRootLogin = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    git
-    neovim
-    firefox
-    home-manager
-  ];
+  environment.nix-persist = {
+    enable = true;
+    path = "/persist/system";
+  };
+
+  environment.systemPackages = with pkgs; [ git neovim firefox home-manager ];
 
   users.users.haru02w = {
     isNormalUser = true;
     description = "haru02w";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = [ "networkmanager" "wheel" ];
   };
 
   system.stateVersion = "24.05";
