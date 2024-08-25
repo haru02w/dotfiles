@@ -25,7 +25,6 @@ in {
   imports =
     [
       sops-nix.homeManagerModules.sops
-      impermanence.nixosModules.home-manager.impermanence
     ]
     ++ validFiles ./.;
 }

@@ -64,7 +64,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-persist.url = "github:haru02w/nix-persist";
+    nix-persist = {
+      url = "github:haru02w/nix-persist";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";

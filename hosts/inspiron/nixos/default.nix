@@ -3,7 +3,6 @@
     (import ./disko.nix {
       device = "/dev/disk/by-id/ata-FUJITSU_MJA2160BH_G2_K95BT9926SR8";
     })
-    ./impermanence.nix
     ./hardware-configuration.nix
   ];
 

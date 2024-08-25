@@ -3,7 +3,6 @@
   pkgs,
   ...
 }: {
-  imports = [./impermanence.nix];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "haru02w";
