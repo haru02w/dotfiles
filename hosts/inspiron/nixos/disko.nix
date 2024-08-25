@@ -25,6 +25,14 @@
               mountpoint = "/boot";
             };
           };
+          swap = {
+            size = "8G";
+            content = {
+              type = "swap";
+              discardPolicy = "both";
+              resumeDevice = true;
+            };
+          };
           root = {
             name = "ROOT";
             size = "100%";
@@ -39,10 +47,6 @@
                 "/nix" = {
                   mountpoint = "/nix";
                   mountOptions = [ "subvol=nix" "compress=zstd" ];
-                };
-                "/swap" = {
-                  mountpoint = "/.swapvol";
-                  swap.swapfile.size = "8G";
                 };
               };
             };
