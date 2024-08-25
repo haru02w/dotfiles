@@ -17,7 +17,7 @@ with lib; let
   # Filters out directories that don't end with .nix or are this file, also makes the strings absolute
   validFiles = dir:
     map
-    (file: ./. + "/${file}")
+    (file: dir + "/${file}")
     (filter
       (file: hasSuffix ".nix" file && file != "default.nix")
       (files dir));

@@ -1,11 +1,11 @@
-{ device ? throw "Set this to your disk device, e.g. /dev/sda", ... }: {
+{
   disko.devices = {
     nodev."/" = {
       fsType = "tmpfs";
       mountOptions = [ "size=4G" "defaults" "mode=755" ];
     };
     disk.main = {
-      inherit device;
+      device = "/dev/disk/by-id/ata-FUJITSU_MJA2160BH_G2_K95BT9926SR8";
       type = "disk";
       content = {
         type = "gpt";
