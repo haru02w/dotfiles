@@ -35,12 +35,16 @@
       (map (host: lib.nameValuePair host (systemPerHost host)) hosts);
   in {
     overlays = import ./overlays {inherit inputs;};
-    nixosModules = import ./modules/nixos;
-    homeModules = import ./modules/home-manager;
+    #nixosModules = import ./modules/nixos;
+    #homeModules = import ./modules/home-manager;
 
     nixosConfigurations = nixosConfigPerHost (host:
       lib.nixosSystem {
-        modules = [self.outputs.nixosModules ./hosts/${host}/nixos];
+        modules = [
+	  #self.outputs.nixosModules 
+          inputs.disko.nixosModules.default
+	  ./hosts/${host}/nixos
+	];
         specialArgs = {inherit inputs;};
       });
     homeConfigurations = homeManagerConfigPerHostAndUser (host: user:
@@ -54,9 +58,9 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-alien = {
