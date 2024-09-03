@@ -9,7 +9,7 @@ with lib; let
 in {
   options.modules.nix.enable = mkOption {
     description = "Enable nix config";
-    default = true;
+    default = config.modules.settings.enable;
     type = types.bool;
   };
 

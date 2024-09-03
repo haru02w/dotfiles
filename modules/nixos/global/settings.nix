@@ -1,12 +1,9 @@
-{
-  lib,
-  config,
-  ...
-}:
-with lib; let
-  cfg = config.modules.settings;
+{ lib, config, ... }:
+with lib;
+let cfg = config.modules.settings;
 in {
   options.modules.settings = with types; {
+    enable = mkEnableOption "NixOS settings";
     hostname = mkOption {
       type = str;
       example = "mycomputer";
@@ -31,7 +28,7 @@ in {
       example = "America/Sao_Paulo";
     };
   };
-  config = {
+  config = mkIf cfg.enable {
     networking.hostName = cfg.hostname;
     networking.networkmanager.enable = mkDefault true;
 

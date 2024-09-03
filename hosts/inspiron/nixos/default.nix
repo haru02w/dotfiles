@@ -34,6 +34,7 @@
   boot.loader.grub.efiInstallAsRemovable = true;
 
   modules.settings = {
+    enable = true;
     hostname = "inspiron";
     keymap.layout = "us";
     locale = "en_US.UTF-8";
