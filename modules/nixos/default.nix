@@ -5,8 +5,8 @@
       sops-nix.nixosModules.sops
       home-manager.nixosModules.home-manager
       nix-persist.nixosModules.nix-persist
-    ] ++ ylib.umport {
+    ] ++ (ylib.umport {
       path = [ ./. ];
       recursive = true;
-    };
+    });
 }

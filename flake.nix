@@ -37,7 +37,7 @@
       nixosConfigurations = nixosConfigPerHost (host:
         lib.nixosSystem {
           modules = [
-            self.outputs.nixosModules 
+            self.outputs.nixosModules
             inputs.disko.nixosModules.default
             ./hosts/${host}/nixos
           ];
@@ -83,7 +83,10 @@
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";
-    nypkgs.url = "github:yunfachi/nypkgs";
+    nypkgs = {
+      url = "github:yunfachi/nypkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # TODO:
   };
 
