@@ -41,10 +41,7 @@
             inputs.disko.nixosModules.default
             ./hosts/${host}/nixos
           ];
-          specialArgs = {
-            inherit inputs;
-            ylib = inputs.nypkgs.lib."${import ./hosts/${host}/arch.nix}";
-          };
+          specialArgs = { inherit inputs; };
         });
       homeConfigurations = homeManagerConfigPerHostAndUser (host: user:
         lib.homeManagerConfiguration {
@@ -68,10 +65,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-persist = {
-      url = "github:haru02w/nix-persist";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nix-persist = {
+    #   url = "github:haru02w/nix-persist";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     disko = {
       url = "github:nix-community/disko";
@@ -83,10 +80,6 @@
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";
-    nypkgs = {
-      url = "github:yunfachi/nypkgs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # TODO:
   };
 
