@@ -9,6 +9,5 @@
       path = ./.;
       exclude = [./default.nix ];
       recursive = true;
-      copyToStore = true;
     });
 }
