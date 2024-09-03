@@ -38,7 +38,6 @@
         lib.nixosSystem {
           modules = [
             self.outputs.nixosModules
-            inputs.disko.nixosModules.default
             ./hosts/${host}/nixos
           ];
           specialArgs = { inherit inputs; };
