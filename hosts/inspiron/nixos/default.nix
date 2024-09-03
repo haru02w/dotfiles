@@ -1,14 +1,9 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, ... }:
-
-{
-  imports = [ # Include the results of the hardware scan.
+{ pkgs, lib, ... }: {
+  imports = [
     ./hardware-configuration.nix
     (import ./disko.nix { device = "/dev/sda"; })
   ];
+
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     mkdir /btrfs_tmp
     mount /dev/disk/by-partlabel/disk-main-ROOT /btrfs_tmp
@@ -38,46 +33,31 @@
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.efiInstallAsRemovable = true;
 
-  networking.hostName = "inspiron"; # Define your hostname.
-  networking.networkmanager.enable =
-    true; # Easiest to use and most distros use this by default.
-
-  time.timeZone = "America/Sao_Paulo";
-
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    useXkbConfig = true; # use xkb.options in tty.
+  modules.settings = {
+    hostname = "inspiron";
+    keymap.layout = "us";
+    locale = "en_US.UTF-8";
+    timezone = "America/Sao_Paulo";
   };
-
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  services.xserver.xkb.layout = "us";
-  services.xserver.xkb.options = "compose:ralt";
 
   services.printing.enable = true;
-  hardware.pulseaudio.enable = false;
-  services.pipewire = {
+  modules.programs.pipewire.enable = true;
+  modules.displayManager.sddm.enable = true;
+  modules.desktopEnvironment.plasma.enable = true;
+  modules.fhsHelpers.enable = true;
+  modules.programs.ssh = {
     enable = true;
-    pulse.enable = true;
+    enablePassword = true;
+    enableRootLogin = true;
   };
+
+  environment.systemPackages = with pkgs; [ git neovim firefox home-manager ];
+
   users.users.haru02w = {
     isNormalUser = true;
-    initialPassword = "2003";
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [ firefox ];
+    description = "haru02w";
+    extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  environment.systemPackages = with pkgs; [ neovim wget ];
-  services.openssh.enable = true;
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" "repl-flake" ];
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
-  system.stateVersion = "24.05"; # Did you read the comment?
-
+  system.stateVersion = "24.11";
 }
