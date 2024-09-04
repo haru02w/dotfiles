@@ -56,6 +56,7 @@
 
   users.users.haru02w = {
     isNormalUser = true;
+    initial password = "2003";
     description = "haru02w";
     extraGroups = [ "networkmanager" "wheel" ];
   };
