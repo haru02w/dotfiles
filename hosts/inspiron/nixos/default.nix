@@ -53,6 +53,10 @@
   };
 
   environment.systemPackages = with pkgs; [ git neovim firefox home-manager ];
+  environment.nix-persist = {
+    enable = true;
+    path = "/persist/nixos";
+  };
 
   users.users.haru02w = {
     isNormalUser = true;
