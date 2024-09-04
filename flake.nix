@@ -13,6 +13,7 @@
       pkgsFor = lib.genAttrs suportedSystems (system:
         import nixpkgs {
           inherit system;
+          overlays = inputs.self.outputs.overlays;
           config.allowUnfree = true;
         });
       directoriesInsidePath = path:
@@ -36,10 +37,7 @@
 
       nixosConfigurations = nixosConfigPerHost (host:
         lib.nixosSystem {
-          modules = [
-            self.outputs.nixosModules
-            ./hosts/${host}/nixos
-          ];
+          modules = [ self.outputs.nixosModules ./hosts/${host}/nixos ];
           specialArgs = { inherit inputs; };
         });
       homeConfigurations = homeManagerConfigPerHostAndUser (host: user:
@@ -57,10 +55,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-alien = {
-      url = "github:thiagokokada/nix-alien";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

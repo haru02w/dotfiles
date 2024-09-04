@@ -1,4 +1,4 @@
-{ inputs, ylib, ... }: {
+{ inputs, ... }: {
   imports = with inputs; [
     disko.nixosModules.disko
     sops-nix.nixosModules.sops
