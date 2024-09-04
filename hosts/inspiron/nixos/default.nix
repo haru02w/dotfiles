@@ -53,6 +53,8 @@
   };
 
   environment.systemPackages = with pkgs; [ git neovim firefox home-manager ];
+
+  fileSystems."/persist".neededForBoot = true;
   environment.nix-persist = {
     enable = true;
     path = "/persist/nixos";
