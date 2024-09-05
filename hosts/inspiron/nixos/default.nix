@@ -1,7 +1,11 @@
-{ pkgs, lib, ... }: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
-    (import ./disko.nix { device = "/dev/sda"; })
+    (import ./disko.nix {device = "/dev/sda";})
   ];
 
   boot.initrd.postDeviceCommands = lib.mkAfter ''
@@ -52,20 +56,20 @@
     enableRootLogin = true;
   };
 
-  environment.systemPackages = with pkgs; [ git neovim firefox home-manager ];
+  environment.systemPackages = with pkgs; [git neovim firefox home-manager];
 
   fileSystems."/persist".neededForBoot = true;
   environment.nix-persist = {
     enable = true;
     path = "/persist";
-    directories = [ "/home" ];
+    directories = ["/home"];
   };
 
   users.users.haru02w = {
     isNormalUser = true;
     initialPassword = "2003";
     description = "haru02w";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
   };
 
   system.stateVersion = "24.11";

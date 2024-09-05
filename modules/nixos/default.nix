@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{inputs, ...}: {
   imports = with inputs; [
     disko.nixosModules.disko
     sops-nix.nixosModules.sops
@@ -16,5 +16,4 @@
     ./desktops/desktopEnvironment.nix
     ./desktops/displayManager.nix
   ];
-
 }
