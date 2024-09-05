@@ -40,10 +40,6 @@
                 mountpoint = "/persist";
                 mountOptions = ["compress=zstd"];
               };
-              "/nix" = {
-                mountpoint = "/nix";
-                mountOptions = ["compress=zstd"];
-              };
             };
           };
         };

@@ -72,6 +72,12 @@
         group = "root";
         mode = "0755";
       }
+      {
+        directories = "/nix";
+        user = "root";
+        group = "root";
+        mode = "0755";
+      }
     ];
   };
 
