@@ -57,7 +57,8 @@
   fileSystems."/persist".neededForBoot = true;
   environment.nix-persist = {
     enable = true;
-    path = "/persist/nixos";
+    path = "/persist";
+    directories = [ "/home" ];
   };
 
   users.users.haru02w = {
