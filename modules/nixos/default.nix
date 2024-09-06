@@ -3,6 +3,7 @@
     disko.nixosModules.disko
     sops-nix.nixosModules.sops
     home-manager.nixosModules.home-manager
+    stylix.nixosModules.stylix
     nix-persist.nixosModules.nix-persist
 
     ./global/settings.nix
