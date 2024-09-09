@@ -1,11 +1,7 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{ pkgs, lib, ... }: {
   imports = [
     ./hardware-configuration.nix
-    (import ./disko.nix {device = "/dev/vda";})
+    (import ./disko.nix { device = "/dev/vda"; })
   ];
 
   boot.initrd.postDeviceCommands = lib.mkAfter ''
@@ -41,26 +37,7 @@
   environment.nix-persist = {
     enable = true;
     path = "/persist";
-    directories = [
-      {
-        directories = "/home";
-        user = "root";
-        group = "root";
-        mode = "0755";
-      }
-      {
-        directories = "/root";
-        user = "root";
-        group = "root";
-        mode = "0755";
-      }
-      {
-        directories = "/nix";
-        user = "root";
-        group = "root";
-        mode = "0755";
-      }
-    ];
+    directories = [ "/home" "/root" "/nix" ];
   };
   system.stateVersion = "24.11";
 }

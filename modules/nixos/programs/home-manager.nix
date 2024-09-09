@@ -6,9 +6,9 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.home-manager;
+  cfg = config.modules.programs.home-manager;
 in {
-  options.modules.home-manager.enable = mkEnableOption "home-manager";
+  options.modules.programs.home-manager.enable = mkEnableOption "home-manager";
   config = mkIf cfg.enable {
     home-manager = {
       users = lib.genAttrs homeUsers (user:

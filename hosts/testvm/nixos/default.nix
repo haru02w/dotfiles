@@ -14,7 +14,7 @@
   modules.displayManager.sddm.enable = true;
   modules.desktopEnvironment.plasma.enable = true;
   modules.fhsHelpers.enable = true;
-  modules.home-manager.enable = true;
+  modules.programs.home-manager.enable = true;
   modules.programs.ssh = {
     enable = true;
     enablePassword = true;
