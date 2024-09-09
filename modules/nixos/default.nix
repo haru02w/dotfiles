@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   imports = with inputs; [
     disko.nixosModules.disko
     sops-nix.nixosModules.sops
@@ -14,6 +14,7 @@
     ./programs/pipewire.nix
     ./programs/ssh.nix
     ./programs/fhsHelpers.nix
+    ./programs/home-manager.nix
     ./desktops/desktopEnvironment.nix
     ./desktops/displayManager.nix
   ];
