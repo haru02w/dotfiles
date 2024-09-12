@@ -9,7 +9,7 @@ in {
   options.modules.profile = mkOption {
     description = "Select a profile to apply";
     type = with types;
-      nullOr enum (directoriesInsidePath ../../profiles);
+      nullOr (enum (directoriesInsidePath ../../profiles));
     default = null;
   };
   config =
