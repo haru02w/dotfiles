@@ -1,1 +1,1 @@
-{imports = [../../../includes/tokyo-stylix.nix];}
+{...}: {imports = [../../../includes/tokyo-stylix.nix];}
