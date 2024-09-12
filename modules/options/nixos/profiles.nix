@@ -1,9 +1,6 @@
-{
-  lib,
-  config,
-  ...
-}:
-with lib; let
+{ lib, config, ... }:
+with lib;
+let
   cfg = config.modules.profile;
   directoriesInsidePath = path:
     builtins.attrNames (lib.filterAttrs (name: value: value == "directory")
@@ -12,8 +9,9 @@ in {
   options.modules.profile = mkOption {
     description = "Select a profile to apply";
     type = with types;
-      enum (directoriesInsidePath ../../profiles ++ ["none"]);
-    default = "none";
+      nullOr enum (directoriesInsidePath ../../profiles);
+    default = null;
   };
-  config = mkIf (cfg != "none") {imports = [../../profiles/${cfg}/nixos];};
+  config =
+    mkIf (cfg != null) { imports = [ ../../profiles/${cfg}/home-manager ]; };
 }
