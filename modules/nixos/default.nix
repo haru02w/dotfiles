@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{inputs, ...}: {
   imports = with inputs; [
     disko.nixosModules.disko
     sops-nix.nixosModules.sops
@@ -6,6 +6,7 @@
     stylix.nixosModules.stylix
     nix-persist.nixosModules.nix-persist
 
+    ./profiles.nix
     ./global/settings.nix
     ./global/nix.nix
     ./global/security.nix

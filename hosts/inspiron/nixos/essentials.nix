@@ -1,7 +1,11 @@
-{ pkgs, lib, ... }: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
-    (import ./disko.nix { device = "/dev/sda"; })
+    (import ./disko.nix {device = "/dev/sda";})
   ];
 
   boot.initrd.postDeviceCommands = lib.mkAfter ''
@@ -37,7 +41,7 @@
   environment.nix-persist = {
     enable = true;
     path = "/persist";
-    directories = [ "/home" "/root" "/nix" ];
+    directories = ["/home" "/root" "/nix"];
   };
   system.stateVersion = "24.11";
 }
