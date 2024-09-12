@@ -11,8 +11,5 @@ in {
     type = with types; nullOr (enum (directoriesInsidePath ../../profiles));
     default = null;
   };
-  config = mkIf (cfg != null) {
-    imports =
-      if cfg == null then [ ] else [ ../../profiles/${cfg}/home-manager ];
-  };
+  config = mkIf (cfg != null) (import ../../profiles/${cfg}/home-manager);
 }
