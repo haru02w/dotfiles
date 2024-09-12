@@ -6,7 +6,6 @@
     stylix.nixosModules.stylix
     nix-persist.nixosModules.nix-persist
 
-    ./profiles.nix
     ./global/settings.nix
     ./global/nix.nix
     ./global/security.nix

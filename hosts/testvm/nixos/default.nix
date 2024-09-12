@@ -1,5 +1,5 @@
-{pkgs, ...}: {
-  imports = [./essentials.nix];
+{ pkgs, ... }: {
+  imports = [ ./essentials.nix ];
 
   modules.settings = {
     enable = true;
@@ -21,13 +21,13 @@
     enableRootLogin = true;
   };
 
-  environment.systemPackages = with pkgs; [git neovim firefox home-manager];
+  environment.systemPackages = with pkgs; [ git neovim firefox home-manager ];
 
   modules.profile = "general";
   users.users.haru02w = {
     isNormalUser = true;
     initialPassword = "2003";
     description = "haru02w";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = [ "networkmanager" "wheel" ];
   };
 }
