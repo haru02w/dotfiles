@@ -2,7 +2,7 @@
   lib,
   config,
   ...
-}:
+}@ inputs:
 with lib; let
   cfg = config.modules.profile;
   directoriesInsidePath = path:
@@ -14,5 +14,8 @@ in {
     type = with types; nullOr (enum (directoriesInsidePath ../../profiles));
     default = null;
   };
-  imports = lib.optionals (cfg != null) [../../profiles/${cfg}/home-manager];
+  config = if cfg != null then
+    import ../../profiles/${cfg}/home-manager inputs
+  else
+    { };
 }
