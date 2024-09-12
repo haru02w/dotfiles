@@ -36,8 +36,8 @@
       (map (host: lib.nameValuePair host (systemPerHost host)) hosts);
   in {
     overlays = import ./overlays {inherit inputs;};
-    nixosModules = import ./modules/nixos;
-    homeModules = import ./modules/home-manager;
+    nixosModules = import ./modules/options/nixos;
+    homeModules = import ./modules/options/home-manager;
 
     nixosConfigurations = nixosConfigPerHost (host:
       lib.nixosSystem {
