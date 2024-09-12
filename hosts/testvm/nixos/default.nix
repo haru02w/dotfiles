@@ -23,6 +23,7 @@
 
   environment.systemPackages = with pkgs; [git neovim firefox home-manager];
 
+  modules.profile = "general";
   users.users.haru02w = {
     isNormalUser = true;
     initialPassword = "2003";
