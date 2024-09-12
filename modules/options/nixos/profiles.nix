@@ -1,6 +1,9 @@
-{ lib, config, ... }:
-with lib;
-let
+{
+  lib,
+  config,
+  ...
+}:
+with lib; let
   cfg = config.modules.profile;
   directoriesInsidePath = path:
     builtins.attrNames (lib.filterAttrs (name: value: value == "directory")
@@ -11,5 +14,5 @@ in {
     type = with types; nullOr (enum (directoriesInsidePath ../../profiles));
     default = null;
   };
-  config = mkIf (cfg != null) (import ../../profiles/${cfg}/nixos);
+  imports = lib.optionals (cfg != null) [../../profiles/${cfg}/nixos];
 }
