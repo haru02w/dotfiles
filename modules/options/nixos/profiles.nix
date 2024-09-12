@@ -8,10 +8,11 @@ let
 in {
   options.modules.profile = mkOption {
     description = "Select a profile to apply";
-    type = with types;
-      nullOr (enum (directoriesInsidePath ../../profiles));
+    type = with types; nullOr (enum (directoriesInsidePath ../../profiles));
     default = null;
   };
-  config =
-    mkIf (cfg != null) { imports = [ ../../profiles/${cfg}/home-manager ]; };
+  config = mkIf (cfg != null) {
+    imports =
+      if cfg == null then [ ] else [ ../../profiles/${cfg}/nixos ];
+  };
 }
