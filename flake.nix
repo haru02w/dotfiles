@@ -1,141 +1,93 @@
 {
+  description = "NixOS configuration for ALL my machines.";
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
-      inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;
+      # Get all directories inside "./hosts" directory
+      hosts = directoriesInsidePath ./hosts;
+      # Get all supported systems by nixpkgs
       suportedSystems = lib.systems.flakeExposed;
+
       forEachSystem = f:
         lib.genAttrs suportedSystems (system: f pkgsFor.${system});
       pkgsFor = lib.genAttrs suportedSystems (system:
         import nixpkgs {
           inherit system;
+          overlays = inputs.self.outputs.overlays;
           config.allowUnfree = true;
         });
-    in
-    {
-      inherit lib;
-      # system-level modules
+      directoriesInsidePath = path:
+        builtins.attrNames (lib.filterAttrs (name: value: value == "directory")
+          (builtins.readDir path));
+      homeManagerUsersPerHost = host:
+        directoriesInsidePath ./hosts/${host}/home-manager;
+      homeManagerConfigPerHostAndUser = systemPerHostAndUser:
+        builtins.listToAttrs (lib.flatten (map (host:
+          map (user:
+            lib.nameValuePair "${user}@${host}"
+            (systemPerHostAndUser host user)) (homeManagerUsersPerHost host))
+          hosts));
+      nixosConfigPerHost = systemPerHost:
+        builtins.listToAttrs
+        (map (host: lib.nameValuePair host (systemPerHost host)) hosts);
+    in {
+      overlays = import ./overlays { inherit inputs; };
       nixosModules = import ./modules/nixos;
-      # user-level modules
-      homeManagerModules = import ./modules/home-manager;
-      # 'nix flake new -t self#<template>'
-      templates = import ./templates;
-      # override inputs
-      overlays = import ./overlays { inherit inputs outputs; };
-      # 'nix build', 'nix shell', etc
-      packages = forEachSystem (pkgs: import ./pkgs { inherit inputs pkgs; });
-      # 'nix develop'
-      devShells =
-        forEachSystem (pkgs: { default = pkgs.callPackage ./shell.nix { }; });
-      # 'nix fmt'
-      formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
+      homeModules = import ./modules/home-manager;
 
-      # 'nixos-rebuild --flake .#<hostname>'
-      nixosConfigurations = {
-        # personal laptop
-        zephyrus = lib.nixosSystem {
-          modules = [ ./nixos/zephyrus ];
-          specialArgs = { inherit inputs outputs; };
-        };
-        # work desktop
-        tweety = lib.nixosSystem {
-          modules = [ ./nixos/tweety ];
-          specialArgs = { inherit inputs outputs; };
-        };
-        testvm = lib.nixosSystem {
-          modules = [ ./nixos/testvm ];
-          specialArgs = { inherit inputs outputs; };
-        };
-      };
+      nixosConfigurations = nixosConfigPerHost (host:
+        lib.nixosSystem {
+          modules = [ ./hosts/${host}/nixos ]
+            ++ (builtins.attrValues self.outputs.nixosModules);
+          specialArgs = {
+            inherit inputs;
+            homeUsers = homeManagerUsersPerHost host;
+          };
+        });
+      homeConfigurations = homeManagerConfigPerHostAndUser (host: user:
+        lib.homeManagerConfiguration {
+          pkgs = pkgsFor."${import ./hosts/${host}/arch.nix}";
+          modules = [
+            inputs.stylix.homeManagerModules.stylix
+            ./hosts/${host}/home-manager/${user}
+          ] ++ (builtins.attrValues self.outputs.homeModules);
+          extraSpecialArgs = { inherit inputs; };
+        });
 
-      # 'home-manager --flake .#<username>@<hostname>'
-      homeConfigurations = {
-        "haru02w@zephyrus" = lib.homeManagerConfiguration {
-          modules = [ ./home/haru02w/zephyrus.nix ];
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-        };
-        "haru02w@tweety" = lib.homeManagerConfiguration {
-          modules = [ ./home/haru02w/tweety.nix ];
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-        };
-        "haru02w@testvm" = lib.homeManagerConfiguration {
-          modules = [ ./home/haru02w/testvm.nix ];
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-        };
-      };
+      formatter = forEachSystem (pkgs: pkgs.alejandra);
     };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    # nixos module
-    nixos-hardware.url = "github:nixos/nixos-hardware";
-
-    # nixos module
-    impermanence.url = "github:nix-community/impermanence";
-
-    # nixos module
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    stylix.url = "github:danth/stylix";
+    nix-persist = {
+      url = "github:haru02w/nix-persist";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # nixos and home-manager module
-    nix-colors.url = "github:misterio77/nix-colors";
-
-    # nixos and home-manager module
+    # TODO:
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     };
-
-    # nixos module
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # overlay
     nur.url = "github:nix-community/NUR";
-
-    # package
-    nixnvc = {
-      url = "github:haru02w/nixnvc";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    #nh = {
-    #  url = "github:viperml/nh";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
-
-    # home-manager module
-    hyprland = {
-      type = "git";
-      submodules = true;
-      url = "https://github.com/hyprwm/Hyprland";
-      ref = "refs/tags/v0.41.2";
-    };
-
-    # package
-    split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces";
-      inputs.hyprland.follows = "hyprland";
-    };
   };
 
   nixConfig = {
     extra-substituters = [
-      "https://hyprland.cachix.org" # hyprland
       "https://nix-community.cachix.org" # nix-community (nur)
     ];
     extra-trusted-public-keys = [
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" # Hyprland
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" # nix-community (nur)
     ];
   };
