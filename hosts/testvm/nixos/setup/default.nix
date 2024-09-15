@@ -34,10 +34,11 @@
   boot.loader.grub.efiInstallAsRemovable = true;
 
   fileSystems."/persist".neededForBoot = true;
+  fileSystems."/home".neededForBoot = true;
   environment.nix-persist = {
     enable = true;
     path = "/persist";
-    directories = [ "/home" "/root" "/nix" ];
   };
+
   system.stateVersion = "24.05";
 }
