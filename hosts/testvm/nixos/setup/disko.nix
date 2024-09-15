@@ -1,4 +1,4 @@
-{device ? throw "Set this to your disk device, e.g. /dev/sda", ...}: {
+{ device ? throw "Set this to your disk device, e.g. /dev/sda", ... }: {
   disko.devices.disk.main = {
     inherit device;
     type = "disk";
@@ -33,12 +33,20 @@
           size = "100%";
           content = {
             type = "btrfs";
-            extraArgs = ["-f"];
+            extraArgs = [ "-f" ];
             subvolumes = {
-              "/root" = {mountpoint = "/";};
+              "/nix" = {
+                mountpoint = "/nix";
+                mountOptions = [ "compress=zstd" ];
+              };
+              "/root" = { mountpoint = "/"; };
+              "/home" = {
+                mountpoint = "/home";
+                mountOptions = [ "compress=zstd" ];
+              };
               "/persist" = {
                 mountpoint = "/persist";
-                mountOptions = ["compress=zstd"];
+                mountOptions = [ "compress=zstd" ];
               };
             };
           };
