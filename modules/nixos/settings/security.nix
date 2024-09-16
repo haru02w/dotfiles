@@ -6,7 +6,7 @@
 with lib; let
   cfg = config.modules.security;
 in {
-  options.modules.security.enable = mkOption {
+  options.modules.settings.security.enable = mkOption {
     description = "Enable security options";
     default = config.modules.settings.enable;
     type = types.bool;

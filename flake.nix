@@ -1,6 +1,7 @@
 {
- description = "NixOS configuration for ALL my machines.";
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
+  description = "NixOS configuration for ALL my machines.";
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+    let
       lib = nixpkgs.lib // home-manager.lib;
       # Get all directories inside "./hosts" directory
       hosts = directoriesInsidePath ./hosts;
@@ -49,7 +50,7 @@
           modules = [
             inputs.stylix.homeManagerModules.stylix
             ./hosts/${host}/home-manager/${user}
-          ] ++ (builtins.attrValues self.outputs.homeModules);
+          ];
           extraSpecialArgs = { inherit inputs; };
         });
 
@@ -77,6 +78,16 @@
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+    };
+    hyprland = {
+      type = "git";
+      submodules = true;
+      url = "https://github.com/hyprwm/Hyprland";
+      ref = "refs/tags/v0.43.0";
+    };
+    hyprsplit = {
+      url = "github:shezdy/hyprsplit";
+      inputs.hyprland.follows = "hyprland";
     };
     # TODO:
     nur.url = "github:nix-community/NUR";

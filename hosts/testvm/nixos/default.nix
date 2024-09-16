@@ -1,39 +1,29 @@
 { config, pkgs, ... }: {
   imports = [ ./setup ];
 
-  networking.hostName = "testvm";
-  networking.networkmanager.enable = true;
-
-  time.timeZone = "America/Sao_Paulo";
-
-  i18n.defaultLocale = "en_US.UTF-8";
-  console.useXkbConfig = true;
-
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb.layout = "us";
-  services.xserver.xkb.options = "compose:ralt";
-
-  hardware.pulseaudio.enable = false;
-  services.pipewire = {
+  modules.settings = {
     enable = true;
-    pulse.enable = true;
+    hostname = "testvm";
+    keymap = {
+      layout = "us";
+      options = "compose:ralt";
+    };
+    locale = "en_US.UTF-8";
+    timezone = "America/Sao_Paulo";
   };
 
-  environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    git
-    wget
-  ];
+  modules.displayManager.sddm.enable = true;
+  modules.desktopEnvironment.gnome.enable = true;
 
-  services.openssh.enable = true;
+  modules.programs.ssh = {
+    enable = true;
+    enablePassword = true;
+    enableRootLogin = true;
+  };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" "repl-flake" ];
-
+  modules.presets.desktop-v1.enable = true;
   ### --- HARU02W --- ###
+  modules.programs.home-manager.enable = true;
   sops = {
     defaultSopsFile = ../../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
@@ -48,7 +38,6 @@
     root.hashedPasswordFile = "!"; # disable root login
     haru02w = {
       isNormalUser = true;
-      # initialPassword = "2003";
       hashedPasswordFile = config.sops.secrets.haru02w.path;
       extraGroups = [ "wheel" "video" "audio" ];
       packages = with pkgs; [ firefox tree ];
