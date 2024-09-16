@@ -1,10 +1,6 @@
-{
-  lib,
-  config,
-  ...
-}:
-with lib; let
-  cfg = config.modules.settings;
+{ lib, config, ... }:
+with lib;
+let cfg = config.modules.settings;
 in {
   options.modules.settings = with types; {
     enable = mkEnableOption "NixOS settings";
@@ -19,6 +15,10 @@ in {
         example = "us";
       };
       variant = mkOption {
+        type = str;
+        default = "";
+      };
+      options = mkOption {
         type = str;
         default = "";
       };
@@ -39,7 +39,9 @@ in {
     services.xserver.xkb = {
       layout = cfg.keymap.layout;
       variant = cfg.keymap.variant;
+      options = cfg.keymap.options;
     };
+    console.useXkbConfig = true;
 
     i18n = {
       defaultLocale = cfg.locale;

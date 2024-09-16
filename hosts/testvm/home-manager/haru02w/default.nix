@@ -1,5 +1,8 @@
-{...}: {
-  imports = [./essentials.nix];
+{ ... }: {
+  imports = [ ./setup ];
+
+  modules.presets.desktop-v1.enable = true;
+
   programs.git = {
     enable = true;
     userName = "Haru02w";
