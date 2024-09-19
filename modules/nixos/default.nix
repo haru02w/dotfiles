@@ -1,5 +1,5 @@
 {
-  flake-inputs = { inputs, ... }: {
+  flake-inputs = {inputs, ...}: {
     imports = with inputs; [
       disko.nixosModules.disko
       sops-nix.nixosModules.sops

@@ -1,5 +1,9 @@
-{ config, pkgs, ... }: {
-  imports = [ ./setup ];
+{
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [./setup];
 
   modules.settings = {
     enable = true;
@@ -12,7 +16,6 @@
     timezone = "America/Sao_Paulo";
   };
 
-  modules.displayManager.sddm.enable = true;
   modules.desktopEnvironment.gnome.enable = true;
 
   modules.programs.ssh = {
@@ -39,8 +42,8 @@
     haru02w = {
       isNormalUser = true;
       hashedPasswordFile = config.sops.secrets.haru02w.path;
-      extraGroups = [ "wheel" "video" "audio" ];
-      packages = with pkgs; [ firefox tree ];
+      shell = pkgs.zsh;
+      extraGroups = ["wheel" "video" "audio"];
     };
   };
   ### ---         --- ###

@@ -1,7 +1,7 @@
-{ lib, ... }: {
+{lib, ...}: {
   imports = [
     ./hardware-configuration.nix
-    (import ./disko.nix { device = "/dev/vda"; })
+    (import ./disko.nix {device = "/dev/vda";})
   ];
 
   boot.initrd.postDeviceCommands = lib.mkAfter ''
