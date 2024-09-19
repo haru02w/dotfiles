@@ -1,6 +1,10 @@
-{ lib, config, ... }:
-with lib;
-let cfg = config.modules.settings;
+{
+  lib,
+  config,
+  ...
+}:
+with lib; let
+  cfg = config.modules.settings;
 in {
   options.modules.settings = with types; {
     enable = mkEnableOption "NixOS settings";

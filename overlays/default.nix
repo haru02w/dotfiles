@@ -1,4 +1,3 @@
-{inputs, ...}:
-with inputs; [
-  nur.overlay
-]
+{inputs, ...}: {
+  nur = inputs.nur.overlay;
+}

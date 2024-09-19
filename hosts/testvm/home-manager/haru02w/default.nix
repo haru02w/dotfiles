@@ -1,5 +1,5 @@
-{ ... }: {
-  imports = [ ./setup ];
+{...}: {
+  imports = [./setup];
 
   modules.presets.desktop-v1.enable = true;
 

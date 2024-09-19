@@ -8,7 +8,7 @@ with lib; let
 in {
   options.modules.settings.security.enable = mkOption {
     description = "Enable security options";
-    default = config.modules.settings.enable;
+    default = true;
     type = types.bool;
   };
 

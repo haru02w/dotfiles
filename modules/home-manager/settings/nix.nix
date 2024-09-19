@@ -1,5 +1,4 @@
 {
-  self,
   inputs,
   lib,
   config,
@@ -10,34 +9,28 @@ with lib; let
 in {
   options.modules.settings.nix.enable = mkOption {
     description = "Enable nix config";
-    default = config.modules.settings.enable;
+    default = true;
     type = types.bool;
   };
 
   config = mkIf cfg.enable {
-    nixpkgs = {
-      overlays = self.outputs.overlays;
-      config.allowUnfree = mkDefault true;
-      config.allowUnfreePredicate = mkDefault (_: true);
-    };
-
     nix = {
       settings = {
-        trusted-users = mkDefault ["root" "@wheel"];
-        auto-optimise-store = mkDefault true;
-        experimental-features = mkDefault ["nix-command" "flakes" "repl-flake"];
-        system-features = mkDefault ["kvm" "big-parallel" "nixos-test"];
+        trusted-users = ["root" "@wheel"];
+        auto-optimise-store = true;
+        experimental-features = ["nix-command" "flakes" "repl-flake"];
+        system-features = ["kvm" "big-parallel" "nixos-test"];
       };
 
       gc = {
-        automatic = mkDefault true;
-        frequency = mkDefault "daily";
-        options = mkDefault "--delete-older-than 3d";
+        automatic = true;
+        frequency = "daily";
+        options = "--delete-older-than 3d";
       };
 
       # Add each flake input as a registry
       # To make nix3 commands consistent with the flake
-      registry = mkDefault (lib.mapAttrs (_: value: {flake = value;}) inputs);
+      registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
     };
   };
 }

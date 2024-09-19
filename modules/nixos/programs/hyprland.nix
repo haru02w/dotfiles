@@ -1,6 +1,12 @@
-{ lib, config, inputs, pkgs, ... }:
-with lib;
-let cfg = config.modules.programs.hyprland;
+{
+  lib,
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.modules.programs.hyprland;
 in {
   options.modules.programs.hyprland.enable = mkEnableOption "Hyprland";
   config = mkIf cfg.enable {

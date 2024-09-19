@@ -1,1 +1,1 @@
-{ ... }: { imports = [ ./desktop-v1 ]; }
+{...}: {imports = [./desktop-v1];}
