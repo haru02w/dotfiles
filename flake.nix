@@ -92,6 +92,7 @@
       url = "https://github.com/hyprwm/Hyprland";
       ref = "refs/tags/v0.43.0";
     };
+    nixos-hardware.url = "github:nixos/nixos-hardware";
     hyprsplit = {
       url = "github:shezdy/hyprsplit";
       inputs.hyprland.follows = "hyprland";
