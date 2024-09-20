@@ -21,7 +21,7 @@ in {
       escapeTime = 0;
       baseIndex = 1;
       keyMode = "vi";
-      prefix = "C-Space";
+      prefix = "M-s";
       extraConfig =
         ''
           is_vim="${pkgs.procps}/bin/ps -o state= -o comm= -t '#{pane_tty}' \
