@@ -1,13 +1,21 @@
 {
   imports = [
     # treesitter
-    ./treesitter.nix # syntax highlight, folding, etc
-    ./treesitter-context.nix # show context of code when not visible
-    ./treesitter-textobjects.nix # select tokens based on the syntax
-    ./cmp.nix # completion
+    ./treesitter/treesitter.nix # syntax highlight, folding, etc
+    ./treesitter/treesitter-context.nix # show context of code when not visible
+    ./treesitter/treesitter-textobjects.nix # select tokens based on the syntax
+
+    # lsp
+    ./lsp/lsp.nix
+    ./lsp/none-ls.nix
+    ./lsp/trouble.nix
+
+    # cmp
+    ./cmp/cmp.nix # TODO:
+
     ./flash.nix # TODO: fast navigation
-    # BUG: ./harpoon.nix # project file manager
-    ./grapple.nix
+    # BUG: ./harpoon.nix # fast file switcher
+    ./grapple.nix # fast file switcher
 
     ./colorizer.nix # hex-color shows color
     ./comment-box.nix # create cool boxes for beautiful comments
