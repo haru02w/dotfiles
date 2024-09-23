@@ -118,14 +118,16 @@
       };
     }
 
-    { # Paste stuff without saving the deleted word into the buffer
+    {
+      # Paste stuff without saving the deleted word into the buffer
       mode = "x";
       key = "<leader>p";
       action = ''"_dP'';
       options.desc = "Deletes to void register and paste over";
     }
-    { # Delete to void register
-      mode = [ "n" "v" ];
+    {
+      # Delete to void register
+      mode = ["n" "v"];
       key = "<leader>D";
       action = ''"_d'';
       options.desc = "Delete to void register";

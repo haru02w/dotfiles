@@ -1,6 +1,10 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 with lib.nixvim; {
-  extraPlugins = [ pkgs.vimPlugins.grapple-nvim ];
+  extraPlugins = [pkgs.vimPlugins.grapple-nvim];
   extraConfigLua = ''
     local grapple = require('grapple')
     grapple.setup({
@@ -8,45 +12,47 @@ with lib.nixvim; {
       icons = false,
     })
   '';
-  keymaps = [
-    {
-      mode = "n";
-      key = "`";
-      action = mkRaw "grapple.tag";
-      options = {
-        silent = true;
-        desc = "add tag to grapple";
-      };
-    }
-    {
-      mode = "n";
-      key = "~";
-      action = mkRaw "grapple.untag";
-      options = {
-        silent = true;
-        desc = "remove tag of grapple";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>`";
-      action = mkRaw "grapple.toggle_tags";
-      options = {
-        silent = true;
-        desc = "show grapple menu";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>~";
-      action = mkRaw "grapple.toggle_scopes";
-      options = {
-        silent = true;
-        desc = "show grapple scopes menu";
-      };
-    }
-  ] ++ builtins.genList (n:
-    let i = toString (n + 1);
+  keymaps =
+    [
+      {
+        mode = "n";
+        key = "`";
+        action = mkRaw "grapple.tag";
+        options = {
+          silent = true;
+          desc = "add tag to grapple";
+        };
+      }
+      {
+        mode = "n";
+        key = "~";
+        action = mkRaw "grapple.untag";
+        options = {
+          silent = true;
+          desc = "remove tag of grapple";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>`";
+        action = mkRaw "grapple.toggle_tags";
+        options = {
+          silent = true;
+          desc = "show grapple menu";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>~";
+        action = mkRaw "grapple.toggle_scopes";
+        options = {
+          silent = true;
+          desc = "show grapple scopes menu";
+        };
+      }
+    ]
+    ++ builtins.genList (n: let
+      i = toString (n + 1);
     in {
       mode = "n";
       key = "<leader>${i}";

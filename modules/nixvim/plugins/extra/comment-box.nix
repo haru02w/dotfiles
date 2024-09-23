@@ -1,1 +1,1 @@
-{ plugins.comment-box.enable = true; }
+{plugins.comment-box.enable = true;}

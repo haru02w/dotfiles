@@ -1,82 +1,88 @@
 {
   description = "NixOS configuration for ALL my machines.";
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
-    let
-      lib = nixpkgs.lib // home-manager.lib;
-      # Get all directories inside "./hosts" directory
-      hosts = directoriesInsidePath ./hosts;
-      # Get all supported systems by nixpkgs
-      suportedSystems = lib.systems.flakeExposed;
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
+    lib = nixpkgs.lib // home-manager.lib;
+    # Get all directories inside "./hosts" directory
+    hosts = directoriesInsidePath ./hosts;
+    # Get all supported systems by nixpkgs
+    suportedSystems = lib.systems.flakeExposed;
 
-      forEachSystem = f:
-        lib.genAttrs suportedSystems (system: f pkgsFor.${system});
-      pkgsFor = lib.genAttrs suportedSystems (system:
-        import nixpkgs {
-          inherit system;
-          overlays = builtins.attrValues inputs.self.outputs.overlays;
-          config.allowUnfree = true;
-          config.allowUnfreePredicate = _: true;
-        });
-      directoriesInsidePath = path:
-        builtins.attrNames (lib.filterAttrs (name: value: value == "directory")
-          (builtins.readDir path));
-      homeManagerUsersPerHost = host:
-        directoriesInsidePath ./hosts/${host}/home-manager;
-      homeManagerConfigPerHostAndUser = systemPerHostAndUser:
-        builtins.listToAttrs (lib.flatten (map (host:
-          map (user:
-            lib.nameValuePair "${user}@${host}"
-            (systemPerHostAndUser host user)) (homeManagerUsersPerHost host))
-          hosts));
-      nixosConfigPerHost = systemPerHost:
-        builtins.listToAttrs
-        (map (host: lib.nameValuePair host (systemPerHost host)) hosts);
-
-      nixvimModule = pkgs: {
-        inherit pkgs;
-        module = import ./modules/nixvim; # import the module directly
-        # You can use `extraSpecialArgs` to pass additional arguments to your module files
-        extraSpecialArgs = {
-          # inherit (inputs) foo;
-        };
-      };
-    in {
-      nixosModules = import ./modules/nixos;
-      homeModules = import ./modules/home-manager;
-
-      checks = forEachSystem (pkgs: {
-        nixvim = with inputs.nixvim.lib.${pkgs.system};
-          check.mkTestDerivationFromNixvimModule (nixvimModule pkgs);
+    forEachSystem = f:
+      lib.genAttrs suportedSystems (system: f pkgsFor.${system});
+    pkgsFor = lib.genAttrs suportedSystems (system:
+      import nixpkgs {
+        inherit system;
+        overlays = builtins.attrValues inputs.self.outputs.overlays;
+        config.allowUnfree = true;
+        config.allowUnfreePredicate = _: true;
       });
-      packages = forEachSystem (pkgs:
-        {
-          nixvim = with inputs.nixvim.legacyPackages.${pkgs.system};
-            makeNixvimWithModule (nixvimModule pkgs);
-        } // (import ./pkgs { inherit pkgs inputs; }));
-      overlays = import ./overlays { inherit inputs; };
-      devShells = forEachSystem (pkgs: import ./shell.nix { inherit pkgs; });
-      formatter = forEachSystem (pkgs: pkgs.alejandra);
+    directoriesInsidePath = path:
+      builtins.attrNames (lib.filterAttrs (name: value: value == "directory")
+        (builtins.readDir path));
+    homeManagerUsersPerHost = host:
+      directoriesInsidePath ./hosts/${host}/home-manager;
+    homeManagerConfigPerHostAndUser = systemPerHostAndUser:
+      builtins.listToAttrs (lib.flatten (map (host:
+        map (user:
+          lib.nameValuePair "${user}@${host}"
+          (systemPerHostAndUser host user)) (homeManagerUsersPerHost host))
+      hosts));
+    nixosConfigPerHost = systemPerHost:
+      builtins.listToAttrs
+      (map (host: lib.nameValuePair host (systemPerHost host)) hosts);
 
-      nixosConfigurations = nixosConfigPerHost (host:
-        lib.nixosSystem {
-          pkgs = pkgsFor."${import ./hosts/${host}/arch.nix}";
-          modules = [ ./hosts/${host}/nixos ]
-            ++ (builtins.attrValues self.outputs.nixosModules);
-          specialArgs = {
-            inherit inputs;
-            homeUsers = homeManagerUsersPerHost host;
-          };
-        });
-      homeConfigurations = homeManagerConfigPerHostAndUser (host: user:
-        lib.homeManagerConfiguration {
-          pkgs = pkgsFor."${import ./hosts/${host}/arch.nix}";
-          modules = [
-            inputs.stylix.homeManagerModules.stylix
-            ./hosts/${host}/home-manager/${user}
-          ];
-          extraSpecialArgs = { inherit inputs; };
-        });
+    nixvimModule = pkgs: {
+      inherit pkgs;
+      module = import ./modules/nixvim; # import the module directly
+      # You can use `extraSpecialArgs` to pass additional arguments to your module files
+      extraSpecialArgs = {
+        # inherit (inputs) foo;
+      };
     };
+  in {
+    nixosModules = import ./modules/nixos;
+    homeModules = import ./modules/home-manager;
+
+    checks = forEachSystem (pkgs: {
+      nixvim = with inputs.nixvim.lib.${pkgs.system};
+        check.mkTestDerivationFromNixvimModule (nixvimModule pkgs);
+    });
+    packages = forEachSystem (pkgs:
+      {
+        nixvim = with inputs.nixvim.legacyPackages.${pkgs.system};
+          makeNixvimWithModule (nixvimModule pkgs);
+      }
+      // (import ./pkgs {inherit pkgs inputs;}));
+    overlays = import ./overlays {inherit inputs;};
+    devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
+    formatter = forEachSystem (pkgs: pkgs.alejandra);
+
+    nixosConfigurations = nixosConfigPerHost (host:
+      lib.nixosSystem {
+        pkgs = pkgsFor."${import ./hosts/${host}/arch.nix}";
+        modules =
+          [./hosts/${host}/nixos]
+          ++ (builtins.attrValues self.outputs.nixosModules);
+        specialArgs = {
+          inherit inputs;
+          homeUsers = homeManagerUsersPerHost host;
+        };
+      });
+    homeConfigurations = homeManagerConfigPerHostAndUser (host: user:
+      lib.homeManagerConfiguration {
+        pkgs = pkgsFor."${import ./hosts/${host}/arch.nix}";
+        modules = [
+          inputs.stylix.homeManagerModules.stylix
+          ./hosts/${host}/home-manager/${user}
+        ];
+        extraSpecialArgs = {inherit inputs;};
+      });
+  };
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";

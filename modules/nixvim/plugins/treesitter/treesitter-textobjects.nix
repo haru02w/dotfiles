@@ -1,4 +1,4 @@
-{ lib, ... }:
+{lib, ...}:
 with lib.nixvim; {
   plugins.treesitter-textobjects = {
     enable = true;
@@ -84,37 +84,37 @@ with lib.nixvim; {
   keymaps = [
     # Support for repeatable moves
     {
-      mode = [ "n" "x" "o" ];
+      mode = ["n" "x" "o"];
       key = ";";
       action = mkRaw "ts_repeat_move.repeat_last_move";
     }
     {
-      mode = [ "n" "x" "o" ];
+      mode = ["n" "x" "o"];
       key = ",";
       action = mkRaw "ts_repeat_move.repeat_last_move_opposite";
     }
 
     # Needed to remove conflicts with default behaviours
     {
-      mode = [ "n" "x" "o" ];
+      mode = ["n" "x" "o"];
       key = "f";
       action = mkRaw "ts_repeat_move.builtin_f_expr";
       options.expr = true;
     }
     {
-      mode = [ "n" "x" "o" ];
+      mode = ["n" "x" "o"];
       key = "F";
       action = mkRaw "ts_repeat_move.builtin_F_expr";
       options.expr = true;
     }
     {
-      mode = [ "n" "x" "o" ];
+      mode = ["n" "x" "o"];
       key = "t";
       action = mkRaw "ts_repeat_move.builtin_t_expr";
       options.expr = true;
     }
     {
-      mode = [ "n" "x" "o" ];
+      mode = ["n" "x" "o"];
       key = "T";
       action = mkRaw "ts_repeat_move.builtin_T_expr";
       options.expr = true;
