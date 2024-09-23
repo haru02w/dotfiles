@@ -4,5 +4,5 @@
     ./keymaps.nix
     ./settings.nix
     ./plugins
-  ]; 
+  ];
 }

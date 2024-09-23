@@ -1,4 +1,4 @@
-{ 
+{
   plugins.harpoon = {
     enable = false;
     # TODO: enableTelescope = true;
@@ -7,7 +7,7 @@
     keymaps = {
       addFile = "`";
       toggleQuickMenu = "<leader>`";
-      navFile ={
+      navFile = {
         "1" = "<leader>1";
         "2" = "<leader>2";
         "3" = "<leader>3";

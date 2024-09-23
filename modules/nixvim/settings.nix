@@ -1,5 +1,13 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  ...
+}:
 with lib.nixvim; {
+  colorschemes.base16 = {
+    enable = true;
+    colorscheme = lib.mkDefault "tokyo-night-dark";
+  };
 
   performance = {
     byteCompileLua = {
@@ -35,13 +43,13 @@ with lib.nixvim; {
       pattern = "*";
     }
     {
-      event = [ "FileType" ];
+      event = ["FileType"];
       pattern = "TelescopePrompt";
       command = "inoremap <buffer><silent> <ESC> <ESC>:close!<CR>";
     }
     {
       event = "FileType";
-      pattern = [ "tex" "latex" "markdown" ];
+      pattern = ["tex" "latex" "markdown"];
       command = "setlocal spell spelllang=en,fr";
     }
   ];

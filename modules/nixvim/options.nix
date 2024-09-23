@@ -5,7 +5,7 @@
     # faster completion
     updatetime = 50;
     # show popup menu and don't auto select
-    completeopt = [ "menuone" "noselect" "noinsert" ];
+    completeopt = ["menu" "menuone" "noselect"];
     # Enable indent in wrapped lines
     breakindent = true;
     mouse = "a";

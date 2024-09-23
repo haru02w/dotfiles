@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  inputs,
   pkgs,
   ...
 }:
@@ -13,7 +12,7 @@ in {
 
   config = mkIf cfg.enable {
     home = {
-      packages = [inputs.nixnvc.packages.${pkgs.system}.default];
+      packages = [pkgs.neovim];
       sessionVariables.EDITOR = "nvim";
     };
   };
