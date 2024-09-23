@@ -8,19 +8,19 @@
     # lsp
     ./lsp/lsp.nix
     ./lsp/none-ls.nix
-    ./lsp/trouble.nix
+    ./lsp/trouble.nix # TODO:
 
     # cmp
     ./cmp/cmp.nix # TODO:
 
-    ./flash.nix # TODO: fast navigation
-    # BUG: ./harpoon.nix # fast file switcher
-    ./grapple.nix # fast file switcher
+    ./movement/flash.nix # TODO: fast navigation
+    ./movement/grapple.nix # fast file switcher
+    # BUG: ./movement/harpoon.nix # fast file switcher
 
-    ./colorizer.nix # hex-color shows color
-    ./comment-box.nix # create cool boxes for beautiful comments
-    ./comment.nix # toggle comments
-    ./undotree.nix # undo history tracker
-    ./which-key.nix # show keys mapped
+    ./extra/colorizer.nix # hex-color shows color
+    ./extra/comment-box.nix # create cool boxes for beautiful comments
+    ./extra/comment.nix # toggle comments
+    ./extra/undotree.nix # undo history tracker
+    ./extra/which-key.nix # show keys mapped
   ];
 }
