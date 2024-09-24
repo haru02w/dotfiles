@@ -9,7 +9,10 @@
         docker-compose-language-service.enable = true;
         dockerls.enable = true;
         # c/c++
-        clangd.enable = true;
+        clangd = {
+          enable = true;
+          cmd = [ "clangd" "--offset-encoding=utf-16" ];
+        };
         cmake.enable = true;
         # bash
         bashls.enable = true;
