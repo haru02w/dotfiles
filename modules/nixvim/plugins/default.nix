@@ -17,7 +17,7 @@
     ./cmp/lspkind.nix # cool icons
 
     # dap
-    # BUG: ./dap/dap.nix
+    ./dap/dap.nix
 
     # movement
     ./movement/flash.nix # TODO: fast navigation
@@ -29,11 +29,12 @@
     ./ui/alpha.nix
     ./ui/dressing.nix
     ./ui/indent-blankline.nix
-    ./ui/noice.nix
+    #./ui/noice.nix
     ./ui/precognition.nix
     ./ui/smart-splits.nix
     ./ui/web-devicons.nix
     ./ui/todo-comments.nix
+    ./ui/guess-indent.nix
 
     # extra
     ./extra/colorizer.nix # hex-color shows color
