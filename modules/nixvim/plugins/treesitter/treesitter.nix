@@ -12,8 +12,8 @@
       incremental_selection = {
         enable = true;
         keymaps = {
-          init_selection = "<C-b>"; # set to `false` to disable one of the mappings
-          node_incremental = "<C-b>";
+          init_selection = "<leader><Space>"; # set to `false` to disable one of the mappings
+          node_incremental = "<leader><Space>";
           scope_incremental = false;
           node_decremental = "<bs>";
         };
