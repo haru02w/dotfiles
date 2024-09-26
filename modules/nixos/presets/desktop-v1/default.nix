@@ -66,6 +66,12 @@ in {
 
     modules.programs.hyprland.enable = mkDefault true;
     modules.fhsHelpers.enable = mkDefault true;
+
+    services.tailscale = {
+      enable = true;
+      useRoutingFeatures = "client";
+    };
+
     environment.systemPackages = with pkgs; [
       neovim # text editor
       git # version control system
