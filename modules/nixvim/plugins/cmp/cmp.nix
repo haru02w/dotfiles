@@ -68,7 +68,6 @@
         mapping = {
           "<Tab>" = ''
             cmp.mapping(function(fallback)
-              local luasnip = require("luasnip")
               if cmp.visible() then
                 cmp.select_next_item()
               else
@@ -78,13 +77,32 @@
           '';
           "<S-Tab>" = ''
             cmp.mapping(function(fallback)
-              local luasnip = require("luasnip")
               if cmp.visible() then
                 cmp.select_prev_item()
               else
                 cmp.complete()
               end
             end, {'i','s','c'})
+          '';
+          "<C-j>" = ''
+            cmp.mapping(function(fallback)
+              local luasnip = require("luasnip")
+              if luasnip.locally_jumpable(1) then
+                luasnip.jump(1)
+              else
+                fallback()
+              end
+            end, { "i", "s" })
+          '';
+          "<C-k>" = ''
+            cmp.mapping(function(fallback)
+              local luasnip = require("luasnip")
+              if luasnip.locally_jumpable(-1) then
+                luasnip.jump(-1)
+              else
+                fallback()
+              end
+            end, { "i", "s" })
           '';
           "<C-e>" = "cmp.mapping(cmp.mapping.abort(), {'i','s','c'})";
           "<C-b>" = "cmp.mapping(cmp.mapping.scroll_docs(-4), {'i','s','c'})";
