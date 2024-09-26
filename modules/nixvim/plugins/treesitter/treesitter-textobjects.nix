@@ -36,6 +36,7 @@ with lib.nixvim; {
     move = {
       enable = true;
       gotoNextStart = {
+        "]a" = "@parameter.inner";
         "]f" = "@call.outer";
         "]m" = "@function.outer";
         "]c" = "@class.outer";
@@ -51,6 +52,7 @@ with lib.nixvim; {
         "]L" = "@loop.outer";
       };
       gotoPreviousStart = {
+        "[a" = "@parameter.inner";
         "[f" = "@call.outer";
         "[m" = "@function.outer";
         "[c" = "@class.outer";
