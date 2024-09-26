@@ -43,6 +43,7 @@ with lib.nixvim; {
         "]l" = "@loop.outer";
       };
       gotoNextEnd = {
+        "]A" = "@parameter.inner";
         "]F" = "@call.outer";
         "]M" = "@function.outer";
         "]C" = "@class.outer";
@@ -57,6 +58,7 @@ with lib.nixvim; {
         "[l" = "@loop.outer";
       };
       gotoPreviousEnd = {
+        "[A" = "@parameter.inner";
         "[F" = "@call.outer";
         "[M" = "@function.outer";
         "[C" = "@class.outer";
@@ -67,12 +69,12 @@ with lib.nixvim; {
     swap = {
       enable = true;
       swapNext = {
-        "<leader>a" = "@parameters.inner";
-        "<leader>m" = "@function.outer";
+        "<leader>]a" = "@parameter.inner";
+        "<leader>]m" = "@function.outer";
       };
       swapPrevious = {
-        "<leader>A" = "@parameter.inner";
-        "<leader>M" = "@function.outer";
+        "<leader>[a" = "@parameter.inner";
+        "<leader>[m" = "@function.outer";
       };
     };
   };
