@@ -84,7 +84,7 @@
               end
             end, {'i','s','c'})
           '';
-          "<C-j>" = ''
+          "<C-n>" = ''
             cmp.mapping(function(fallback)
               local luasnip = require("luasnip")
               if luasnip.locally_jumpable(1) then
@@ -94,7 +94,7 @@
               end
             end, { "i", "s" })
           '';
-          "<C-k>" = ''
+          "<C-p>" = ''
             cmp.mapping(function(fallback)
               local luasnip = require("luasnip")
               if luasnip.locally_jumpable(-1) then
