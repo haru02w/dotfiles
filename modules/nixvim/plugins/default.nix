@@ -14,6 +14,7 @@
     # cmp
     ./cmp/autopairs.nix # add closing chars automatically
     ./cmp/cmp.nix # completion
+    ./cmp/luasnip.nix # snippets
     ./cmp/lspkind.nix # cool icons
 
     # dap
