@@ -1,5 +1,9 @@
 {
   plugins = {
+    codeium-nvim = {
+      enable = true;
+      settings.enable_chat = true;
+    };
     cmp = {
       enable = true;
       autoEnableSources = true;
@@ -39,6 +43,7 @@
           maxViewEntries = 30;
         };
         sources = [
+          { name = "codeium"; }
           {
             name = "luasnip";
             option.show_autosnippets = true;
