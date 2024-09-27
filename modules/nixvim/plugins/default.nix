@@ -51,5 +51,6 @@
     ./extra/ufo.nix # folding
     ./extra/hardtime.nix # enforce good pratices
     ./extra/presence.nix # discord presence
+    ./extra/wtf.nix # search on web
   ];
 }

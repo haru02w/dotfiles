@@ -1,11 +1,12 @@
-{
+{ lib, ... }:
+with lib.nixvim; {
   opts = {
     encoding = "utf-8";
     fileencoding = "utf-8";
     # faster completion
     updatetime = 50;
     # show popup menu and don't auto select
-    completeopt = ["menu" "menuone" "noselect"];
+    completeopt = [ "menu" "menuone" "noselect" ];
     # Enable indent in wrapped lines
     breakindent = true;
     mouse = "a";
@@ -57,5 +58,9 @@
     # testing
     cmdheight = 0;
     showmode = false;
+  };
+  diagnostics = {
+    underline.severity.max = mkRaw "vim.diagnostic.severity.WARN";
+    virtual_text.severity.min = mkRaw "vim.diagnostic.severity.ERROR";
   };
 }

@@ -16,7 +16,7 @@ with lib.nixvim; {
     [
       {
         mode = "n";
-        key = "`";
+        key = "<leader>m";
         action = mkRaw "grapple.tag";
         options = {
           silent = true;
@@ -25,7 +25,7 @@ with lib.nixvim; {
       }
       {
         mode = "n";
-        key = "~";
+        key = "<leader>M";
         action = mkRaw "grapple.untag";
         options = {
           silent = true;
