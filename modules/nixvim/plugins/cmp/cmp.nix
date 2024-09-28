@@ -9,15 +9,15 @@
       autoEnableSources = true;
       filetype = {
         "gitcommit" = {
-          sources = [ { name = "cmp_git"; } { name = "buffer"; } ];
+          sources = [{name = "cmp_git";} {name = "buffer";}];
         };
       };
       cmdline = let
         searchSources = {
           sources = [
-            { name = "nvim_lsp_document_symbol"; }
-            { name = "buffer"; }
-            { name = "async_path"; }
+            {name = "nvim_lsp_document_symbol";}
+            {name = "buffer";}
+            {name = "async_path";}
           ];
           view.entries = {
             name = "wildmenu";
@@ -29,9 +29,9 @@
         "/" = searchSources;
         ":" = {
           sources = [
-            { name = "async_path"; }
-            { name = "cmdline"; }
-            { name = "cmdline_history"; }
+            {name = "async_path";}
+            {name = "cmdline";}
+            {name = "cmdline_history";}
           ];
         };
       };
@@ -43,7 +43,7 @@
           maxViewEntries = 30;
         };
         sources = [
-          { name = "codeium"; }
+          {name = "codeium";}
           {
             name = "luasnip";
             option.show_autosnippets = true;
@@ -53,8 +53,8 @@
             name = "nvim_lsp";
             keywordLength = 3;
           }
-          { name = "nvim_lsp_signature_help"; }
-          { name = "emoji"; }
+          {name = "nvim_lsp_signature_help";}
+          {name = "emoji";}
           {
             name = "async_path";
             keywordLength = 3;
@@ -63,8 +63,8 @@
             name = "buffer";
             keywordLength = 3;
           }
-          { name = "rg"; }
-          { name = "nvim_lua"; }
+          {name = "rg";}
+          {name = "nvim_lua";}
           {
             name = "dictionary";
             keywordLength = 3;
@@ -113,10 +113,8 @@
           "<C-b>" = "cmp.mapping(cmp.mapping.scroll_docs(-4), {'i','s','c'})";
           "<C-f>" = "cmp.mapping(cmp.mapping.scroll_docs(4), {'i','s','c'})";
           "<C-Space>" = "cmp.mapping(cmp.mapping.complete(), {'i','s','c'})";
-          "<CR>" =
-            "cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Insert, select = false})";
-          "<S-CR>" =
-            "cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = false})";
+          "<CR>" = "cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Insert, select = false})";
+          "<S-CR>" = "cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = false})";
         };
       };
     };

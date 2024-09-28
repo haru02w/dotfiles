@@ -1,7 +1,12 @@
-{ config, lib, inputs, ... }: {
+{
+  config,
+  lib,
+  inputs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
-    (import ./disko.nix { device = "/dev/nvme0n1"; })
+    (import ./disko.nix {device = "/dev/nvme0n1";})
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
   ];
 
@@ -52,8 +57,8 @@
   };
 
   environment.etc = {
-    "amdcard" = { source = "/dev/dri/by-path/pci-0000:04:00.0-card"; };
-    "nvicard" = { source = "/dev/dri/by-path/pci-0000:01:00.0-card"; };
+    "amdcard" = {source = "/dev/dri/by-path/pci-0000:04:00.0-card";};
+    "nvicard" = {source = "/dev/dri/by-path/pci-0000:01:00.0-card";};
   };
   environment.sessionVariables.WLR_DRM_DEVICES = ''
     /etc/${config.environment.etc."amdcard".target}:/etc/${

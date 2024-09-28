@@ -4,6 +4,17 @@
 
   keymaps = [
     {
+      mode = "x";
+      key = "n";
+      action = ''
+        :<c-u>let temp_variable=@"<CR>gvy:<c-u>let @/='\V<C-R>=escape(@",'/\')<CR>'<CR>:let @"=temp_variable<CR>
+      '';
+      options = {
+        silent = true;
+        desc = "search by selected word";
+      };
+    }
+    {
       mode = "n";
       key = "<leader>\\";
       action = "<cmd>sp<cr>";
@@ -122,6 +133,13 @@
       # Paste stuff without saving the deleted word into the buffer
       mode = "x";
       key = "<leader>p";
+      action = ''"_dp'';
+      options.desc = "Deletes to void register and paste over";
+    }
+    {
+      # Paste stuff without saving the deleted word into the buffer
+      mode = "x";
+      key = "<leader>P";
       action = ''"_dP'';
       options.desc = "Deletes to void register and paste over";
     }

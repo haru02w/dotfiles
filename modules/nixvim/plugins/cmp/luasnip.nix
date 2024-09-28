@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   plugins.luasnip = {
     enable = true;
     settings = {
@@ -8,9 +8,11 @@
       delete_check_events = "InsertEnter";
       region_check_events = "InsertLeave";
     };
-    fromVscode = [{
-      lazyLoad = true;
-      paths = "${pkgs.vimPlugins.friendly-snippets}";
-    }];
+    fromVscode = [
+      {
+        lazyLoad = true;
+        paths = "${pkgs.vimPlugins.friendly-snippets}";
+      }
+    ];
   };
 }

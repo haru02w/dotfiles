@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./setup
   ];
@@ -42,9 +47,8 @@
       isNormalUser = true;
       hashedPasswordFile = config.sops.secrets.haru02w.path;
       shell = pkgs.zsh;
-      extraGroups = [ "wheel" "video" "audio" ];
+      extraGroups = ["wheel" "video" "audio"];
     };
   };
   ### ---         --- ###
-
 }

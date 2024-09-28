@@ -11,7 +11,7 @@
         # c/c++
         clangd = {
           enable = true;
-          cmd = [ "clangd" "--offset-encoding=utf-16" ];
+          cmd = ["clangd" "--offset-encoding=utf-16"];
         };
         cmake.enable = true;
         # bash
