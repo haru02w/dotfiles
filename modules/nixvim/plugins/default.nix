@@ -5,10 +5,14 @@
     ./treesitter/treesitter-context.nix # show context of code when not visible
     ./treesitter/treesitter-textobjects.nix # select tokens based on the syntax
     ./treesitter/ts-autotag.nix # auto-close html tags
+    ./treesitter/surround.nix # manage surroundings
+    ./treesitter/rainbow-delimiters.nix # change colors of surroundings
+    ./treesitter/matchup.nix # '%' for words
 
     # lsp
     ./lsp/lsp.nix
     ./lsp/none-ls.nix
+    ./lsp/navbuddy.nix
     ./lsp/trouble.nix # TODO:
 
     # cmp
@@ -21,7 +25,7 @@
     ./dap/dap.nix
 
     # movement
-    ./movement/flash.nix # TODO: fast navigation
+    ./movement/flash.nix
     ./movement/grapple.nix # fast file switcher (harpoon alternative)
     # BUG: ./movement/harpoon.nix # fast file switcher
 
@@ -52,5 +56,6 @@
     ./extra/hardtime.nix # enforce good pratices
     ./extra/presence.nix # discord presence
     ./extra/wtf.nix # search on web
+    ./extra/hex.nix # read and write binary files
   ];
 }
