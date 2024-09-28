@@ -1,1 +1,1 @@
-{ plugins.wtf.enable = true; }
+{plugins.wtf.enable = true;}

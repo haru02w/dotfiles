@@ -66,5 +66,6 @@ with lib.nixvim; {
         silent = true;
         desc = "select ${i} file in grapple";
       };
-    }) 9;
+    })
+    9;
 }

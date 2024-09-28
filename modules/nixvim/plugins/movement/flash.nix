@@ -1,4 +1,4 @@
-{ lib, ... }:
+{lib, ...}:
 with lib.nixvim; {
   plugins.flash = {
     enable = true;
@@ -10,7 +10,7 @@ with lib.nixvim; {
   keymaps = [
     {
       key = "s";
-      mode = [ "n" "x" "o" ];
+      mode = ["n" "x" "o"];
       action = mkRaw "require('flash').jump";
       options = {
         silent = true;
@@ -19,7 +19,7 @@ with lib.nixvim; {
     }
     {
       key = "S";
-      mode = [ "n" "x" "o" ];
+      mode = ["n" "x" "o"];
       action = mkRaw "require('flash').treesitter";
       options = {
         silent = true;
@@ -37,7 +37,7 @@ with lib.nixvim; {
     }
     {
       key = "R";
-      mode = [ "o" "x" ];
+      mode = ["o" "x"];
       action = mkRaw "require('flash').treesitter_search";
       options = {
         silent = true;
@@ -47,3 +47,4 @@ with lib.nixvim; {
   ];
 }
 # TODO:
+

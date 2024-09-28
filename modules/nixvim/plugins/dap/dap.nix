@@ -1,12 +1,16 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 with lib.nixvim; {
-  extraPackages = with pkgs; [ lldb gdb ];
+  extraPackages = with pkgs; [lldb gdb];
   plugins.dap = {
     enable = true;
     extensions = {
       dap-ui = {
         enable = true;
-        floating.mappings.close = [ "<ESC>" "q" ];
+        floating.mappings.close = ["<ESC>" "q"];
       };
       dap-virtual-text.enable = true;
     };
@@ -14,7 +18,7 @@ with lib.nixvim; {
       executables = {
         gdb = {
           command = "${pkgs.gdb}/bin/gdb";
-          args = [ "-i" "dap" ];
+          args = ["-i" "dap"];
         };
         lldb.command = "${pkgs.lldb}/bin/lldb-dap";
       };
@@ -22,9 +26,8 @@ with lib.nixvim; {
         codelldb = {
           port = 13000;
           executable = {
-            command =
-              "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb";
-            args = [ "--port" "13000" ];
+            command = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb";
+            args = ["--port" "13000"];
           };
         };
       };
@@ -133,7 +136,8 @@ with lib.nixvim; {
     {
       mode = "n";
       key = "<F8>";
-      action = mkRaw
+      action =
+        mkRaw
         "function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end";
       options = {
         silent = true;
