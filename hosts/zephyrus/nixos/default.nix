@@ -1,12 +1,9 @@
 {
   config,
   pkgs,
-  inputs,
   ...
 }: {
-  imports = [
-    ./setup
-  ];
+  imports = [./setup];
 
   modules.settings = {
     enable = true;
@@ -25,6 +22,12 @@
     enable = true;
     enablePassword = false;
     enableRootLogin = false;
+  };
+
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-cuda;
+    acceleration = "cuda";
   };
 
   modules.presets.desktop-v1.enable = true;

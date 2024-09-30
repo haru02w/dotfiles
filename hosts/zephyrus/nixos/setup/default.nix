@@ -65,4 +65,10 @@
       config.environment.etc."nvicard".target
     }
   '';
+
+  #ignore lid close
+  services.logind.extraConfig = ''
+    HandleLidSwitch=ignore
+    HandleLidSwitchExternalPower=ignore
+  '';
 }

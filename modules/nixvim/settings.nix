@@ -47,10 +47,5 @@ with lib.nixvim; {
       pattern = "TelescopePrompt";
       command = "inoremap <buffer><silent> <ESC> <ESC>:close!<CR>";
     }
-    {
-      event = "FileType";
-      pattern = ["tex" "latex" "markdown"];
-      command = "setlocal spell spelllang=en,fr";
-    }
   ];
 }

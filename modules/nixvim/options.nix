@@ -6,7 +6,7 @@ with lib.nixvim; {
     # faster completion
     updatetime = 50;
     # show popup menu and don't auto select
-    completeopt = ["menu" "menuone" "noselect"];
+    completeopt = ["menuone" "noselect" "noinsert"];
     # Enable indent in wrapped lines
     breakindent = true;
     mouse = "a";
