@@ -7,5 +7,6 @@
     ./neovim.nix
     ./pipewire.nix
     ./ssh.nix
+    ./plymouth.nix
   ];
 }
