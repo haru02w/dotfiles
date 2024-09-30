@@ -37,7 +37,7 @@
     ./ui/alpha.nix
     ./ui/dressing.nix
     ./ui/indent-blankline.nix
-    #./ui/noice.nix
+    ./ui/fidget.nix
     ./ui/precognition.nix
     ./ui/smart-splits.nix
     ./ui/web-devicons.nix

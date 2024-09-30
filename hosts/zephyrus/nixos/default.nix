@@ -15,8 +15,7 @@
     locale = "en_US.UTF-8";
     timezone = "America/Sao_Paulo";
   };
-
-  modules.desktopEnvironment.gnome.enable = true;
+  modules.programs.plymouth.enable = true;
 
   modules.programs.ssh = {
     enable = true;
