@@ -11,6 +11,7 @@
         "/var/log" # logs
         "/var/lib/tailscale" # tailscale login
         "/etc/asusd" # asusctl state
+        "/var/lib/ollama"
         "/etc/ssh"
         "/root/.local/share/nix/"
       ];

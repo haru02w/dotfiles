@@ -35,6 +35,11 @@
   };
 
   services.tailscale.enable = true;
+  services.ollama = {
+    enable = true;
+    package = pkgs.unstable.ollama-cuda;
+    acceleration = "cuda";
+  };
 
   #ignore lid close
   services.logind.extraConfig = ''
