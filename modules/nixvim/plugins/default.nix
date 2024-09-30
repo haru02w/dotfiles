@@ -9,6 +9,9 @@
     ./treesitter/rainbow-delimiters.nix # change colors of surroundings
     ./treesitter/matchup.nix # '%' for words
 
+    # AI
+    ./ai/ollama.nix
+
     # lsp
     ./lsp/lsp.nix
     ./lsp/none-ls.nix

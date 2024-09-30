@@ -17,6 +17,7 @@ in {
       webcord
 
       # CLI
+      lazygit
       progress
       libqalculate
       ncdu
