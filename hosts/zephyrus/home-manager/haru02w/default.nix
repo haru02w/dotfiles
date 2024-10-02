@@ -1,7 +1,9 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [./setup];
-
-  modules.presets.desktop-v1.enable = true;
 
   modules.programs.sops.enable = true;
   programs.git = {
@@ -10,12 +12,12 @@
     userEmail = "haru02w@protonmail.com";
   };
 
-  wayland.windowManager.hyprland.settings = {
-    #monitor = ["eDP-1,1920x1080@60,auto,1.5"];
-    bindl = [
-      ", XF86KbdBrightnessUp, exec, ${pkgs.asusctl}/bin/asusctl -n"
-      ", XF86KbdBrightnessDown, exec, ${pkgs.asusctl}/bin/asusctl -p"
-    ];
+  modules.presets.desktop-v2 = {
+    enable = true;
+    sway.extraKeybindings = {
+      "XF86KbdBrightnessUp" = "exec ${pkgs.asusctl}/bin/asusctl -n";
+      "XF86KbdBrightnessDown" = "exec ${pkgs.asusctl}/bin/asusctl -p";
+    };
   };
 
   services.kanshi = {
@@ -43,8 +45,8 @@
           }
           {
             criteria = "HDMI-A-1";
-            position = "0,0";
-            mode = "1920x1080@60Hz";
+            mode = "1920x1080@60";
+            status = "enable";
           }
         ];
       }

@@ -43,12 +43,12 @@
           maxViewEntries = 30;
         };
         sources = [
-          {name = "codeium";}
           {
             name = "luasnip";
             option.show_autosnippets = true;
             keywordLength = 3;
           }
+          # {name = "codeium";}
           {
             name = "nvim_lsp";
             keywordLength = 3;
