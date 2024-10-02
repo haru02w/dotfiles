@@ -27,7 +27,6 @@ in {
       tldr
 
       # services
-      swaylock
       wl-clipboard # clipboard on wayland
       libnotify # notifications
       brightnessctl # change brightness

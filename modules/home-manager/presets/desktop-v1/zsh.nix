@@ -14,7 +14,6 @@ in {
     programs.zsh = {
       enable = true;
       autocd = true;
-      localVariables.ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=5";
       defaultKeymap = "emacs";
       #plugins
       enableCompletion = true;

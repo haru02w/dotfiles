@@ -6,6 +6,10 @@
 with lib; let
   cfg = config.modules.settings;
 in {
+  imports = [
+    ./security.nix
+    ./nix.nix
+  ];
   options.modules.settings = with types; {
     enable = mkEnableOption "NixOS settings";
     hostname = mkOption {
@@ -38,7 +42,7 @@ in {
   };
   config = mkIf cfg.enable {
     networking.hostName = cfg.hostname;
-    networking.networkmanager.enable = mkDefault true;
+    networking.networkmanager.enable = true;
 
     services.xserver.xkb = {
       layout = cfg.keymap.layout;

@@ -8,7 +8,7 @@ with lib; let
 in {
   options.modules.programs.docker.enable = mkEnableOption "docker";
   config = mkIf cfg.enable {
-    virtualisation.docker.enable = mkDefault true;
+    virtualisation.docker.enable = true;
     environment.systemPackages = with pkgs; [docker-compose];
   };
 }

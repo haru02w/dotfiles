@@ -106,12 +106,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     };
-    hyprland = {
-      type = "git";
-      submodules = true;
-      url = "https://github.com/hyprwm/Hyprland";
-      ref = "refs/tags/v0.43.0";
-    };
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    # hyprland = {
+    #   type = "git";
+    #   submodules = true;
+    #   url = "https://github.com/hyprwm/Hyprland";
+    #   ref = "refs/tags/v0.42.0";
+    # };
     nixos-hardware.url = "github:nixos/nixos-hardware";
     hyprsplit = {
       url = "github:shezdy/hyprsplit";

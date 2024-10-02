@@ -46,7 +46,7 @@ in {
       })
       (mkIf cfg.enlightenment.enable {
         services.xserver.desktopManager.enlightenment.enable = true;
-        services.acpid.enable = mkDefault true;
+        services.acpid.enable = true;
       })
       (mkIf cfg.lxqt.enable {
         services.xserver.desktopManager.lxqt.enable = true;

@@ -2,7 +2,10 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  ifGroupsExist = groups:
+    builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
+in {
   imports = [./setup];
 
   modules.settings = {
@@ -15,6 +18,8 @@
     locale = "en_US.UTF-8";
     timezone = "America/Sao_Paulo";
   };
+
+  services.asusd.enable = true;
   modules.programs.plymouth.enable = true;
 
   modules.programs.ssh = {
@@ -23,11 +28,11 @@
     enableRootLogin = false;
   };
 
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-cuda;
-    acceleration = "cuda";
-  };
+  # services.ollama = {
+  #   enable = true;
+  #   package = pkgs.ollama-cuda;
+  #   acceleration = "cuda";
+  # };
 
   modules.presets.desktop-v1.enable = true;
 
@@ -49,7 +54,21 @@
       isNormalUser = true;
       hashedPasswordFile = config.sops.secrets.haru02w.path;
       shell = pkgs.zsh;
-      extraGroups = ["wheel" "video" "audio"];
+      extraGroups =
+        [
+          "wheel"
+          "input"
+          "video"
+          "audio"
+        ]
+        ++ ifGroupsExist [
+          "lp"
+          "networkmanager"
+          "docker"
+          "libvirtd"
+          "git"
+          "kvm"
+        ];
     };
   };
   ### ---         --- ###

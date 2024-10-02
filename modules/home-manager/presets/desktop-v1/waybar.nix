@@ -14,7 +14,7 @@ in {
     programs.waybar = with config.lib.stylix.colors; {
       enable = true;
       systemd.enable = true;
-      systemd.target = "hyprland-session.target";
+      systemd.target = "graphical-session.target";
       settings.mainBar = {
         layer = "top";
         position = "right";

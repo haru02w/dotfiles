@@ -8,6 +8,7 @@ with lib; let
 in {
   imports = [
     ./hyprland.nix
+    ./swaylock.nix
     ./foot.nix
     ./mako.nix
     ./rofi.nix
@@ -25,6 +26,7 @@ in {
 
   config = mkIf cfg.enable {
     modules.presets.desktop-v1.hyprland.enable = mkDefault true;
+    modules.presets.desktop-v1.swaylock.enable = mkDefault true;
     modules.presets.desktop-v1.foot.enable = mkDefault true;
     modules.presets.desktop-v1.mako.enable = mkDefault true;
     modules.presets.desktop-v1.rofi.enable = mkDefault true;

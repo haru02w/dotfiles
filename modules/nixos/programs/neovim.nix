@@ -13,11 +13,11 @@ in {
   };
   config = mkIf cfg.enable {
     programs.neovim = {
-      enable = mkDefault true;
-      defaultEditor = mkDefault true;
-      viAlias = mkDefault true;
-      vimAlias = mkDefault true;
-      configure.customRC = mkDefault ''
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+      configure.customRC = ''
         set number relativenumber
       '';
     };

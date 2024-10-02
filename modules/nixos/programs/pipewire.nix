@@ -11,11 +11,11 @@ in {
     hardware.pulseaudio.enable = mkForce false;
     security.rtkit.enable = mkForce true;
     services.pipewire = {
-      enable = mkDefault true;
-      alsa.enable = mkDefault true;
-      alsa.support32Bit = mkDefault true;
-      pulse.enable = mkDefault true;
-      jack.enable = mkDefault true;
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = true;
     };
   };
 }
