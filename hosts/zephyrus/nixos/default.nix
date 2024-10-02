@@ -34,7 +34,7 @@ in {
   #   acceleration = "cuda";
   # };
 
-  modules.presets.desktop-v1.enable = true;
+  modules.presets.desktop-v2.enable = true;
 
   ### --- HARU02W --- ###
   modules.programs.home-manager.enable = true;
