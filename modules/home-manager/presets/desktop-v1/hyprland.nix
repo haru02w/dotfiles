@@ -130,6 +130,7 @@ in {
         "$mod, V, togglefloating"
         "$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons" # pkgs.
         "$mod, R, exec, ${pkgs.rofi-wayland}/bin/rofi -show run" # pkgs.
+        "$mod, escape, exec, swaylock"
         "$mod, P, pseudo" # dwindle
 
         "$mod SHIFT, Space, togglesplit"

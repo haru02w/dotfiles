@@ -17,7 +17,7 @@ in {
       lib.any (value: value == true) (map (name: cfg.${name}.enable) (builtins.attrNames cfg));
   in
     lib.mkMerge [
-      (mkIf anyDMActive {services.xserver.enable = mkOverride 42 true;})
+      (mkIf anyDMActive {services.xserver.enable = mkDefault true;})
       (mkIf cfg.gdm.enable {
         services.xserver.displayManager.gdm.enable = true;
       })

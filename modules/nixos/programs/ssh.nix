@@ -13,19 +13,19 @@ in {
   };
   config = mkIf cfg.enable {
     services.openssh = {
-      enable = mkDefault true;
+      enable = true;
       settings = {
         # Harden
-        PasswordAuthentication = mkDefault cfg.enablePassword;
-        PermitRootLogin = mkDefault (
+        PasswordAuthentication = cfg.enablePassword;
+        PermitRootLogin = (
           if cfg.enableRootLogin
           then "yes"
           else "no"
         );
         # Automatically remove stale sockets
-        StreamLocalBindUnlink = mkDefault "yes";
+        StreamLocalBindUnlink = "yes";
         # Allow forwarding ports to everywhere
-        GatewayPorts = mkDefault "clientspecified";
+        GatewayPorts = "clientspecified";
       };
     };
   };

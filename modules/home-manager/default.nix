@@ -4,6 +4,7 @@
       sops-nix.homeManagerModules.sops
 
       ./settings
+      ./programs
       ./presets
     ];
   };

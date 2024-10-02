@@ -37,9 +37,11 @@
     umount /btrfs_tmp
   '';
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+  };
 
   fileSystems."/persist".neededForBoot = true;
   fileSystems."/home".neededForBoot = true;
@@ -51,24 +53,24 @@
   #bluetooth support
   hardware.bluetooth.enable = true;
 
-  hardware.nvidia.powerManagement = {
-    enable = true;
-    finegrained = true;
+  hardware.nvidia = {
+    open = false;
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
+    dynamicBoost.enable = true;
   };
+  services.asusd.enableUserService = true;
 
-  environment.etc = {
-    "amdcard" = {source = "/dev/dri/by-path/pci-0000:04:00.0-card";};
-    "nvicard" = {source = "/dev/dri/by-path/pci-0000:01:00.0-card";};
-  };
-  environment.sessionVariables.WLR_DRM_DEVICES = ''
-    /etc/${config.environment.etc."amdcard".target}:/etc/${
-      config.environment.etc."nvicard".target
-    }
-  '';
+  environment.sessionVariables.AQ_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
+  #:/etc/${
+  #    config.environment.etc."nvicard".target
+  #  }'';
+  boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
 
   #ignore lid close
   services.logind.extraConfig = ''
-    HandleLidSwitch=ignore
-    HandleLidSwitchExternalPower=ignore
+    HandleLidSwitch=suspend
+    HandleLidSwitchExternalPower=suspend
+    HandleLidSwitchDocked=ignore
   '';
 }

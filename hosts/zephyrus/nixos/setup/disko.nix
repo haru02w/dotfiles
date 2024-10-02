@@ -30,7 +30,7 @@
         };
         root = {
           name = "ROOT";
-          size = "100%";
+          size = "155G";
           content = {
             type = "btrfs";
             extraArgs = ["-f"];

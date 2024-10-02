@@ -7,9 +7,13 @@
 with lib; let
   cfg = config.modules.presets.desktop-v1;
 in {
+  imports = [
+    ./tuigreet.nix
+  ];
   options.modules.presets.desktop-v1.enable =
     mkEnableOption "desktop-v1 preset";
   config = mkIf cfg.enable {
+    modules.presets.desktop-v1.tuigreet.enable = true;
     stylix = {
       enable = true;
 
@@ -20,7 +24,7 @@ in {
       cursor = {
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Ice";
-        size = 16;
+        size = 20;
       };
 
       fonts = {
@@ -50,27 +54,17 @@ in {
 
     services.udisks2.enable = true;
     programs.zsh.enable = true;
-    modules.programs.pipewire.enable = mkDefault true;
-    services.displayManager.ly = {
-      enable = true;
-      settings = {
-        animation = "matrix";
-        auth_fails = 3;
-        clear_password = true;
-        default_input = "password";
-        save = true;
-        load = true;
-        numlock = true;
-      };
-    };
+    modules.programs.pipewire.enable = true;
 
-    modules.programs.hyprland.enable = mkDefault true;
-    modules.fhsHelpers.enable = mkDefault true;
+    modules.programs.hyprland.enable = true;
+    modules.fhsHelpers.enable = true;
 
     services.tailscale = {
       enable = true;
       useRoutingFeatures = "client";
     };
+
+    security.pam.services.swaylock = {};
 
     environment.systemPackages = with pkgs; [
       neovim # text editor

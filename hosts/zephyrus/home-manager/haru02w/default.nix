@@ -1,12 +1,54 @@
-{...}: {
+{pkgs, ...}: {
   imports = [./setup];
 
   modules.presets.desktop-v1.enable = true;
 
+  modules.programs.sops.enable = true;
   programs.git = {
     enable = true;
     userName = "Haru02w";
     userEmail = "haru02w@protonmail.com";
+  };
+
+  wayland.windowManager.hyprland.settings = {
+    #monitor = ["eDP-1,1920x1080@60,auto,1.5"];
+    bindl = [
+      ", XF86KbdBrightnessUp, exec, ${pkgs.asusctl}/bin/asusctl -n"
+      ", XF86KbdBrightnessDown, exec, ${pkgs.asusctl}/bin/asusctl -p"
+    ];
+  };
+
+  services.kanshi = {
+    enable = true;
+    systemdTarget = "graphical-session.target";
+
+    settings = [
+      {
+        profile.name = "undocked";
+        profile.outputs = [
+          {
+            criteria = "eDP-1";
+            scale = 1.5;
+            mode = "1920x1080@60";
+            status = "enable";
+          }
+        ];
+      }
+      {
+        profile.name = "docked";
+        profile.outputs = [
+          {
+            criteria = "eDP-1";
+            status = "disable";
+          }
+          {
+            criteria = "HDMI-A-1";
+            position = "0,0";
+            mode = "1920x1080@60Hz";
+          }
+        ];
+      }
+    ];
   };
 
   home.packages = [

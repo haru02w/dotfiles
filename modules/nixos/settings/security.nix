@@ -4,7 +4,7 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.security;
+  cfg = config.modules.settings.security;
 in {
   options.modules.settings.security.enable = mkOption {
     description = "Enable security options";
@@ -22,10 +22,10 @@ in {
           value = 1;
         }
       ];
-      sudo.wheelNeedsPassword = mkDefault false;
-      rtkit.enable = mkDefault true;
-      polkit.enable = mkDefault true;
-      polkit.extraConfig = mkDefault ''
+      sudo.wheelNeedsPassword = false;
+      rtkit.enable = true;
+      polkit.enable = true;
+      polkit.extraConfig = ''
         polkit.addRule(function(action, subject) {
           if (action.id.indexOf("org.freedesktop.NetworkManager.") == 0 && subject.isInGroup("network")) {
             return polkit.Result.YES;

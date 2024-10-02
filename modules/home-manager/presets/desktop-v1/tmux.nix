@@ -87,7 +87,7 @@ in {
         bind-key -T copy-mode-vi "M-j" select-pane -D
         bind-key -T copy-mode-vi "M-k" select-pane -U
         bind-key -T copy-mode-vi "M-l" select-pane -R
-        bind-key -T copy-mode-vi "M-\" select-pane -l
+        bind-key -T copy-mode-vi "M-\\" select-pane -l
 
         # selecting panes
         bind-key -n M-h if-shell "$is_vim" "send-keys M-h"  "select-pane -L"

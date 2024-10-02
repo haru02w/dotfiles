@@ -1,12 +1,12 @@
 {...}: {
   imports = [
-    ./hyprland.nix
     ./docker.nix
     ./fhsHelpers.nix
     ./home-manager.nix
+    ./hyprland.nix
     ./neovim.nix
     ./pipewire.nix
-    ./ssh.nix
     ./plymouth.nix
+    ./ssh.nix
   ];
 }
