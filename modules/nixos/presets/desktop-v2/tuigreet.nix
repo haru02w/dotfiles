@@ -24,9 +24,9 @@ in {
             --asterisks \
             --window-padding 1 \
             --container-padding 2 \
-            --prompt-padding 2
+            --prompt-padding 2 \
+            --cmd "sway"
           '';
-          # --cmd "Hyprland > /dev/null"
           user = "greeter";
         };
       };

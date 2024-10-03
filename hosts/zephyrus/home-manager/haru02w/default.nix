@@ -15,8 +15,36 @@
   modules.presets.desktop-v2 = {
     enable = true;
     sway.extraKeybindings = {
+      "XF86Launch4" = "exec '${pkgs.asusctl}/bin/asusctl profile -n; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar'";
       "XF86KbdBrightnessUp" = "exec ${pkgs.asusctl}/bin/asusctl -n";
       "XF86KbdBrightnessDown" = "exec ${pkgs.asusctl}/bin/asusctl -p";
+    };
+  };
+  programs.waybar.settings.mainBar = {
+    modules-left = lib.mkBefore ["custom/fanprofiles"];
+    "custom/fanprofiles" = {
+      interval = "once";
+      signal = 8;
+      format = "{}";
+      exec-on-event = false;
+      on-click = "${pkgs.asusctl}/bin/asusctl profile -n; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar";
+      exec = let
+        script = pkgs.writeShellScriptBin "fanprofiles.sh" ''
+          RETURN=$(${pkgs.asusctl}/bin/asusctl profile -p)
+
+          if [[ $RETURN = *"Performance"* ]]
+          then
+              echo "󱑴"
+          elif [[ $RETURN = *"Balanced"* ]]
+          then
+              echo "󱑳"
+          elif [[ $RETURN = *"Quiet"* ]]
+          then
+              echo "󱑲"
+          fi
+        '';
+      in "${script}/bin/fanprofiles.sh"; # WARN
+      escape = true;
     };
   };
 
