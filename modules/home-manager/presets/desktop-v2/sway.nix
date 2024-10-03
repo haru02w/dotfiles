@@ -61,7 +61,6 @@ in {
           hideEdgeBorders = "smart";
         };
         defaultWorkspace = "workspace number 1";
-        workspaceAutoBackAndForth = true;
 
         terminal = "${getExe config.programs.foot.package}";
         menu = "${getExe config.programs.rofi.package} -show drun -show-icons";
