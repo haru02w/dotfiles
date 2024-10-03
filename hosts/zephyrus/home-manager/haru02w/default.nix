@@ -24,8 +24,8 @@ in {
     };
   };
   wayland.windowManager.sway.extraConfig = ''
-    bindswitch --locked lid:on exec ${getExe' config.services.kanshi.package "kanshictl"} switch docked
-    bindswitch --locked lid:off exec ${getExe' config.services.kanshi.package "kanshictl"} switch docked-lid-closed
+    bindswitch --locked lid:off exec ${getExe' config.services.kanshi.package "kanshictl"} switch docked
+    bindswitch --locked lid:on exec ${getExe' config.services.kanshi.package "kanshictl"} switch docked-lid-closed
   '';
   programs.waybar.settings.mainBar = {
     modules-left = lib.mkBefore ["custom/fanprofiles"];
