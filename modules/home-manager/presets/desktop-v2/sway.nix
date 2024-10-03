@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.modules.presets.desktop-v2.sway;
-  inherit (lib) getExe;
+  inherit (lib) getExe getExe';
 in {
   options.modules.presets.desktop-v2.sway = {
     enable = mkEnableOption "desktop-v2 sway";
@@ -62,7 +62,7 @@ in {
         };
         defaultWorkspace = "workspace number 1";
 
-        terminal = "${getExe config.programs.foot.package}";
+        terminal = "${getExe' config.programs.foot.package "footclient"}";
         menu = "${getExe config.programs.rofi.package} -show drun -show-icons";
         modifier = "Mod4";
         floating.modifier = "Mod4";

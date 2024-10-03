@@ -1,8 +1,11 @@
 {
   pkgs,
   lib,
+  config,
   ...
-}: {
+}: let
+  inherit (lib) getExe';
+in {
   imports = [./setup];
 
   modules.programs.sops.enable = true;
@@ -20,6 +23,10 @@
       "XF86KbdBrightnessDown" = "exec ${pkgs.asusctl}/bin/asusctl -p";
     };
   };
+  wayland.windowManager.sway.extraConfig = ''
+    bindswitch --locked lid:on exec ${getExe' config.services.kanshi.package "kanshictl"} switch docked
+    bindswitch --locked lid:off exec ${getExe' config.services.kanshi.package "kanshictl"} switch docked-lid-closed
+  '';
   programs.waybar.settings.mainBar = {
     modules-left = lib.mkBefore ["custom/fanprofiles"];
     "custom/fanprofiles" = {
@@ -58,7 +65,7 @@
         profile.outputs = [
           {
             criteria = "eDP-1";
-            scale = 1.5;
+            scale = 1.4;
             mode = "1920x1080@60";
             status = "enable";
           }
@@ -66,6 +73,22 @@
       }
       {
         profile.name = "docked";
+        profile.outputs = [
+          {
+            criteria = "eDP-1";
+            scale = 1.4;
+            mode = "1920x1080@60";
+            status = "enable";
+          }
+          {
+            criteria = "HDMI-A-1";
+            mode = "1920x1080@60";
+            status = "enable";
+          }
+        ];
+      }
+      {
+        profile.name = "docked-lid-closed";
         profile.outputs = [
           {
             criteria = "eDP-1";

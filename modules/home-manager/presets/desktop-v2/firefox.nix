@@ -26,7 +26,7 @@ in {
       enable = true;
       profiles.${config.home.username} = {
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          sidebery
+          simple-tab-groups
           ublock-origin
           sponsorblock
           enhancer-for-youtube
