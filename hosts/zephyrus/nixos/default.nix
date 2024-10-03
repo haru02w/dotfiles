@@ -19,7 +19,10 @@ in {
     timezone = "America/Sao_Paulo";
   };
 
-  services.asusd.enable = true;
+  services.asusd = {
+    enable = true;
+    enableUserService = true;
+  };
   modules.programs.plymouth.enable = true;
 
   modules.programs.ssh = {
