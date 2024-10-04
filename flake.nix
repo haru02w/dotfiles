@@ -9,12 +9,13 @@
     lib = nixpkgs.lib // home-manager.lib;
     # Get all directories inside "./hosts" directory
     hosts = directoriesInsidePath ./hosts;
+
     # Get all supported systems by nixpkgs
-    suportedSystems = lib.systems.flakeExposed;
+    supportedSystems = lib.systems.flakeExposed;
 
     forEachSystem = f:
-      lib.genAttrs suportedSystems (system: f pkgsFor.${system});
-    pkgsFor = lib.genAttrs suportedSystems (system:
+      lib.genAttrs supportedSystems (system: f pkgsFor.${system});
+    pkgsFor = lib.genAttrs supportedSystems (system:
       import nixpkgs {
         inherit system;
         overlays = builtins.attrValues inputs.self.outputs.overlays;
@@ -48,10 +49,12 @@
     nixosModules = import ./modules/nixos;
     homeModules = import ./modules/home-manager;
 
+    # 'nix flake check`
     checks = forEachSystem (pkgs: {
       nixvim = with inputs.nixvim.lib.${pkgs.system};
         check.mkTestDerivationFromNixvimModule (nixvimModule pkgs);
     });
+    # 'nix build', 'nix shell', etc
     packages = forEachSystem (pkgs:
       {
         nixvim = with inputs.nixvim.legacyPackages.${pkgs.system};
@@ -59,9 +62,14 @@
       }
       // (import ./pkgs {inherit pkgs inputs;}));
     overlays = import ./overlays {inherit inputs;};
+    # 'nix develop'
     devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
+    # 'nix fmt'
     formatter = forEachSystem (pkgs: pkgs.alejandra);
+    # 'nix flake new -t self#<template>'
+    templates = import ./templates;
 
+    # 'nixos-rebuild --flake .#<hostname>'
     nixosConfigurations = nixosConfigPerHost (host:
       lib.nixosSystem {
         pkgs = pkgsFor."${import ./hosts/${host}/arch.nix}";
@@ -73,6 +81,8 @@
           homeUsers = homeManagerUsersPerHost host;
         };
       });
+
+    # 'home-manager --flake .#<username>@<hostname>'
     homeConfigurations = homeManagerConfigPerHostAndUser (host: user:
       lib.homeManagerConfiguration {
         pkgs = pkgsFor."${import ./hosts/${host}/arch.nix}";
