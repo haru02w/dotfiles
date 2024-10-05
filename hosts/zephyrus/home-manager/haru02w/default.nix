@@ -65,7 +65,7 @@ in {
         profile.outputs = [
           {
             criteria = "eDP-1";
-            scale = 1.4;
+            scale = 1.5;
             mode = "1920x1080@60";
             status = "enable";
           }
@@ -76,13 +76,15 @@ in {
         profile.outputs = [
           {
             criteria = "eDP-1";
-            scale = 1.4;
+            scale = 1.5;
             mode = "1920x1080@60";
+            position = "320,1080";
             status = "enable";
           }
           {
             criteria = "HDMI-A-1";
             mode = "1920x1080@60";
+            position = "0,0";
             status = "enable";
           }
         ];
