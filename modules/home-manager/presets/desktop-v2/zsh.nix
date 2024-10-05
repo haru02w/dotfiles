@@ -59,6 +59,9 @@ in {
       shellAliases = {
         nixos-switch = "sudo nixos-rebuild switch --flake ~/.dotfiles";
         nixos-boot = "sudo nixos-rebuild boot --flake ~/.dotfiles";
+        # `tmux` stuff
+        tm = "tmux new -c $(find * -type d | fzf)";
+        cdf = "cd $(find * -type d | fzf)";
         # `bat` stuff
         cat = "bat";
         man = "batman";
@@ -72,6 +75,10 @@ in {
       };
     };
 
+    programs.fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     programs.eza = {
       enable = true;
       enableZshIntegration = true;
