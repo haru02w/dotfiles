@@ -105,6 +105,11 @@ in {
             # Move containers to other workspace groups
             // from0to9 (i: lib.nameValuePair "${modifier}+Alt+Shift+${i}" "exec '${pkgs.swaysome}/bin/swaysome move-to-group ${i}'")
             // {
+              "${modifier}+o" = "exec '${pkgs.swaysome}/bin/swaysome next-output'";
+              "${modifier}+Shift+o" = "exec '${pkgs.swaysome}/bin/swaysome prev-output'";
+
+              "${modifier}+Alt+o" = "exec '${pkgs.swaysome}/bin/swaysome workspace-group-next-output'";
+              "${modifier}+Alt+Shift+o" = "exec '${pkgs.swaysome}/bin/swaysome workspace-group-prev-output'";
               # Disable keybindings
               "${modifier}+Shift+q" = null;
               # Enable keybindings
