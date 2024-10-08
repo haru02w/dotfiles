@@ -52,6 +52,12 @@ in {
       };
     };
 
+    xdg.portal = {
+      enable = true;
+      config.common.default = "wlr";
+      wlr.enable = true;
+    };
+
     services.udisks2.enable = true;
     programs.zsh.enable = true;
     modules.programs.pipewire.enable = true;
