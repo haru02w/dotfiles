@@ -6,7 +6,7 @@
       inlayHints = true;
       servers = {
         # docker
-        docker-compose-language-service.enable = true;
+        docker_compose_language_service.enable = true;
         dockerls.enable = true;
         # c/c++
         clangd = {
@@ -17,7 +17,7 @@
         # bash
         bashls.enable = true;
         # rust
-        rust-analyzer = {
+        rust_analyzer = {
           enable = true;
           installCargo = true;
           installRustc = true;
@@ -28,12 +28,12 @@
         html.enable = true;
         cssls.enable = true;
         # java
-        jdt-language-server.enable = true;
+        jdtls.enable = true;
         # lua
-        lua-ls.enable = true;
+        lua_ls.enable = true;
         # nix
         nixd.enable = true;
-        nil-ls = {
+        nil_ls = {
           enable = true;
           settings.nix.flake.autoArchive = true;
         };
