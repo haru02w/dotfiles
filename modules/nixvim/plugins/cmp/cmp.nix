@@ -109,6 +109,24 @@
               end
             end, { "i", "s" })
           '';
+          "<C-j>" = ''
+            cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
+              else
+                fallback()
+              end
+            end, {'i','s','c'})
+          '';
+          "<C-k>" = ''
+            cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Replace })
+              else
+                fallback()
+              end
+            end, {'i','s','c'})
+          '';
           "<C-e>" = "cmp.mapping(cmp.mapping.abort(), {'i','s','c'})";
           "<C-b>" = "cmp.mapping(cmp.mapping.scroll_docs(-4), {'i','s','c'})";
           "<C-f>" = "cmp.mapping(cmp.mapping.scroll_docs(4), {'i','s','c'})";
