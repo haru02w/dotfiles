@@ -27,14 +27,8 @@ in {
 
   modules.presets.nas-v1 = {
     enable = true;
-    adminpassFile = "${config.sops.secrets.haru02w.path}";
-    hostName = "nc.haru02w.eu.org";
+    adminpassFile = "${config.sops.secrets.nextcloud.path}";
     cloudflaredCredentialsFile = "${config.sops.secrets."cloudflared/nas-tunnel".path}";
-  };
-
-  services.cloudflared = {
-    user = "haru02w";
-    group = "users";
   };
 
   ### --- HARU02W --- ###
@@ -42,19 +36,26 @@ in {
     defaultSopsFile = ../../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
     age.keyFile = "/home/haru02w/.config/sops/age/keys.txt";
-    secrets.haru02w = {
-      sopsFile = ../../../secrets/secrets.yaml;
-      neededForUsers = true;
-    };
+    secrets = {
+      haru02w = {
+        sopsFile = ../../../secrets/secrets.yaml;
+        neededForUsers = true;
+      };
+      nextcloud = {
+        owner = "nextcloud";
+        group = "nextcloud";
+        sopsFile = ../../../secrets/secrets.yaml;
+      };
 
-    secrets."cloudflared/cert-pem" = {
-      sopsFile = ../../../secrets/secrets.yaml;
-      path = "${config.users.users.haru02w.homeDirectory}/.cloudflared/cert.pem";
+      "cloudflared/nas-tunnel" = {
+        owner = "cloudflared";
+        sopsFile = ../../../secrets/secrets.yaml;
+      };
     };
   };
   # create required folder
   # systemd.tmpfiles.rules = [
-  #   "d ${config.users.users.haru02w.homeDirectory}/.cloudflared 700 haru02w users"
+  #   "d ${config.users.users.haru02w.home}/.cloudflared 700 haru02w users"
   # ];
 
   users.mutableUsers = false; # disable imperative passwords
@@ -63,7 +64,6 @@ in {
     haru02w = {
       isNormalUser = true;
       hashedPasswordFile = config.sops.secrets.haru02w.path;
-      shell = pkgs.zsh;
       extraGroups =
         [
           "wheel"

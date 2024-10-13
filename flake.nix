@@ -33,6 +33,7 @@
           lib.nameValuePair "${user}@${host}"
           (systemPerHostAndUser host user)) (homeManagerUsersPerHost host))
       hosts));
+
     nixosConfigPerHost = systemPerHost:
       builtins.listToAttrs
       (map (host: lib.nameValuePair host (systemPerHost host)) hosts);
@@ -68,6 +69,7 @@
     formatter = forEachSystem (pkgs: pkgs.alejandra);
     # 'nix flake new -t self#<template>'
     templates = import ./templates;
+
 
     # 'nixos-rebuild --flake .#<hostname>'
     nixosConfigurations = nixosConfigPerHost (host:
