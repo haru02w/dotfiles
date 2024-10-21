@@ -18,7 +18,7 @@ in {
       settings = {
         trusted-users = ["root" "@wheel"];
         auto-optimise-store = true;
-        experimental-features = ["nix-command" "flakes" "repl-flake"];
+        experimental-features = ["nix-command" "flakes"];
         system-features = ["kvm" "big-parallel" "nixos-test"];
       };
 
