@@ -70,7 +70,6 @@
     # 'nix flake new -t self#<template>'
     templates = import ./templates;
 
-
     # 'nixos-rebuild --flake .#<hostname>'
     nixosConfigurations = nixosConfigPerHost (host:
       lib.nixosSystem {
