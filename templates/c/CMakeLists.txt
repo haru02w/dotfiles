@@ -19,7 +19,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC "include")
 # https://cmake.org/cmake/help/latest/manual/cmake-modules.7.html
 # find_package(Curses REQUIRED)
 #
-# target_include_directories(${PROJECT} PUBLIC ${CURSES_INCLUDE_DIRS})
+# target_include_directories(${PROJECT_NAME} PUBLIC ${CURSES_INCLUDE_DIRS})
 #
 # target_link_libraries(${PROJECT_NAME} ${CURSES_LIBRARIES})
 # ...............................................................
