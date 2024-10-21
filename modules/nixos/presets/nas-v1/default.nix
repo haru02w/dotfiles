@@ -27,8 +27,12 @@ in {
         database.createLocally = true;
         maxUploadSize = "16G";
         hostName = "nc.haru02w.eu.org";
-        #notify_push.enable = true;
+        notify_push = {
+          enable = true;
+          bendDomainToLocalhost = true;
+        };
         autoUpdateApps.enable = true;
+        appstoreEnable = true;
         extraAppsEnable = true;
         extraApps = {
           inherit
