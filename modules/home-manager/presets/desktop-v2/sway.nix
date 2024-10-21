@@ -48,6 +48,9 @@ in {
       # checkConfig = false;
       extraOptions = ["--unsupported-gpu"];
       systemd.enable = true;
+      extraConfig = ''
+        hide_edge_borders --i3 smart_no_gaps
+      '';
       config = {
         bars = [];
         focus = {
@@ -59,8 +62,9 @@ in {
         window = {
           border = 1;
           titlebar = false;
-          hideEdgeBorders = "smart";
+          # hideEdgeBorders = "smart"; # WARN: on extraConfig
         };
+
         defaultWorkspace = "workspace number 1";
 
         terminal = "${getExe' config.programs.foot.package "footclient"}";
