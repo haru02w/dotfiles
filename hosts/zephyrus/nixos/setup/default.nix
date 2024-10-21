@@ -43,6 +43,7 @@
     efiInstallAsRemovable = true;
   };
 
+  services.davfs2.enable = true;
   fileSystems."/persist".neededForBoot = true;
   fileSystems."/home".neededForBoot = true;
   environment.nix-persist = {
