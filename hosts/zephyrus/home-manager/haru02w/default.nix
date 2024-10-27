@@ -78,13 +78,13 @@ in {
             criteria = "eDP-1";
             scale = 1.5;
             mode = "1920x1080@60";
-            position = "320,1080";
+            position = "0,180";
             status = "enable";
           }
           {
             criteria = "HDMI-A-1";
             mode = "1920x1080@60";
-            position = "0,0";
+            position = "1280,0";
             status = "enable";
           }
         ];
