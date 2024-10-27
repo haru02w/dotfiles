@@ -37,6 +37,8 @@ in {
         ];
 
         settings = {
+          # enable dark color on STG
+          "svg.context-properties.content.enabled" = true;
           #enable hardware acceleration
           "media.ffmpeg.vaapi.enabled" = true;
           # dark mode
