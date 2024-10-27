@@ -37,7 +37,7 @@
       };
       settings = {
         experimental.ghost_text = true;
-        snippet.expand = "luasnip";
+        snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
         performance = {
           fetching_timeout = 200;
           maxViewEntries = 30;

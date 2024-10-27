@@ -3,10 +3,10 @@
     enable = true;
     settings = {
       enable_autosnippets = true;
-      store_selection_keys = "<C-l>";
+      cut_selection_keys = "<Tab>";
       history = false;
-      delete_check_events = "InsertEnter";
-      region_check_events = "InsertLeave";
+      delete_check_events = "TextChanged";
+      region_check_events = "CursorMoved";
     };
     fromVscode = [
       {
