@@ -2,10 +2,6 @@
 with lib.nixvim; {
   plugins.flash = {
     enable = true;
-    settings = {
-      jump.autojump = true;
-      modes.search.enabled = true;
-    };
   };
   keymaps = [
     {
@@ -47,4 +43,3 @@ with lib.nixvim; {
   ];
 }
 # TODO:
-
