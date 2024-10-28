@@ -30,6 +30,14 @@ in {
     adminpassFile = "${config.sops.secrets.nextcloud.path}";
     cloudflaredCredentialsFile = "${config.sops.secrets."cloudflared/nas-tunnel".path}";
   };
+  services.nextcloud.poolSettings = {
+    pm = "dynamic";
+    "pm.max_children" = "105";
+    "pm.max_requests" = "500";
+    "pm.max_spare_servers" = "78";
+    "pm.min_spare_servers" = "26";
+    "pm.start_servers" = "26";
+  };
 
   ### --- HARU02W --- ###
   sops = {
