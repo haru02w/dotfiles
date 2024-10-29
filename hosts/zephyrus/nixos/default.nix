@@ -19,6 +19,11 @@ in {
     timezone = "America/Sao_Paulo";
   };
 
+  virtualisation.docker = {
+    enable = true;
+    extraPackages = [pkgs.docker-compose];
+  };
+
   services.asusd = {
     enable = true;
     enableUserService = true;
