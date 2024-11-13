@@ -31,7 +31,7 @@ in {
           enable = true;
           bendDomainToLocalhost = true;
         };
-        autoUpdateApps.enable = true;
+        #autoUpdateApps.enable = true;
         appstoreEnable = true;
         extraAppsEnable = true;
         extraApps = {

@@ -14,7 +14,7 @@ in {
     home.packages = with pkgs; [
       # GUI
       discord
-      webcord
+      vesktop
 
       # CLI
       lazygit
