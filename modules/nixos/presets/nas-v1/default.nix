@@ -48,6 +48,7 @@ in {
             ;
         };
         settings = {
+          updatechecker = false;
           overwriteprotocol = "https";
           default_phone_region = "BR";
         };
