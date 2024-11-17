@@ -1,9 +1,10 @@
 {
   plugins = {
-    lsp-format.enable = true;
+    # lsp-format.enable = true;
     lsp = {
       enable = true;
       inlayHints = true;
+
       servers = {
         # docker
         docker_compose_language_service.enable = true;
