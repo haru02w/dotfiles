@@ -20,7 +20,7 @@
         # nix
         alejandra.enable = true;
         # python
-        blackd = {
+        black = {
           enable = true;
           settings.fast = true;
         };
