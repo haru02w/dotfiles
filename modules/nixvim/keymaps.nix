@@ -99,7 +99,6 @@
         desc = "Previous search term keeping cursor in the middle";
       };
     }
-
     {
       mode = "v";
       key = "<";
