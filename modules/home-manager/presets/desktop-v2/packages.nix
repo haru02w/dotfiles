@@ -25,6 +25,8 @@ in {
       btop
       neofetch
       tldr
+      zip
+      unzip
 
       # services
       wl-clipboard # clipboard on wayland

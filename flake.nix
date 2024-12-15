@@ -115,7 +115,6 @@
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     };
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     # hyprland = {
