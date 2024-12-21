@@ -8,6 +8,9 @@
       delete_check_events = "TextChanged";
       region_check_events = "CursorMoved";
     };
+    fromLua = [
+      {paths = ../../snippets;}
+    ];
     fromVscode = [
       {
         lazyLoad = true;
