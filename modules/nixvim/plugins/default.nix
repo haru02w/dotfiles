@@ -29,7 +29,8 @@
 
     # movement
     ./movement/flash.nix
-    ./movement/grapple.nix # fast file switcher (harpoon alternative)
+    ./movement/buffer_manager.nix # harpoon and grapple for buffers instead of files
+    #./movement/grapple.nix # fast file switcher (harpoon alternative)
     # BUG: ./movement/harpoon.nix # fast file switcher
 
     # ui
