@@ -43,7 +43,7 @@
       module = import ./modules/nixvim; # import the module directly
       # You can use `extraSpecialArgs` to pass additional arguments to your module files
       extraSpecialArgs = {
-        # inherit (inputs) foo;
+        inherit inputs;
       };
     };
   in {
@@ -116,25 +116,29 @@
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    #hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     # hyprland = {
     #   type = "git";
     #   submodules = true;
     #   url = "https://github.com/hyprwm/Hyprland";
     #   ref = "refs/tags/v0.42.0";
     # };
-    nixos-hardware.url = "github:nixos/nixos-hardware";
-    hyprsplit = {
-      url = "github:shezdy/hyprsplit";
-      inputs.hyprland.follows = "hyprland";
-    };
+    # hyprsplit = {
+    #   url = "github:shezdy/hyprsplit";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
 
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+    nur.url = "github:nix-community/nur";
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    nur.url = "github:nix-community/nur";
+    buffer_manager-nvim = {
+      url = "github:j-morano/buffer_manager.nvim";
+      flake = false;
+    };
   };
 
   nixConfig = {
