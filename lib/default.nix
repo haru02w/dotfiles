@@ -1,5 +1,5 @@
 {inputs, ...}: let
-  inherit (inputs.nixpkgs) lib;
+  lib = inputs.nixpkgs.lib // inputs.home-manager.lib;
 in
   lib
   // rec {
@@ -49,7 +49,6 @@ in
         };
       };
     in
-      with inputs.nixvim.legacyPackages.${pkgs.system};
+      with inputs.nixvim.legacyPackages.x86_64-linux;
         makeNixvimWithModule (nixvimModule pkgs);
-
   }
