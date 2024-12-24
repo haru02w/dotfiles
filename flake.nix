@@ -3,12 +3,20 @@
   outputs = inputs: let
     lib = import ./lib {inherit inputs;};
   in {
-    nixosModules = import ./modules/nixos;
-    homeModules = import ./modules/home-manager;
+    nixosModules = {
+      modules = _: {
+        imports = lib.nixFilesInPathR ./modules/nixos;
+      };
+    };
+    homeModules = {
+      modules = _: {
+        imports = lib.nixFilesInPathR ./modules/home-manager;
+      };
+    };
 
     # 'nixos-rebuild --flake .#<hostname>'
     nixosConfigurations = lib.mkNixosConfig (host: let
-      settings = import ./hosts/${host} {} ;
+      settings = import ./hosts/${host} {};
     in {
       pkgs = lib.pkgsFor."${settings.arch}";
       modules =
@@ -38,16 +46,12 @@
     });
 
     # 'nix build', 'nix shell', etc
-    packages = lib.forEachSystem (pkgs:
-      {
-        nixvim = lib.mkNixvimPkg pkgs;
-      }
-      // (import ./pkgs {inherit pkgs inputs;}));
+    packages = lib.forEachSystemPkgs (pkgs: import ./pkgs {inherit inputs pkgs;});
     overlays = import ./overlays {inherit inputs;};
     # 'nix develop'
-    devShells = lib.forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
+    devShells = lib.forEachSystemPkgs (pkgs: import ./shell.nix {inherit pkgs;});
     # 'nix fmt'
-    formatter = lib.forEachSystem (pkgs: pkgs.alejandra);
+    formatter = lib.forEachSystemPkgs (pkgs: pkgs.alejandra);
     # 'nix flake new -t self#<template>'
     templates = import ./templates;
   };

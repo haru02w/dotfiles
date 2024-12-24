@@ -1,0 +1,3 @@
+{
+  plugins.precognition.enable = true;
+}
