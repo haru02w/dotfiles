@@ -1,10 +1,9 @@
 {inputs, ...}: let
-  lib = inputs.nixpkgs.lib // inputs.home-manager.lib;
-in
-  lib
-  // rec {
+  lib = inputs.nixpkgs.lib;
+  myLib = rec {
+    flakeRoot = inputs.self.outPath;
     # generate inputs:{ "x86_64-linux" = input; "x86_64-darwin" = input; (...)}
-    forEachSystemPkgs = lib.genAttrs lib.systems.flakeExposed;
+    forEachSystemPkgs = f: lib.genAttrs lib.systems.flakeExposed (system: f pkgsFor.${system});
 
     # generate nixpkgs.legacyPackages with overlays and unfree packages
     pkgsFor = lib.genAttrs lib.systems.flakeExposed (system:
@@ -38,6 +37,8 @@ in
           (systemPerHostAndUser host user)) (mkHomeUsers host))
       hosts));
 
+    mkTemplates = builtins.listToAttrs (map (dir: lib.nameValuePair dir {path = ../templates/${dir};}) (dirsInPath ../templates));
+
     # Generate NixVim Package with `pkgs` as input
     mkNixvimPkg = pkgs: let
       nixvimModule = pkgs: {
@@ -51,4 +52,6 @@ in
     in
       with inputs.nixvim.legacyPackages.x86_64-linux;
         makeNixvimWithModule (nixvimModule pkgs);
-  }
+  };
+in
+  lib.extend (_: _: inputs.home-manager.lib // myLib)

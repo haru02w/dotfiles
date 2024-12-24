@@ -66,6 +66,22 @@
         "type": "github"
       }
     },
+    "buffer_manager-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1731918840,
+        "narHash": "sha256-Z1F9+KUs2QEqnKGngOBkE4P3cjEZxW4WF0SPEtc4vkI=",
+        "owner": "j-morano",
+        "repo": "buffer_manager.nvim",
+        "rev": "f196217f7c1ddae74ed51dfc2c3befe6d62b26d1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "j-morano",
+        "repo": "buffer_manager.nvim",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -94,11 +110,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1734701201,
-        "narHash": "sha256-hk0roBX10j/hospoWIJIJj3i2skd7Oml6yKQBx7mTFk=",
+        "lastModified": 1735048446,
+        "narHash": "sha256-Tc35Y8H+krA6rZeOIczsaGAtobSSBPqR32AfNTeHDRc=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "2ee76c861af3b895b3b104bae04777b61397485b",
+        "rev": "3a4de9fa3a78ba7b7170dda6bd8b4cdab87c0b21",
         "type": "github"
       },
       "original": {
@@ -310,11 +326,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1734944412,
-        "narHash": "sha256-36QfCAl8V6nMIRUCgiC79VriJPUXXkHuR8zQA1vAtSU=",
+        "lastModified": 1735053786,
+        "narHash": "sha256-Gm+0DcbUS338vvkwyYWms5jsWlx8z8MeQBzcnIDuIkw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "8264bfe3a064d704c57df91e34b795b6ac7bad9e",
+        "rev": "35b98d20ca8f4ca1f6a2c30b8a2c8bb305a36d84",
         "type": "github"
       },
       "original": {
@@ -509,11 +525,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1734979259,
-        "narHash": "sha256-jIW45i9kC83Go/3yY7VWvzQgCVi79LdNoK7xzZ4hvgQ=",
+        "lastModified": 1735055770,
+        "narHash": "sha256-gAS8PxfXDHde8TZVQJ58yt2CjK3K+FRoAiuGW6dPHGU=",
         "owner": "nix-community",
         "repo": "nur",
-        "rev": "9352dd122ce26f1c482aaeeb55ab057b9f84008b",
+        "rev": "f94ad9a1f34effad4cda2d94558df9cd9a621135",
         "type": "github"
       },
       "original": {
@@ -547,6 +563,7 @@
     },
     "root": {
       "inputs": {
+        "buffer_manager-nvim": "buffer_manager-nvim",
         "disko": "disko",
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",

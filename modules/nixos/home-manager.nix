@@ -10,11 +10,20 @@ with lib; let
 in {
   options.modules.home-manager.enable = mkEnableOption "home-manager";
   config = mkIf cfg.enable {
-    home-manager = {
-      users = lib.genAttrs (mkHomeUsers host) (user: nixFilesInPathR ../hosts/${host}/home-manager/${user});
+    home-manager = let
+      host = config.networking.hostName;
+    in {
+      users = lib.genAttrs (mkHomeUsers host) (user: _: {
+        imports = nixFilesInPathR (flakeRoot + "/hosts/${host}/home-manager/${user}");
+      });
       useGlobalPkgs = true;
       useUserPackages = true;
-      extraSpecialArgs = {inherit inputs; inherit settings;};
+      backupFileExtension = "hm-backup";
+      extraSpecialArgs = {
+        inherit lib;
+        inherit inputs;
+        inherit settings;
+      };
     };
   };
 }
