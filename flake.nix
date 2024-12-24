@@ -3,6 +3,7 @@
   outputs = inputs: let
     lib = import ./lib {inherit inputs;};
   in {
+    inherit lib;
     nixosModules = {
       modules = _: {
         imports = lib.nixFilesInPathR ./modules/nixos;
@@ -23,6 +24,7 @@
         lib.nixFilesInPathR ./hosts/${host}/nixos
         ++ (builtins.attrValues inputs.self.outputs.nixosModules);
       specialArgs = {
+        inherit lib;
         inherit inputs;
         inherit settings;
       };
@@ -40,6 +42,7 @@
           inputs.stylix.homeManagerModules.stylix
         ];
       extraSpecialArgs = {
+        inherit lib;
         inherit inputs;
         inherit settings;
       };
@@ -49,11 +52,11 @@
     packages = lib.forEachSystemPkgs (pkgs: import ./pkgs {inherit inputs pkgs;});
     overlays = import ./overlays {inherit inputs;};
     # 'nix develop'
-    devShells = lib.forEachSystemPkgs (pkgs: import ./shell.nix {inherit pkgs;});
+    devShells = lib.forEachSystemPkgs (pkgs: import ./shell.nix {inherit inputs pkgs;});
     # 'nix fmt'
     formatter = lib.forEachSystemPkgs (pkgs: pkgs.alejandra);
     # 'nix flake new -t self#<template>'
-    templates = import ./templates;
+    templates = lib.mkTemplates;
   };
 
   nixConfig = {
@@ -82,11 +85,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
+    nur.url = "github:nix-community/nur";
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    nur.url = "github:nix-community/nur";
+    buffer_manager-nvim = {
+      url = "github:j-morano/buffer_manager.nvim";
+      flake = false;
+    };
   };
 }

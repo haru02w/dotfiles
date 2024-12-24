@@ -1,6 +1,6 @@
 {inputs, ...}: {
   nur = inputs.nur.overlays.default;
-  # nixvim = final: prev: {
-  #   neovim = inputs.self.packages.${final.system}.nixvim;
-  # };
+  nixvim = final: prev: {
+    inherit (inputs.self.packages.${final.system}) nixvim;
+  };
 }
