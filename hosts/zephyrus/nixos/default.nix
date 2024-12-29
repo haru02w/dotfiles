@@ -32,7 +32,7 @@ in {
 
   modules.programs.ssh = {
     enable = true;
-    enablePassword = false;
+    enablePassword = true;
     enableRootLogin = false;
   };
 

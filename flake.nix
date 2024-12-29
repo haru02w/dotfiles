@@ -15,6 +15,7 @@
 
     forEachSystem = f:
       lib.genAttrs supportedSystems (system: f pkgsFor.${system});
+
     pkgsFor = lib.genAttrs supportedSystems (system:
       import nixpkgs {
         inherit system;

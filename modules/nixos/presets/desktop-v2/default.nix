@@ -76,5 +76,13 @@ in {
       git # version control system
       wget # downloader
     ];
+
+    programs.virt-manager.enable = true;
+
+    users.groups.libvirtd.members = ["haru02w"];
+
+    virtualisation.libvirtd.enable = true;
+
+    virtualisation.spiceUSBRedirection.enable = true;
   };
 }
