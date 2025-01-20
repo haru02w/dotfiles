@@ -1,4 +1,4 @@
-{lib, ...}:
+{lib, config, pkgs, ...}:
 with lib; {
   wayland.windowManager.sway.extraConfig = ''
     bindswitch --locked lid:off exec ${getExe' config.services.kanshi.package "kanshictl"} switch docked

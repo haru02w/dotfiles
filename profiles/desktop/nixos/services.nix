@@ -41,8 +41,16 @@
       };
     };
   };
+  xdg.portal = {
+    enable = true;
+    config.common.default = "wlr";
+    wlr.enable = true;
+  };
+
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
+
+  security.pam.services.swaylock = {};
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

@@ -14,8 +14,16 @@
         config.allowUnfreePredicate = _: true;
       });
 
+    listFilesRecursive = dir:
+      lib.flatten (lib.mapAttrsToList (name: type:
+        if type == "directory" || type == "symlink" then
+          listFilesRecursive (dir + "/${name}")
+        else
+          dir + "/${name}"
+      ) (builtins.readDir dir));
+
     # Generate path:[${path}/**/*.nix, (...)]
-    nixFilesInPathR = path: lib.filter (value: lib.strings.hasSuffix ".nix" value) (lib.filesystem.listFilesRecursive path);
+    nixFilesInPathR = path: lib.filter (value: lib.strings.hasSuffix ".nix" value) (listFilesRecursive path);
     # Generate path:[${path}/*/]
     dirsInPath = path:
       builtins.attrNames (lib.filterAttrs (_: value: value == "directory")
