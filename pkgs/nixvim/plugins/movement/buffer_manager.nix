@@ -12,8 +12,16 @@ with lib.nixvim; let
     };
 in {
   extraPlugins = [
-    (mkNvimPlugin inputs.buffer_manager-nvim
-      "buffer_manager.nvim") # manage buffers
+    (pkgs.vimUtils.buildVimPlugin (let
+      src = inputs.buffer_manager-nvim;
+      pname = "buffer_manager.nvim";
+    in {
+      inherit pname src;
+      buildInputs = with pkgs.vimPlugins; [
+        plenary-nvim
+      ];
+      version = src.lastModifiedDate;
+    })) # manage buffers
   ];
 
   extraConfigLua = ''

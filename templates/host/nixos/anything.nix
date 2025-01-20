@@ -1,0 +1,3 @@
+{
+    # NixOS settings
+}

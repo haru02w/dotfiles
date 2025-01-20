@@ -81,46 +81,42 @@ with lib.nixvim; {
     };
   };
 
-  extraConfigLua = ''
-    local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
-  '';
-
   keymaps = [
     # Support for repeatable moves
     {
       mode = ["n" "x" "o"];
       key = ";";
-      action = mkRaw "ts_repeat_move.repeat_last_move";
+      action = mkRaw "require('nvim-treesitter.textobjects.repeatable_move').repeat_last_move";
     }
     {
       mode = ["n" "x" "o"];
       key = ",";
-      action = mkRaw "ts_repeat_move.repeat_last_move_opposite";
+      action = mkRaw "require('nvim-treesitter.textobjects.repeatable_move').repeat_last_move_opposite";
     }
 
     # Needed to remove conflicts with default behaviours
     {
       mode = ["n" "x" "o"];
       key = "f";
-      action = mkRaw "ts_repeat_move.builtin_f_expr";
+      action = mkRaw "require('nvim-treesitter.textobjects.repeatable_move').builtin_f_expr";
       options.expr = true;
     }
     {
       mode = ["n" "x" "o"];
       key = "F";
-      action = mkRaw "ts_repeat_move.builtin_F_expr";
+      action = mkRaw "require('nvim-treesitter.textobjects.repeatable_move').builtin_F_expr";
       options.expr = true;
     }
     {
       mode = ["n" "x" "o"];
       key = "t";
-      action = mkRaw "ts_repeat_move.builtin_t_expr";
+      action = mkRaw "require('nvim-treesitter.textobjects.repeatable_move').builtin_t_expr";
       options.expr = true;
     }
     {
       mode = ["n" "x" "o"];
       key = "T";
-      action = mkRaw "ts_repeat_move.builtin_T_expr";
+      action = mkRaw "require('nvim-treesitter.textobjects.repeatable_move').builtin_T_expr";
       options.expr = true;
     }
   ];

@@ -100,7 +100,7 @@ with lib.nixvim; {
     {
       mode = "n";
       key = "<F3>";
-      action = mkRaw "dapui.toggle";
+      action = mkRaw "require('dapui').toggle";
       options = {
         silent = true;
         desc = "toggle dap ui";
@@ -109,7 +109,7 @@ with lib.nixvim; {
     {
       mode = "n";
       key = "<F5>";
-      action = mkRaw "dap.continue";
+      action = mkRaw "require('dap').continue";
       options = {
         silent = true;
         desc = "debug: continue program";
@@ -118,7 +118,7 @@ with lib.nixvim; {
     {
       mode = "n";
       key = "<F4>";
-      action = mkRaw "dap.terminate";
+      action = mkRaw "require('dap').terminate";
       options = {
         silent = true;
         desc = "debug: terminate program";
@@ -127,7 +127,7 @@ with lib.nixvim; {
     {
       mode = "n";
       key = "<F6>";
-      action = mkRaw "dap.pause";
+      action = mkRaw "require('dap').pause";
       options = {
         silent = true;
         desc = "debug: pause program";
@@ -138,7 +138,7 @@ with lib.nixvim; {
       key = "<F8>";
       action =
         mkRaw
-        "function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end";
+        "function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end";
       options = {
         silent = true;
         desc = "debug: conditional breakpoint";
@@ -147,7 +147,7 @@ with lib.nixvim; {
     {
       mode = "n";
       key = "<F9>";
-      action = mkRaw "dap.toggle_breakpoint";
+      action = mkRaw "require('dap').toggle_breakpoint";
       options = {
         silent = true;
         desc = "debug: toggle breakpoint";
@@ -157,7 +157,7 @@ with lib.nixvim; {
     {
       mode = "n";
       key = "<F10>";
-      action = mkRaw "dap.step_over";
+      action = mkRaw "require('dap').step_over";
       options = {
         silent = true;
         desc = "debug: conditional breakpoint";
@@ -166,7 +166,7 @@ with lib.nixvim; {
     {
       mode = "n";
       key = "<F11>";
-      action = mkRaw "dap.step_into";
+      action = mkRaw "require('dap').step_into";
       options = {
         silent = true;
         desc = "debug: step into";
@@ -175,7 +175,7 @@ with lib.nixvim; {
     {
       mode = "n";
       key = "<F12>";
-      action = mkRaw "dap.step_out";
+      action = mkRaw "require('dap').step_out";
       options = {
         silent = true;
         desc = "debug: step out";

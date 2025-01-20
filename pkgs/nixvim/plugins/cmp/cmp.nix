@@ -36,6 +36,7 @@
         };
       };
       settings = {
+        preselect = "cmp.PreselectMode.None";
         experimental.ghost_text = true;
         snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
         performance = {
@@ -131,8 +132,8 @@
           "<C-b>" = "cmp.mapping(cmp.mapping.scroll_docs(-4), {'i','s','c'})";
           "<C-f>" = "cmp.mapping(cmp.mapping.scroll_docs(4), {'i','s','c'})";
           "<C-Space>" = "cmp.mapping(cmp.mapping.complete(), {'i','s','c'})";
-          "<CR>" = "cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Insert, select = false})";
-          "<S-CR>" = "cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = false})";
+          "<CR>" = "cmp.mapping(cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Insert, select = false}), {'i','s','c'})";
+          "<S-CR>" = "cmp.mapping(cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = false}), {'i','s','c'})";
         };
       };
     };
