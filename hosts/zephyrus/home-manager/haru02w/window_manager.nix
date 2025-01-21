@@ -1,6 +1,15 @@
-{lib, config, pkgs, ...}:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib; {
   wayland.windowManager.sway.extraConfig = ''
+    bindsym --to-code XF86Launch4 exec ${pkgs.asusctl}/bin/asusctl profile -n; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar
+    bindsym --to-code XF86KbdBrightnessUp exec ${pkgs.asusctl}/bin/asusctl -n
+    bindsym --to-code XF86KbdBrightnessDown exec ${pkgs.asusctl}/bin/asusctl -p
+
     bindswitch --locked lid:off exec ${getExe' config.services.kanshi.package "kanshictl"} switch docked
     bindswitch --locked lid:on exec ${getExe' config.services.kanshi.package "kanshictl"} switch docked-lid-closed
   '';
