@@ -7,7 +7,7 @@
   # Bootloader.
   boot.loader.grub = {
     enable = true;
-    device = "/dev/vda";
+    device = "/dev/sda";
     useOSProber = true;
   };
 
@@ -41,6 +41,7 @@
   };
 
   # Users Requirements
+  modules.home-manager.enable = true;
   programs.zsh.enable = true;
 
   # Users
