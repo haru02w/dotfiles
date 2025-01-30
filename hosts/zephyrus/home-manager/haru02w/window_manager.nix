@@ -69,7 +69,7 @@ with lib; {
             status = "enable";
           }
           {
-            criteria = "HDMI-A-1";
+            criteria = "*";
             mode = "1920x1080@60";
             position = "1280,0";
             status = "enable";
@@ -84,7 +84,7 @@ with lib; {
             status = "disable";
           }
           {
-            criteria = "HDMI-A-1";
+            criteria = "*";
             mode = "1920x1080@60";
             status = "enable";
           }

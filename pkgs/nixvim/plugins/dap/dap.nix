@@ -5,81 +5,80 @@
 }:
 with lib.nixvim; {
   extraPackages = with pkgs; [lldb gdb];
-  plugins.dap = {
-    enable = true;
-    extensions = {
-      dap-ui = {
-        enable = true;
-        floating.mappings.close = ["<ESC>" "q"];
-      };
-      dap-virtual-text.enable = true;
+  plugins = {
+    dap-virtual-text.enable = true;
+    dap-ui = {
+      enable = true;
+      settings.floating.mappings.close = ["<ESC>" "q"];
     };
-    adapters = {
-      executables = {
-        gdb = {
-          command = "${pkgs.gdb}/bin/gdb";
-          args = ["-i" "dap"];
+    dap = {
+      enable = true;
+      adapters = {
+        executables = {
+          gdb = {
+            command = "${pkgs.gdb}/bin/gdb";
+            args = ["-i" "dap"];
+          };
+          lldb.command = "${pkgs.lldb}/bin/lldb-dap";
         };
-        lldb.command = "${pkgs.lldb}/bin/lldb-dap";
-      };
-      servers = {
-        codelldb = {
-          port = 13000;
-          executable = {
-            command = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb";
-            args = ["--port" "13000"];
+        servers = {
+          codelldb = {
+            port = 13000;
+            executable = {
+              command = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb";
+              args = ["--port" "13000"];
+            };
           };
         };
       };
-    };
-    configurations = let
-      program = mkRaw ''
-        function()
-          return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. '/', "file")
-        end
-      '';
-      args = mkRaw ''
-        function()
-          local args_string = vim.fn.input("Input arguments: ")
-          return vim.split(args_string, " ")
-        end
-      '';
-      c-cpp-rust-config = [
-        {
-          name = "Launch (gdb)";
-          type = "gdb";
-          request = "launch";
-          program = program;
-          args = args;
-          cwd = "\${workspaceFolder}";
-          stopAtEntry = false;
-        }
-        {
-          name = "Launch (LLDB)";
-          type = "lldb";
-          request = "launch";
-          program = program;
-          args = args;
-          cwd = "\${workspaceFolder}";
-          stopOnEntry = false;
-        }
-        {
-          name = "Launch (codelldb)";
-          type = "codelldb";
-          request = "launch";
-          program = program;
-          args = args;
-          cwd = "\${workspaceFolder}";
-          stopOnEntry = false;
-        }
-      ];
-    in {
-      c = c-cpp-rust-config;
-      cpp = c-cpp-rust-config;
-      rust = c-cpp-rust-config;
+      configurations = let
+        program = mkRaw ''
+          function()
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. '/', "file")
+          end
+        '';
+        args = mkRaw ''
+          function()
+            local args_string = vim.fn.input("Input arguments: ")
+            return vim.split(args_string, " ")
+          end
+        '';
+        c-cpp-rust-config = [
+          {
+            name = "Launch (gdb)";
+            type = "gdb";
+            request = "launch";
+            inherit program;
+            inherit args;
+            cwd = "\${workspaceFolder}";
+            stopAtEntry = false;
+          }
+          {
+            name = "Launch (LLDB)";
+            type = "lldb";
+            request = "launch";
+            inherit program;
+            inherit args;
+            cwd = "\${workspaceFolder}";
+            stopOnEntry = false;
+          }
+          {
+            name = "Launch (codelldb)";
+            type = "codelldb";
+            request = "launch";
+            inherit program;
+            inherit args;
+            cwd = "\${workspaceFolder}";
+            stopOnEntry = false;
+          }
+        ];
+      in {
+        c = c-cpp-rust-config;
+        cpp = c-cpp-rust-config;
+        rust = c-cpp-rust-config;
+      };
     };
   };
-
   extraConfigLua = ''
     local dap, dapui = require("dap"), require("dapui")
     dap.listeners.before.attach.dapui_config = function()

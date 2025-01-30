@@ -11,6 +11,7 @@
     efiSupport = true;
     efiInstallAsRemovable = true;
   };
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Networking
   networking.hostName = baseNameOf ./../..; # Define your hostname.
