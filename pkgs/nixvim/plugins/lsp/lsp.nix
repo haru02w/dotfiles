@@ -15,6 +15,8 @@
           cmd = ["clangd" "--offset-encoding=utf-16"];
         };
         cmake.enable = true;
+        # dart
+        dartls.enable = true;
         # bash
         bashls.enable = true;
         # rust
@@ -119,5 +121,6 @@
     };
     # JS/TS lsp
     typescript-tools.enable = true;
+    flutter-tools.enable = true;
   };
 }
