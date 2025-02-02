@@ -14,6 +14,7 @@
         imports = lib.nixFilesInPathR ./modules/home-manager;
       };
     };
+    nixvimModule = import ./modules/nixvim;
 
     # 'nixos-rebuild --flake .#<hostname>'
     nixosConfigurations = lib.mkNixosConfig (host: let

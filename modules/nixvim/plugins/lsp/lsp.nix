@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   plugins = {
     # lsp-format.enable = true;
     lsp = {
@@ -121,6 +121,7 @@
     };
     # JS/TS lsp
     typescript-tools.enable = true;
+    # Flutter
     flutter-tools.enable = true;
   };
 }
