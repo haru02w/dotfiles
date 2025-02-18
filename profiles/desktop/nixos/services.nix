@@ -110,12 +110,6 @@
   # Access for private devices (VPN)
   services.tailscale.enable = true;
 
-  # Enable Docker with docker-compose
-  virtualisation.docker = {
-    enable = true;
-    extraPackages = [pkgs.docker-compose];
-  };
-
   # Virt-manager service to run virtual machines
   programs.virt-manager.enable = true;
   virtualisation = {
