@@ -263,7 +263,7 @@
   programs.firefox = {
     enable = true;
     profiles.${config.home.username} = {
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         simple-tab-groups
         ublock-origin
         sponsorblock

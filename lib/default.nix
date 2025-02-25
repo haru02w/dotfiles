@@ -1,5 +1,5 @@
 {inputs, ...}: let
-  lib = inputs.nixpkgs.lib;
+  inherit (inputs.nixpkgs) lib;
   myLib = rec {
     flakeRoot = inputs.self.outPath;
     # generate inputs:{ "x86_64-linux" = input; "x86_64-darwin" = input; (...)}
