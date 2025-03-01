@@ -14,6 +14,7 @@
     libnotify # notifications
     brightnessctl # change brightness
     grimblast # screenshots
+    pulsemixer
   ];
 
   # MIME

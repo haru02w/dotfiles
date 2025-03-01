@@ -6,7 +6,6 @@
     powerManagement.enable = true;
     powerManagement.finegrained = true;
     dynamicBoost.enable = true;
-    prime.reverseSync.enable = true;
   };
   services.asusd = {
     enable = true;
