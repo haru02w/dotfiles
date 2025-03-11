@@ -3,9 +3,17 @@
   lib,
   ...
 }: {
-  # Enable Docker with docker-compose
-  virtualisation.docker = {
+  # Enable the OpenSSH daemon.
+  services.openssh = {
     enable = true;
-    extraPackages = [pkgs.docker-compose];
+    settings = {
+      # Harden
+      PasswordAuthentication = true;
+      PermitRootLogin = "yes";
+      # Automatically remove stale sockets
+      StreamLocalBindUnlink = "yes";
+      # Allow forwarding ports to everywhere
+      GatewayPorts = "clientspecified";
+    };
   };
 }

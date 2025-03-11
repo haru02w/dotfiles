@@ -10,16 +10,19 @@
       import inputs.nixpkgs {
         inherit system;
         overlays = builtins.attrValues inputs.self.outputs.overlays;
-        config.allowUnfree = true;
-        config.allowUnfreePredicate = _: true;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = _: true;
+          allowUnsupportedSystem = true;
+        };
       });
 
     listFilesRecursive = dir:
-      lib.flatten (lib.mapAttrsToList (name: type:
-        if type == "directory" || type == "symlink" then
-          listFilesRecursive (dir + "/${name}")
-        else
-          dir + "/${name}"
+      lib.flatten (lib.mapAttrsToList (
+        name: type:
+          if type == "directory" || type == "symlink"
+          then listFilesRecursive (dir + "/${name}")
+          else dir + "/${name}"
       ) (builtins.readDir dir));
 
     # Generate path:[${path}/**/*.nix, (...)]
