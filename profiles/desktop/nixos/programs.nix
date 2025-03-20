@@ -16,5 +16,6 @@
     git
     wget
     sshfs
+    networkmanagerapplet
   ];
 }
