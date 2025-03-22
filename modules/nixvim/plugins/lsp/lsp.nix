@@ -48,6 +48,8 @@
         yamlls.enable = true;
         # sql
         sqls.enable = true;
+        # tailwind
+        tailwindcss.enable = true;
       };
       keymaps = {
         silent = true;
@@ -119,6 +121,8 @@
     };
     # JS/TS lsp
     typescript-tools.enable = true;
+    # Tailwind 
+    tailwind-tools.enable = true;
     # Flutter
     flutter-tools.enable = true;
   };

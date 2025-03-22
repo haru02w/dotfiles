@@ -13,7 +13,7 @@
     wl-clipboard # clipboard on wayland
     libnotify # notifications
     brightnessctl # change brightness
-    grimblast # screenshots
+    sway-contrib.grimshot
     pulsemixer
   ];
 
