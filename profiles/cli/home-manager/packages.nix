@@ -16,6 +16,7 @@
     tldr
     zip
     unzip
+    devenv
 
     # Fonts
     nerd-fonts.fira-code
