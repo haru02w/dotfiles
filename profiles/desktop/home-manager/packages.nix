@@ -15,6 +15,7 @@
     brightnessctl # change brightness
     sway-contrib.grimshot
     pulsemixer
+    seafile-client
   ];
 
   # MIME
@@ -261,6 +262,8 @@
   };
 
   # Firefox
+
+  stylix.targets.firefox.profileNames = ["${config.home.username}"];
   programs.firefox = {
     enable = true;
     profiles.${config.home.username} = {
