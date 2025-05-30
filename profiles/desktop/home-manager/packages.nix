@@ -251,8 +251,10 @@
   # Mako
   services.mako = {
     enable = true;
-    ignoreTimeout = true;
-    defaultTimeout = 5000;
+    settings = {
+      ignore-timeout = true;
+      default-timeout = 5000;
+    };
   };
 
   # Rofi

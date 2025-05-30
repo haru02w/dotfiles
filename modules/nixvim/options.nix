@@ -59,7 +59,7 @@ with lib.nixvim; {
     cmdheight = 1;
     showmode = false;
   };
-  diagnostics = {
+  diagnostic.settings = {
     underline.severity.max = mkRaw "vim.diagnostic.severity.WARN";
     virtual_text.severity.min = mkRaw "vim.diagnostic.severity.ERROR";
   };
