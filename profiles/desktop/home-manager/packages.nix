@@ -16,6 +16,7 @@
     sway-contrib.grimshot
     pulsemixer
     seafile-client
+    imv # image viewer
   ];
 
   # MIME

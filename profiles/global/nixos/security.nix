@@ -1,4 +1,5 @@
 {...}: {
+  networking.firewall.enable = false;
   security = {
     pam.loginLimits = [
       {
