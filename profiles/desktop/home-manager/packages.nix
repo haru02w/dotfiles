@@ -17,6 +17,7 @@
     pulsemixer
     seafile-client
     imv # image viewer
+    mpv
   ];
 
   # MIME
