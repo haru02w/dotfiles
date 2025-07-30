@@ -276,10 +276,12 @@
         ublock-origin
         sponsorblock
         enhancer-for-youtube
+        youtube-nonstop
         df-youtube
         translate-web-pages
         darkreader
         bitwarden
+        vimium
       ];
 
       settings = {
