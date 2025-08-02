@@ -19,7 +19,8 @@ with lib.nixvim; {
     shiftround = true;
     autoindent = true;
     smartindent = true;
-    wrap = false;
+    linebreak = true;
+    wrap = true; # TODO: put a keybind to toggle it
 
     splitbelow = true;
     splitright = true;
@@ -54,10 +55,6 @@ with lib.nixvim; {
     foldlevel = 99;
     foldlevelstart = 99;
     foldenable = true;
-
-    # testing
-    cmdheight = 1;
-    showmode = false;
   };
   diagnostic.settings = {
     underline.severity.max = mkRaw "vim.diagnostic.severity.WARN";

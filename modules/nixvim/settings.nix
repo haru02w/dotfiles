@@ -38,7 +38,7 @@ with lib.nixvim; {
 
   autoCmd = [
     {
-      callback = mkRaw "function() vim.highlight.on_yank({timeout=500}) end";
+      callback = mkRaw "function() vim.highlight.on_yank({timeout=300}) end";
       event = "TextYankPost";
       pattern = "*";
     }

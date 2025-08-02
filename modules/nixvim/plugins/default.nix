@@ -10,7 +10,7 @@
     ./treesitter/matchup.nix # '%' for words
 
     # AI
-    ./ai/ollama.nix
+    # ./ai/{...} # TODO: put something
 
     # lsp
     ./lsp/lsp.nix
@@ -29,9 +29,9 @@
 
     # movement
     ./movement/flash.nix
-    ./movement/buffer_manager.nix # harpoon and grapple for buffers instead of files
     #./movement/grapple.nix # fast file switcher (harpoon alternative)
-    # BUG: ./movement/harpoon.nix # fast file switcher
+    #./movement/harpoon.nix # fast file switcher
+    ./movement/buffer_manager.nix # harpoon and grapple for buffers instead of files
 
     # ui
     ./ui/lualine.nix # line

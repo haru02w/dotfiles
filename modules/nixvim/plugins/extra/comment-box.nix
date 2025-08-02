@@ -1,1 +1,2 @@
-{plugins.comment-box.enable = true;}
+# TODO: create keybinds
+{plugins.comment-box.enable = false;}

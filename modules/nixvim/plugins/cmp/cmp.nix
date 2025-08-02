@@ -9,7 +9,10 @@
       autoEnableSources = true;
       filetype = {
         "gitcommit" = {
-          sources = [{name = "cmp_git";} {name = "buffer";}];
+          sources = [
+            {name = "cmp_git";}
+            {name = "buffer";}
+          ];
         };
       };
       cmdline = let
@@ -45,11 +48,14 @@
         };
         sources = [
           {
+            name = "codeium";
+            max_item_count = 3;
+          }
+          {
             name = "luasnip";
             option.show_autosnippets = true;
             keywordLength = 3;
           }
-          # {name = "codeium";}
           {
             name = "nvim_lsp";
             keywordLength = 3;

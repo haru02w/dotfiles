@@ -29,8 +29,8 @@ with lib.nixvim; {
         "ac" = "@class.outer";
         "ic" = "@class.inner";
 
-        "at" = "@comment.outer";
-        "it" = "@comment.inner";
+        "a/" = "@comment.outer";
+        "i/" = "@comment.inner";
       };
     };
     move = {

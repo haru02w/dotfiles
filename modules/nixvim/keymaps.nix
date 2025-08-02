@@ -127,6 +127,15 @@
         desc = "disable highlight on search terms";
       };
     }
+    {
+      mode = "n";
+      key = "<leader>ww";
+      action = "<cmd>set wrap!<cr>";
+      options = {
+        silent = true;
+        desc = "disable highlight on search terms";
+      };
+    }
 
     {
       # Paste stuff without saving the deleted word into the buffer
@@ -144,7 +153,10 @@
     }
     {
       # Delete to void register
-      mode = ["n" "v"];
+      mode = [
+        "n"
+        "v"
+      ];
       key = "<leader>D";
       action = ''"_d'';
       options.desc = "Delete to void register";

@@ -1,3 +1,4 @@
 {
-  plugins.precognition.enable = true;
+  # It distracts me sometimes
+  plugins.precognition.enable = false;
 }
