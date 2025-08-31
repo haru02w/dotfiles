@@ -15,7 +15,6 @@
     brightnessctl # change brightness
     sway-contrib.grimshot
     pulsemixer
-    seafile-client
     imv # image viewer
     mpv
   ];
@@ -275,7 +274,7 @@
         simple-tab-groups
         ublock-origin
         sponsorblock
-        enhancer-for-youtube
+        # enhancer-for-youtube
         youtube-nonstop
         df-youtube
         translate-web-pages

@@ -23,9 +23,10 @@
   };
   boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
   #ignore lid close
-  services.logind.extraConfig = ''
-    HandleLidSwitch=suspend
-    HandleLidSwitchExternalPower=suspend
-    HandleLidSwitchDocked=ignore
-  '';
+
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchExternalPower = "suspend";
+    HandleLidSwitchDocked = "ignore";
+  };
 }
