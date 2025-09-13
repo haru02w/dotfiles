@@ -54,6 +54,7 @@
     ./extra/telescope.nix # fuzzy find
     ./extra/illuminate.nix # illuminate cursor words
     ./extra/marksview.nix # Markdown viewer
+    ./extra/texpresso.nix # Latex Viewer
     ./extra/oil.nix # file manager
     ./extra/spectre.nix # search replace workdir
     ./extra/ufo.nix # folding

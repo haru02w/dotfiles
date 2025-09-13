@@ -1,0 +1,3 @@
+{
+  plugins.texpresso.enable = true;
+}
