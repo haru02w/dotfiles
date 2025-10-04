@@ -6,7 +6,8 @@
 }: {
   home.packages = with pkgs; [
     # CLI
-    nixvim
+    nixvim # custom
+    rclone
     lazygit
     progress
     libqalculate
@@ -231,7 +232,12 @@
 
   programs.bat = {
     enable = true;
-    extraPackages = with pkgs.bat-extras; [batdiff batman batgrep batwatch];
+    extraPackages = with pkgs.bat-extras; [
+      batdiff
+      batman
+      batgrep
+      batwatch
+    ];
   };
 
   programs.zoxide = {

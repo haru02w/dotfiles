@@ -14,6 +14,7 @@
 
     # lsp
     ./lsp/lsp.nix
+    ./lsp/lspconfig.nix
     ./lsp/none-ls.nix
     ./lsp/navbuddy.nix
     ./lsp/trouble.nix # TODO:
