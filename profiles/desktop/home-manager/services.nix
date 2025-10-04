@@ -3,7 +3,9 @@
   config,
   lib,
   ...
-}: {
+}: let
+  from0to9 = attr: builtins.listToAttrs (builtins.genList (i: attr (toString i)) 10);
+in {
   # Media Player buttons functionallity (playerctl)
   services.playerctld.enable = true;
   services.mpris-proxy.enable = true;
@@ -118,21 +120,33 @@
       bindkeysToCode = true;
       keybindings = let
         inherit (config.wayland.windowManager.sway.config) modifier;
-        inherit (config.wayland.windowManager.sway.config) left down up right;
-        from0to9 = attr:
-          builtins.listToAttrs (builtins.genList (i: attr (toString i)) 10);
+        inherit
+          (config.wayland.windowManager.sway.config)
+          left
+          down
+          up
+          right
+          ;
       in
         lib.mkOptionDefault (
           # Change focus between workspaces
           from0to9 (i: lib.nameValuePair "${modifier}+${i}" "exec '${pkgs.swaysome}/bin/swaysome focus ${i}'")
           //
           # Move containers between workspaces
-          from0to9 (i: lib.nameValuePair "${modifier}+Shift+${i}" "exec '${pkgs.swaysome}/bin/swaysome move ${i}'")
+          from0to9 (
+            i: lib.nameValuePair "${modifier}+Shift+${i}" "exec '${pkgs.swaysome}/bin/swaysome move ${i}'"
+          )
           # Focus workspace groups
-          // from0to9 (i: lib.nameValuePair "${modifier}+Alt+${i}" "exec '${pkgs.swaysome}/bin/swaysome focus-group ${i}'")
+          // from0to9 (
+            i: lib.nameValuePair "${modifier}+Alt+${i}" "exec '${pkgs.swaysome}/bin/swaysome focus-group ${i}'"
+          )
           # Move containers to other workspace groups
-          // from0to9 (i: lib.nameValuePair "${modifier}+Alt+Shift+${i}" "exec '${pkgs.swaysome}/bin/swaysome move-to-group ${i}'")
+          // from0to9 (
+            i:
+              lib.nameValuePair "${modifier}+Alt+Shift+${i}" "exec '${pkgs.swaysome}/bin/swaysome move-to-group ${i}'"
+          )
           // {
+            # TODO: I hate this. Create a clone of `swaysome` to fix this anoying behavior (and learn Rust lol)
             "${modifier}+o" = "exec '${pkgs.swaysome}/bin/swaysome next-output'";
             "${modifier}+Shift+o" = "exec '${pkgs.swaysome}/bin/swaysome prev-output'";
 
