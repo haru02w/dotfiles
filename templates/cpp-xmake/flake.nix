@@ -25,7 +25,7 @@
           name = "main";
           src = ./.;
           nativeBuildInputs = [xmake gdb];
-          buildInputs = [ ];
+          buildInputs = [];
         };
       });
   };

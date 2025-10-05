@@ -87,7 +87,6 @@
     };
   };
 
-
   # Enable Docker with docker-compose
   virtualisation.docker = {
     enable = true;

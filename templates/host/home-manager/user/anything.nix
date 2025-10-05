@@ -1,3 +1,3 @@
 {
-    # Home Manager Settings
+  # Home Manager Settings
 }

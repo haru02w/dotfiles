@@ -1,6 +1,9 @@
-{ lib, ... }:
-with lib.nixvim;
 {
+  lib,
+  pkgs,
+  ...
+}:
+with lib.nixvim; {
   lsp = {
     inlayHints.enable = true;
     servers = {
@@ -138,4 +141,10 @@ with lib.nixvim;
     # Flutter
     flutter-tools.enable = true;
   };
+  # NOTE: maybe I won't use some of them
+  extraPackages = with pkgs; [
+    cargo
+    rustc
+    rustfmt
+  ];
 }

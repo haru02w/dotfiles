@@ -1,3 +1,3 @@
 {
-    # NixOS settings
+  # NixOS settings
 }

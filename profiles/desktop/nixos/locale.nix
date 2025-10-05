@@ -11,5 +11,4 @@
     layout = "us";
     options = "compose:ralt,altwin:swap_lalt_lwin,ctrl:nocaps";
   };
-  
 }
