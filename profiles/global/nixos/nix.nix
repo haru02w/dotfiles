@@ -19,9 +19,8 @@
       options = "--delete-older-than 3d";
     };
 
-    # Add each flake input as a registry
-    # To make nix3 commands consistent with the flake
-    # registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
+    # Add each flake input on the registry, so I can use `self#config`
+    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     # Add nixpkgs input to NIX_PATH
     # This lets nix2 commands still use <nixpkgs>
