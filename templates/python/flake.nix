@@ -1,36 +1,47 @@
 {
-  description = "Python project template";
+  description = "Template for dirty Python projects with UV package manager";
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  }: let
-    forAllSystems = function:
-      nixpkgs.lib.genAttrs [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ] (system:
-        function (import nixpkgs {
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+  outputs =
+    { nixpkgs, ... }:
+    let
+      inherit (nixpkgs) lib;
+      supportedSystems = lib.systems.flakeExposed;
+
+      forEachSystem = f: lib.genAttrs supportedSystems (system: f pkgsFor.${system});
+
+      pkgsFor = lib.genAttrs supportedSystems (
+        system:
+        import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          # config.cudaSupport = true; # Toggle to install cuda-tools
-          # overlays = [];
-        }));
-  in {
-    packages = forAllSystems (pkgs: {
-      default = pkgs.callPackage ./package.nix {};
-      # cuda = pkgs.callPackage ./cuda-package.nix { };
-    });
+          config.allowUnfreePredicate = _: true;
+        }
+      );
+    in
+    {
+      # Provide a Python package build using uv
+      packages = forEachSystem (pkgs: {
+        # TODO: It's not really working yet, idk why
+        default = pkgs.python3Packages.buildPythonApplication {
+          pname = "main";
+          version = "0.1.0";
+          src = ./.;
+          format = "pyproject";
+        };
+      });
 
-    devShells = forAllSystems (pkgs: {
-      default = pkgs.callPackage ./shell.nix {};
-      package = self.outputs.packages.${pkgs.system}.default;
-      cuda = pkgs.callPackage ./shell.nix {};
-    });
-  };
-
-  inputs = {nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";};
+      # Development shell with uv and Python tooling
+      devShells = forEachSystem (
+        pkgs: with pkgs; {
+          default = mkShell {
+            buildInputs = [
+              python3
+              uv
+            ];
+          };
+        }
+      );
+    };
 }
