@@ -6,49 +6,62 @@
     forEachSystemPkgs = f: lib.genAttrs lib.systems.flakeExposed (system: f pkgsFor.${system});
 
     # generate nixpkgs.legacyPackages with overlays and unfree packages
-    pkgsFor = lib.genAttrs lib.systems.flakeExposed (system:
-      import inputs.nixpkgs {
-        inherit system;
-        overlays = builtins.attrValues inputs.self.outputs.overlays;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = _: true;
-          allowUnsupportedSystem = true;
-        };
-      });
+    pkgsFor = lib.genAttrs lib.systems.flakeExposed (
+      system:
+        import inputs.nixpkgs {
+          inherit system;
+          overlays = builtins.attrValues inputs.self.outputs.overlays;
+          config = {
+            allowUnfree = true;
+            allowUnfreePredicate = _: true;
+            allowUnsupportedSystem = true;
+          };
+        }
+    );
 
     listFilesRecursive = dir:
-      lib.flatten (lib.mapAttrsToList (
-        name: type:
-          if type == "directory" || type == "symlink"
-          then listFilesRecursive (dir + "/${name}")
-          else dir + "/${name}"
-      ) (builtins.readDir dir));
+      lib.flatten (
+        lib.mapAttrsToList (
+          name: type:
+            if type == "directory" || type == "symlink"
+            then listFilesRecursive (dir + "/${name}")
+            else dir + "/${name}"
+        ) (builtins.readDir dir)
+      );
 
     # Generate path:[${path}/**/*.nix, (...)]
     nixFilesInPathR = path: lib.filter (value: lib.strings.hasSuffix ".nix" value) (listFilesRecursive path);
     # Generate path:[${path}/*/]
-    dirsInPath = path:
-      builtins.attrNames (lib.filterAttrs (_: value: value == "directory")
-        (builtins.readDir path));
+    dirsInPath = path: builtins.attrNames (lib.filterAttrs (_: value: value == "directory") (builtins.readDir path));
 
     hosts = dirsInPath ../hosts;
-    mkHomeUsers = host:
-      dirsInPath ../hosts/${host}/home-manager;
+    mkHomeUsers = host: dirsInPath ../hosts/${host}/home-manager;
 
     # Generate nixosConfiguration for all dirs (hosts) in the `./hosts` dir
     mkNixosConfig = systemPerHost:
-      builtins.listToAttrs
-      (map (host: lib.nameValuePair host (lib.nixosSystem (systemPerHost host))) hosts);
+      builtins.listToAttrs (
+        map (host: lib.nameValuePair host (lib.nixosSystem (systemPerHost host))) hosts
+      );
 
     mkHomeConfig = systemPerHostAndUser:
-      builtins.listToAttrs (lib.flatten (map (host:
-        map (user:
-          lib.nameValuePair "${user}@${host}"
-          (systemPerHostAndUser host user)) (mkHomeUsers host))
-      hosts));
+      builtins.listToAttrs (
+        lib.flatten (
+          map (
+            host:
+              map (
+                user:
+                  lib.nameValuePair "${user}@${host}" (
+                    inputs.home-manager.lib.homeManagerConfiguration (systemPerHostAndUser host user)
+                  )
+              ) (mkHomeUsers host)
+          )
+          hosts
+        )
+      );
 
-    mkTemplates = builtins.listToAttrs (map (dir: lib.nameValuePair dir {path = ../templates/${dir};}) (dirsInPath ../templates));
+    mkTemplates = builtins.listToAttrs (
+      map (dir: lib.nameValuePair dir {path = ../templates/${dir};}) (dirsInPath ../templates)
+    );
 
     # Generate NixVim Package with `pkgs` as input
     mkNixvimPkg = pkgs: let

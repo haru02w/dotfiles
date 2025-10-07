@@ -40,7 +40,7 @@
       modules =
         lib.nixFilesInPathR ./hosts/${host}/home-manager/${user}
         ++ [
-          inputs.stylix.homeManagerModules.stylix
+          inputs.stylix.homeModules.stylix
         ];
       extraSpecialArgs = {
         inherit lib;
