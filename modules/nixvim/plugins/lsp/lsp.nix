@@ -13,7 +13,7 @@ with lib.nixvim; {
       # c/c++
       clangd = {
         enable = true;
-        settings.cmd = [
+        config.cmd = [
           "clangd"
           "--offset-encoding=utf-16"
         ];
@@ -41,7 +41,7 @@ with lib.nixvim; {
       nixd.enable = true;
       nil_ls = {
         enable = true;
-        settings.nix.flake.autoArchive = true;
+        config.nix.flake.autoArchive = true;
       };
       # markdown
       marksman.enable = true;
@@ -67,12 +67,12 @@ with lib.nixvim; {
       }
       {
         key = "[d";
-        action = mkRaw "function() vim.diagnostic.jump({ count = -1, float = true }) end";
+        action = mkRaw "function() vim.diagnostic.goto_prev() end";
         options.desc = "Go to previous diagnostic";
       }
       {
         key = "]d";
-        action = mkRaw "function() vim.diagnostic.jump({ count = 1, float = true }) end";
+        action = mkRaw "function() vim.diagnostic.goto_next() end";
         options.desc = "Go to next diagnostic";
       }
 

@@ -1,6 +1,6 @@
 {
-  plugins.presence-nvim = {
+  plugins.presence = {
     enable = true;
-    neovimImageText = "Nixvim";
+    settings.neovim_image_text = "Nixvim";
   };
 }

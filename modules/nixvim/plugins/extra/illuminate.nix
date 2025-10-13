@@ -1,8 +1,8 @@
 {
   plugins.illuminate = {
     enable = true;
-    underCursor = false;
-    filetypesDenylist = [
+    settings.under_cursor = false;
+    settings.filetypes_denylist = [
       "Outline"
       "TelescopePrompt"
       "alpha"
