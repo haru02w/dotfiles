@@ -1,9 +1,11 @@
 {
   inputs,
   lib,
+  pkgs,
   ...
 }: {
   nix = {
+    package = pkgs.nix;
     settings = {
       trusted-users = ["root" "@wheel"];
       auto-optimise-store = true;
