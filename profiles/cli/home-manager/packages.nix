@@ -157,7 +157,12 @@
   };
 
   # bash
-  programs.bash.enable = true;
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      zsh
+    '';
+  };
 
   # ZSH
   programs.zsh = {
