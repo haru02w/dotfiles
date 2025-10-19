@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
     # CLI
     nixvim # custom
@@ -155,6 +156,9 @@
     '';
   };
 
+  # bash
+  programs.bash.enable = true;
+
   # ZSH
   programs.zsh = {
     enable = true;
@@ -166,8 +170,8 @@
     autosuggestion.enable = true;
     historySubstringSearch = {
       enable = true;
-      searchUpKey = ["^[[A"];
-      searchDownKey = ["^[[B"];
+      searchUpKey = [ "^[[A" ];
+      searchDownKey = [ "^[[B" ];
     };
     plugins = [
       {
@@ -189,9 +193,9 @@
     '';
 
     /*
-    envExtra =''
-      setopt no_global_rcs
-    '';
+      envExtra =''
+        setopt no_global_rcs
+      '';
     */
 
     history = {

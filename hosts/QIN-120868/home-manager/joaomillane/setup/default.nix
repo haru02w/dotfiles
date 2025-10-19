@@ -3,7 +3,8 @@
   inputs,
   lib,
   ...
-}: {
+}:
+{
   imports = builtins.attrValues inputs.self.outputs.homeModules;
   # Settings
   home = {
@@ -35,4 +36,5 @@
       path = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
     };
   };
+  targets.genericLinux.enable = true;
 }
