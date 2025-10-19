@@ -4,13 +4,19 @@
     settings.updateInInsert = false;
     sources = {
       code_actions = {
-        statix.enable = true;
         refactoring.enable = true;
+        # git
+        gitrebase.enable = true;
+        # nix
+        statix.enable = true;
       };
       diagnostics = {
-        # TODO:
+        # nix
         statix.enable = true;
+        # yaml
         yamllint.enable = true;
+        # python
+        pylint.enable = true;
       };
       hover = {
         dictionary.enable = true;
