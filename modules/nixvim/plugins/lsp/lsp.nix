@@ -46,7 +46,7 @@ with lib.nixvim; {
       # markdown
       marksman.enable = true;
       # python
-      pyright.enable = true;
+      basedpyright.enable = true;
       # go
       gopls.enable = true;
       # yaml

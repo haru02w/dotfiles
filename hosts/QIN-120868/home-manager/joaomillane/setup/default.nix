@@ -37,4 +37,5 @@
     };
   };
   targets.genericLinux.enable = true;
+  nix.settings.trusted-users = [ config.home.username ];
 }
