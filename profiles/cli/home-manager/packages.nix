@@ -45,6 +45,7 @@
     customPaneNavigationAndResize = true;
     plugins = with pkgs; [
       tmuxPlugins.cpu
+      tmuxPlugins.yank
       {
         plugin = tmuxPlugins.resurrect;
         extraConfig = ''
@@ -99,8 +100,9 @@
 
       # Start selection
       bind-key -T copy-mode-vi v send-keys -X begin-selection
-      # copy content
-      bind-key -T copy-mode-vi y send-keys -X copy-selection
+
+      # copy content (deprecated in favor of tmux-yank)
+      # bind-key -T copy-mode-vi y send-keys -X copy-selection
 
       # Enter copy-mode
       unbind [
@@ -159,9 +161,6 @@
   # bash
   programs.bash = {
     enable = true;
-    initExtra = ''
-      zsh
-    '';
   };
 
   # ZSH

@@ -16,7 +16,7 @@
         # yaml
         yamllint.enable = true;
         # python
-        pylint.enable = true;
+        # pylint.enable = true;
       };
       hover = {
         dictionary.enable = true;
@@ -36,7 +36,10 @@
         prettier = {
           enable = true;
           disableTsServerFormatter = true;
-          settings.extra_args = ["--no-semi" "--single-quote"];
+          settings.extra_args = [
+            "--no-semi"
+            "--single-quote"
+          ];
         };
         # lua
         stylua.enable = true;

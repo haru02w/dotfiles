@@ -3,7 +3,8 @@
   pkgs,
   ...
 }:
-with lib.nixvim; {
+with lib.nixvim;
+{
   lsp = {
     inlayHints.enable = true;
     servers = {
@@ -47,6 +48,14 @@ with lib.nixvim; {
       marksman.enable = true;
       # python
       basedpyright.enable = true;
+      # pylsp = {
+      #   enable = true;
+        # config.plugins = {
+        #   black.enabled = true;
+        #   flake8.enabled = true;
+        #   isort.enabled = true;
+        # };
+      # };
       # go
       gopls.enable = true;
       # yaml
