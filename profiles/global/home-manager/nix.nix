@@ -5,7 +5,7 @@
   ...
 }: {
   nix = {
-    package = pkgs.nix;
+    package = lib.mkForce pkgs.nix;
     settings = {
       trusted-users = ["root" "@wheel"];
       auto-optimise-store = true;
