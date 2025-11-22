@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  nixvim = inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
+  nixvim = inputs.nixvim.legacyPackages.${pkgs.stdenv.hostPlatform.system}.makeNixvimWithModule {
     inherit pkgs;
     module = inputs.self.outputs.nixvimModule;
     extraSpecialArgs = {

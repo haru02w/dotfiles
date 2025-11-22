@@ -16,8 +16,8 @@
   # Git config
   programs.git = {
     enable = true;
-    userName = config.home.username;
-    userEmail = "joaovictormillane@gmail.com";
+    settings.user.name = config.home.username;
+    settings.user.email = "joaovictormillane@gmail.com";
   };
 
   # Password manager
