@@ -2,35 +2,38 @@
 with lib.nixvim; {
   plugins.flash = {
     enable = true;
-    settings = {
-      modes = {
-        search.enabled = true;
-        char.enabled = true;
-      };
-    };
   };
   keymaps = [
     {
-      key = "<leader>t/";
+      key = "s";
       mode = ["n" "x" "o"];
-      action = mkRaw "require('flash').toggle";
+      action = mkRaw "require('flash').jump";
       options = {
         silent = true;
         desc = "flash";
       };
     }
     {
-      key = "/";
+      key = "S";
+      mode = ["n" "x" "o"];
+      action = mkRaw "require('flash').treesitter";
+      options = {
+        silent = true;
+        desc = "flash";
+      };
+    }
+    {
+      key = "r";
+      mode = "o";
+      action = mkRaw "require('flash').remote";
+      options = {
+        silent = true;
+        desc = "flash";
+      };
+    }
+    {
+      key = "R";
       mode = ["o" "x"];
-      action = mkRaw "require('flash').treesitter_search";
-      options = {
-        silent = true;
-        desc = "flash";
-      };
-    }
-    {
-      key = "<leader>/";
-      mode = "n";
       action = mkRaw "require('flash').treesitter_search";
       options = {
         silent = true;

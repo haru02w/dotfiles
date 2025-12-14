@@ -19,6 +19,7 @@
     zip
     unzip
     devenv
+    yazi
 
     # Fonts
     nerd-fonts.fira-code

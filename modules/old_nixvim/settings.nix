@@ -38,8 +38,8 @@ with lib.nixvim; {
 
   autoCmd = [
     {
-      callback = mkRaw "function() vim.highlight.on_yank({timeout=300}) end";
-      event = "TextYankPost";
+      callback = mkraw "function() vim.highlight.on_yank({timeout=300}) end";
+      event = "textyankpost";
       pattern = "*";
     }
     {

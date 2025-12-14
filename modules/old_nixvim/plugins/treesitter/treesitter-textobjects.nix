@@ -1,10 +1,11 @@
-{lib, ...}:
-with lib.nixvim; {
+{ lib, ... }:
+with lib.nixvim;
+{
   plugins.treesitter-textobjects = {
     enable = true;
     settings = {
       select = {
-        enable = false; # WARNING: false
+        enable = true;
         lookahead = true;
         keymaps = {
           "a=" = "@assignment.outer";
@@ -82,4 +83,68 @@ with lib.nixvim; {
       };
     };
   };
+
+  keymaps = [
+    # Support for repeatable moves
+    {
+      mode = [
+        "n"
+        "x"
+        "o"
+      ];
+      key = ";";
+      action = mkRaw "require('nvim-treesitter.textobjects.repeatable_move').repeat_last_move";
+    }
+    {
+      mode = [
+        "n"
+        "x"
+        "o"
+      ];
+      key = ",";
+      action = mkRaw "require('nvim-treesitter.textobjects.repeatable_move').repeat_last_move_opposite";
+    }
+
+    # Needed to remove conflicts with default behaviours
+    {
+      mode = [
+        "n"
+        "x"
+        "o"
+      ];
+      key = "f";
+      action = mkRaw "require('nvim-treesitter.textobjects.repeatable_move').builtin_f_expr";
+      options.expr = true;
+    }
+    {
+      mode = [
+        "n"
+        "x"
+        "o"
+      ];
+      key = "F";
+      action = mkRaw "require('nvim-treesitter.textobjects.repeatable_move').builtin_F_expr";
+      options.expr = true;
+    }
+    {
+      mode = [
+        "n"
+        "x"
+        "o"
+      ];
+      key = "t";
+      action = mkRaw "require('nvim-treesitter.textobjects.repeatable_move').builtin_t_expr";
+      options.expr = true;
+    }
+    {
+      mode = [
+        "n"
+        "x"
+        "o"
+      ];
+      key = "T";
+      action = mkRaw "require('nvim-treesitter.textobjects.repeatable_move').builtin_T_expr";
+      options.expr = true;
+    }
+  ];
 }

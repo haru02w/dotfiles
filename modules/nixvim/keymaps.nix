@@ -9,162 +9,122 @@
       action = ''
         :<c-u>let temp_variable=@"<CR>gvy:<c-u>let @/='\V<C-R>=escape(@",'/\')<CR>'<CR>:let @"=temp_variable<CR>
       '';
-      options = {
-        silent = true;
-        desc = "search by selected word";
-      };
+      options.desc = "Search for the word under the cursor";
     }
     {
       mode = "n";
       key = "<leader>\\";
       action = "<cmd>sp<cr>";
-      options = {
-        silent = true;
-        desc = "horizontal split";
-      };
+      options.desc = "Horizontal split";
     }
     {
       mode = "n";
       key = "<leader>|";
       action = "<cmd>vs<cr>";
-      options = {
-        silent = true;
-        desc = "vertical split";
-      };
+      options.desc = "Vertical split";
     }
-
+    {
+      mode = "n";
+      key = "J";
+      action = "mzJ`z";
+      options.desc = "Append next line without moving cursor";
+    }
     {
       mode = "v";
       key = "J";
       action = ":m '>+1<CR>gv=gv";
-      options = {
-        silent = true;
-        desc = "move text down without losing selection";
-      };
+      options.desc = "Move text down without losing selection";
     }
     {
       mode = "v";
       key = "K";
       action = ":m '<-2<CR>gv=gv";
-      options = {
-        silent = true;
-        desc = "move text up without losing selection";
-      };
+      options.desc = "Move text up without losing selection";
     }
-
-    {
-      mode = "n";
-      key = "J";
-      action = "mzJ`z";
-      options = {
-        silent = true;
-        desc = "append next line without moving cursor";
-      };
-    }
-
     {
       mode = "n";
       key = "<C-d>";
       action = "<C-d>zz";
-      options = {
-        silent = true;
-        desc = "move cursor half page down while keeping cursor in the middle";
-      };
+      options.desc = "Move cursor half page down while keeping cursor in the middle";
     }
     {
       mode = "n";
       key = "<C-u>";
       action = "<C-u>zz";
-      options = {
-        silent = true;
-        desc = "move cursor half page up keeping cursor in the middle";
-      };
+      options.desc = "Move cursor half page up keeping cursor in the middle";
     }
 
     {
       mode = "n";
       key = "n";
       action = "nzzzv";
-      options = {
-        silent = true;
-        desc = "Next search term keeping cursor in the middle";
-      };
+      options.desc = "Next search term keeping cursor in the middle";
     }
     {
       mode = "n";
       key = "N";
       action = "Nzzzv";
-      options = {
-        silent = true;
-        desc = "Previous search term keeping cursor in the middle";
-      };
+      options.desc = "Previous search term keeping cursor in the middle";
     }
     {
       mode = "v";
       key = "<";
       action = "<gv";
-      options = {
-        silent = true;
-        desc = "ident left and keep selection";
-      };
+      options.desc = "Indent left and keep selection";
     }
     {
       mode = "v";
       key = ">";
       action = ">gv";
-      options = {
-        silent = true;
-        desc = "ident right and keep selection";
-      };
+      options.desc = "Indent right and keep selection";
     }
-
     {
       mode = "n";
       key = "<leader>n";
       action = "<cmd>nohlsearch<cr>";
-      options = {
-        silent = true;
-        desc = "disable highlight on search terms";
-      };
+      options.desc = "Disable highlight on search terms";
     }
     {
       mode = "n";
-      key = "<leader>ww";
+      key = "<leader>tw";
       action = "<cmd>set wrap!<cr>";
-      options = {
-        silent = true;
-        desc = "disable highlight on search terms";
-      };
+      options.desc = "Disable highlight on search terms";
     }
-
     {
-      # Paste stuff without saving the deleted word into the buffer
+      mode = ["n" "v"];
+      key = "<leader>d";
+      action = ''"_d'';
+      options.desc = "Delete without yanking";
+    }
+    {
       mode = "x";
       key = "<leader>p";
       action = ''"_dp'';
-      options.desc = "Deletes to void register and paste over";
+      options.desc = "Paste over without yanking";
     }
     {
-      # Paste stuff without saving the deleted word into the buffer
       mode = "x";
       key = "<leader>P";
       action = ''"_dP'';
-      options.desc = "Deletes to void register and paste over";
-    }
-    {
-      # Delete to void register
-      mode = [
-        "n"
-        "v"
-      ];
-      key = "<leader>D";
-      action = ''"_d'';
-      options.desc = "Delete to void register";
+      options.desc = "Paste over without yanking";
     }
     {
       mode = "i";
       key = "<C-c>";
       action = "<Esc>";
+      options.desc = "Quick esc";
+    }
+    {
+      mode = "n";
+      key = "<leader>bn";
+      action = "<cmd>bnext<cr>";
+      options.desc = "Next buffer";
+    }
+    {
+      mode = "n";
+      key = "<leader>bp";
+      action = "<cmd>bprevious<cr>";
+      options.desc = "Previous buffer";
     }
   ];
 }
