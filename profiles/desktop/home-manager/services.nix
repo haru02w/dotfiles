@@ -52,12 +52,9 @@ in {
   services.swayidle = {
     enable = true;
     systemdTarget = "graphical-session.target";
-    events = [
-      {
-        event = "before-sleep";
-        command = "${lib.getExe config.programs.swaylock.package} -efF";
-      }
-    ];
+    events = {
+        "before-sleep" = "${lib.getExe config.programs.swaylock.package} -efF";
+      };
     timeouts = [
       {
         timeout = 900;
