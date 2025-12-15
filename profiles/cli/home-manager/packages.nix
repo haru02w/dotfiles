@@ -44,6 +44,7 @@
     secureSocket = true;
     sensibleOnTop = true;
     customPaneNavigationAndResize = true;
+    historyLimit = 10000;
     plugins = with pkgs; [
       tmuxPlugins.cpu
       tmuxPlugins.yank

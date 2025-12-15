@@ -12,6 +12,8 @@
 
       # The next line enables shell command completion for gcloud.
       if [ -f '/home/joaomillane/Downloads/google-cloud-sdk/completion.bash.inc' ]; then source '/home/joaomillane/Downloads/google-cloud-sdk/completion.bash.inc'; fi
+
+      PATH="$PATH:$HOME/.local/bin"
     '';
     initExtra = ''
       zsh
