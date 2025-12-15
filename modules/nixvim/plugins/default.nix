@@ -9,6 +9,7 @@
     ./language-server/lsp.nix
     ./language-server/blink-cmp.nix
     ./language-server/none-ls.nix
+    ./language-server/trouble.nix
     # movement
     ./movement/flash.nix
     ./movement/harpoon.nix

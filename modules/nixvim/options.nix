@@ -13,6 +13,12 @@ with lib.nixvim; {
     Normal = {
       bg = "none";
     };
+    NormalFloat = {
+      bg = "none";
+    };
+    FloatBorder = {
+      bg = "none";
+    };
     NormalNC = {
       bg = "none";
     };
