@@ -3,6 +3,13 @@
     # TODO: setup cmdline settings and ai sources
     enable = true;
     settings = {
+      signature = {
+        enabled = true;
+        keymap = {
+          "<C-b>" = ["scroll_signature_up" "fallback"];
+          "<C-f>" = ["scroll_signature_down" "fallback"];
+        };
+      };
       completion = {
         keyword.range = "full";
         list = {
@@ -13,6 +20,7 @@
           };
         };
         trigger = {
+          show_on_accept_on_trigger_character = true;
           show_on_backspace = true;
           show_on_backspace_in_keyword = true;
           show_on_insert = true;
@@ -28,17 +36,22 @@
       sources = {
         default = ["snippets" "lsp" "path" "buffer" "ripgrep" "emoji" "dictionary"];
         providers = {
-          # snippets (preset luasnip)
-          # lsp (default)
-          # path (default)
-          emoji.module = "blink-emoji";
+          snippets.score_offset = 6;
+          lsp.score_offset = 5;
+          path.score_offset = 4;
+          emoji = {
+            module = "blink-emoji";
+            score_offset = 3;
+          };
           ripgrep = {
-            async = true;
             module = "blink-ripgrep";
+            async = true;
+            score_offset = 2;
           };
           dictionary = {
-            async = true;
             module = "blink-cmp-dictionary";
+            async = true;
+            score_offset = 1;
           };
         };
       };
