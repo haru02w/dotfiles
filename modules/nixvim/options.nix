@@ -68,7 +68,7 @@ with lib.nixvim; {
     winblend = 0;
     conceallevel = 0;
     concealcursor = "";
-    lazyredraw = true;
+    # lazyredraw = true;
     synmaxcol = 300;
 
     # file handling
