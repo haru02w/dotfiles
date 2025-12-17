@@ -47,7 +47,12 @@
     historyLimit = 10000;
     plugins = with pkgs; [
       tmuxPlugins.cpu
-      tmuxPlugins.yank
+      {
+        plugin = tmuxPlugins.yank;
+        extraConfig = ''
+          set -g @yank_action 'copy-pipe'
+        '';
+      }
       {
         plugin = tmuxPlugins.resurrect;
         extraConfig = ''
@@ -96,15 +101,14 @@
       # Delete pane
       bind c kill-pane
 
-      # Split panes
+      ##### SPLITS (Vim-style)
+      bind-key -T pane-nav v if-shell "$is_vim" "send-keys C-w v" "split-window -h"
+      bind-key -T pane-nav s if-shell "$is_vim" "send-keys C-w s" "split-window -v"
       bind \\ split-window -v
       bind | split-window -h
 
       # Start selection
       bind-key -T copy-mode-vi v send-keys -X begin-selection
-
-      # copy content (deprecated in favor of tmux-yank)
-      # bind-key -T copy-mode-vi y send-keys -X copy-selection
 
       # Enter copy-mode
       unbind [
@@ -112,30 +116,36 @@
       bind-key v copy-mode
       bind-key p paste-buffer
 
-      # select panes on copy mode
+      # Prevents prefix hanging
+      set -g repeat-time 500
+
+      # Use <C-w> as a Vim-like prefix
+      bind-key -n C-w switch-client -T pane-nav
+
+      ##### COPY MODE (unchanged, optional)
       bind-key -T copy-mode-vi "M-h" select-pane -L
       bind-key -T copy-mode-vi "M-j" select-pane -D
       bind-key -T copy-mode-vi "M-k" select-pane -U
       bind-key -T copy-mode-vi "M-l" select-pane -R
       bind-key -T copy-mode-vi "M-\\" select-pane -l
 
-      # selecting panes
-      bind-key -n M-h if-shell "$is_vim" "send-keys M-h"  "select-pane -L"
-      bind-key -n M-j if-shell "$is_vim" "send-keys M-j"  "select-pane -D"
-      bind-key -n M-k if-shell "$is_vim" "send-keys M-k"  "select-pane -U"
-      bind-key -n M-l if-shell "$is_vim" "send-keys M-l"  "select-pane -R"
+      ##### PANE SELECTION  (<C-w> h j k l)
+      bind-key -T pane-nav h if-shell "$is_vim" "send-keys C-w h" "select-pane -L"
+      bind-key -T pane-nav j if-shell "$is_vim" "send-keys C-w j" "select-pane -D"
+      bind-key -T pane-nav k if-shell "$is_vim" "send-keys C-w k" "select-pane -U"
+      bind-key -T pane-nav l if-shell "$is_vim" "send-keys C-w l" "select-pane -R"
 
-      # resizing panes
-      bind-key -n C-M-h if-shell "$is_vim" "send-keys C-M-h" "resize-pane -L 3"
-      bind-key -n C-M-j if-shell "$is_vim" "send-keys C-M-j" "resize-pane -D 3"
-      bind-key -n C-M-k if-shell "$is_vim" "send-keys C-M-k" "resize-pane -U 3"
-      bind-key -n C-M-l if-shell "$is_vim" "send-keys C-M-l" "resize-pane -R 3"
+      ##### PANE RESIZE (<C-w> <C-h/j/k/l>)
+      bind-key -T pane-nav C-h if-shell "$is_vim" "send-keys C-w C-h" "resize-pane -L 3"
+      bind-key -T pane-nav C-j if-shell "$is_vim" "send-keys C-w C-j" "resize-pane -D 3"
+      bind-key -T pane-nav C-k if-shell "$is_vim" "send-keys C-w C-k" "resize-pane -U 3"
+      bind-key -T pane-nav C-l if-shell "$is_vim" "send-keys C-w C-l" "resize-pane -R 3"
 
-      # swaping panes
-      bind-key -n M-H if-shell "$is_vim" "send-keys M-H" "swap-pane -D"
-      bind-key -n M-J if-shell "$is_vim" "send-keys M-J" "swap-pane -D"
-      bind-key -n M-K if-shell "$is_vim" "send-keys M-K" "swap-pane -U"
-      bind-key -n M-L if-shell "$is_vim" "send-keys M-L" "swap-pane -U"
+      ##### PANE SWAP (<C-w> H J K L)
+      bind-key -T pane-nav H if-shell "$is_vim" "send-keys C-w H" "swap-pane -L"
+      bind-key -T pane-nav J if-shell "$is_vim" "send-keys C-w J" "swap-pane -D"
+      bind-key -T pane-nav K if-shell "$is_vim" "send-keys C-w K" "swap-pane -U"
+      bind-key -T pane-nav L if-shell "$is_vim" "send-keys C-w L" "swap-pane -R"
 
       #Auto windowing
       bind-key 1 if-shell "$tmux select-window -t :1" "" "new-window -t :1"

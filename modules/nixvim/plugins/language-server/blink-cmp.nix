@@ -1,15 +1,14 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}:
+with lib.nixvim; {
   plugins.blink-cmp = {
     # TODO: setup cmdline settings and ai sources
     enable = true;
     settings = {
-      signature = {
-        enabled = true;
-        keymap = {
-          "<C-b>" = ["scroll_signature_up" "fallback"];
-          "<C-f>" = ["scroll_signature_down" "fallback"];
-        };
-      };
+      signature.enabled = true;
       completion = {
         keyword.range = "full";
         list = {
@@ -31,7 +30,11 @@
         };
         ghost_text.enabled = true;
       };
-      keymap.preset = "enter";
+      keymap = {
+        preset = "enter";
+        "<C-b>" = [ "scroll_signature_up" "fallback" ];
+        "<C-f>" = [ "scroll_signature_down" "fallback" ];
+      };
       snippets.preset = "luasnip";
       sources = {
         default = ["snippets" "lsp" "path" "buffer" "ripgrep" "emoji" "dictionary"];

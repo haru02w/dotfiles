@@ -22,6 +22,7 @@
     ./ui/lualine.nix
     ./ui/todo-comments.nix
     ./ui/quicker.nix
+    ./ui/noice.nix
     # extra
     ./extra/comment.nix
     ./extra/gitsigns.nix
