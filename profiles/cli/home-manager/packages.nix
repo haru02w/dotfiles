@@ -1,10 +1,17 @@
 {
+  inputs,
   config,
   pkgs,
   lib,
   ...
-}:
-{
+}: let
+  tmux-toggle-scratch = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "tmux-toggle-scratch";
+    rtpFilePath = "tmux-toggle-scratch.tmux";
+    version = "unstable";
+    src = inputs.tmux-toggle-scratch;
+  };
+in {
   home.packages = with pkgs; [
     # CLI
     nixvim # custom
@@ -47,6 +54,13 @@
     historyLimit = 10000;
     plugins = with pkgs; [
       tmuxPlugins.cpu
+      {
+        plugin = tmux-toggle-scratch;
+        extraConfig = ''
+          set -g @toggle-scratch-keys 'C-a'
+          set -g @toggle-scratch-popup-options '-w80% -h80%'
+        '';
+      }
       {
         plugin = tmuxPlugins.yank;
         extraConfig = ''
@@ -186,8 +200,8 @@
     autosuggestion.enable = true;
     historySubstringSearch = {
       enable = true;
-      searchUpKey = [ "^[[A" ];
-      searchDownKey = [ "^[[B" ];
+      searchUpKey = ["^[[A"];
+      searchDownKey = ["^[[B"];
     };
     plugins = [
       {
@@ -209,9 +223,9 @@
     '';
 
     /*
-      envExtra =''
-        setopt no_global_rcs
-      '';
+    envExtra =''
+      setopt no_global_rcs
+    '';
     */
 
     history = {

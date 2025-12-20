@@ -98,5 +98,9 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tmux-toggle-scratch = {
+      url = "github:momo-lab/tmux-toggle-scratch";
+      flake = false;
+    };
   };
 }

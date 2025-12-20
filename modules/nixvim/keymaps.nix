@@ -53,7 +53,6 @@
       action = "<C-u>zz";
       options.desc = "Move cursor half page up keeping cursor in the middle";
     }
-
     {
       mode = "n";
       key = "n";

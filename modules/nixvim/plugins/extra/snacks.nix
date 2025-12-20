@@ -18,13 +18,6 @@ with lib.nixvim; {
           preset = "ivy";
         };
       };
-      scroll = {
-        enabled = true;
-        animate.duration = {
-          step = 10;
-          total = 30;
-        };
-      };
     };
   };
   keymaps = [

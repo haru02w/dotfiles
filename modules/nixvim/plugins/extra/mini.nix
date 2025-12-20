@@ -8,38 +8,54 @@ with lib.nixvim; {
       surround = {}; # prefix sa
       ai = {
         custom_textobjects = {
-          "=" = mkRaw ''            require('mini.ai').gen_spec.treesitter({
-                          a = '@assignment.outer',
-                          i = '@assignment.inner',
-                      })'';
-          a = mkRaw ''            require('mini.ai').gen_spec.treesitter({
-                          a = '@parameter.outer',
-                          i = '@parameter.inner',
-                      })'';
-          i = mkRaw ''            require('mini.ai').gen_spec.treesitter({
-                          a = '@conditional.outer',
-                          i = '@conditional.inner',
-                      })'';
-          l = mkRaw ''            require('mini.ai').gen_spec.treesitter({
-                          a = '@loop.outer',
-                          i = '@loop.inner',
-                      })'';
-          f = mkRaw ''            require('mini.ai').gen_spec.treesitter({
-                          a = '@call.outer',
-                          i = '@call.inner',
-                      })'';
-          m = mkRaw ''            require('mini.ai').gen_spec.treesitter({
-                          a = '@function.outer',
-                          i = '@function.inner',
-                      })'';
-          c = mkRaw ''            require('mini.ai').gen_spec.treesitter({
-                          a = '@class.outer',
-                          i = '@class.inner',
-                      })'';
-          t = mkRaw ''            require('mini.ai').gen_spec.treesitter({
-                          a = '@comment.outer',
-                          i = '@comment.inner',
-                      })'';
+          "=" = mkRaw ''
+            require('mini.ai').gen_spec.treesitter({
+              a = '@assignment.outer',
+              i = '@assignment.inner',
+            })
+          '';
+          a = mkRaw ''
+            require('mini.ai').gen_spec.treesitter({
+              a = '@parameter.outer',
+              i = '@parameter.inner',
+            })
+          '';
+          i = mkRaw ''
+            require('mini.ai').gen_spec.treesitter({
+              a = '@conditional.outer',
+              i = '@conditional.inner',
+            })
+          '';
+          l = mkRaw ''
+            require('mini.ai').gen_spec.treesitter({
+              a = '@loop.outer',
+              i = '@loop.inner',
+            })
+          '';
+          f = mkRaw ''
+            require('mini.ai').gen_spec.treesitter({
+              a = '@call.outer',
+              i = '@call.inner',
+            })
+          '';
+          m = mkRaw ''
+            require('mini.ai').gen_spec.treesitter({
+              a = '@function.outer',
+              i = '@function.inner',
+            })
+          '';
+          c = mkRaw ''
+            require('mini.ai').gen_spec.treesitter({
+              a = '@class.outer',
+              i = '@class.inner',
+            })
+          '';
+          t = mkRaw ''
+            require('mini.ai').gen_spec.treesitter({
+              a = '@comment.outer',
+              i = '@comment.inner',
+            })
+          '';
         };
       };
       # ui

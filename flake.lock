@@ -400,7 +400,8 @@
         "nixvim": "nixvim",
         "nur": "nur",
         "sops-nix": "sops-nix",
-        "stylix": "stylix"
+        "stylix": "stylix",
+        "tmux-toggle-scratch": "tmux-toggle-scratch"
       }
     },
     "sops-nix": {
@@ -565,6 +566,22 @@
       "original": {
         "owner": "tinted-theming",
         "repo": "base16-zed",
+        "type": "github"
+      }
+    },
+    "tmux-toggle-scratch": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755126432,
+        "narHash": "sha256-lzNMwf5o+Mg5vqLfdf+JU+MgetXbEyQQsPI+kRRnEIE=",
+        "owner": "momo-lab",
+        "repo": "tmux-toggle-scratch",
+        "rev": "28f9ab4f37cbb90a7da9419f14ab487648b22386",
+        "type": "github"
+      },
+      "original": {
+        "owner": "momo-lab",
+        "repo": "tmux-toggle-scratch",
         "type": "github"
       }
     }
