@@ -5,7 +5,7 @@
 
     nixvimInjections = true;
 
-    folding = true;
+    folding.enable = true;
     settings = {
       indent.enable = true;
       highlight.enable = true;

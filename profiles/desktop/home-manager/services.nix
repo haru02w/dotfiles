@@ -53,8 +53,8 @@ in {
     enable = true;
     systemdTarget = "graphical-session.target";
     events = {
-        "before-sleep" = "${lib.getExe config.programs.swaylock.package} -efF";
-      };
+      "before-sleep" = "${lib.getExe config.programs.swaylock.package} -efF";
+    };
     timeouts = [
       {
         timeout = 900;
@@ -96,7 +96,8 @@ in {
 
       defaultWorkspace = "workspace number 1";
 
-      terminal = "${lib.getExe' config.programs.foot.package "footclient"}";
+      terminal = "${lib.getExe config.programs.ghostty.package}";
+      #terminal = "${lib.getExe' config.programs.foot.package "footclient"}";
       menu = "${lib.getExe config.programs.rofi.package} -show drun -show-icons";
       modifier = "Mod4";
       floating.modifier = "Mod4";

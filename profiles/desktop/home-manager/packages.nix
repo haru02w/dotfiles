@@ -16,7 +16,6 @@
     sway-contrib.grimshot
     pulsemixer
     imv # image viewer
-    mpv
   ];
 
   # MIME
@@ -31,10 +30,28 @@
       "x-scheme-handler/unknown" = ["firefox.desktop"];
     };
   };
-
-  # Foot
-  programs.foot = {
+  # MPV
+  programs.mpv = {
     enable = true;
+    config = {
+      vo = "kitty";
+      vo-kitty-use-shm = "yes";
+    };
+  };
+
+  # Ghostty
+  programs.ghostty = {
+    enable = true;
+    settings = {
+      cursor-style = "block";
+      cursor-style-blink = false;
+      shell-integration-features = "no-cursor";
+    };
+  };
+
+  # Foot (Inactive)
+  programs.foot = {
+    enable = false;
     server.enable = true;
     settings.main.dpi-aware = lib.mkForce "no";
   };
