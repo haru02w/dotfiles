@@ -32,13 +32,19 @@ with lib.nixvim; {
       };
       keymap = {
         preset = "enter";
-        "<C-b>" = [ "scroll_signature_up" "fallback" ];
-        "<C-f>" = [ "scroll_signature_down" "fallback" ];
+        "<C-b>" = ["scroll_signature_up" "fallback"];
+        "<C-f>" = ["scroll_signature_down" "fallback"];
       };
       snippets.preset = "luasnip";
       sources = {
-        default = ["snippets" "lsp" "path" "buffer" "ripgrep" "emoji" "dictionary"];
+        default = ["minuet" "snippets" "lsp" "path" "buffer" "ripgrep" "emoji" "dictionary"];
         providers = {
+          minuet = {
+            module = "minuet.blink";
+            async = true;
+            timeout_ms = 3000;
+            score_offset = 7;
+          };
           snippets.score_offset = 6;
           lsp.score_offset = 5;
           path.score_offset = 4;

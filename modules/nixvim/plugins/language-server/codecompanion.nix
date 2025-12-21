@@ -11,17 +11,7 @@ with lib.nixvim; {
             return require("codecompanion.adapters").extend("openai_compatible",{
               env = {
                 url = "https://openrouter.ai/api",
-                api_key = function()
-                  local path = vim.fn.expand("~/.config/openrouter-api.key")
-                  local f = io.open(path, "r")
-                  if f then
-                    local content = f:read("*all"):gsub("%s+", "")
-                    f:close()
-                    return content
-                  end
-                  vim.notify("OpenRouter API key file not found at " .. path, vim.log.levels.WARN)
-                  return ""
-                end,
+                api_key = os.getenv('OPENROUTER_API_KEY'),
                 chat_url = "/v1/chat/completions",
               },
               schema = {

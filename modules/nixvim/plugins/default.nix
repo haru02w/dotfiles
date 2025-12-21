@@ -1,4 +1,20 @@
 {
+  # Loads the content of the file into the environment variable
+  extraConfigLua = ''
+    local function load_key_to_env(path, env_var)
+      local expanded_path = vim.fn.expand(path)
+      local f = io.open(expanded_path, "r")
+      if f then
+        local key = f:read("*all"):gsub("%s+", "")
+        f:close()
+        vim.fn.setenv(env_var, key)
+      end
+    end
+
+    -- Load your key into the environment variable
+    load_key_to_env("~/.config/openrouter-api.key", "OPENROUTER_API_KEY")
+  '';
+
   imports = [
     # treesitter
     ./treesitter/treesitter.nix
@@ -11,6 +27,7 @@
     ./language-server/none-ls.nix
     ./language-server/trouble.nix
     ./language-server/codecompanion.nix
+    ./language-server/minuet-ai.nix
     # movement
     ./movement/flash.nix
     ./movement/harpoon.nix
