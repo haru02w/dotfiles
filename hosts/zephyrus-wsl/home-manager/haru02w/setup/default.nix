@@ -25,14 +25,20 @@
     defaultSopsFormat = "yaml";
     age.keyFile = lib.mkDefault "/${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
-    secrets."ssh/key" = {
-      sopsFile = lib.flakeRoot + "/secrets/secrets.yaml";
-      path = "${config.home.homeDirectory}/.ssh/id_ed25519";
-    };
+    secrets = {
+      "ssh/key" = {
+        sopsFile = lib.flakeRoot + "/secrets/secrets.yaml";
+        path = "${config.home.homeDirectory}/.ssh/id_ed25519";
+      };
 
-    secrets."ssh/pub" = {
-      sopsFile = lib.flakeRoot + "/secrets/secrets.yaml";
-      path = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
+      "ssh/pub" = {
+        sopsFile = lib.flakeRoot + "/secrets/secrets.yaml";
+        path = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
+      };
+      "openrouter-apikey" = {
+        sopsFile = lib.flakeRoot + "/secrets/secrets.yaml";
+        path = "${config.home.homeDirectory}/.config/openrouter-api.key";
+      };
     };
   };
 }
