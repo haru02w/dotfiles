@@ -33,27 +33,27 @@
   # MPV
   programs.mpv = {
     enable = true;
-    config = {
-      vo = "kitty";
-      vo-kitty-use-shm = "yes";
-    };
+    # config = {
+    #   vo = "kitty";
+    #   vo-kitty-use-shm = "yes";
+    # };
   };
 
-  # Ghostty
-  programs.ghostty = {
+  # Foot
+  programs.foot = {
     enable = true;
+    server.enable = true;
+    settings.main.dpi-aware = lib.mkForce "no";
+  };
+
+  # Ghostty (NOTE: Don't work with compose keys. Not ready for me yet)
+  programs.ghostty = {
+    enable = false;
     settings = {
       cursor-style = "block";
       cursor-style-blink = false;
       shell-integration-features = "no-cursor";
     };
-  };
-
-  # Foot (Inactive)
-  programs.foot = {
-    enable = false;
-    server.enable = true;
-    settings.main.dpi-aware = lib.mkForce "no";
   };
 
   # Waybar

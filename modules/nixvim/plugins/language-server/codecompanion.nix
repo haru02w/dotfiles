@@ -16,7 +16,7 @@ with lib.nixvim; {
               },
               schema = {
                 model = {
-                  default = "xiaomi/mimo-v2-flash:free",
+                  default = "anthropic/claude-sonnet-4.5",
                 },
               },
             })

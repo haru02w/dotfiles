@@ -16,6 +16,17 @@
   '';
 
   imports = [
+    # extra
+    ./extra/snacks.nix
+    ./extra/mini.nix
+    ./extra/comment.nix
+    ./extra/gitsigns.nix
+    ./extra/hex.nix
+    ./extra/indent-o-matic.nix
+    ./extra/presence.nix
+    ./extra/ufo.nix
+    ./extra/undotree.nix
+    ./extra/which-key.nix
     # treesitter
     ./treesitter/treesitter.nix
     ./treesitter/treesitter-textobjects.nix
@@ -41,16 +52,5 @@
     ./ui/todo-comments.nix
     ./ui/quicker.nix
     ./ui/noice.nix
-    # extra
-    ./extra/comment.nix
-    ./extra/gitsigns.nix
-    ./extra/hex.nix
-    ./extra/indent-o-matic.nix
-    ./extra/mini.nix
-    ./extra/presence.nix
-    ./extra/snacks.nix
-    ./extra/ufo.nix
-    ./extra/undotree.nix
-    ./extra/which-key.nix
   ];
 }

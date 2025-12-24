@@ -96,8 +96,8 @@ in {
 
       defaultWorkspace = "workspace number 1";
 
-      terminal = "${lib.getExe config.programs.ghostty.package}";
-      #terminal = "${lib.getExe' config.programs.foot.package "footclient"}";
+      # terminal = "${lib.getExe config.programs.ghostty.package}";
+      terminal = "${lib.getExe' config.programs.foot.package "footclient"}";
       menu = "${lib.getExe config.programs.rofi.package} -show drun -show-icons";
       modifier = "Mod4";
       floating.modifier = "Mod4";

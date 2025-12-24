@@ -19,6 +19,15 @@
         };
       };
       presets.long_message_to_split = true;
+      routes = [
+        {
+          filter = {
+            event = "notify";
+            kind = "info";
+          };
+          opts.history = true;
+        }
+      ];
     };
   };
 }

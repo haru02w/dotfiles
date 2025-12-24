@@ -1,5 +1,4 @@
 {
-  # TODO: configure tmux too
   plugins.tmux-navigator = {
     enable = true;
     settings = {
@@ -9,23 +8,23 @@
     keymaps = [
       {
         action = "left";
-        key = "<C-w>h";
+        key = "<C-Space>h";
       }
       {
         action = "down";
-        key = "<C-w>j";
+        key = "<C-Space>j";
       }
       {
         action = "up";
-        key = "<C-w>k";
+        key = "<C-Space>k";
       }
       {
         action = "right";
-        key = "<C-w>l";
+        key = "<C-Space>l";
       }
       {
         action = "previous";
-        key = "<C-w>p";
+        key = "<C-Space>p";
       }
     ];
   };

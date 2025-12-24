@@ -27,7 +27,7 @@ with lib.nixvim; {
     number = true;
     relativenumber = true;
     cursorline = true;
-    wrap = false; # TODO: <leader>ow to toggle wrap
+    wrap = false; # TODO: <leader>tw to toggle wrap
     breakindent = true;
     linebreak = true;
     scrolloff = 10;
@@ -171,17 +171,18 @@ with lib.nixvim; {
     }
   ];
 
-  # TODO: enable later
-  # performance = {
-  #   byteCompileLua = {
-  #     enable = true;
-  #     configs = true;
-  #     initLua = true;
-  #     luaLib = true;
-  #     nvimRuntime = true;
-  #     plugins = true;
-  #   };
-  # };
+  performance = {
+    byteCompileLua = {
+      enable = true;
+      configs = true;
+      initLua = true;
+      luaLib = true;
+      nvimRuntime = true;
+      plugins = true;
+    };
+  };
+  luaLoader.enable = true;
+
   viAlias = true;
   vimAlias = true;
   waylandSupport = true;

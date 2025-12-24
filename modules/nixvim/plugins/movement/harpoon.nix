@@ -37,30 +37,6 @@ in {
       }
       {
         mode = "n";
-        key = "<C-h>";
-        action = mkRaw ''function() require('harpoon'):list():select(1) end'';
-        options.desc = "Select harpoon mark 1";
-      }
-      {
-        mode = "n";
-        key = "<C-j>";
-        action = mkRaw ''function() require('harpoon'):list():select(2) end'';
-        options.desc = "Select harpoon mark 2";
-      }
-      {
-        mode = "n";
-        key = "<C-k>";
-        action = mkRaw ''function() require('harpoon'):list():select(3) end'';
-        options.desc = "Select harpoon mark 3";
-      }
-      {
-        mode = "n";
-        key = "<C-l>";
-        action = mkRaw ''function() require('harpoon'):list():select(4) end'';
-        options.desc = "Select harpoon mark 4";
-      }
-      {
-        mode = "n";
         key = "<C-S-p>";
         action = mkRaw ''function() require('harpoon'):list():prev() end'';
         options.desc = "Select harpoon previous mark";

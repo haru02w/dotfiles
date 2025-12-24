@@ -5,7 +5,7 @@
 }:
 with lib.nixvim; {
   plugins.blink-cmp = {
-    # TODO: setup cmdline settings and ai sources
+    # TODO: setup cmdline settings
     enable = true;
     settings = {
       signature.enabled = true;
@@ -19,6 +19,7 @@ with lib.nixvim; {
           };
         };
         trigger = {
+          prefetch_on_insert = false;
           show_on_accept_on_trigger_character = true;
           show_on_backspace = true;
           show_on_backspace_in_keyword = true;
@@ -32,6 +33,8 @@ with lib.nixvim; {
       };
       keymap = {
         preset = "enter";
+        "<C-a>" = mkRaw "require('minuet').make_blink_map()";
+        "<C-k>" = ["fallback"]; # Disable it
         "<C-b>" = ["scroll_signature_up" "fallback"];
         "<C-f>" = ["scroll_signature_down" "fallback"];
       };
