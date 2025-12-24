@@ -12,8 +12,7 @@ with lib.nixvim; {
           name = "OpenRouter";
           stream = true;
           optional = {
-            max_tokens = 56;
-            top_p = 0.9;
+            max_tokens = 256;
             provider.sort = "throughput";
           };
         };
