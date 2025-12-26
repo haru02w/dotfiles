@@ -35,8 +35,6 @@ with lib.nixvim; {
         preset = "enter";
         "<C-a>" = mkRaw "require('minuet').make_blink_map()";
         "<C-k>" = ["fallback"]; # Disable it
-        "<C-b>" = ["scroll_signature_up" "fallback"];
-        "<C-f>" = ["scroll_signature_down" "fallback"];
       };
       snippets.preset = "luasnip";
       sources = {
