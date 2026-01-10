@@ -14,6 +14,7 @@
     -- Load your key into the environment variable
     load_key_to_env("~/.config/openrouter-api.key", "OPENROUTER_API_KEY")
   '';
+  env.OPENCODE_API_KEY = "sk-OV3pz6iBOQ0rRvHBQxO1CNxMSxA9Wu7k0R8k1EGNUOgPIMeeOkfGHERfLXtBEa1g";
 
   imports = [
     # extra

@@ -27,6 +27,7 @@ in {
     unzip
     devenv
     yazi
+    opencode
 
     # Fonts
     nerd-fonts.fira-code

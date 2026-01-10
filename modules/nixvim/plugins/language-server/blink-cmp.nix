@@ -33,8 +33,7 @@ with lib.nixvim; {
       };
       keymap = {
         preset = "enter";
-        "<C-a>" = mkRaw "require('minuet').make_blink_map()";
-        "<C-k>" = ["fallback"]; # Disable it
+        "<C-Tab>" = mkRaw "require('minuet').make_blink_map()";
       };
       snippets.preset = "luasnip";
       sources = {

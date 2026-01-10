@@ -125,42 +125,5 @@
       action = "<cmd>bprevious<cr>";
       options.desc = "Previous buffer";
     }
-    # Insert mode
-    {
-      mode = "i";
-      key = "<C-h>";
-      action = "<Left>";
-      options = {
-        desc = "left";
-        nowait = true;
-      };
-    }
-    {
-      mode = "i";
-      key = "<C-j>";
-      action = "<Down>";
-      options = {
-        desc = "down";
-        nowait = true;
-      };
-    }
-    {
-      mode = "i";
-      key = "<C-k>";
-      action = "<Up>";
-      options = {
-        desc = "up";
-        nowait = true;
-      };
-    }
-    {
-      mode = "i";
-      key = "<C-l>";
-      action = "<Right>";
-      options = {
-        desc = "right";
-        nowait = true;
-      };
-    }
   ];
 }
