@@ -7,8 +7,8 @@ with lib.nixvim; {
       context_window = 1024;
       context_ratio = 0.85;
       # Latency tuning
-      throttle = 250;
-      debounce = 120;
+      throttle = 500;
+      debounce = 350;
       request_timeout = 2;
       n_completions = 1;
       # idk
@@ -20,7 +20,7 @@ with lib.nixvim; {
       provider = "openai_compatible";
       provider_options = {
         openai_compatible = {
-          api_key = mkRaw "os.getenv('OPENROUTER_API_KEY')";
+          api_key = "OPENROUTER_API_KEY";
           end_point = "https://openrouter.ai/api/v1/chat/completions";
           model = "mistralai/codestral-2508";
           name = "OpenRouter";
