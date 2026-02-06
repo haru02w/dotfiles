@@ -1,38 +1,32 @@
-{lib, pkgs, ...}:
+{
+  lib,
+  pkgs,
+  ...
+}:
 # WARNING: this only works because sops creates '.config/openrouter-api.key' file
 # in the host config. Create it to use standalone
 with lib.nixvim; {
   plugins.codecompanion = {
     enable = true;
     settings = {
-      # adapters = {
-      #   http.openrouter = mkRaw ''
-      #     function()
-      #       return require("codecompanion.adapters").extend("openai_compatible",{
-      #         env = {
-      #           url = "https://openrouter.ai/api",
-      #           api_key = os.getenv('OPENROUTER_API_KEY'),
-      #           chat_url = "/v1/chat/completions",
-      #         },
-      #         schema = {
-      #           model = {
-      #             default = "anthropic/claude-sonnet-4.5",
-      #           },
-      #         },
-      #       })
-      #     end
-      #   '';
-      # };
+      chat = {
+        fold_reasoning = true;
+        show_reasoning = true;
+        window = {
+          buflisted = false;
+          width = 0.3;
+          opts = {
+            breakindent = true;
+            linebreak = true;
+            wrap = true;
+          };
+        };
+        variables.buffer.opts.default_params = "all";
+      };
       strategies = {
-        agent = {
-          adapter = "opencode";
-        };
-        chat = {
-          adapter = "opencode";
-        };
-        inline = {
-          adapter = "opencode";
-        };
+        agent.adapter = "opencode";
+        chat.adapter = "opencode";
+        inline.adapter = "opencode";
       };
     };
   };
