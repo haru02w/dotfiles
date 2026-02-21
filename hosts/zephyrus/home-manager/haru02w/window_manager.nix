@@ -6,9 +6,9 @@
 }:
 with lib; {
   wayland.windowManager.sway.extraConfig = ''
-    bindsym --to-code XF86Launch4 exec ${pkgs.asusctl}/bin/asusctl profile -n; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar
-    bindsym --to-code XF86KbdBrightnessUp exec ${pkgs.asusctl}/bin/asusctl -n
-    bindsym --to-code XF86KbdBrightnessDown exec ${pkgs.asusctl}/bin/asusctl -p
+    bindsym --to-code XF86Launch4 exec ${pkgs.asusctl}/bin/asusctl profile next; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar
+    bindsym --to-code XF86KbdBrightnessUp exec ${pkgs.asusctl}/bin/asusctl leds next
+    bindsym --to-code XF86KbdBrightnessDown exec ${pkgs.asusctl}/bin/asusctl leds prev
 
     bindswitch --locked lid:off exec ${getExe' config.services.kanshi.package "kanshictl"} switch docked
     bindswitch --locked lid:on exec ${getExe' config.services.kanshi.package "kanshictl"} switch docked-lid-closed
@@ -21,10 +21,10 @@ with lib; {
       signal = 8;
       format = "{}";
       exec-on-event = false;
-      on-click = "${pkgs.asusctl}/bin/asusctl profile -n; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar";
+      on-click = "${pkgs.asusctl}/bin/asusctl profile next; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar";
       exec = let
         script = pkgs.writeShellScriptBin "fanprofiles.sh" ''
-          RETURN=$(${pkgs.asusctl}/bin/asusctl profile -p)
+          RETURN=$(${pkgs.asusctl}/bin/asusctl profile get | head -n 1)
 
           if [[ $RETURN = *"Performance"* ]]
           then
