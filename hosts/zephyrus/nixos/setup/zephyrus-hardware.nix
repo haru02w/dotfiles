@@ -14,7 +14,6 @@
   };
   services.asusd = {
     enable = true;
-    enableUserService = true;
   };
   environment.sessionVariables = rec {
     AQ_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";

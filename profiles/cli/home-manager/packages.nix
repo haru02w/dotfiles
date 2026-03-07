@@ -21,13 +21,12 @@ in {
     libqalculate
     ncdu
     btop
-    neofetch
+    fastfetch
     tldr
     zip
     unzip
     devenv
     yazi
-    opencode
 
     # Fonts
     nerd-fonts.fira-code
@@ -282,4 +281,11 @@ in {
     nix-direnv.enable = true;
   };
   home.sessionVariables.DIRENV_LOG_FORMAT = "";
+
+  programs.opencode = {
+    enable = true;
+    settings = {
+      # Custom providers
+    };
+  };
 }
