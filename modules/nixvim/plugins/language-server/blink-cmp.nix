@@ -33,17 +33,17 @@ with lib.nixvim; {
       };
       keymap = {
         preset = "enter";
-        "<C-Tab>" = mkRaw "require('minuet').make_blink_map()";
+        "<C-k>" = mkRaw "require('minuet').make_blink_map()";
       };
       snippets.preset = "luasnip";
       sources = {
-        default = ["minuet" "snippets" "lsp" "path" "buffer" "ripgrep" "emoji" "dictionary"];
+        default = ["snippets" "lsp" "path" "buffer" "ripgrep" "emoji" "dictionary"];
         providers = {
           minuet = {
             module = "minuet.blink";
             async = true;
-            timeout_ms = 2000;
-            score_offset = 7;
+            timeout_ms = 3000;
+            score_offset = 50;
           };
           snippets.score_offset = 6;
           lsp.score_offset = 5;
