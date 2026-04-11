@@ -9,7 +9,7 @@
   home = {
     username = baseNameOf ./..;
     homeDirectory = "/home/${config.home.username}";
-    stateVersion = "24.05";
+    stateVersion = "26.05";
   };
 
   # Git config

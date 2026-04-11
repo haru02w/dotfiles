@@ -12,7 +12,7 @@ with lib.nixvim; {
       completion = {
         keyword.range = "full";
         list = {
-          max_items = 10;
+          #max_items = 10;
           selection = {
             preselect = false;
             auto_insert = false;
