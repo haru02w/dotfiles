@@ -20,12 +20,12 @@
   in {
     # Provide some binary packages for selected system types.
     devShells = forEachSystem (pkgs: {
-      default = lib.mkShell {
+      default = pkgs.mkShell {
         # buildInputs - Dependencies that should exist in the runtime environment.
         # propagatedBuildInputs - Dependencies that should exist in the runtime environment and also propagated to downstream runtime environments.
         # nativeBuildInputs - Dependencies that should only exist in the build environment.
         # propagatedNativeBuildInputs - Dependencies that should only exist in the build environment and also propagated to downstream build environments.
-        builInputs = with pkgs; [devenv];
+        buildInputs = with pkgs; [devenv];
       };
     });
   };
