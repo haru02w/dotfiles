@@ -27,7 +27,10 @@ in {
       ];
     };
   };
-  services.kdeconnect.enable = true;
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+  };
 
   # Swaylock and SwayIdle
   programs.swaylock = {
