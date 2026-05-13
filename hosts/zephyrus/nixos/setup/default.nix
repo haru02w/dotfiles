@@ -24,7 +24,7 @@
   sops = {
     defaultSopsFile = lib.flakeRoot + "/secrets/secrets.yaml";
     defaultSopsFormat = "yaml";
-    age.keyFile = "/home/haru02w/.config/sops/age/keys.txt";
+    age.keyFile = "${config.users.users.haru02w.home}/.config/sops/age/keys.txt";
     secrets.haru02w = {
       sopsFile = lib.flakeRoot + "/secrets/secrets.yaml";
       neededForUsers = true;

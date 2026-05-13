@@ -4,7 +4,8 @@
     settings.updateInInsert = false;
     sources = {
       code_actions = {
-        refactoring.enable = true;
+        # `async` module conflicts with nvim-ufo
+        #refactoring.enable = true;
         gitrebase.enable = true;
         # nix
         statix.enable = true;
@@ -45,7 +46,8 @@
       };
     };
   };
-  plugins = {
-    refactoring.enable = true;
-  };
+  # `async` module conflicts with nvim-ufo
+  #plugins = {
+  #  refactoring.enable = true;
+  #};
 }

@@ -27,7 +27,7 @@ with lib.nixvim; {
     number = true;
     relativenumber = true;
     cursorline = true;
-    wrap = false; # TODO: <leader>tw to toggle wrap
+    wrap = false;
     breakindent = true;
     linebreak = true;
     scrolloff = 10;
@@ -101,10 +101,10 @@ with lib.nixvim; {
     splitright = true;
     splitbelow = true;
 
-    # fold settings (TODO: maybe review this)
-    foldmethod = "expr";
-    foldexpr = "nvim_treesitter#folderexpr()"; # WARN: treesitter dependency
-    foldlevel = 99; # starts aways unfolded
+    # fold settings
+    foldlevel = 99;
+    foldlevelstart = 99;
+    foldenable = true;
 
     # performance
     redrawtime = 10000;

@@ -6,7 +6,7 @@
 }:
 with lib; {
   wayland.windowManager.sway.extraConfig = ''
-    bindsym --to-code XF86Launch4 exec ${pkgs.asusctl}/bin/asusctl profile next; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar
+    bindsym --to-code XF86Launch4 exec ${pkgs.asusctl}/bin/asusctl profile next && ${pkgs.procps}/bin/pkill -RTMIN+8 waybar
     bindsym --to-code XF86KbdBrightnessUp exec ${pkgs.asusctl}/bin/asusctl leds next
     bindsym --to-code XF86KbdBrightnessDown exec ${pkgs.asusctl}/bin/asusctl leds prev
 
@@ -21,23 +21,19 @@ with lib; {
       signal = 8;
       format = "{}";
       exec-on-event = false;
-      on-click = "${pkgs.asusctl}/bin/asusctl profile next; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar";
+      on-click = "${pkgs.asusctl}/bin/asusctl profile next && ${pkgs.procps}/bin/pkill -RTMIN+8 waybar";
       exec = let
         script = pkgs.writeShellScriptBin "fanprofiles.sh" ''
-          RETURN=$(${pkgs.asusctl}/bin/asusctl profile get | head -n 1)
+          RETURN=$(${pkgs.asusctl}/bin/asusctl profile get)
+          RETURN=''${RETURN%%$'\n'*}
 
-          if [[ $RETURN = *"Performance"* ]]
-          then
-              echo "󱑴"
-          elif [[ $RETURN = *"Balanced"* ]]
-          then
-              echo "󱑳"
-          elif [[ $RETURN = *"Quiet"* ]]
-          then
-              echo "󱑲"
-          fi
+          case $RETURN in
+            *Performance*) echo "󱑴" ;;
+            *Balanced*)    echo "󱑳" ;;
+            *Quiet*)       echo "󱑲" ;;
+          esac
         '';
-      in "${script}/bin/fanprofiles.sh"; # WARN
+      in "${script}/bin/fanprofiles.sh";
       escape = true;
     };
   };

@@ -12,7 +12,6 @@ in
 
     settings = {
       trusted-users = ["root" "@wheel"];
-      auto-optimise-store = true;
       experimental-features = ["nix-command" "flakes"];
       system-features = ["kvm" "big-parallel" "nixos-test"];
       flake-registry = ""; # disable global flake registry
@@ -31,8 +30,4 @@ in
     # This lets nix2 commands still use <nixpkgs>
     nixPath = ["nixpkgs=${inputs.nixpkgs.outPath}"];
   };
-
-  # TODO: add common FHSEnv
-  programs.nix-ld.enable = true;
-  services.envfs.enable = true;
 }

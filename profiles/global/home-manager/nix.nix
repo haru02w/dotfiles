@@ -3,14 +3,15 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+in {
   nix = {
     package = lib.mkForce pkgs.nix;
     settings = {
       trusted-users = ["root" "@wheel"];
-      auto-optimise-store = true;
       experimental-features = ["nix-command" "flakes"];
-      system-features = ["kvm" "big-parallel" "nixos-test"];
+      system-features = ["kvm" "big-parallel"];
     };
 
     gc = {
@@ -19,8 +20,7 @@
       options = "--delete-older-than 3d";
     };
 
-    # Add each flake input as a registry
-    # To make nix3 commands consistent with the flake
-    # registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
+    # filter drops non-flake inputs (e.g. tmux-toggle-scratch)
+    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
   };
 }

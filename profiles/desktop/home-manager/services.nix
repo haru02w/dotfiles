@@ -179,7 +179,7 @@ in {
             "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
             "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
             # Laptop's keybindings
-            "Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot savecopy area $HOME/.screenshots/$(date +'%s.png')";
+            "Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot savecopy area ${config.xdg.userDirs.extraConfig.XDG_SCREENSHOTS_DIR}/$(date +'%s.png')";
             "XF86AudioRaiseVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ -l 1.0";
             "XF86AudioLowerVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- -l 1.0";
             "XF86AudioMute" = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
@@ -190,7 +190,10 @@ in {
       modes.resize = {};
     };
   };
-  home.activation.screenshots = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    run mkdir -p $HOME/.screenshots
-  '';
+
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+    extraConfig.XDG_SCREENSHOTS_DIR = "${config.home.homeDirectory}/.screenshots";
+  };
 }

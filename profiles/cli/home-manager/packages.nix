@@ -34,8 +34,13 @@ in {
 
   fonts.fontconfig.enable = true;
 
-  # NixVim (Neovim) Set default editor
   home.sessionVariables.EDITOR = "nvim";
+
+  home.sessionVariablesExtra = ''
+    if [ -r "$HOME/.config/openrouter-api.key" ]; then
+      export OPENROUTER_API_KEY="$(< "$HOME/.config/openrouter-api.key")"
+    fi
+  '';
 
   # Tmux
   programs.tmux = {
@@ -216,12 +221,6 @@ in {
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
     '';
-
-    /*
-    envExtra =''
-      setopt no_global_rcs
-    '';
-    */
 
     history = {
       expireDuplicatesFirst = true;

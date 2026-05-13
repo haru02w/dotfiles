@@ -87,7 +87,7 @@
       mode = "n";
       key = "<leader>tw";
       action = "<cmd>set wrap!<cr>";
-      options.desc = "Disable highlight on search terms";
+      options.desc = "Toggle wrap";
     }
     {
       mode = ["n" "v"];

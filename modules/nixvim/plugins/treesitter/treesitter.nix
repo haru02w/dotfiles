@@ -5,7 +5,8 @@
 
     nixvimInjections = true;
 
-    folding.enable = true;
+    # folding from nvim-ufo (uses treesitter as provider)
+    folding.enable = false;
     settings = {
       indent.enable = true;
       highlight.enable = true;

@@ -3,8 +3,6 @@
   pkgs,
   ...
 }:
-# WARNING: this only works because sops creates '.config/openrouter-api.key' file
-# in the host config. Create it to use standalone
 with lib.nixvim; {
   plugins.codecompanion = {
     enable = true;

@@ -46,16 +46,6 @@
     settings.main.dpi-aware = lib.mkForce "no";
   };
 
-  # Ghostty (NOTE: Don't work with compose keys. Not ready for me yet)
-  programs.ghostty = {
-    enable = false;
-    settings = {
-      cursor-style = "block";
-      cursor-style-blink = false;
-      shell-integration-features = "no-cursor";
-    };
-  };
-
   # Waybar
   programs.waybar = with config.lib.stylix.colors; {
     enable = true;
@@ -65,7 +55,6 @@
       layer = "top";
       position = "right";
       modules-left = [
-        # "custom/fanprofiles"
         "cpu"
         "memory"
         "battery"
@@ -165,33 +154,6 @@
         format-connected = "󰂱";
         on-click = "${pkgs.rofi-bluetooth}/bin/rofi-bluetooth";
       };
-      #   "custom/fanprofiles" = {
-      #     interval = "once";
-      #     signal = 8;
-      #     format = "{}";
-      #     exec-on-event = false;
-      #     on-click =
-      #       "${pkgs.asusctl}/bin/asusctl profile -n; ${pkgs.procps}/bin/pkill -RTMIN+8 waybar";
-      #     exec =
-      #       let
-      #         script = pkgs.writeShellScriptBin "fanprofiles.sh" ''
-      #           RETURN=$(${pkgs.asusctl}/bin/asusctl profile -p)
-      #
-      #           if [[ $RETURN = *"Performance"* ]]
-      #           then
-      #               echo "󱑴"
-      #           elif [[ $RETURN = *"Balanced"* ]]
-      #           then
-      #               echo "󱑳"
-      #           elif [[ $RETURN = *"Quiet"* ]]
-      #           then
-      #               echo "󱑲"
-      #           fi
-      #         '';
-      #       in
-      #       "${script}/bin/fanprofiles.sh"; # WARN
-      #     escape = true;
-      #   };
     };
 
     style = ''

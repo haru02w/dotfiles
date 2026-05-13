@@ -35,12 +35,12 @@
     dirsInPath = path: builtins.attrNames (lib.filterAttrs (_: value: value == "directory") (builtins.readDir path));
 
     hosts = dirsInPath ../hosts;
+    nixosHosts = lib.filter (host: builtins.pathExists (../hosts + "/${host}/nixos")) hosts;
     mkHomeUsers = host: dirsInPath ../hosts/${host}/home-manager;
 
-    # Generate nixosConfiguration for all dirs (hosts) in the `./hosts` dir
     mkNixosConfig = systemPerHost:
       builtins.listToAttrs (
-        map (host: lib.nameValuePair host (lib.nixosSystem (systemPerHost host))) hosts
+        map (host: lib.nameValuePair host (lib.nixosSystem (systemPerHost host))) nixosHosts
       );
 
     mkHomeConfig = systemPerHostAndUser:
