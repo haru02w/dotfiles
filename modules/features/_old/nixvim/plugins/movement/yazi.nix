@@ -1,4 +1,5 @@
-{ den, ... }: {
+{ den, ... }:
+{
   den.aspects.nixvim.homeManager.programs.nixvim = {
     globals.loaded_netrwPlugin = 1;
     plugins.yazi = {

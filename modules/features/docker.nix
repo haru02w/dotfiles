@@ -1,8 +1,10 @@
 {
-  den.aspects.docker.nixos = {pkgs, ...}: {
-    virtualisation.docker = {
-      enable = true;
-      extraPackages = [pkgs.docker-compose];
+  den.aspects.docker.nixos =
+    { pkgs, ... }:
+    {
+      virtualisation.docker = {
+        enable = true;
+        extraPackages = [ pkgs.docker-compose ];
+      };
     };
-  };
 }

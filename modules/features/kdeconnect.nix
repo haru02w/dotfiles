@@ -1,11 +1,13 @@
 {
-  den.aspects.kdeconnect.homeManager = {
-    services.kdeconnect = {
-      enable = true;
-      indicator = true;
+  den.aspects.kdeconnect = {
+    homeManager = {
+      services.kdeconnect = {
+        enable = true;
+        indicator = true;
+      };
     };
-    # nixos = {
-    #   programs.kdeconnect.enable = true;
-    # };
+    nixos = _: {
+      programs.kdeconnect.enable = true;
+    };
   };
 }

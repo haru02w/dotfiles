@@ -2,7 +2,8 @@
   lib,
   den,
   ...
-}: {
+}:
+{
   den = {
     # Defaults
     default = {
@@ -17,13 +18,13 @@
 
     # Schemas
     schema.user = {
-      classes = lib.mkDefault ["homeManager"];
-      includes = [den.batteries.mutual-provider];
+      classes = lib.mkDefault [ "homeManager" ];
+      includes = [ den.batteries.mutual-provider ];
     };
 
     # Hosts
     hosts = {
-      x86_64-linux.zephyrus.users.haru02w = {};
+      x86_64-linux.zephyrus.users.haru02w = { };
     };
   };
 }

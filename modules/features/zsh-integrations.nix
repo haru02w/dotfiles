@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   den.aspects.zsh = {
     darwin = {
       homebrew.enableZshIntegration = lib.mkDefault true;
@@ -21,7 +22,6 @@
         lsd.enableZshIntegration = lib.mkDefault true;
         nnn.enableZshIntegration = lib.mkDefault true;
         pls.enableZshIntegration = lib.mkDefault true;
-        eww.enableZshIntegration = lib.mkDefault true;
         fzf.enableZshIntegration = lib.mkDefault true;
         mods.enableZshIntegration = lib.mkDefault true;
         hstr.enableZshIntegration = lib.mkDefault true;

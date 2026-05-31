@@ -1,4 +1,5 @@
-{ den, ... }: {
+{ den, ... }:
+{
   den.aspects.nixvim.homeManager.programs.nixvim = {
     globals.mapleader = " ";
     globals.localmapleader = " ";
@@ -91,7 +92,10 @@
         options.desc = "Toggle wrap";
       }
       {
-        mode = [ "n" "v" ];
+        mode = [
+          "n"
+          "v"
+        ];
         key = "<leader>d";
         action = ''"_d'';
         options.desc = "Delete without yanking";
