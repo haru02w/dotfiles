@@ -33,7 +33,7 @@
             ublock-origin
             darkreader
             bitwarden
-            firefox-translations
+            translate-web-pages
             enhancer-for-youtube
             sponsorblock
             df-youtube
