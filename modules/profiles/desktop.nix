@@ -15,6 +15,7 @@
       den.aspects.noctalia
       den.aspects.firefox
       den.aspects.vieb
+      den.aspects.voxtype
     ];
 
     nixos =
@@ -24,6 +25,9 @@
         hardware.bluetooth.enable = true;
         services.power-profiles-daemon.enable = true;
         services.upower.enable = true;
+
+        # extract this later
+        services.tailscale.enable = true;
 
         i18n.inputMethod = {
           enable = true;

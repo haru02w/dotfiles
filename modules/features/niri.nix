@@ -167,6 +167,10 @@
               # TODO: set yazi as default file-manager
               "Mod+E".action = sh "xdg-open ~";
 
+              # Voxtype push-to-talk (compositor bind consumes the key so it
+              # never leaks to the focused app; built-in evdev hotkey is off).
+              "Ctrl+F12".action = sh "voxtype record toggle";
+
               # Session
               "Mod+Shift+E".action.quit = [ ];
               "Mod+Shift+P".action.power-off-monitors = [ ];

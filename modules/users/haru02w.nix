@@ -17,6 +17,8 @@
         ];
       };
 
-    provides.to-hosts.nixos = _: { };
+    provides.to-hosts.nixos = _: {
+      users.users.haru02w.extraGroups = [ "input" ];
+    };
   };
 }

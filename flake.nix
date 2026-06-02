@@ -24,6 +24,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
+    mango = {
+      url = "github:mangowm/mango";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     niri-flake = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,6 +64,10 @@
     };
     vieb-nix = {
       url = "github:tejing1/vieb-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    voxtype = {
+      url = "github:peteonrails/voxtype";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
