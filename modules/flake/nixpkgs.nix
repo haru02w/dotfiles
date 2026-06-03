@@ -7,7 +7,7 @@ let
   };
 in
 {
-  flake-file.inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+  flake-file.inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
   den.default = {
     nixos.nixpkgs = { inherit config; };

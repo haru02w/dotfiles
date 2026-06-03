@@ -18,17 +18,14 @@
         package = pkgs.voxtype-vulkan;
         service.enable = true;
 
-        # Multilingual model (small, ~466 MB) with auto language detection —
-        # handles Portuguese plus mixed pt/en.
-        model.name = "small";
+        model.name = "medium";
         settings = {
-          whisper.language = "auto";
-          # OSD popup binary not in nixpkgs and has no binary cache; building it
-          # from the flake means compiling.
-          # Use cheap indicators instead so
-          # toggle-mode recording is never silently left on:
-          #   - beep on start/stop
-          #   - desktop notifications (shown by noctalia)
+          whisper = {
+            language = [ "en" "pt" ];
+            eager_processing = true;
+            flash_attention = true;
+            context_window_optimization = true;
+          };
           osd.enabled = false;
           hotkey.enabled = false;
           audio.feedback = {
