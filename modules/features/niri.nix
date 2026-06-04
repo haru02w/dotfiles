@@ -85,7 +85,22 @@
 
           gestures.hot-corners.enable = false;
 
-          outputs."eDP-1".scale = 1.25;
+          outputs = {
+            # Samsung sits above eDP-1, horizontally centered.
+            # eDP-1 logical 1536x864 (1920/1.25), Samsung logical 1920x1080.
+            # x = (1536-1920)/2 = -192, y = -1080 (Samsung height above eDP-1).
+            "Samsung Electric Company C27F390 HX5NA00324".position = {
+              x = -192;
+              y = -1080;
+            };
+            "eDP-1" = {
+              scale = 1.25;
+              position = {
+                x = 0;
+                y = 0;
+              };
+            };
+          };
 
           workspaces = {
             "1" = { };
