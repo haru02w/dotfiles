@@ -21,7 +21,10 @@
         model.name = "medium";
         settings = {
           whisper = {
-            language = [ "en" "pt" ];
+            language = [
+              "en"
+              "pt"
+            ];
             eager_processing = true;
             flash_attention = true;
             context_window_optimization = true;

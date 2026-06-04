@@ -103,6 +103,7 @@
             background-color = "#161616"; # bridges startup gap before noctalia paints wallpaper
             gaps = 8;
             center-focused-column = "never";
+            always-center-single-column = true;
             preset-column-widths = [
               { proportion = 1.0 / 3.0; }
               { proportion = 1.0 / 2.0; }
@@ -188,8 +189,8 @@
               # Focus
               "Mod+H".action.focus-column-left = [ ];
               "Mod+L".action.focus-column-right = [ ];
-              "Mod+J".action.focus-window-down = [ ];
-              "Mod+K".action.focus-window-up = [ ];
+              "Mod+J".action.focus-window-or-workspace-down = [ ];
+              "Mod+K".action.focus-window-or-workspace-up = [ ];
               "Mod+Left".action.focus-column-left = [ ];
               "Mod+Right".action.focus-column-right = [ ];
               "Mod+Down".action.focus-window-down = [ ];
@@ -197,16 +198,20 @@
               "Mod+Home".action.focus-column-first = [ ];
               "Mod+End".action.focus-column-last = [ ];
               "Mod+Ctrl+H".action.focus-monitor-left = [ ];
+              "Mod+Ctrl+J".action.focus-monitor-down = [ ];
+              "Mod+Ctrl+K".action.focus-monitor-up = [ ];
               "Mod+Ctrl+L".action.focus-monitor-right = [ ];
 
               # Move
               "Mod+Shift+H".action.move-column-left = [ ];
-              "Mod+Shift+L".action.move-column-right = [ ];
               "Mod+Shift+J".action.move-window-down = [ ];
               "Mod+Shift+K".action.move-window-up = [ ];
+              "Mod+Shift+L".action.move-column-right = [ ];
               "Mod+Shift+Home".action.move-column-to-first = [ ];
               "Mod+Shift+End".action.move-column-to-last = [ ];
               "Mod+Ctrl+Shift+H".action.move-column-to-monitor-left = [ ];
+              "Mod+Ctrl+Shift+J".action.move-column-to-monitor-down = [ ];
+              "Mod+Ctrl+Shift+K".action.move-column-to-monitor-up = [ ];
               "Mod+Ctrl+Shift+L".action.move-column-to-monitor-right = [ ];
 
               # Resize
@@ -222,14 +227,14 @@
               # Consume/expel
               "Mod+BracketLeft".action.consume-or-expel-window-left = [ ];
               "Mod+BracketRight".action.consume-or-expel-window-right = [ ];
-              "Mod+I".action.consume-window-into-column = [ ];
-              "Mod+O".action.expel-window-from-column = [ ];
+              "Mod+Comma".action.consume-window-into-column = [ ];
+              "Mod+Period".action.expel-window-from-column = [ ];
 
               # Workspaces
               "Mod+U".action.focus-workspace-down = [ ];
-              "Mod+P".action.focus-workspace-up = [ ];
+              "Mod+I".action.focus-workspace-up = [ ];
               "Mod+Ctrl+U".action.move-column-to-workspace-down = [ ];
-              "Mod+Ctrl+P".action.move-column-to-workspace-up = [ ];
+              "Mod+Ctrl+I".action.move-column-to-workspace-up = [ ];
               "Mod+1".action.focus-workspace = 1;
               "Mod+2".action.focus-workspace = 2;
               "Mod+3".action.focus-workspace = 3;
