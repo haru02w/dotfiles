@@ -18,7 +18,10 @@
       };
 
     provides.to-hosts.nixos = _: {
-      users.users.haru02w.extraGroups = [ "input" ];
+      users.users.haru02w.extraGroups = [
+        "input"
+        "docker"
+      ];
     };
   };
 }
