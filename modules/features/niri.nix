@@ -30,17 +30,17 @@
           enable = true;
           extraPortals = with pkgs; [
             xdg-desktop-portal-gtk
+            xdg-desktop-portal-gnome
           ];
           config.niri = {
-            default = [
-              "gtk"
-            ];
-            "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+            default = [ "gtk" ];
+            "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
           };
         };
 
         services.gnome.gnome-keyring.enable = true;
       };
+
     homeManager =
       {
         osConfig ? null,
@@ -100,18 +100,6 @@
             };
           };
 
-          workspaces = {
-            "1" = { };
-            "2" = { };
-            "3" = { };
-            "4" = { };
-            "5" = { };
-            "6" = { };
-            "7" = { };
-            "8" = { };
-            "9" = { };
-          };
-
           layout = {
             background-color = "#161616"; # bridges startup gap before noctalia paints wallpaper
             gaps = 8;
@@ -149,6 +137,13 @@
 
           spawn-at-startup = [
             { command = [ "noctalia-shell" ]; }
+            {
+              command = [
+                "${pkgs.bash}/bin/bash"
+                "-c"
+                "sleep 10 && systemctl --user restart xdg-desktop-portal"
+              ];
+            }
           ];
 
           animations.enable = true;

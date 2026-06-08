@@ -13,7 +13,9 @@ let
   };
 
   # Auto-discover every directory under ./templates as a template.
-  names = lib.attrNames (lib.filterAttrs (_: type: type == "directory") (builtins.readDir templatesDir));
+  names = lib.attrNames (
+    lib.filterAttrs (_: type: type == "directory") (builtins.readDir templatesDir)
+  );
 in
 {
   flake.templates = lib.genAttrs names (name: {

@@ -10,7 +10,9 @@
       den.aspects.udiskie
       den.aspects.virt-manager
       den.aspects.kdeconnect
-      den.aspects.niri
+      # Replaced by mango
+      # den.aspects.niri
+      den.aspects.mango
       den.aspects.ghostty
       den.aspects.noctalia
       den.aspects.firefox

@@ -40,9 +40,15 @@ let
   };
 in
 {
-  flake-file.inputs.stylix = {
-    url = "github:nix-community/stylix";
-    inputs.nixpkgs.follows = "nixpkgs";
+  flake-file = {
+    # No nixpkgs.follows: keep stylix pinned so nix-community.cachix.org hits.
+    inputs.stylix.url = "github:nix-community/stylix";
+    nixConfig = {
+      extra-substituters = [ "https://nix-community.cachix.org" ];
+      extra-trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+    };
   };
 
   den.aspects.stylix = {

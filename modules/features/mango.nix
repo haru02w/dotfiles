@@ -12,16 +12,36 @@
   };
   den.aspects.mango = {
     nixos =
-      { ... }:
+      { pkgs, ... }:
       {
         imports = [ inputs.mango.nixosModules.mango ];
         # programs.mango.enable also wires up xdg-desktop-portal (wlr) and
         # gnome-keyring as the Secret portal, so no extra portal config needed here.
         programs.mango.enable = true;
+        programs.mango.package = pkgs.mangowc;
         services.displayManager.defaultSession = lib.mkForce "mango";
       };
     homeManager =
-      { pkgs, ... }:
+      {
+        osConfig ? null,
+        pkgs,
+        ...
+      }:
+      let
+        xkb = osConfig.services.xserver.xkb or { };
+        # No arg -> full, "region" -> frozen drag-select, "window" -> focused.
+        screenshot = pkgs.writeShellScript "mango-screenshot" ''
+          mkdir -p "$HOME/Pictures/Screenshots"
+          f="$HOME/Pictures/Screenshots/Screenshot from $(date "+%Y-%m-%d %H-%M-%S").png"
+          shot() { grim "$@" - | tee "$f" | wl-copy -t image/png; }
+          case "$1" in
+            __grab) g=$(slurp) && [ -n "$g" ] && shot -g "$g"; ${pkgs.procps}/bin/pkill -x wayfreeze ;;
+            region) ${pkgs.wayfreeze}/bin/wayfreeze --hide-cursor --after-freeze-cmd "$0 __grab" ;;
+            window) g=$(mmsg get focusing-client | jq -r '"\(.x),\(.y) \(.width)x\(.height)"') && [ -n "$g" ] && shot -g "$g" ;;
+            *) shot ;;
+          esac
+        '';
+      in
       {
         # mango's nixos and home-manager modules are disjoint (programs.mango vs
         # wayland.windowManager.mango), so always import the HM module and enable
@@ -35,39 +55,76 @@
           playerctl
           grim
           slurp
+          jq
           wireplumber
           xdg-utils
         ];
 
         wayland.windowManager.mango = {
           enable = true;
+          package = pkgs.mangowc;
 
           # runs at compositor startup (no shebang needed)
+          # wl-clip-persist keeps the current selection alive after the source
+          # window closes — wlroots/dwl frees it on client exit (niri/smithay
+          # buffers it internally, so this isn't needed there).
           autostart_sh = ''
+            ${pkgs.wl-clip-persist}/bin/wl-clip-persist --clipboard regular &
             noctalia-shell &
           '';
 
           settings = {
             # Input
-            repeat_rate = 25;
-            repeat_delay = 600;
             numlockon = 1;
-            xkb_rules_layout = "us";
-            tap_to_click = 1;
-            tap_and_drag = 1;
-            drag_lock = 1;
+            # mango reads xkb rules from config only, never from XKB_DEFAULT_OPTIONS
+            # (it passes "" not NULL to xkb_keymap_new_from_names, so the env
+            # default is ignored). Pull from locale.nix's services.xserver.xkb so
+            # Mod follows the alt/super swap, same as niri (which inherits the env).
+            xkb_rules_layout = xkb.layout or "us";
+            xkb_rules_options = xkb.options or "";
             trackpad_natural_scrolling = 1;
-            disable_while_typing = 1;
-            sloppyfocus = 1;
+            accel_profile = 2;
+            accel_speed = 0.0;
 
-            # Layout
+            # Monitors (mirrors niri.nix). eDP-1 stays at origin; Samsung sits
+            # above it, horizontally centered. eDP-1 logical 1536x864 (1920/1.25),
+            # Samsung logical 1920x1080: x = (1536-1920)/2 = -192, y = -1080.
+            # mango's atoi parser accepts the negative coords (the docs' 0-99999
+            # range is nominal); only XWayland apps misbehave with negative output
+            # positions, and mango runs none here. eDP-1 matched by connector name;
+            # Samsung by make/model/serial (niri concatenates these into one id).
+            monitorrule = [
+              "make:Samsung Electric Company,model:C27F390,serial:HX5NA00324,x:-192,y:-1080"
+              "name:^eDP-1$,x:0,y:0,scale:1.25"
+            ];
+
+            # General Layout
+            # gappih = 8;
+            # gappiv = 8;
+            # gappoh = 8;
+            # gappov = 8;
+            # borderpx = 2;
+            border_radius = 6;
+            no_radius_when_single = 1;
+            no_border_when_single = 1;
+            focus_cross_monitor = 1;
+            enable_floating_snap = 1;
+            enable_hotarea = 0;
+
+            # Master Layout
             new_is_master = 1;
-            smartgaps = 0;
-            gappih = 8;
-            gappiv = 8;
-            gappoh = 8;
-            gappov = 8;
-            borderpx = 2;
+            smartgaps = 1;
+            # Scroll Layout
+            scroller_default_proportion = 0.5;
+
+            # Animations (defaults are 350-800ms, too slow)
+            animation_type_open = "zoom";
+            animation_type_close = "zoom";
+            tag_animation_direction = 0; # vertical
+            animation_duration_move = 200;
+            animation_duration_open = 200;
+            animation_duration_tag = 200;
+            animation_duration_close = 200;
 
             env = [
               "NIXOS_OZONE_WL,1"
@@ -79,27 +136,68 @@
               "SUPER,d,spawn,noctalia-shell ipc call launcher toggle"
               "SUPER,e,spawn,xdg-open ~"
 
+              # Voxtype push-to-talk (ignore if non existent)
+              "CTRL,slash,spawn,voxtype record toggle"
+
               # Session
               "SUPER+SHIFT,e,quit"
               "SUPER+ALT,l,spawn,noctalia-shell ipc call lockScreen lock"
 
               # Window management
               "SUPER,q,killclient,"
+              "SUPER,f,togglemaximizescreen,"
               "SUPER+SHIFT,f,togglefullscreen,"
               "SUPER,v,togglefloating,"
-              "SUPER,Tab,focusstack,next"
+              "SUPER,Tab,toggleoverview,"
+              "SUPER,n,switch_layout,"
+              "SUPER,s,setlayout,scroller"
+              "SUPER,m,setlayout,tile"
+              "SUPER,c,centerwin,"
+              "SUPER,i,minimized,"
+              "SUPER+SHIFT,I,restore_minimized"
+              "SUPER,z,toggle_scratchpad"
 
               # Focus
               "SUPER,h,focusdir,left"
               "SUPER,l,focusdir,right"
               "SUPER,j,focusdir,down"
               "SUPER,k,focusdir,up"
+              "SUPER,Left,focusdir,left"
+              "SUPER,Right,focusdir,right"
+              "SUPER,Down,focusdir,down"
+              "SUPER,Up,focusdir,up"
+
+              # Focus monitor
+              "SUPER+CTRL,h,focusmon,left"
+              "SUPER+CTRL,l,focusmon,right"
+              "SUPER+CTRL,j,focusmon,down"
+              "SUPER+CTRL,k,focusmon,up"
 
               # Move
               "SUPER+SHIFT,h,exchange_client,left"
               "SUPER+SHIFT,l,exchange_client,right"
               "SUPER+SHIFT,j,exchange_client,down"
               "SUPER+SHIFT,k,exchange_client,up"
+
+              # Move to monitor
+              "SUPER+CTRL+SHIFT,h,tagmon,left"
+              "SUPER+CTRL+SHIFT,l,tagmon,right"
+              "SUPER+CTRL+SHIFT,j,tagmon,down"
+              "SUPER+CTRL+SHIFT,k,tagmon,up"
+
+              # Resize (niri's keys: Mod -/= width, Mod+Shift -/= height; px deltas)
+              "SUPER,minus,resizewin,-50,0"
+              "SUPER,equal,resizewin,+50,0"
+              "SUPER+SHIFT,minus,resizewin,0,-50"
+              "SUPER+SHIFT,equal,resizewin,0,+50"
+
+              # Scroller stack ([ ] = left/right, { } = up/down)
+              "SUPER,bracketleft,scroller_stack,left"
+              "SUPER,bracketright,scroller_stack,right"
+              "SUPER+SHIFT,bracketleft,scroller_stack,up"
+              "SUPER+SHIFT,bracketright,scroller_stack,down"
+              "SUPER+ALT,j,focusstack,next"
+              "SUPER+ALT,k,focusstack,prev"
 
               # Workspaces (tags)
               "SUPER,1,view,1"
@@ -122,18 +220,30 @@
               "SUPER+SHIFT,9,tag,9"
 
               # System
-              "SUPER,r,reload_config"
+              "SUPER+SHIFT,r,reload_config"
 
-              # Media
-              "l,XF86AudioRaiseVolume,spawn,wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+"
-              "l,XF86AudioLowerVolume,spawn,wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"
-              "l,XF86AudioMute,spawn,wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-              "l,XF86AudioMicMute,spawn,wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-              "XF86AudioPlay,spawn,playerctl play-pause"
-              "XF86AudioPrev,spawn,playerctl previous"
-              "XF86AudioNext,spawn,playerctl next"
-              "l,XF86MonBrightnessUp,spawn,brightnessctl set 5%+"
-              "l,XF86MonBrightnessDown,spawn,brightnessctl set 5%-"
+              # Screenshots (mango has no built-in tool; grim/slurp + mmsg)
+              "NONE,Print,spawn,${screenshot} region"
+              "CTRL,Print,spawn,${screenshot}"
+              "ALT,Print,spawn,${screenshot} window"
+
+              # Media playback
+              "NONE,XF86AudioPlay,spawn,playerctl play-pause"
+              "NONE,XF86AudioPrev,spawn,playerctl previous"
+              "NONE,XF86AudioNext,spawn,playerctl next"
+            ];
+
+            # Lock-allowed binds (`bindl` = bind that fires while screen locked)
+            bindl = [
+              "NONE,XF86AudioRaiseVolume,spawn,wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+"
+              "NONE,XF86AudioLowerVolume,spawn,wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"
+              "NONE,XF86AudioMute,spawn,wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+              "NONE,XF86AudioMicMute,spawn,wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+              "NONE,XF86MonBrightnessUp,spawn,brightnessctl set 5%+"
+              "NONE,XF86MonBrightnessDown,spawn,brightnessctl set 5%-"
+              "NONE,XF86KbdBrightnessUp,spawn,asusctl leds next"
+              "NONE,XF86KbdBrightnessDown,spawn,asusctl leds prev"
+              "NONE,XF86Launch4,spawn,asusctl profile next"
             ];
 
             # Mouse binds
