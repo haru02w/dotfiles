@@ -9,14 +9,17 @@
       url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    inputs.wayland-pipewire-idle-inhibit = {
+      url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   den.aspects.mango = {
     nixos =
       { pkgs, ... }:
       {
         imports = [ inputs.mango.nixosModules.mango ];
-        # programs.mango.enable also wires up xdg-desktop-portal (wlr) and
-        # gnome-keyring as the Secret portal, so no extra portal config needed here.
+        # programs.mango.enable also wires up xdg-desktop-portal (wlr) and gnome-keyring Secret portal.
         programs.mango.enable = true;
         programs.mango.package = pkgs.mangowc;
         services.displayManager.defaultSession = lib.mkForce "mango";
@@ -43,10 +46,18 @@
         '';
       in
       {
-        # mango's nixos and home-manager modules are disjoint (programs.mango vs
-        # wayland.windowManager.mango), so always import the HM module and enable
-        # it here — config is only generated when enable = true.
-        imports = [ inputs.mango.hmModules.mango ];
+        # mango's nixos and HM modules are disjoint; import the HM module here, config gated on enable.
+        imports = [
+          inputs.mango.hmModules.mango
+          inputs.wayland-pipewire-idle-inhibit.homeModules.default
+        ];
+
+        # Emit a wayland idle-inhibitor while PipeWire plays media, so noctalia won't lock during video.
+        services.wayland-pipewire-idle-inhibit = {
+          enable = true;
+          systemdTarget = "graphical-session.target";
+          settings.idle_inhibitor = "wayland";
+        };
 
         home.packages = with pkgs; [
           wl-clipboard
@@ -64,10 +75,7 @@
           enable = true;
           package = pkgs.mangowc;
 
-          # runs at compositor startup (no shebang needed)
-          # wl-clip-persist keeps the current selection alive after the source
-          # window closes — wlroots/dwl frees it on client exit (niri/smithay
-          # buffers it internally, so this isn't needed there).
+          # wl-clip-persist keeps the selection alive after the source window closes (wlroots frees it on exit).
           autostart_sh = ''
             ${pkgs.wl-clip-persist}/bin/wl-clip-persist --clipboard regular &
             noctalia-shell &
@@ -76,23 +84,14 @@
           settings = {
             # Input
             numlockon = 1;
-            # mango reads xkb rules from config only, never from XKB_DEFAULT_OPTIONS
-            # (it passes "" not NULL to xkb_keymap_new_from_names, so the env
-            # default is ignored). Pull from locale.nix's services.xserver.xkb so
-            # Mod follows the alt/super swap, same as niri (which inherits the env).
+            # mango ignores XKB_DEFAULT_OPTIONS; pull xkb from locale.nix so Mod follows the alt/super swap.
             xkb_rules_layout = xkb.layout or "us";
             xkb_rules_options = xkb.options or "";
             trackpad_natural_scrolling = 1;
             accel_profile = 2;
             accel_speed = 0.0;
 
-            # Monitors (mirrors niri.nix). eDP-1 stays at origin; Samsung sits
-            # above it, horizontally centered. eDP-1 logical 1536x864 (1920/1.25),
-            # Samsung logical 1920x1080: x = (1536-1920)/2 = -192, y = -1080.
-            # mango's atoi parser accepts the negative coords (the docs' 0-99999
-            # range is nominal); only XWayland apps misbehave with negative output
-            # positions, and mango runs none here. eDP-1 matched by connector name;
-            # Samsung by make/model/serial (niri concatenates these into one id).
+            # eDP-1 at origin (scale 1.25); Samsung centered above it at x:-192,y:-1080 (negative coords ok, no XWayland).
             monitorrule = [
               "make:Samsung Electric Company,model:C27F390,serial:HX5NA00324,x:-192,y:-1080"
               "name:^eDP-1$,x:0,y:0,scale:1.25"

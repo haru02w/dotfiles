@@ -34,7 +34,7 @@ An aspect can be split across **many files** — every file that writes
 ```
 modules/
 ├── default.nix            # den root: defaults, schemas, host registry
-├── flake/                 # flake-parts plumbing (dendritic, devshell, formatter, nixpkgs)
+├── flake/                 # flake-parts plumbing (dendritic, devshell, formatter, nixpkgs, templates)
 ├── profiles/              # layered bundles of features (base ⊂ headless ⊂ desktop)
 ├── features/              # one aspect per concern (git, niri, zsh, sops, ...)
 │   ├── hardware/          # driver/boot aspects (nvidia, grub, kvm-amd, ...)
@@ -43,6 +43,8 @@ modules/
 ├── users/                 # per-user aspects (haru02w.nix)
 ├── packages/              # flake packages built per-system (nvf neovim)
 └── tools/                 # extra flake packages/apps (nh host builders, vm runner)
+
+templates/                 # `nix flake init -t` project scaffolds (c, cpp, go, rust, python, ...)
 ```
 
 Defaults, entity schemas and the host registry live in
@@ -230,6 +232,20 @@ Add a plugin by dropping a file in `modules/packages/nvf/plugins/` that writes
 Current flake packages: `nvf`, `vm`, `zephyrus` (nh host builder),
 `write-flake` / `write-inputs` / `write-lock` (flake-file generators).
 
+## Dev templates
+
+[`modules/flake/templates.nix`](./modules/flake/templates.nix) auto-discovers
+every directory under [`templates/`](./templates) and exposes it as a flake
+template. Scaffold a new project in the current directory with:
+
+```console
+nix flake init -t github:haru02w/dotfiles#rust   # or c, cpp, cpp-xmake, devshell, go, python
+```
+
+Each template ships a `flake.nix` devshell + `.envrc` (direnv). Add a template
+by dropping a directory under `templates/` — it is picked up automatically;
+give it a friendlier blurb via the `descriptions` map in `templates.nix`.
+
 ## Secrets
 
 Secrets are managed with [sops-nix](https://github.com/Mic92/sops-nix) (age key
@@ -261,8 +277,10 @@ nix flake update den            # bump the den framework
 nix fmt                         # nixfmt via treefmt-nix
 ```
 
-A dev shell with `sops`, `age`, `ssh-to-age`, `claude-code`, `opencode`, `nodejs` is available
-via `nix develop` (auto-loaded by [direnv](./.envrc)).
+A dev shell with `sops`, `age`, `ssh-to-age`, `claude-code`, `opencode`,
+`nodejs`, `nh` is available via `nix develop` (auto-loaded by
+[direnv](./.envrc)). It also points `nh` at the repo root (`NH_OS_FLAKE` /
+`NH_HOME_FLAKE`) so `nh os switch` works without `--flake`.
 
 ---
 

@@ -21,6 +21,7 @@
       users.users.haru02w.extraGroups = [
         "input"
         "docker"
+        "libvirtd"
       ];
     };
   };

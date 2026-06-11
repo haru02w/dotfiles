@@ -32,6 +32,9 @@
                   async = true;
                   score_offset = 1;
                 };
+                # Rank avante's @mention / /command / #shortcut items high
+                # inside the AvanteInput buffer (source self-guards by filetype).
+                avante.score_offset = 100;
               };
             };
           };
@@ -42,6 +45,14 @@
               enable = true;
               package = pkgs.vimPlugins.blink-cmp-dictionary;
               module = "blink-cmp-dictionary";
+            };
+            # avante sidebar completions (@mentions, /commands, #shortcuts).
+            # nvf auto-adds the provider + appends to sources.default; the
+            # source only activates when filetype == AvanteInput.
+            avante = {
+              enable = true;
+              package = pkgs.vimPlugins.blink-cmp-avante;
+              module = "blink-cmp-avante";
             };
           };
         };

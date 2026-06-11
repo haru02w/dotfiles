@@ -1,6 +1,11 @@
 {
   den.aspects.zsh = {
-    nixos.programs.zsh.enable = true;
+    nixos.programs.zsh = {
+      enable = true;
+      # home-manager runs its own compinit in ~/.zshrc; avoid the redundant
+      # global one in /etc/zshrc (saves a full compinit, ~waiting per shell).
+      enableGlobalCompInit = false;
+    };
     homeManager =
       { pkgs, ... }:
       {
