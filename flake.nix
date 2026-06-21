@@ -8,11 +8,13 @@
       "https://nix-community.cachix.org"
       "https://noctalia.cachix.org"
       "https://niri.cachix.org"
+      "https://lark-nix.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+      "lark-nix.cachix.org-1:l44MeIXQqzYeuz3NDq8JzBcMCdD4KCRAM9Q99miHl5w="
     ];
   };
 
@@ -32,6 +34,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
+    lark-nix.url = "github:bintis/lark-nix";
     mango = {
       url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";

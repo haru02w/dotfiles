@@ -13,6 +13,7 @@
         den.batteries.define-user
         den.batteries.hostname
         den.batteries.inputs'
+        den.batteries.self'
       ];
     };
 

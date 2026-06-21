@@ -23,7 +23,10 @@
             flutter-tools.enable = false;
           };
           java.enable = true;
-          nix.enable = true;
+          nix = {
+            enable = true;
+            lsp.servers = [ "nixd" ];
+          };
           bash.enable = true;
           lua.enable = true;
           json.enable = true;

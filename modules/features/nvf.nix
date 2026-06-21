@@ -1,22 +1,21 @@
-{ inputs, ... }:
 {
   den.aspects.nvf = {
     nixos =
-      { pkgs, ... }:
+      { self', ... }:
       {
         environment.systemPackages = [
-          inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.nvf
+          self'.packages.nvf
         ];
       };
 
     homeManager =
-      { pkgs, ... }:
+      { self', ... }:
       {
         home.sessionVariables = {
           EDITOR = "nvim";
         };
         home.packages = [
-          inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.nvf
+          self'.packages.nvf
         ];
       };
   };

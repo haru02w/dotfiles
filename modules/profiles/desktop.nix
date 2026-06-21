@@ -18,18 +18,22 @@
       den.aspects.firefox
       den.aspects.vieb
       den.aspects.voxtype
+      den.aspects.lark
     ];
 
     nixos =
       { pkgs, ... }:
       {
-        hardware.graphics.enable = true;
-        hardware.bluetooth.enable = true;
-        services.power-profiles-daemon.enable = true;
-        services.upower.enable = true;
-
-        # extract this later
-        services.tailscale.enable = true;
+        hardware = {
+          graphics.enable = true;
+          bluetooth.enable = true;
+        };
+        services = {
+          power-profiles-daemon.enable = true;
+          upower.enable = true;
+          # extract this later
+          tailscale.enable = true;
+        };
 
         i18n.inputMethod = {
           enable = true;

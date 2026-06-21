@@ -21,6 +21,10 @@
       {
         home.packages = with pkgs; [
           btop
+          libqalculate
+          zip
+          unzip
+          p7zip
         ];
       };
   };
