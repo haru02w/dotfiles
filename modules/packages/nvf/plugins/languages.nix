@@ -34,6 +34,7 @@
           toml.enable = true;
           sql.enable = true;
           docker.enable = true;
+          terraform.enable = true;
         };
 
         extraPackages = with pkgs; [
