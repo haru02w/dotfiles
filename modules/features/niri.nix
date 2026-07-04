@@ -136,7 +136,7 @@
           };
 
           spawn-at-startup = [
-            { command = [ "noctalia-shell" ]; }
+            { command = [ "noctalia" ]; }
             {
               command = [
                 "${pkgs.bash}/bin/bash"
@@ -172,7 +172,7 @@
             {
               # Apps
               "Mod+Return".action = run "ghostty";
-              "Mod+D".action = sh "noctalia-shell ipc call launcher toggle";
+              "Mod+D".action = sh "noctalia msg panel-toggle launcher";
               # TODO: set yazi as default file-manager
               "Mod+E".action = sh "xdg-open ~";
 
@@ -182,7 +182,7 @@
               # Session
               "Mod+Shift+E".action.quit = [ ];
               "Mod+Shift+P".action.power-off-monitors = [ ];
-              "Super+Alt+L".action = sh "noctalia-shell ipc call lockScreen lock";
+              "Super+Alt+L".action = sh "noctalia msg session lock";
 
               # Window management
               "Mod+Q".action.close-window = [ ];

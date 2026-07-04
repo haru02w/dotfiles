@@ -1,9 +1,6 @@
 { inputs, ... }:
 {
   flake-file = {
-    # Do NOT set inputs.nixpkgs.follows here: following our nixpkgs rebuilds
-    # noctalia + its quickshell fork from source. Leaving it pinned lets the
-    # noctalia.cachix.org binary cache hit.
     inputs.noctalia-shell.url = "github:noctalia-dev/noctalia-shell";
     nixConfig = {
       extra-substituters = [ "https://noctalia.cachix.org" ];
@@ -18,37 +15,40 @@
     {
       imports = [ inputs.noctalia-shell.homeModules.default ];
 
-      programs.noctalia-shell = {
+      programs.noctalia = {
         enable = true;
-        settings.idle.enabled = true;
-        settings.idle.suspendTimeout = 0; # 0 = never auto-suspend on idle
-        settings.general.lockOnSuspend = true;
-        settings.dock.enabled = false;
-        settings.bar = {
+        settings.widget.date.format = "{:%d\n%b}"; # stack day/month; horizontal "04 Jul" widened the vertical bar
+        settings.widget.network.show_label = false; # icon only, no SSID text
+        settings.bar.main = {
           position = "right";
-          widgets = {
-            left = [
-              { id = "ControlCenter"; }
-              { id = "Launcher"; }
-              { id = "SystemMonitor"; }
-              { id = "ActiveWindow"; }
-              { id = "MediaMini"; }
-            ];
-            center = [
-              { id = "Workspace"; }
-            ];
-            right = [
-              { id = "Tray"; }
-              { id = "NotificationHistory"; }
-              { id = "Battery"; }
-              { id = "Volume"; }
-              { id = "Brightness"; }
-              {
-                id = "Clock";
-                formatVertical = "HH mm - dd MMM";
-              }
-            ];
-          };
+          margin_ends = 0; # default 180 pads both ends inward, clumping widgets to center
+          # Widget ordering — reorder freely. Valid ids: active_window,
+          # audio_visualizer, battery, bluetooth, brightness, caffeine,
+          # clipboard, clock, control-center, custom_button, keyboard_layout,
+          # launcher, lock_keys, media, network, nightlight, notifications,
+          # power_profile, screenshot, session, settings, spacer, sysmon,
+          # taskbar, tray, volume, wallpaper, weather, workspaces.
+          start = [
+            "control-center"
+            "session"
+            "launcher"
+            "power_profile"
+            "media"
+            "notifications"
+            "tray"
+          ];
+          center = [
+            "workspaces"
+          ];
+          end = [
+            "network"
+            "bluetooth"
+            "volume"
+            "brightness"
+            "battery"
+            "clock"
+            "date"
+          ];
         };
       };
 

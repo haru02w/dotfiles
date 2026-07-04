@@ -21,7 +21,7 @@
         imports = [ inputs.mango.nixosModules.mango ];
         # programs.mango.enable also wires up xdg-desktop-portal (wlr) and gnome-keyring Secret portal.
         programs.mango.enable = true;
-        programs.mango.package = pkgs.mangowc;
+        programs.mango.package = pkgs.mango;
         services.displayManager.defaultSession = lib.mkForce "mango";
       };
     homeManager =
@@ -73,12 +73,12 @@
 
         wayland.windowManager.mango = {
           enable = true;
-          package = pkgs.mangowc;
+          package = pkgs.mango;
 
           # wl-clip-persist keeps the selection alive after the source window closes (wlroots frees it on exit).
           autostart_sh = ''
             ${pkgs.wl-clip-persist}/bin/wl-clip-persist --clipboard regular &
-            noctalia-shell &
+            noctalia &
           '';
 
           settings = {
@@ -88,8 +88,10 @@
             xkb_rules_layout = xkb.layout or "us";
             xkb_rules_options = xkb.options or "";
             trackpad_natural_scrolling = 1;
-            accel_profile = 2;
-            accel_speed = 0.0;
+            mouse_accel_profile = 2;
+            mouse_accel_speed = 0.0;
+            trackpad_accel_profile = 2;
+            trackpad_accel_speed = 0.0;
 
             # eDP-1 at origin (scale 1.25); Samsung centered above it at x:-192,y:-1080 (negative coords ok, no XWayland).
             monitorrule = [
@@ -132,7 +134,8 @@
             bind = [
               # Apps
               "SUPER,Return,spawn,ghostty"
-              "SUPER,d,spawn,noctalia-shell ipc call launcher toggle"
+              "SUPER,d,spawn,noctalia msg panel-toggle launcher"
+              "SUPER,c,spawn,noctalia msg panel-toggle launcher /clip"
               "SUPER,e,spawn,xdg-open ~"
 
               # Voxtype push-to-talk (ignore if non existent)
@@ -140,7 +143,7 @@
 
               # Session
               "SUPER+SHIFT,e,quit"
-              "SUPER+ALT,l,spawn,noctalia-shell ipc call lockScreen lock"
+              "SUPER+ALT,l,spawn,noctalia msg session lock"
 
               # Window management
               "SUPER,q,killclient,"
@@ -151,7 +154,7 @@
               "SUPER,n,switch_layout,"
               "SUPER,s,setlayout,scroller"
               "SUPER,m,setlayout,tile"
-              "SUPER,c,centerwin,"
+              "SUPER+SHIFT,c,centerwin,"
               "SUPER,i,minimized,"
               "SUPER+SHIFT,I,restore_minimized"
               "SUPER,z,toggle_scratchpad"
