@@ -42,8 +42,6 @@ in
           age.keyFile = lib.mkDefault "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
           secrets = {
-            "ssh/key".path = "${config.home.homeDirectory}/.ssh/id_ed25519";
-            "ssh/pub".path = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
             "openrouter-apikey".path = "${config.home.homeDirectory}/.config/openrouter-api.key";
           };
         };

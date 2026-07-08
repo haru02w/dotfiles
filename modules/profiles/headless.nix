@@ -13,6 +13,7 @@
       den.aspects.stylix
       den.aspects.nvf
       den.aspects.tmux
+      den.aspects.rbw
     ];
 
     nixos = _: { };
@@ -22,6 +23,7 @@
         home.packages = with pkgs; [
           btop
           libqalculate
+          tldr
           zip
           unzip
           p7zip

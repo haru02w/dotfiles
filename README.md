@@ -251,8 +251,33 @@ give it a friendlier blurb via the `descriptions` map in `templates.nix`.
 Secrets are managed with [sops-nix](https://github.com/Mic92/sops-nix) (age key
 at `~/.config/sops/age/keys.txt`). The `sops` feature
 ([`modules/features/sops.nix`](./modules/features/sops.nix)) wires
-[`secrets/secrets.yaml`](./secrets) into both NixOS and Home Manager. Edit
-secrets from the dev shell:
+[`secrets/secrets.yaml`](./secrets) into both NixOS and Home Manager.
+
+### Bootstrapping a new machine (prerequisite)
+
+Before a new machine can decrypt secrets, it needs an age key derived from an
+SSH key that is already authorized in [`.sops.yaml`](./.sops.yaml):
+
+1. Copy the SSH keypair into `~/.ssh/id_ed25519` and `~/.ssh/id_ed25519.pub`
+   (in my case, out of Bitwarden).
+
+2. Derive the age key from the SSH private key:
+
+   ```console
+   nix-shell -p ssh-to-age --run "ssh-to-age -private-key -i ~/.ssh/id_ed25519 > ~/.config/sops/age/keys.txt"
+   ```
+
+3. Verify decryption works by opening the secrets file:
+
+   ```console
+   nix-shell -p sops --run "sops secrets/secrets.yaml"
+   ```
+
+See the [sops-nix](https://github.com/Mic92/sops-nix) repository for more.
+
+### Editing secrets
+
+Once bootstrapped, edit secrets from the dev shell:
 
 ```console
 nix develop          # provides sops, age, ssh-to-age
