@@ -256,22 +256,33 @@ at `~/.config/sops/age/keys.txt`). The `sops` feature
 ### Bootstrapping a new machine (prerequisite)
 
 Before a new machine can decrypt secrets, it needs an age key derived from an
-SSH key that is already authorized in [`.sops.yaml`](./.sops.yaml):
+SSH key that is already authorized in [`.sops.yaml`](./.sops.yaml). The SSH key
+lives in Bitwarden (as an **SSH Key** item type) and is pulled with
+[`rbw`](./modules/features/rbw.nix) — it never needs to touch `~/.ssh`.
 
-1. Copy the SSH keypair into `~/.ssh/id_ed25519` and `~/.ssh/id_ed25519.pub`
-   (in my case, out of Bitwarden).
-
-2. Derive the age key from the SSH private key:
+1. Configure `rbw` (the config isn't applied yet on a fresh machine), log in,
+   sync, and derive the age key straight from the private key in Bitwarden — no
+   file on disk:
 
    ```console
-   nix-shell -p ssh-to-age --run "ssh-to-age -private-key -i ~/.ssh/id_ed25519 > ~/.config/sops/age/keys.txt"
+   mkdir -p ~/.config/sops/age
+   nix-shell -p rbw ssh-to-age pinentry-curses --run '
+     rbw config set base_url https://bw.haru02w.eu.org
+     rbw config set email joaovictormillane@gmail.com
+     rbw config set pinentry pinentry-curses
+     rbw login && rbw sync &&
+     rbw get --field private_key "haru02w ssh key" | ssh-to-age -private-key > ~/.config/sops/age/keys.txt'
    ```
 
-3. Verify decryption works by opening the secrets file:
+2. Verify decryption works by opening the secrets file:
 
    ```console
    nix-shell -p sops --run "sops secrets/secrets.yaml"
    ```
+
+Once the config is applied, the same SSH key is served for `ssh`/`git` by
+`rbw`'s built-in SSH agent (`SSH_AUTH_SOCK` →
+`$XDG_RUNTIME_DIR/rbw/ssh-agent-socket`) — verify with `rbw unlock && ssh-add -l`.
 
 See the [sops-nix](https://github.com/Mic92/sops-nix) repository for more.
 
