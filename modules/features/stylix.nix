@@ -71,6 +71,7 @@ in
       {
         imports = lib.optional (!managedByNixos) inputs.stylix.homeModules.stylix;
         stylix = lib.mkIf (!managedByNixos) (mkStylix pkgs);
+        home.pointerCursor.enable = true;
       };
   };
 }
