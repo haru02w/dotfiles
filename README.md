@@ -15,6 +15,11 @@ skips any path containing a `/_` segment, so prefixing a file or directory with
 > Do **not** edit it by hand. Inputs are declared inline in the module that uses
 > them (via `flake-file.inputs`) and regenerated with `nix run .#write-flake`.
 
+> New `.nix` files must be tracked by git before Nix will see them — flakes only
+> read files known to the working tree. After adding a module, run
+> `git add <path>` before `nix run .#write-flake` / `nixos-rebuild` or the new
+> module (and any `flake-file.inputs` it declares) will be silently ignored.
+
 ## Concepts (den in 60 seconds)
 
 | Term | What it is |
@@ -93,6 +98,37 @@ den = {
    (`nixos`/`darwin`) is auto-detected from `<system>`.
 
 Build it: `nix run .#<host> -- switch` (see [Build & test](#build--test)).
+
+### WSL hosts
+
+For a NixOS-WSL host, skip the `disko` / boot-loader / display-server pieces and
+build on `headless` instead of `desktop` (see
+[`zephyrus-wsl/`](./modules/configurations/zephyrus-wsl) for a working example):
+
+```nix
+{ inputs, den, lib, ... }:
+{
+  flake-file.inputs.nixos-wsl = {
+    url = "github:nix-community/NixOS-WSL";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  den.aspects."<host>" = {
+    includes = [ den.aspects.headless ];
+    nixos = _: {
+      imports = [ inputs.nixos-wsl.nixosModules.default ];
+      wsl = { enable = true; defaultUser = "<user>"; };
+      # WSL manages networking / no sshd needed
+      networking.networkmanager.enable = lib.mkForce false;
+      services.openssh.enable = lib.mkForce false;
+    };
+    provides.to-users.homeManager = _: { };
+  };
+}
+```
+
+Switch via `sudo nixos-rebuild switch --flake .#<host>` — `nh` currently trips
+over `nix config show` under `sudo` in this repo.
 
 ## Adding a user
 
@@ -279,6 +315,21 @@ lives in Bitwarden (as an **SSH Key** item type) and is pulled with
    ```console
    nix-shell -p sops --run "sops secrets/secrets.yaml"
    ```
+
+3. **Before the first `switch`**, seed the key at the *target* user's home so
+   sops-nix can decrypt secrets (`neededForUsers = true`) during activation —
+   the target home directory won't exist yet, so create it as root:
+
+   ```console
+   sudo mkdir -p /home/<user>/.config/sops/age
+   sudo cp ~/.config/sops/age/keys.txt /home/<user>/.config/sops/age/keys.txt
+   ```
+
+   After the first switch creates the user, fix ownership:
+   `sudo chown -R <user>:users /home/<user>/.config`. If home-manager tries to
+   activate while another user still holds the same UID (common on WSL where
+   you start as `nixos` UID 1000), restart the user manager once so it reloads
+   as the new user: `sudo systemctl restart user@1000.service`.
 
 Once the config is applied, the same SSH key is served for `ssh`/`git` by
 `rbw`'s built-in SSH agent (`SSH_AUTH_SOCK` →

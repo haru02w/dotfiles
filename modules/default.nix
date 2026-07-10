@@ -26,6 +26,7 @@
     # Hosts
     hosts = {
       x86_64-linux.zephyrus.users.haru02w = { };
+      x86_64-linux."zephyrus-wsl".users.haru02w = { };
     };
   };
 }
