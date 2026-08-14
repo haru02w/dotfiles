@@ -13,9 +13,10 @@
       # Replaced by mango
       # den.aspects.niri
       den.aspects.mango
+      #den.aspects.kanata # maybe later, not now
       den.aspects.ghostty
       den.aspects.noctalia
-      den.aspects.firefox
+      den.aspects.zen
       den.aspects.vieb
       den.aspects.voxtype
       den.aspects.lark

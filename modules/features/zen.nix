@@ -1,33 +1,62 @@
 { inputs, ... }:
 {
   flake-file.inputs.nur.url = "github:nix-community/NUR";
+  flake-file.inputs.zen-browser = {
+    url = "github:0xc000022070/zen-browser-flake";
+    inputs = {
+      nixpkgs.follows = "nixpkgs";
+      home-manager.follows = "home-manager";
+    };
+  };
 
-  den.aspects.firefox.homeManager =
+  den.aspects.zen.homeManager =
     {
       pkgs,
       config,
       ...
     }:
     {
+      imports = [ inputs.zen-browser.homeModules.beta ];
+
       nixpkgs.overlays = [ inputs.nur.overlays.default ];
+
+      # muscle-memory: `firefox` in launcher/shell opens zen
+      home.shellAliases.firefox = "zen-beta";
+      xdg.desktopEntries.firefox = {
+        name = "Firefox";
+        genericName = "Web Browser";
+        exec = "zen-beta %U";
+        icon = "zen-beta";
+        terminal = false;
+        categories = [
+          "Network"
+          "WebBrowser"
+        ];
+        mimeType = [
+          "text/html"
+          "x-scheme-handler/http"
+          "x-scheme-handler/https"
+        ];
+      };
 
       xdg.mimeApps = {
         enable = true;
         defaultApplications = {
-          "text/html" = "firefox.desktop";
-          "x-scheme-handler/http" = "firefox.desktop";
-          "x-scheme-handler/https" = "firefox.desktop";
-          "x-scheme-handler/about" = "firefox.desktop";
-          "x-scheme-handler/unknown" = "firefox.desktop";
+          "text/html" = "zen-beta.desktop";
+          "x-scheme-handler/http" = "zen-beta.desktop";
+          "x-scheme-handler/https" = "zen-beta.desktop";
+          "x-scheme-handler/about" = "zen-beta.desktop";
+          "x-scheme-handler/unknown" = "zen-beta.desktop";
           # preserve previously-set imperative handlers
           "x-scheme-handler/discord" = "vesktop.desktop";
           "x-scheme-handler/claude-cli" = "claude-code-url-handler.desktop";
         };
       };
 
-      stylix.targets.firefox.profileNames = [ "${config.home.username}" ];
-      programs.firefox = {
+      stylix.targets.zen-browser.profileNames = [ "${config.home.username}" ];
+      programs.zen-browser = {
         enable = true;
+        setAsDefaultBrowser = true;
         profiles.${config.home.username} = {
           extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
             ublock-origin
