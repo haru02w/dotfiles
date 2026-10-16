@@ -13,7 +13,7 @@
       # Replaced by mango
       # den.aspects.niri
       den.aspects.mango
-      #den.aspects.kanata # maybe later, not now
+      den.aspects.vial
       den.aspects.ghostty
       den.aspects.noctalia
       den.aspects.zen

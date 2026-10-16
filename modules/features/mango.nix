@@ -83,7 +83,7 @@
 
           settings = {
             # Input
-            numlockon = 1;
+            numlock_on = 1;
             # mango ignores XKB_DEFAULT_OPTIONS; pull xkb from locale.nix so Mod follows the alt/super swap.
             xkb_rules_layout = xkb.layout or "us";
             xkb_rules_options = xkb.options or "";
@@ -94,17 +94,17 @@
             trackpad_accel_speed = 0.0;
 
             # eDP-1 at origin (scale 1.25); Samsung centered above it at x:-192,y:-1080 (negative coords ok, no XWayland).
-            monitorrule = [
+            monitor_rule = [
               "make:Samsung Electric Company,model:C27F390,serial:HX5NA00324,x:-192,y:-1080"
               "name:^eDP-1$,x:0,y:0,scale:1.25"
             ];
 
             # General Layout
-            # gappih = 8;
-            # gappiv = 8;
-            # gappoh = 8;
-            # gappov = 8;
-            # borderpx = 2;
+            # gap_inner_horizontal = 8;
+            # gap_inner_vertical = 8;
+            # gap_outer_horizontal = 8;
+            # gap_outer_vertical = 8;
+            # border_px = 2;
             border_radius = 6;
             no_radius_when_single = 1;
             no_border_when_single = 1;
@@ -114,7 +114,7 @@
 
             # Master Layout
             new_is_master = 1;
-            smartgaps = 1;
+            smart_gaps = 1;
             # Scroll Layout
             scroller_default_proportion = 0.5;
 

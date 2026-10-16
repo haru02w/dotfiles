@@ -7,7 +7,7 @@
       console.useXkbConfig = true;
       services.xserver.xkb = {
         layout = "us";
-        options = "compose:ralt,altwin:swap_lalt_lwin,ctrl:nocaps";
+        options = "compose:ralt";
       };
       environment.sessionVariables = {
         XKB_DEFAULT_LAYOUT = config.services.xserver.xkb.layout;

@@ -4,35 +4,27 @@
       services.kanata = {
         enable = true;
         keyboards.internal = {
-          extraDefCfg = ''
-            concurrent-tap-hold yes
-            process-unmapped-keys yes
-          '';
           config = ''
             (defsrc
-              a    s    d    f    j    k    l    ;
-            )
-
-            (defvar
-              tap-timeout  200
-              hold-timeout 200
-              left-keys  (q w e r t a s d f g z x c v b)
-              right-keys (y u i o p h j k l ; n m , . /)
+              esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12 del
+              grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+              tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+              caps a    s    d    f    g    h    j    k    l    ;    '    ret
+              lsft z    x    c    v    b    n    m    ,    .    /    rsft
+              lctl lmet lalt           spc            ralt rmet rctl
             )
 
             (defalias
-              a (tap-hold-tap-keys $tap-timeout $hold-timeout a lmet $left-keys)
-              s (tap-hold-tap-keys $tap-timeout $hold-timeout s lalt $left-keys)
-              d (tap-hold-tap-keys $tap-timeout $hold-timeout d lctl $left-keys)
-              f (tap-hold-tap-keys $tap-timeout $hold-timeout f lsft $left-keys)
-              j (tap-hold-tap-keys $tap-timeout $hold-timeout j rsft $right-keys)
-              k (tap-hold-tap-keys $tap-timeout $hold-timeout k rctl $right-keys)
-              l (tap-hold-tap-keys $tap-timeout $hold-timeout l ralt $right-keys)
-              scln (tap-hold-tap-keys $tap-timeout $hold-timeout ; rmet $right-keys)
+              caps (tap-hold 200 200 esc lctl)
             )
 
-            (deflayer default
-              @a   @s   @d   @f   @j   @k   @l   @scln
+            (deflayer base
+              esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12 del
+              grv   1    2    3    4    5    6    7    8    9    0    -    =    bspc
+              tab   q    w    e    r    t    y    u    i    o    p    [    ]    \
+              @caps a    s    d    f    g    h    j    k    l    ;    '    ret
+              lsft  z    x    c    v    b    n    m    ,    .    /    rsft
+              lctl  lalt lmet           spc            ralt rmet rctl
             )
           '';
         };
