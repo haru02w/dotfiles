@@ -22,7 +22,7 @@
 
   inputs = {
     blink-edit-nvim = {
-      url = "github:BlinkResearchLabs/blink-edit.nvim";
+      url = "github:haru02w/blink-edit.nvim";
       flake = false;
     };
     den.url = "github:denful/den";

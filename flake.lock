@@ -71,15 +71,15 @@
     "blink-edit-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1769973893,
-        "narHash": "sha256-GxO9SlfiOWXAsTtIkAfygISO83BWif3+AktXlHGi0q0=",
-        "owner": "BlinkResearchLabs",
+        "lastModified": 1792360928,
+        "narHash": "sha256-ajTzjwe6ORiqNvKL6IygAnIcS4ePWWz1nQmbmsAv/vA=",
+        "owner": "haru02w",
         "repo": "blink-edit.nvim",
-        "rev": "220f5777f5597f6d7868981d6ff9b6218247fec4",
+        "rev": "feeb409987c3e02c914001dece64517da8cb45ab",
         "type": "github"
       },
       "original": {
-        "owner": "BlinkResearchLabs",
+        "owner": "haru02w",
         "repo": "blink-edit.nvim",
         "type": "github"
       }
