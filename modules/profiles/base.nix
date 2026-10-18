@@ -11,7 +11,13 @@
       den.aspects.sops
     ];
 
-    nixos = _: { };
+    nixos = _: {
+      # `nh os switch` (run as the user, not under sudo)
+      programs.nh = {
+        enable = true;
+        flake = "/home/haru02w/Projects/dotfiles";
+      };
+    };
     homeManager = _: { };
   };
 }

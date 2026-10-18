@@ -1,4 +1,4 @@
-# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
+# DO-NOT-EDIT. This file was auto-generated using github:denful/flake-file.
 # Use `nix run .#write-flake` to regenerate it.
 {
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
@@ -8,17 +8,23 @@
       "https://nix-community.cachix.org"
       "https://noctalia.cachix.org"
       "https://niri.cachix.org"
+      "https://cache.nixos-cuda.org"
       "https://lark-nix.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+      "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
       "lark-nix.cachix.org-1:l44MeIXQqzYeuz3NDq8JzBcMCdD4KCRAM9Q99miHl5w="
     ];
   };
 
   inputs = {
+    blink-edit-nvim = {
+      url = "github:BlinkResearchLabs/blink-edit.nvim";
+      flake = false;
+    };
     den.url = "github:denful/den";
     disko = {
       url = "github:nix-community/disko";
@@ -33,7 +39,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    import-tree.url = "github:vic/import-tree";
+    import-tree.url = "github:denful/import-tree";
     lark-nix.url = "github:bintis/lark-nix";
     mango = {
       url = "github:mangowm/mango";
@@ -56,17 +62,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixvim.url = "github:nix-community/nixvim";
     noctalia-shell.url = "github:noctalia-dev/noctalia-shell";
     nur.url = "github:nix-community/NUR";
-    nvf = {
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix.url = "github:nix-community/stylix";
+    sweep-next-edit = {
+      url = "file+https://huggingface.co/sweepai/sweep-next-edit-1.5B/resolve/main/sweep-next-edit-1.5b.q8_0.v2.gguf";
+      flake = false;
+    };
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";

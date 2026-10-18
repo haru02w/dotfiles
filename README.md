@@ -46,7 +46,7 @@ modules/
 │   └── _old/              # archived modules — `_` prefix makes import-tree skip them
 ├── configurations/        # per-host config (e.g. zephyrus/) — host aspect + disko + hardware
 ├── users/                 # per-user aspects (haru02w.nix)
-├── packages/              # flake packages built per-system (nvf neovim)
+├── packages/              # flake packages built per-system (nixvim neovim)
 └── tools/                 # extra flake packages/apps (nh host builders, vm runner)
 
 templates/                 # `nix flake init -t` project scaffolds (c, cpp, go, rust, python, ...)
@@ -259,13 +259,13 @@ Packages built per-system go in [`modules/packages/`](./modules/packages) or
 }
 ```
 
-The [`nvf`](./modules/packages/nvf) Neovim package shows the modular pattern: a
-`perSystem` option (`nvf.module`) is merged across every plugin file, then fed
-to `neovimConfiguration` in [`default.nix`](./modules/packages/nvf/default.nix).
-Add a plugin by dropping a file in `modules/packages/nvf/plugins/` that writes
-`perSystem.nvf.module.config.vim.<...>`.
+The [`nixvim`](./modules/packages/nixvim) Neovim package shows the modular pattern: a
+`perSystem` option (`nixvim.module`) is merged across every plugin file, then fed
+to `makeNixvimWithModule` in [`default.nix`](./modules/packages/nixvim/default.nix).
+Add a plugin by dropping a file in `modules/packages/nixvim/plugins/` that writes
+`perSystem.nixvim.module.<...>` (e.g. `plugins.<name>`, `keymaps`).
 
-Current flake packages: `nvf`, `vm`, `zephyrus` (nh host builder),
+Current flake packages: `nixvim`, `vm`, `zephyrus` (nh host builder),
 `write-flake` / `write-inputs` / `write-lock` (flake-file generators).
 
 ## Dev templates
