@@ -11,7 +11,7 @@
       den.aspects.openssh
       den.aspects.nix-ld
       den.aspects.stylix
-      den.aspects.nvf
+      den.aspects.nixvim
       den.aspects.tmux
       den.aspects.rbw
     ];

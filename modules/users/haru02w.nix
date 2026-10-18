@@ -12,7 +12,6 @@
       {
         # temp
         home.packages = with pkgs; [
-          neovim
           claude-code
         ];
       };
