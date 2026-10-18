@@ -2,7 +2,7 @@
 {
   # Not packaged in nixpkgs yet.
   flake-file.inputs.blink-edit-nvim = {
-    url = "github:BlinkResearchLabs/blink-edit.nvim";
+    url = "github:haru02w/blink-edit.nvim";
     flake = false;
   };
 
