@@ -26,25 +26,5 @@ in
         users.mutableUsers = false;
         users.users.haru02w.hashedPasswordFile = config.sops.secrets.haru02w.path;
       };
-
-    homeManager =
-      {
-        config,
-        lib,
-        ...
-      }:
-      {
-        imports = [ inputs.sops-nix.homeManagerModules.sops ];
-
-        sops = {
-          defaultSopsFile = secretsFile;
-          defaultSopsFormat = "yaml";
-          age.keyFile = lib.mkDefault "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-
-          secrets = {
-            "openrouter-apikey".path = "${config.home.homeDirectory}/.config/openrouter-api.key";
-          };
-        };
-      };
   };
 }

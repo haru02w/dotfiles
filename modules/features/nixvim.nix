@@ -9,14 +9,28 @@
       };
 
     homeManager =
-      { self', ... }:
       {
-        home.sessionVariables = {
-          EDITOR = "nvim";
+        config,
+        lib,
+        self',
+        ...
+      }:
+      {
+        # Lets a host swap in a variant, e.g. `self'.packages.nixvim.extend { … }`
+        options.nixvim.package = lib.mkOption {
+          type = lib.types.package;
+          default = self'.packages.nixvim;
+          description = "Neovim (nixvim) package to install.";
         };
-        home.packages = [
-          self'.packages.nixvim
-        ];
+
+        config = {
+          home.sessionVariables = {
+            EDITOR = "nvim";
+          };
+          home.packages = [
+            config.nixvim.package
+          ];
+        };
       };
   };
 }
