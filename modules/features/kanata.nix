@@ -3,7 +3,9 @@
     nixos = {
       services.kanata = {
         enable = true;
+        # Only the laptop's built-in keyboard; external keyboards are untouched.
         keyboards.internal = {
+          devices = [ "/dev/input/by-id/usb-ASUSTeK_Computer_Inc._N-KEY_Device-if02-event-kbd" ];
           config = ''
             (defsrc
               esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12 del
