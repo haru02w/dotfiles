@@ -5,7 +5,6 @@
     {
       config,
       pkgs,
-      self',
       ...
     }:
     {
@@ -13,9 +12,6 @@
 
       nix.package = pkgs.nix;
       nix.settings.trusted-users = [ config.home.username ];
-
-      # No llama-cpp server on this host.
-      nixvim.package = self'.packages.nixvim.extend { blink-edit.enable = false; };
 
       # Login shell stays bash; hand off to zsh.
       programs.bash = {
