@@ -12,11 +12,8 @@
       nixvim.module =
         { config, lib, ... }:
         {
-          # Hosts without the llama-cpp server can build a variant without it:
-          # `self'.packages.nixvim.extend { blink-edit.enable = false; }`
-          options.blink-edit.enable = lib.mkEnableOption "blink-edit next-edit predictions" // {
-            default = true;
-          };
+          # Off by default; the llama-cpp aspect (Sweep server) enables it.
+          options.blink-edit.enable = lib.mkEnableOption "blink-edit next-edit predictions";
 
           config = lib.mkIf config.blink-edit.enable {
             extraPlugins = [

@@ -1,14 +1,6 @@
 {
   den.aspects.nixvim = {
     nixos =
-      { self', ... }:
-      {
-        environment.systemPackages = [
-          self'.packages.nixvim
-        ];
-      };
-
-    homeManager =
       {
         config,
         lib,
@@ -20,6 +12,27 @@
         options.nixvim.package = lib.mkOption {
           type = lib.types.package;
           default = self'.packages.nixvim;
+          description = "Neovim (nixvim) package to install.";
+        };
+
+        config.environment.systemPackages = [
+          config.nixvim.package
+        ];
+      };
+
+    homeManager =
+      {
+        config,
+        lib,
+        self',
+        osConfig ? null,
+        ...
+      }:
+      {
+        options.nixvim.package = lib.mkOption {
+          type = lib.types.package;
+          # Follow the host's choice when home-manager runs under NixOS.
+          default = osConfig.nixvim.package or self'.packages.nixvim;
           description = "Neovim (nixvim) package to install.";
         };
 

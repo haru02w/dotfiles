@@ -18,9 +18,11 @@ in
   # llama.cpp server running Sweep Next-Edit 1.5B for blink-edit.nvim
   # (next-edit predictions). Model: https://huggingface.co/sweepai/sweep-next-edit-1.5B
   den.aspects.llama-cpp.nixos =
-    { pkgs, ... }:
+    { pkgs, self', ... }:
     {
       nix.settings = cudaCache;
+
+      nixvim.package = self'.packages.nixvim.extend { blink-edit.enable = true; };
 
       services.llama-cpp = {
         enable = true;
