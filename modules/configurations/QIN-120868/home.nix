@@ -14,6 +14,17 @@
       nix.package = pkgs.nix;
       nix.settings.trusted-users = [ config.home.username ];
 
+      # Ubuntu GNOME desktop: keep stylix out of it. The kde target overrides
+      # XDG_CONFIG_DIRS (drops /etc/xdg) and breaks the GNOME session.
+      stylix.targets = {
+        fontconfig.enable = false;
+        gnome.enable = false;
+        gtk.enable = false;
+        kde.enable = false;
+      };
+      # Let the system fontconfig see fonts from the Nix profile.
+      fonts.fontconfig.enable = true;
+
       # Login shell stays bash; hand off to zsh.
       programs.bash = {
         enable = true;
