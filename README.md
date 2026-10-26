@@ -2,7 +2,8 @@
 
 NixOS + Home Manager configuration built on the [**den**](https://den.denful.dev)
 framework using the [Dendritic](https://den.denful.dev/explanation/core-principles/)
-pattern.
+pattern. The same aspects build full NixOS hosts and standalone Home Manager
+setups for non-NixOS machines.
 
 Every `.nix` file under [`modules/`](./modules) is auto-imported as a flake-parts
 module (`outputs = import-tree ./modules` in [`flake.nix`](./flake.nix)). There is
@@ -30,6 +31,7 @@ skips any path containing a `/_` segment, so prefixing a file or directory with
 | **includes** | List of aspect refs / inline modules an aspect depends on (forms a DAG). |
 | **provides** | Named sub-aspects for host↔user mutual config (`to-users`, `to-hosts`). |
 | **host / user** | Entities registered in `den.hosts.<system>.<name>.users.<user>`. |
+| **home** | A standalone Home Manager entity (no NixOS), registered in `den.homes.<system>."<user>@<host>"`. |
 
 An aspect can be split across **many files** — every file that writes
 `den.aspects.zephyrus.*` merges into the same `zephyrus` aspect.
@@ -41,11 +43,10 @@ modules/
 ├── default.nix            # den root: defaults, schemas, host registry
 ├── flake/                 # flake-parts plumbing (dendritic, devshell, formatter, nixpkgs, templates)
 ├── profiles/              # layered bundles of features (base ⊂ headless ⊂ desktop)
-├── features/              # one aspect per concern (git, niri, zsh, sops, ...)
-│   ├── hardware/          # driver/boot aspects (nvidia, grub, kvm-amd, ...)
-│   └── _old/              # archived modules — `_` prefix makes import-tree skip them
-├── configurations/        # per-host config (e.g. zephyrus/) — host aspect + disko + hardware
-├── users/                 # per-user aspects (haru02w.nix)
+├── features/              # one aspect per concern (git, mango, zsh, sops, ...)
+│   └── hardware/          # driver/boot aspects (nvidia, grub, kvm-amd, ...)
+├── configurations/        # per-host / per-home config (zephyrus/, zephyrus-wsl/, QIN-120868/)
+├── users/                 # per-user aspects (haru02w.nix, joaomillane.nix)
 ├── packages/              # flake packages built per-system (nixvim neovim)
 └── tools/                 # extra flake packages/apps (nh host builders, vm runner)
 
@@ -57,11 +58,18 @@ Defaults, entity schemas and the host registry live in
 
 ```nix
 den = {
-  default.includes = [ den.batteries.define-user den.batteries.hostname den.batteries.inputs' ];
+  default.includes = [ den.batteries.define-user den.batteries.hostname den.batteries.inputs' den.batteries.self' ];
   schema.user = { classes = lib.mkDefault [ "homeManager" ]; includes = [ den.batteries.mutual-provider ]; };
-  hosts.x86_64-linux.zephyrus.users.haru02w = { };
+  hosts = {
+    x86_64-linux.zephyrus.users.haru02w = { };
+    x86_64-linux."zephyrus-wsl".users.haru02w = { };
+  };
+  homes.x86_64-linux."joaomillane@QIN-120868" = { };
 };
 ```
+
+The `inputs'` and `self'` batteries pass system-specialised `inputs'.<input>` and
+`self'.packages.<pkg>` into every `nixos` / `homeManager` module.
 
 ---
 
@@ -155,6 +163,48 @@ over `nix config show` under `sudo` in this repo.
    `den.hosts.<system>.<host>.users.<user> = { };`
 
 Users default to `classes = [ "homeManager" ]` (set in `den.schema.user`).
+
+## Adding a standalone home (non-NixOS)
+
+For a machine that runs Home Manager on top of another distro (see
+[`QIN-120868/`](./modules/configurations/QIN-120868) for a working example):
+
+1. Create a user aspect in `modules/users/<user>.nix`. It only needs
+   `homeManager` config, and it pulls in a profile directly since there is no
+   host aspect to inherit from:
+
+   ```nix
+   { den, ... }:
+   {
+     den.aspects.<user> = {
+       includes = [ den.aspects.headless ];
+       homeManager = { };
+     };
+   }
+   ```
+
+2. Put machine-specific bits in an aspect named `"<user>@<host>"`, in
+   `modules/configurations/<host>/home.nix`:
+
+   ```nix
+   {
+     den.aspects."<user>@<host>".homeManager = { config, pkgs, ... }: {
+       targets.genericLinux.enable = true;
+       nix.package = pkgs.nix;
+       nix.settings.trusted-users = [ config.home.username ];
+     };
+   }
+   ```
+
+3. Register it in [`modules/default.nix`](./modules/default.nix):
+
+   ```nix
+   den.homes.x86_64-linux."<user>@<host>" = { };
+   ```
+
+Only the `homeManager` half of each included aspect applies; `nixos` blocks are
+ignored. Build it with `nix run .#<user>-<host> -- switch` (the `@` becomes `-`
+in the package name) or `home-manager switch --flake .#<user>@<host>`.
 
 ## Adding a profile
 
@@ -265,7 +315,18 @@ to `makeNixvimWithModule` in [`default.nix`](./modules/packages/nixvim/default.n
 Add a plugin by dropping a file in `modules/packages/nixvim/plugins/` that writes
 `perSystem.nixvim.module.<...>` (e.g. `plugins.<name>`, `keymaps`).
 
-Current flake packages: `nixvim`, `vm`, `zephyrus` (nh host builder),
+The `nixvim` feature installs that package and exposes a `nixvim.package` Home
+Manager option, so a host can install a variant built with `.extend`. The
+blink-edit plugin (next-edit predictions) talks to the local llama.cpp server
+from the [`llama-cpp`](./modules/features/llama-cpp.nix) aspect, so hosts
+without that server turn it off:
+
+```nix
+nixvim.package = self'.packages.nixvim.extend { blink-edit.enable = false; };
+```
+
+Current flake packages: `nixvim`, `vm`, `zephyrus` / `zephyrus-wsl` /
+`joaomillane-QIN-120868` (nh builders, one per host or home),
 `write-flake` / `write-inputs` / `write-lock` (flake-file generators).
 
 ## Dev templates
@@ -353,6 +414,9 @@ sops secrets/secrets.yaml
 nix run .#zephyrus              # default action: build
 nix run .#zephyrus -- switch    # apply
 
+# build / switch a standalone home (nh home under the hood)
+nix run .#joaomillane-QIN-120868 -- switch
+
 # spin up a throwaway VM of the host to test changes without rebooting
 nix run .#vm
 
@@ -367,7 +431,10 @@ nix fmt                         # nixfmt via treefmt-nix
 A dev shell with `sops`, `age`, `ssh-to-age`, `claude-code`, `opencode`,
 `nodejs`, `nh` is available via `nix develop` (auto-loaded by
 [direnv](./.envrc)). It also points `nh` at the repo root (`NH_OS_FLAKE` /
-`NH_HOME_FLAKE`) so `nh os switch` works without `--flake`.
+`NH_HOME_FLAKE`) so `nh os switch` / `nh home switch` work without `--flake`.
+
+CI ([`.github/workflows/test.yml`](./.github/workflows/test.yml)) runs
+`nix flake check` on every push and pull request.
 
 ---
 
