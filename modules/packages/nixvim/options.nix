@@ -10,6 +10,9 @@
       };
 
       colorschemes.oxocarbon.enable = true;
+      # oxocarbon defines BlinkCmpMenuSelection as NONE/NONE, which shadows
+      # blink's default link to PmenuSel and hides the selected item.
+      highlightOverride.BlinkCmpMenuSelection.link = "PmenuSel";
 
       plugins.lz-n.enable = true;
 
