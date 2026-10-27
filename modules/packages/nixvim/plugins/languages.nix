@@ -6,7 +6,11 @@
         lsp.servers = {
           asm_lsp.enable = true; # assembly
           clangd.enable = true; # clang
-          basedpyright.enable = true; # python
+          # python; a project's pyrightconfig.json still wins over this
+          basedpyright = {
+            enable = true;
+            config.settings.basedpyright.analysis.typeCheckingMode = "basic";
+          };
           gopls.enable = true; # go
           superhtml.enable = true; # html
           cssls.enable = true; # css
