@@ -118,6 +118,66 @@
           action.__raw = "function() require('conform').format({ lsp_format = 'fallback' }) end";
           options.desc = "Format";
         }
+        {
+          key = "[d";
+          action.__raw = "function() vim.diagnostic.jump({ count = -1, float = true }) end";
+          options.desc = "Go to previous diagnostic";
+        }
+        {
+          key = "]d";
+          action.__raw = "function() vim.diagnostic.jump({ count = 1, float = true }) end";
+          options.desc = "Go to next diagnostic";
+        }
+        {
+          key = "gd";
+          lspBufAction = "definition";
+          options.desc = "Go to definition";
+        }
+        {
+          key = "gO";
+          lspBufAction = "document_symbol";
+          options.desc = "Go to document symbols";
+        }
+        {
+          key = "gr";
+          lspBufAction = "references";
+          options.desc = "List references";
+        }
+        {
+          key = "gI";
+          lspBufAction = "implementation";
+          options.desc = "Go to implementation";
+        }
+        {
+          key = "gt";
+          lspBufAction = "type_definition";
+          options.desc = "Go to type definition";
+        }
+        {
+          key = "K";
+          lspBufAction = "hover";
+          options.desc = "Hover documentation";
+        }
+        {
+          key = "gK";
+          lspBufAction = "signature_help";
+          options.desc = "Signature help";
+        }
+        {
+          key = "<leader>li";
+          lspBufAction = "incoming_calls";
+          options.desc = "Incoming calls";
+        }
+        {
+          key = "<leader>lo";
+          lspBufAction = "outgoing_calls";
+          options.desc = "Outgoing calls";
+        }
+        {
+          key = "<leader>lr";
+          lspBufAction = "rename";
+          options.desc = "Rename symbol";
+        }
       ];
     };
   };
