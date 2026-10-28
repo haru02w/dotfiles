@@ -93,9 +93,9 @@
             trackpad_accel_profile = 2;
             trackpad_accel_speed = 0.0;
 
-            # eDP-1 at origin (scale 1.25); Samsung centered above it at x:-192,y:-1080 (negative coords ok, no XWayland).
+            # eDP-1 at origin (scale 1.25 -> logical 1536x864); Samsung to its right, top-aligned at x:1536,y:0.
             monitor_rule = [
-              "make:Samsung Electric Company,model:C27F390,serial:HX5NA00324,x:-192,y:-1080"
+              "make:Samsung Electric Company,model:C27F390,serial:HX5NA00324,x:1536,y:0"
               "name:^eDP-1$,x:0,y:0,scale:1.25"
             ];
 
